@@ -1,0 +1,40 @@
+[
+{"name":"FlipyView", "behavior":{"id":"-0", "stop":"true"}},
+{"name":"0_1.jpg",  "behavior":{"id":"1", "stop":"false"}},
+{"name":"0_2.jpg",  "behavior":{"id":"2", "stop":"false"}},
+{"name":"0_3.jpg",  "behavior":{"id":"3", "stop":"true", "revibe":"0.38"}},
+
+{"name":"RemoteImageView", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"radionula_screen.jpg"}, "behavior":{"stop":"true"}},
+
+{"name":"FechSomeView", "options":{"url":"https://api.pikchur.com/api/feeds/json", "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][feeds][timeline][page]=1&data[api][feeds][timeline][limit]=25", "filter":"pikchur"}, "behavior":{"id":"3.2", "stop":"true"}},
+
+
+{"name":"FechSomeView", "options":{"url":"http://kitschmaster.com/kiches/144.json", "filter":"kitschmaster"}, "behavior":{"id":"3.3", "stop":"true"}},
+{"name":"000000005.caf",  "behavior":{"id":"3.4", "stop":"true"}},
+
+{"name":"0_4.jpg",  "behavior":{"id":"4", "stop":"false"}},
+{"name":"0_5.jpg",  "behavior":{"id":"5", "stop":"false"}},
+{"name":"0_6.jpg",  "behavior":{"id":"6", "stop":"false"}},
+{"name":"0_7.jpg",  "behavior":{"id":"7", "stop":"false"}},
+{"name":"0_mm_test1.jpg",  "behavior":{"id":"7.1", "stop":"true"}},
+{"name":"0_8.jpg",  "behavior":{"id":"8", "stop":"false"}},
+{"name":"0_9.jpg",  "behavior":{"id":"9", "stop":"false"}},
+{"name":"0_10.jpg", "behavior":{"id":"10", "stop":"false"}},
+{"name":"0_11.jpg", "behavior":{"id":"11", "stop":"false"}},
+{"name":"0_12.jpg", "behavior":{"id":"12", "stop":"false"}},
+{"name":"0_13.jpg", "behavior":{"id":"13", "stop":"false"}},
+{"name":"0_14.jpg", "behavior":{"id":"14", "stop":"false"}},
+{"name":"0_15.jpg", "behavior":{"id":"15", "stop":"false"}},
+{"name":"0_16.jpg", "behavior":{"id":"16", "stop":"false"}},
+{"name":"0_17.jpg", "behavior":{"id":"17", "stop":"false", "revibe":"1.0"}},
+{"name":"0_18.jpg", "behavior":{"id":"18", "stop":"false"}},
+{"name":"0_19.jpg", "behavior":{"id":"19", "stop":"false"}},
+{"name":"0_20.jpg", "behavior":{"id":"20", "stop":"true"}},
+{"name":"0_Movie716.mov", "behavior":{"id":"21", "stop":"false", "background":"true"}},
+{"name":"0_Movie_139.mov", "behavior":{"id":"22", "stop":"false", "background":"true"}},
+{"name":"0_Movie_140.mov", "behavior":{"id":"23", "stop":"false", "background":"true"}},
+{"name":"0_Movie_141.mov", "behavior":{"id":"24", "stop":"false", "background":"true"}},
+{"name":"FlipsideView", "behavior":{"id":"26", "stop":"true"}}
+
+]

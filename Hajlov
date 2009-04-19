@@ -1,0 +1,217 @@
+No &copy; rights here. What You Give, is What You Want.
+
+
+MakeMoney Sounds to Money Making Enlightenment:
+****************************************************************************************
+
+1. Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!
+
+2. This Application is your Personal Money Making Mobile Application.
+
+3. This Application is Here to Serve You.
+
+4. There is no way back.
+
+5. This Application is a real Source of Money Making Code on Earth.
+
+6. This Application is as powerful as any Holy Mantra or Prayer. 
+
+7. Run this Application and leave it running in your pocket.
+
+8. This Application has built in Spiritual Healing and Money Making Code.
+
+9. Turn this Application On whenever you need to Make Money.
+
+10. Let this Application radiate Money Making information into the space around you.
+
+11. The core of This Application is a True Spiritual Well Being Attractor.
+
+12. When You bought this Application You were initialized to become Millionare. 
+
+13. This Application slowly transforms You into a Millionare.
+
+14. This Application has a built in Money Making Prayer and a built in Money Making Mantra.
+
+15. Remember, this Application is in Your Hand, always with You, whenever You need it.
+
+16. When You are Ready, feeling like a Milionare, Make Money!
+
+###THE BOOK OF MakeMoney###
+vibe 3
+
+This Application is not Art. 
+
+This information will be presented only once!
+
+Please highten Your Awareness every morning when You wake up. - revibe 0.5
+
+3
+
+2
+
+1 - revibe 4
+
+This Application is a Personal Mobile Money Making Application.
+
+It is not a Way, more like a passage.
+
+Life is passing wile this Application is running.
+
+Every 3.8 seconds this Application transends. 
+
+Transends with something like this.
+
+You Should grock fast, what transending means.
+
+It is not enough to just transend.
+
+Go from transending into meditation by tapping on the Button.
+
+You stopped meditation and started transending again.
+
+With the Button you can transend any meditation. 
+
+The Button is white while still transending every 3.8 seconds.
+
+Tap the Button and you can meditate on any transend.
+
+The Button is white and red while You are meditating. - stop
+
+This Application is not Control.
+
+It is not here to prove anything, but to Give.
+
+Your Souls Enlightenment should begin in 4 seconds.
+
+1 - revibe 1
+
+2
+
+3 - revibe 4
+
+You are already Enlightened.
+
+You are Enlightenment. 
+
+You are One.
+
+Only You Exist.
+
+Please think about this information for 15 seconds. - revibe 1
+
+4..19 - revibe 4 
+
+Thanks. 
+
+Learn about and enjoy the rest of Personal Mobile Money Making Eternity.
+
+This Application is designed for fast transending. 
+
+20 - stop revibe 0.1
+21..33 
+
+Try holding the Button for 0.5 seconds and see what happens. - stop
+
+Underbuttons are used to move in meditation between transends. 
+
+34..121
+
+That was a Vibe of one transend each 0.1 seconds. - revibe 4
+
+This Application is designed for time stopping meditations, so you can relax. - stop
+
+Listen to this Applications Music and Dance at the same time for 30 seconds.
+
+#caf (TODO music player)
+
+See a Movie for 10 seconds.
+
+#mov
+
+Behavior after transending can be manipulated.
+
+The Vibe can be revibed to be faster or slower. - revibe 0.38
+
+1
+
+2
+
+3 - revibe 4
+
+Deep meditation can be initialized just like this. - stop
+
+Transends can be Images, Sounds, Movies or any custom Views.
+
+You can recieve full source code and tools for making personalized clones of This Application.
+
+But only if You enter a valid email in the next screen. ;) - revibe 1
+
+#input (TODO)
+
+Thanks for buying MakeMoney and enjoy creating Your MakeMoney based Application.
+
+#web - (TODO pikchurs) - stop - open - freeze (TODO - freeze memory spot, never change again)
+
+
+
+
+#########################################################
+stage.json
+
+	available transitions
+	0 - MoveIn, 
+	1 - Push, 
+	2 - Reveal, 
+	3 - Fade
+
+
+
+	This is the data for ...
+
+listing.json
+
+	this file is your poem. what you put in here will become your fortune.
+
+	it has to be a regular JSON file.
+
+	you can write your Application Views just by filling up this file with references to images, mov-s, caf-s or subclasess of IIController.
+
+	this file can be generated with the transender.gem
+	
+	if you do not have it, no problem, you can get it like this:
+	
+		gem sources -a http://gems.github.com 
+		sudo gem install mihael-transender
+		
+	create a folder and just fill it up with images, movies and sounds, then:
+	
+		transender -assemble_app (TODO)
+	
+
+### HASH
+[{"name":"0000000004.jpg", "next":""}, { "name":"MoneyTimerView" }, {"name":"000000005.caf", "next":""}, {"name":"0000000006.jpg", "next":""}, {"name":"0000000007.caf", "next":""}, {"name":"0000000010.jpg", "next":""}, {"name":"0000000011.caf", "next":""} ]
+
+
+{"name":"0000000004.jpg", "behavior":{"stop":false}}, 
+{"name":"000000005.caf", "behavior":{"stop":false, "background":true}},
+{"name":"0000000006.jpg", "behavior":{"stop":true}}, 
+{"name":"0000000007.caf", "behavior":{"stop":false}}, 
+
+muvis
+
+{"name":"0_Movie716.mov", "behavior":{"id":"21", "stop":"false", "background":"true"}},
+{"name":"0_Movie_139.mov", "behavior":{"id":"22", "stop":"false", "background":"true"}},
+{"name":"0_Movie_140.mov", "behavior":{"id":"23", "stop":"false", "background":"true"}},
+{"name":"0_Movie_141.mov", "behavior":{"id":"24", "stop":"false", "background":"true"}},
+
+flipside - currently unusable, since kitschmaster does not like dreamhost anymore
+
+{"name":"FlipsideView", "behavior":{"id":"26", "stop":"true"}}
+
+content - startups
+{"name":"MoonTimeView", "behavior":{"id":"3.1", "stop":"true"}},
+{"name":"0_mm_test1.jpg",  "behavior":{"id":"7.1", "stop":"true"}},
+
+views
+
+{"name":"MoonTimeView", "behavior":{"id":"3.2", "stop":"true"}},
