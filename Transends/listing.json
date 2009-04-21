@@ -2,15 +2,14 @@
 {"name":"FlipyView", "behavior":{"id":"-0", "stop":"true"}},
 {"name":"0_1.jpg",  "behavior":{"id":"1", "stop":"false"}},
 {"name":"0_2.jpg",  "behavior":{"id":"2", "stop":"false"}},
-{"name":"0_3.jpg",  "behavior":{"id":"3", "stop":"true", "revibe":"0.38"}},
-
+{"name":"0_3.jpg",  "behavior":{"id":"3", "stop":"false"}},
 {"name":"RemoteImageView", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+
+{"name":"FecherView", "options":{"button_title":"+25 pikchurs", "url":"https://api.pikchur.com/api/feeds/json","page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"1.38"}},
+
 {"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"radionula_screen.jpg"}, "behavior":{"stop":"true"}},
 
-{"name":"FechSomeView", "options":{"url":"https://api.pikchur.com/api/feeds/json", "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][feeds][timeline][page]=1&data[api][feeds][timeline][limit]=25", "filter":"pikchur"}, "behavior":{"id":"3.2", "stop":"true"}},
-
-
-{"name":"FechSomeView", "options":{"url":"http://kitschmaster.com/kiches/144.json", "filter":"kitschmaster"}, "behavior":{"id":"3.3", "stop":"true"}},
+{"name":"FecherView", "options":{"button_title":"Get Kitsch!", "url":"http://kitschmaster.com/kiches/144.json", "filter":"kitschmaster"}, "behavior":{"stop":"true"}},
 {"name":"000000005.caf",  "behavior":{"id":"3.4", "stop":"true"}},
 
 {"name":"0_4.jpg",  "behavior":{"id":"4", "stop":"false"}},

@@ -34,14 +34,13 @@
 		47348B0C0F9A3B6100A1D78A /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B080F9A3B6100A1D78A /* FlipsideView.xib */; };
 		47348B0D0F9A3B6100A1D78A /* MoneyTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B090F9A3B6100A1D78A /* MoneyTimerView.xib */; };
 		47348B0E0F9A3B6100A1D78A /* RemoteImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */; };
-		47348B130F9A3CA300A1D78A /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47348B100F9A3CA300A1D78A /* Filter.m */; };
+		47348B130F9A3CA300A1D78A /* IIFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47348B100F9A3CA300A1D78A /* IIFilter.m */; };
 		47348B140F9A3CA300A1D78A /* RemoteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47348B120F9A3CA300A1D78A /* RemoteImageViewController.m */; };
 		47348B160F9A3CD500A1D78A /* MoonTimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B150F9A3CD500A1D78A /* MoonTimeView.xib */; };
 		47348B2C0F9A48DD00A1D78A /* AssetRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 47348B2B0F9A48DD00A1D78A /* AssetRepository.m */; };
 		47348DB70F9B837600A1D78A /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 47348DB60F9B837600A1D78A /* AudioStreamer.m */; };
 		47348E160F9B85E700A1D78A /* StreamingPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47348E150F9B85E700A1D78A /* StreamingPlayerViewController.m */; };
 		47348E180F9B880700A1D78A /* StreamingPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348E170F9B880700A1D78A /* StreamingPlayerView.xib */; };
-		47348E480F9B8D5300A1D78A /* radionula_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47348E460F9B8D5300A1D78A /* radionula_icon.jpg */; };
 		47348E490F9B8D5300A1D78A /* radionula_screen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47348E470F9B8D5300A1D78A /* radionula_screen.jpg */; };
 		4773867B0F4ACCB20044085E /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 477386670F4ACCB20044085E /* ASIFormDataRequest.m */; };
 		4773867C0F4ACCB20044085E /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 477386690F4ACCB20044085E /* ASIHTTPRequest.m */; };
@@ -87,6 +86,10 @@
 		47AD915B0F800830001687AA /* 0_Movie_141.mov in Resources */ = {isa = PBXBuildFile; fileRef = 47AD91570F80082F001687AA /* 0_Movie_141.mov */; };
 		47B14CEC0F7C08260017AB44 /* IIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B14CEB0F7C08260017AB44 /* IIController.m */; };
 		47B14D580F7E09360017AB44 /* stage.json in Resources */ = {isa = PBXBuildFile; fileRef = 47B14D570F7E09360017AB44 /* stage.json */; };
+		47C7E24A0F9CBB4100789864 /* Filter_kitschmaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C7E2470F9CBB4100789864 /* Filter_kitschmaster.m */; };
+		47C7E24B0F9CBB4100789864 /* Filter_pikchur.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C7E2490F9CBB4100789864 /* Filter_pikchur.m */; };
+		47C7E25C0F9CC59100789864 /* FecherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C7E25B0F9CC59100789864 /* FecherViewController.m */; };
+		47C7E25E0F9CC70900789864 /* FecherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C7E25D0F9CC70900789864 /* FecherView.xib */; };
 		47D796120F725A9C00C52774 /* IIMusic.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D796080F725A9C00C52774 /* IIMusic.m */; };
 		47D796130F725A9C00C52774 /* IINotControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D7960A0F725A9C00C52774 /* IINotControls.m */; };
 		47D796140F725A9C00C52774 /* IITransender.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D7960C0F725A9C00C52774 /* IITransender.m */; };
@@ -176,8 +179,8 @@
 		47348B080F9A3B6100A1D78A /* FlipsideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
 		47348B090F9A3B6100A1D78A /* MoneyTimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoneyTimerView.xib; sourceTree = "<group>"; };
 		47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoteImageViewController.xib; sourceTree = "<group>"; };
-		47348B0F0F9A3CA300A1D78A /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter.h; path = Classes/Filter.h; sourceTree = "<group>"; };
-		47348B100F9A3CA300A1D78A /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter.m; path = Classes/Filter.m; sourceTree = "<group>"; };
+		47348B0F0F9A3CA300A1D78A /* IIFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIFilter.h; path = Classes/IIFilter.h; sourceTree = "<group>"; };
+		47348B100F9A3CA300A1D78A /* IIFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIFilter.m; path = Classes/IIFilter.m; sourceTree = "<group>"; };
 		47348B110F9A3CA300A1D78A /* RemoteImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoteImageViewController.h; path = Classes/RemoteImageViewController.h; sourceTree = "<group>"; };
 		47348B120F9A3CA300A1D78A /* RemoteImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoteImageViewController.m; path = Classes/RemoteImageViewController.m; sourceTree = "<group>"; };
 		47348B150F9A3CD500A1D78A /* MoonTimeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoonTimeView.xib; sourceTree = "<group>"; };
@@ -188,7 +191,6 @@
 		47348E140F9B85E700A1D78A /* StreamingPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamingPlayerViewController.h; path = Classes/StreamingPlayerViewController.h; sourceTree = "<group>"; };
 		47348E150F9B85E700A1D78A /* StreamingPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamingPlayerViewController.m; path = Classes/StreamingPlayerViewController.m; sourceTree = "<group>"; };
 		47348E170F9B880700A1D78A /* StreamingPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamingPlayerView.xib; sourceTree = "<group>"; };
-		47348E460F9B8D5300A1D78A /* radionula_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = radionula_icon.jpg; path = Artwork/radionula_icon.jpg; sourceTree = SOURCE_ROOT; };
 		47348E470F9B8D5300A1D78A /* radionula_screen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = radionula_screen.jpg; path = Artwork/radionula_screen.jpg; sourceTree = SOURCE_ROOT; };
 		477386660F4ACCB20044085E /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIFormDataRequest.h; path = Classes/ASIFormDataRequest.h; sourceTree = "<group>"; };
 		477386670F4ACCB20044085E /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIFormDataRequest.m; path = Classes/ASIFormDataRequest.m; sourceTree = "<group>"; };
@@ -246,6 +248,13 @@
 		47B14CEA0F7C08260017AB44 /* IIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIController.h; path = Classes/IIController.h; sourceTree = "<group>"; };
 		47B14CEB0F7C08260017AB44 /* IIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIController.m; path = Classes/IIController.m; sourceTree = "<group>"; };
 		47B14D570F7E09360017AB44 /* stage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stage.json; sourceTree = "<group>"; };
+		47C7E2460F9CBB4100789864 /* Filter_kitschmaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_kitschmaster.h; path = Classes/Filter_kitschmaster.h; sourceTree = "<group>"; };
+		47C7E2470F9CBB4100789864 /* Filter_kitschmaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_kitschmaster.m; path = Classes/Filter_kitschmaster.m; sourceTree = "<group>"; };
+		47C7E2480F9CBB4100789864 /* Filter_pikchur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_pikchur.h; path = Classes/Filter_pikchur.h; sourceTree = "<group>"; };
+		47C7E2490F9CBB4100789864 /* Filter_pikchur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_pikchur.m; path = Classes/Filter_pikchur.m; sourceTree = "<group>"; };
+		47C7E25A0F9CC59100789864 /* FecherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FecherViewController.h; path = Classes/FecherViewController.h; sourceTree = "<group>"; };
+		47C7E25B0F9CC59100789864 /* FecherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FecherViewController.m; path = Classes/FecherViewController.m; sourceTree = "<group>"; };
+		47C7E25D0F9CC70900789864 /* FecherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FecherView.xib; sourceTree = "<group>"; };
 		47D796070F725A9C00C52774 /* IIMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIMusic.h; path = Classes/IIMusic.h; sourceTree = "<group>"; };
 		47D796080F725A9C00C52774 /* IIMusic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIMusic.m; path = Classes/IIMusic.m; sourceTree = "<group>"; };
 		47D796090F725A9C00C52774 /* IINotControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IINotControls.h; path = Classes/IINotControls.h; sourceTree = "<group>"; };
@@ -346,12 +355,16 @@
 		289233A00DB2D0730083E9F9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				47C7E25A0F9CC59100789864 /* FecherViewController.h */,
+				47C7E25B0F9CC59100789864 /* FecherViewController.m */,
+				47C7E2460F9CBB4100789864 /* Filter_kitschmaster.h */,
+				47C7E2470F9CBB4100789864 /* Filter_kitschmaster.m */,
+				47C7E2480F9CBB4100789864 /* Filter_pikchur.h */,
+				47C7E2490F9CBB4100789864 /* Filter_pikchur.m */,
 				47348E140F9B85E700A1D78A /* StreamingPlayerViewController.h */,
 				47348E150F9B85E700A1D78A /* StreamingPlayerViewController.m */,
 				47348B2A0F9A48DD00A1D78A /* AssetRepository.h */,
 				47348B2B0F9A48DD00A1D78A /* AssetRepository.m */,
-				47348B0F0F9A3CA300A1D78A /* Filter.h */,
-				47348B100F9A3CA300A1D78A /* Filter.m */,
 				47348B110F9A3CA300A1D78A /* RemoteImageViewController.h */,
 				47348B120F9A3CA300A1D78A /* RemoteImageViewController.m */,
 				473488DB0F99DF8E00A1D78A /* FechSomeViewController.h */,
@@ -459,6 +472,7 @@
 				47348B090F9A3B6100A1D78A /* MoneyTimerView.xib */,
 				47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */,
 				47348E170F9B880700A1D78A /* StreamingPlayerView.xib */,
+				47C7E25D0F9CC70900789864 /* FecherView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -531,8 +545,10 @@
 				47D7960E0F725A9C00C52774 /* IITransenderView.m */,
 				47D7960F0F725A9C00C52774 /* IITransenderViewController.h */,
 				47D796100F725A9C00C52774 /* IITransenderViewController.m */,
-				473488C20F991F2B00A1D78A /* IIWWW.h */,
+				47348B0F0F9A3CA300A1D78A /* IIFilter.h */,
+				47348B100F9A3CA300A1D78A /* IIFilter.m */,
 				473488C30F991F2B00A1D78A /* IIWWW.m */,
+				473488C20F991F2B00A1D78A /* IIWWW.h */,
 			);
 			name = Transender;
 			sourceTree = "<group>";
@@ -540,7 +556,6 @@
 		47EBEAC10F4C688A009F377E /* Transends */ = {
 			isa = PBXGroup;
 			children = (
-				47348E460F9B8D5300A1D78A /* radionula_icon.jpg */,
 				47348E470F9B8D5300A1D78A /* radionula_screen.jpg */,
 				47B14D570F7E09360017AB44 /* stage.json */,
 				472643200F56A9530097D30A /* listing.json */,
@@ -728,8 +743,8 @@
 				47348B0E0F9A3B6100A1D78A /* RemoteImageViewController.xib in Resources */,
 				47348B160F9A3CD500A1D78A /* MoonTimeView.xib in Resources */,
 				47348E180F9B880700A1D78A /* StreamingPlayerView.xib in Resources */,
-				47348E480F9B8D5300A1D78A /* radionula_icon.jpg in Resources */,
 				47348E490F9B8D5300A1D78A /* radionula_screen.jpg in Resources */,
+				47C7E25E0F9CC70900789864 /* FecherView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,11 +781,14 @@
 				473488E00F99DF8E00A1D78A /* FechSomeViewController.m in Sources */,
 				473488E10F99DF8E00A1D78A /* main.m in Sources */,
 				473488E20F99DF8E00A1D78A /* UIApplication-Network.m in Sources */,
-				47348B130F9A3CA300A1D78A /* Filter.m in Sources */,
+				47348B130F9A3CA300A1D78A /* IIFilter.m in Sources */,
 				47348B140F9A3CA300A1D78A /* RemoteImageViewController.m in Sources */,
 				47348B2C0F9A48DD00A1D78A /* AssetRepository.m in Sources */,
 				47348DB70F9B837600A1D78A /* AudioStreamer.m in Sources */,
 				47348E160F9B85E700A1D78A /* StreamingPlayerViewController.m in Sources */,
+				47C7E24A0F9CBB4100789864 /* Filter_kitschmaster.m in Sources */,
+				47C7E24B0F9CBB4100789864 /* Filter_pikchur.m in Sources */,
+				47C7E25C0F9CC59100789864 /* FecherViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

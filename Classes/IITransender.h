@@ -15,20 +15,23 @@
  * You could listen to music. Or watch a movie.
  *
  * Transends can also be full-blown applications. 
- * Or simply UIViewControllers - subclasses of IIController.
+ * Or simply subclasses of IIController (a UIViewController subclass).
  * The only limitation are notControls which stay above Your application view. 
  *
  */
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "IIController.h"
 #define kIITransenderVibeShort 0.05
 #define kIITransenderVibeLong 2.0
 #define kIITransenderZero 0
 #define kIITransenderDirectionUp NO
 #define kIITransenderDirectionDown YES
 
+@class IIController;
+
 @protocol IITransenderDelegate <NSObject>
-- (void)transendedWithView:(UIViewController*)transend andBehavior:(NSDictionary*)behavior;
+- (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithMovie:(NSString*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior;
@@ -45,8 +48,6 @@
 	float vibe; //time beetwen transends - vibration freq.
 	NSTimer *beat;	//the beat generator and transend invoker
 	
-	UIImage *current; //holds last transended image
-
 	int nextMemorySpot;
 	
 	NSString *transendsPath; //path to Transends
@@ -57,11 +58,13 @@
 
 @property (nonatomic, assign) id <IITransenderDelegate> delegate;
 @property (readwrite, retain) NSMutableArray *memories;
-@property (readwrite, retain) UIImage *current;
 @property (readwrite) BOOL direction;
 
 - (id)initWith:(NSString*)jsonMemories;
 - (id)init;
+
+- (void)rememberMemoriesWithString:(NSString*)s;
+- (void)rememberMemories:(NSMutableArray*)m;
 
 - (int)currentSpot;
 - (float)currentVibe;
@@ -69,6 +72,7 @@
 - (void)spot;
 - (void)meditate;
 - (void)transend;
+- (void)transendNow;
 - (void)transendOrMeditate;
 - (void)transendWithVibe:(float)v;
 - (void)reVibe:(float)v;

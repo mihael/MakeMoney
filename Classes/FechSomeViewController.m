@@ -14,19 +14,15 @@
 - (IBAction)buttonTouched:(id)sender
 {
 	[progress setHidden:NO];
-	[www fech];
-	NSLog(@"button feched %@", [self.options valueForKey:@"url"]);
-	
+	[www fech];	
 }
 
 - (void)notFeched:(NSString*)err
 {
-	NSLog(@"notfetched %@", err);
 }
 
 - (void)feched:(NSMutableArray*)listing
 {
-	NSLog(@"feched %@", listing);
 	[self.transender spot]; //rewind memory spot
 
 	[self.transender rememberMemories:listing];
@@ -48,11 +44,9 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	www = [[IIWWW alloc] initWithUrl:[self.options valueForKey:@"url"] andParams:[self.options valueForKey:@"params"]];
-	[www setFilterName:[self.options valueForKey:@"filter"]];
+	www = [[IIWWW alloc] initWithOptions:self.options];
 	[www setProgressDelegate:progress];
 	[www setDelegate:self];
-	NSLog(@"FechSomeView#viewDidLoad");
 }
 
 /*

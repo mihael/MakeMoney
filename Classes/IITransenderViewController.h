@@ -4,12 +4,11 @@
 //
 #import <UIKit/UIKit.h>
 #import "IITransender.h"
+#import "IIController.h"
 #import "IIMusic.h"
 #import "IITransenderView.h"
 #import "IINotControls.h"
-#import "IIWWW.h"
 #define kTransendAnimated YES
-#define kTransendAnimationSpeed 0.79 //not used
 
 @protocol IITransenderViewControllerDelegate <NSObject>
 - (void)transending;
@@ -19,21 +18,24 @@
 @end
 
 @class IITransender;
+@class IIController;
+@class IINotControls;
+@class IIMusic;
 
 @interface IITransenderViewController : UIViewController 
 <IINotControlsDelegate, 
  IITransenderDelegate, 
- IIWWWDelegate,
  IIMusicDelegate, 
  IITransenderViewDelegate> 
 {
     id <IITransenderViewControllerDelegate> delegate;
 		IITransenderView *skrin;
+    	IINotControls *notControls;
 		IITransender *transender;
+		IIController *transendController;
 		IIMusic *music;
 		NSTimer *magic;
 		BOOL feeling;	
-		UIViewController *transendController;
 		UIImageView *transendEmitter1;
 		UIImageView *transendEmitter2;
 		NSString* listingName;
@@ -53,6 +55,7 @@
 
 @property (nonatomic, assign) id <IITransenderViewControllerDelegate> delegate;
 @property (readonly, retain) IITransender *transender;
+@property (readwrite, assign) IINotControls *notControls;
 @property (readwrite, retain) UIViewController *transendController;
 @property (readwrite) BOOL feeling;
 @property (readwrite, retain) NSString* listingName;
@@ -60,15 +63,22 @@
 
 - (id)initWithTransendsListing:(NSString*)aListingName andStage:(NSDictionary*)aStageName;
 
-- (void)transendedWithView:(UIViewController*)transend andBehavior:(NSDictionary*)behavior;
+- (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithMovie:(NSString*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedAll:(id)sender;
+- (void)continueWithBehavior;
 
 - (void)transitionViewDidStart:(IITransenderView *)view;
 - (void)transitionViewDidFinish:(IITransenderView *)view;
 - (void)transitionViewDidCancel:(IITransenderView *)view;
 
 - (void)transit:(UIView*)wiev;
+
+- (void)transitImage:(UIImage*)img;
+
+-(void)hearMusicFile:(NSString*)thePath;
+-(void)seeMovie:(NSURL*)url;
+
 @end

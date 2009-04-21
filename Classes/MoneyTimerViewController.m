@@ -7,17 +7,14 @@
 @synthesize hourly;
 - (void)viewDidLoad {
     [super viewDidLoad];
-	NSLog(@"MoneyTimerViewController#viewDidLoad");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	NSLog(@"MoneyTimerViewController#viewWillAppear");
 	[self startik];
 }
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-	NSLog(@"MoneyTimerViewController#viewWillDisappear");
 	[self endtik];
 }
 
@@ -44,7 +41,6 @@
 	}
 	seconds = 0; //zapomni si kje točno sem ostal
 	costofonehour = pow(10, [hourly value]);
-	NSLog(@"STARTIK");// cost %i", costofonehour);
 	tiktak = [[NSTimer scheduledTimerWithTimeInterval:1
 											   target:self 
 											 selector:@selector(taktik:)
@@ -62,13 +58,12 @@
 - (void)taktik:(NSTimer*)t {
 	//counter.text = [NSString stringWithFormat:@"%i", t];
 	seconds++;
-	NSLog(@"taktik %i", seconds);
 	[self showMoney];
 	[self updateSliderLabel];
 }
 
 - (void)showMoney {
-	NSLog(@"showMoney cost of one hour: %i seconds: %i money: %f", costofonehour, seconds, ((float)seconds/3600 * (float)costofonehour));
+	//DebugLog(@"showMoney cost of one hour: %i seconds: %i money: %f", costofonehour, seconds, ((float)seconds/3600 * (float)costofonehour));
 	money.text = [NSString stringWithFormat:@"%i. %f", seconds, ((float)seconds/3600 * (float)costofonehour)];
 }
 
@@ -88,10 +83,8 @@
 #pragma mark IIController overrides
 - (void)stopFunctioning {
 	[self endtik];
-	NSLog(@"MoneyTimerViewController#stopFunctioning");
 }
 - (void)startFunctioning {
 	[self startik];
-	NSLog(@"MoneyTimerViewController#startFunctioning");
 }
 @end

@@ -14,14 +14,13 @@
 - (void)didReceiveMemoryWarning {
 	[super didReceiveMemoryWarning]; 
 	[[iAlert instance] alert:@"Received Memory Warning" withMessage:@"Good luck!"];
-	NSLog(@"Too many memories.");
+	DebugLog(@"Too many memories.");
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];     
 	networkQueue = [[ASINetworkQueue alloc] init];	
-	NSLog(@"FlipsideView#viewDidLoad");
 	if ([[Reachability sharedReachability] internetConnectionStatus]==NotReachable) {
 		version.text = @"Please connect device to internet. Thanks.";
 	} else {
@@ -68,7 +67,6 @@
 }
 
 - (void)showStartups:(NSString*)s andMadeMoney:(NSString*)m {
-	//NSLog(@"showStartups %@ %@", s, m);	
 	version.text = [NSString stringWithFormat:@"Version %@", [MakeMoneyAppDelegate version]];
 	startups.text = [NSString stringWithFormat:@"%@ was purchased %@.", APP_TITLE, s];
 	moneymade.text = [NSString stringWithFormat:@"%@ made $%@.", APP_TITLE, m];
@@ -92,12 +90,10 @@
 
 #pragma mark UIWebView
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-	//NSLog(@"WebViewController#webViewDidFinishLoad");
 	[self stopLoading];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-	//NSLog(@"WebViewController#webViewDidStartLoad");	
 	[self startLoading];
 }
 
@@ -111,7 +107,7 @@
 			[[iAlert instance] alert:@"Web" withMessage:@"Timed out."];
 			break;
 		default:
-			//NSLog(@"WebViewController#didFailWithError %@ code %i ", [error localizedDescription], error.code);			
+			DebugLog(@"WebViewController#didFailWithError %@ code %i ", [error localizedDescription], error.code);			
 			break;
 	}//hide all other errors for now :) and be happy	
 }

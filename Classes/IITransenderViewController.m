@@ -2,7 +2,6 @@
 //  IITransenderController.m
 //  MakeMoney
 //
-#import "iAlert.h"
 #import "IITransenderViewController.h"
 #import "MakeMoneyAppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
@@ -10,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation IITransenderViewController
-@synthesize delegate, transender, transendController, feeling, listingName, notBehavior;
+@synthesize delegate, transender, transendController, feeling, listingName, notBehavior, notControls;
 
 - (id)initWithTransendsListing:(NSString*)aListingName andStage:(NSDictionary*)aStage{
 	if (self = [super init]) {
@@ -20,7 +19,6 @@
 		directions = [[NSArray arrayWithObjects:kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom, nil] retain];
 		horizontal = [[stage valueForKey:@"horizontal"] boolValue];
 		animated = [[stage valueForKey:@"animated"] boolValue];
-		
 	}
 	return self;
 }
@@ -39,15 +37,14 @@
 	[self.view addSubview:transendEmitter1];
 	
 	avoidBehavior = NO;
-	
-	
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 	[transender meditate];
-	[[iAlert instance] alert:@"Received Memory Warning" withMessage:@"Good luck!"];
-	NSLog(@"Too many memories.");
+	[notControls lightUp];
+	[[iAlert instance] alert:@"Received Memory Warning in TransenderViewController" withMessage:@"Good luck!"];
+	DebugLog(@"Too many memories.");
 }
 
 - (void)dealloc {
@@ -64,15 +61,19 @@
 }
 
 #pragma mark IITransenderDelegate
-- (void)transendedWithView:(UIViewController*)transend andBehavior:(NSDictionary*)behavior {
-	NSLog(@"IITransenderViewController#transendedWithView %@ andBehavior %@", transend, behavior);
+- (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior {
+	DebugLog(@"IITransenderViewController#transendedWithView %@ andBehavior %@", transend, behavior);
+	if (self.notControls && [transend respondsToSelector:@selector(setNotControls:)])
+		[transend setNotControls:self.notControls];//give the current controller access to notControls
 	[self setNotBehavior:behavior];
-	[self transit:transend.view];
 	if (transendController) {  
 		if ([transendController respondsToSelector:@selector(stopFunctioning)]) {
 			[transendController stopFunctioning]; //stop the previous view if can
 		} 
-	}	
+	}		
+	[self transit:transend.view]; //transit with the fresh view
+	[transendController release]; //release any previously transended views
+	transendController = nil;
 	[self setTransendController:transend];
 	if ([transendController respondsToSelector:@selector(startFunctioning)]) {
 		[transendController startFunctioning]; //start the current view if can
@@ -81,15 +82,14 @@
 }
 
 - (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior {
-	NSLog(@"IITransenderViewController#transendedWithImage %@ andBehavior %@", transend, behavior);
+	DebugLog(@"IITransenderViewController#transendedWithImage %@ andBehavior %@", transend, behavior);
 	[self setNotBehavior:behavior];
-	NSLog(@"continue ...");
 	[self transitImage:transend];
 	[self continueWithBehavior];
 }
 
 - (void)transendedWithMovie:(NSString*)transend andBehavior:(NSDictionary*)behavior {
-	NSLog(@"IITransenderViewController#transendedWithMovie %@ andBehavior %@", transend, behavior);
+	DebugLog(@"IITransenderViewController#transendedWithMovie %@ andBehavior %@", transend, behavior);
 	[self setNotBehavior:behavior];
 	if ([[behavior valueForKey:@"background"] boolValue]) 
 	{
@@ -106,7 +106,7 @@
 }
 
 - (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior {
-	NSLog(@"IITransenderViewController#transendedWithMusic %@ andBehavior %@", transend, behavior);
+	DebugLog(@"IITransenderViewController#transendedWithMusic %@ andBehavior %@", transend, behavior);
 	[self setNotBehavior:behavior];
 	//stop transending
 	[transender meditate];
@@ -125,7 +125,7 @@
 }
 
 - (void)transendedAll:(id)sender {
-	NSLog(@"IITransenderViewController#transendedAll");
+	DebugLog(@"IITransenderViewController#transendedAll");
 }
 
 #pragma mark Behavior
@@ -142,8 +142,6 @@
 		if (notBehavior) {
 			BOOL stop = [[notBehavior valueForKey:@"stop"] boolValue];
 			if (stop) {
-				NSLog(@"stop!");
-
 				if ([transender isTransending]) { //no need to meditate if already meditating
 					[transender meditate];
 					if (delegate) {
@@ -259,11 +257,8 @@
 		if (animated) {
 			//chose transition type and direction at random from the arrays of supported transitions and directions
 			//NSUInteger transitionsIndex = random() % [transitions count];
-
-			NSString *transition = [transitions objectAtIndex:1];//[transitions objectAtIndex:transitionsIndex];
-			
-						NSLog(@"in transit ..");
-			
+			//TODO - let choose transition from listing
+			NSString *transition = [transitions objectAtIndex:1];//[transitions objectAtIndex:transitionsIndex];						
 			//NSUInteger directionsIndex = random() % [directions count];
 			NSString *dir = nil; //[directions objectAtIndex:directionsIndex];
 			
@@ -271,8 +266,7 @@
 				if (horizontal) {
 					dir = [directions objectAtIndex:0];
 				} else {
-					dir = [directions objectAtIndex:2];
-				
+					dir = [directions objectAtIndex:2];				
 				}
 			} else {
 				if (horizontal) {
@@ -292,7 +286,7 @@
 		}
 		
 	} else {
-		NSLog(@"No transit. Skrin has no views.");
+		DebugLog(@"IITransenderViewController# No transit. Skrin has no views.");
 	}
 }
 

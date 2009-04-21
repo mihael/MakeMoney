@@ -45,6 +45,7 @@
     self.mainViewController = viewController;
     [viewController release];    
 	[notControls setDelegate:self.mainViewController];
+	[self.mainViewController setNotControls:notControls];
 	[self.mainViewController setDelegate:self];
 
     [self.view insertSubview:mainViewController.view belowSubview:notControls];
@@ -113,8 +114,8 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-	[[iAlert instance] alert:@"Received Memory Warning" withMessage:@"Good luck!"];
-	NSLog(@"Too many memories.");
+	[[iAlert instance] alert:@"Received Memory Warning in RootViewController" withMessage:@"Good luck!"];
+	DebugLog(@"RootViewController# Too many memories.");
 }
 
 - (void)dealloc {
@@ -126,11 +127,9 @@
 
 #pragma mark IITransenderViewControllerDelegate
 - (void)transending {
-	NSLog(@"transending lightsDown");
 	[notControls lightDown];
 }
 - (void)meditating {
-	NSLog(@"meditating lightsUp");
 	[notControls lightUp];
 }
 

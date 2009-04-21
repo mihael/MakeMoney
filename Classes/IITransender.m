@@ -5,12 +5,13 @@
 #import <UIKit/UIKit.h>
 #import "IITransender.h"
 #import "MoneyTimerViewController.h"
+#import "JSON.h"
 #ifdef __APPLE__
 #include "TargetConditionals.h"
 #endif
 
 @implementation IITransender
-@synthesize memories, delegate, current, direction;
+@synthesize memories, delegate, direction;
 
 #pragma mark Om Init
 // always connect with Mother Earth before acting
@@ -22,7 +23,6 @@
 	nextMemorySpot = kIITransenderZero;
 	vibe = kIITransenderVibeLong; 
 	beat = nil;
-	current = nil;	
 	transendsPath = [[[[NSBundle mainBundle] pathForResource:@"listing" ofType:@"json"] stringByDeletingLastPathComponent] retain];
 }
 
@@ -42,7 +42,6 @@
 				[transends appendFormat:@"{\"name\":\"%@\"},", p]; // [[p componentsSeparatedByString:@"/"] lastObject]];
 			}
 		}
-
 		[self rememberMemoriesWithString:[NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]]];
 	}
 	return self;
@@ -66,7 +65,6 @@
 #pragma mark Work Purifies
 - (void)rememberMemoriesWithString:(NSString*)s
 {
-	//NSLog(@"IITransender#rememberMemoriesWithString:\n%@\n", s);
 	[self rememberMemories:[s JSONValue]];
 }
 
@@ -82,7 +80,7 @@
 {
 	if (v>kIITransenderVibeShort && v<kIITransenderVibeLong) {
 		vibe = v;
-		NSLog(@"IITransender#setTransendenceVibe %f", vibe);
+		//DebugLog(@"IITransender#setTransendenceVibe %f", vibe);
 	}
 }
 
@@ -109,85 +107,75 @@
 //the main method
 - (void)invokeTransend:(NSTimer*)timer
 {
-	//find out what is next
-	[self computeSpot];
+	if (delegate) {
+		//find out what is next
+		[self computeSpot];
 
-	//transend with memoriesSpot
-	NSLog(@"IITransender#invokeTransend with memoriesSpot: %i ", memoriesSpot);
-	
-	NSDictionary *behavior = [[memories objectAtIndex:memoriesSpot] objectForKey:@"behavior"];
-	NSDictionary *options = [[memories objectAtIndex:memoriesSpot] objectForKey:@"options"];
-	NSString *memoryName = [[memories objectAtIndex:memoriesSpot] valueForKey:@"name"];		
-	NSString *diskName = nil;
-	
-	if ([memoryName hasSuffix:@"View"]) {
-		NSString *className = [NSString stringWithFormat:@"%@Controller", memoryName];
-		Class viewControllerClass = NSClassFromString(className);
-		id viewController = nil;
-				
-		if ([Kriya xibExists:memoryName] ) { //load from nib if there is one
-			viewController = [[viewControllerClass alloc] initWithNibName:memoryName bundle:nil];
-		} else { //just init, view controller should load it self programmatically
-			viewController = [[viewControllerClass alloc] init]; 
-		}
-
-		//transend
-		if (viewController && delegate) {
-			if (options) {
-				if ([viewController respondsToSelector:@selector(setTransender:)])
-					[viewController setTransender:self];
-				if ([viewController respondsToSelector:@selector(setOptions:)])
-					[viewController setOptions:options];			
-			}
-			if ([delegate respondsToSelector:@selector(transendedWithView:andBehavior:)])
-				[delegate transendedWithView:viewController andBehavior:behavior];
-		} else {
-			NSLog(@"Not transended view: %@", memoryName);
-		}	
-	
-	} else {
+		//transend with memoriesSpot
+		DebugLog(@"IITransender#invokeTransend %i vibe: %f", memoriesSpot, vibe);
 		
-		if ([memoryName hasPrefix:@"0"]) { //a simple 0-prefixed transend
-			diskName = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryName];
-		} else if ([memoryName hasPrefix:@"/"]) { //a direct path
-			diskName = memoryName;
-		}
-	
-		if ([[memoryName pathExtension] isEqualToString:@"jpg"]) {
-			[self setCurrent:[UIImage imageWithContentsOfFile:diskName]];
-
-			if (delegate) {
+		NSDictionary *behavior = [[memories objectAtIndex:memoriesSpot] objectForKey:@"behavior"];
+		NSDictionary *options = [[memories objectAtIndex:memoriesSpot] objectForKey:@"options"];
+		NSString *memoryName = [[memories objectAtIndex:memoriesSpot] valueForKey:@"name"];		
+		NSString *diskName = nil;
+		
+		if ([memoryName hasSuffix:@"View"]) {
+			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryName];
+			Class viewControllerClass = NSClassFromString(className);
+			id viewController = nil;
+					
+			if ([Kriya xibExists:memoryName] ) { //load from nib if there is one
+				viewController = [[viewControllerClass alloc] initWithNibName:memoryName bundle:nil];
+			} else { //just init, view controller should load it self programmatically
+				viewController = [[viewControllerClass alloc] init]; 
+			}		
+			
+			//transend
+			if (viewController && [viewController respondsToSelector:@selector(startFunctioning)] && delegate) {
+				if (options) {
+					if ([viewController respondsToSelector:@selector(setTransender:)])
+						[viewController setTransender:self];
+					if ([viewController respondsToSelector:@selector(setOptions:)])
+						[viewController setOptions:options];			
+				}
+				if ([delegate respondsToSelector:@selector(transendedWithView:andBehavior:)])
+					[delegate transendedWithView:viewController andBehavior:behavior];
+			} else {
+				DebugLog(@"IITransender#invokeTransend not transended %i: %@", memoriesSpot, memoryName);
+			}	
+		
+		} else {
+			
+			if ([memoryName hasPrefix:@"0"]) { //a simple 0-prefixed transend
+				diskName = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryName];
+			} else if ([memoryName hasPrefix:@"/"]) { //a direct path
+				diskName = memoryName;
+			}
+		
+			if ([[memoryName pathExtension] isEqualToString:@"jpg"]) {
 				if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
-					[delegate transendedWithImage:current andBehavior:behavior];
-			}				
-		}
+					[delegate transendedWithImage:[UIImage imageWithContentsOfFile:diskName] andBehavior:behavior];
+			}
 
-
-		//can not play sounds and movies in simulator, so do not transend
-		#if !(TARGET_IPHONE_SIMULATOR)
-		if ([[memoryName pathExtension] isEqualToString:@"mov"]) {
-			if (delegate) {
+			//can not play sounds and movies in simulator, so do not transend
+			#if !(TARGET_IPHONE_SIMULATOR)
+			if ([[memoryName pathExtension] isEqualToString:@"mov"]) {
 				if ([delegate respondsToSelector:@selector(transendedWithMovie:andBehavior:)])
 					[delegate transendedWithMovie:diskName andBehavior:behavior];
-			}				
-		}
-		if ([[memoryName pathExtension] isEqualToString:@"caf"]) {
-			if (delegate) {
+			}
+			if ([[memoryName pathExtension] isEqualToString:@"caf"]) {
 				if ([delegate respondsToSelector:@selector(transendedWithMusic:andBehavior:)])
 					[delegate transendedWithMusic:diskName andBehavior:behavior];
-			}				
-		}		
-		#endif
-	}
-
-	//always call delegate when last transend in listing transended
-	if (memoriesSpot == memoriesCount) {
-		if (delegate) {
-			if ([delegate respondsToSelector:@selector(transendedAll:)])
-				[delegate transendedAll:self];
+			}		
+			#endif
 		}
-	}
-	
+
+		//always call delegate when last transend in listing transended
+		if (memoriesSpot == memoriesCount) {
+			if ([delegate respondsToSelector:@selector(transendedAll:)])
+				[delegate transendedAll:self];		
+		}
+	}	
 
 }
 
@@ -207,6 +195,13 @@
 	[self transendWithVibe:vibe];
 }
 
+//invokes first then starts transending 
+- (void)transendNow 
+{
+	[self invokeTransend];
+	[self transend];
+}
+
 - (void)transendWithVibe:(float)v
 {
 	[self meditate];
@@ -216,10 +211,9 @@
 										   selector:@selector(invokeTransend:)
                                            userInfo:nil
                                             repeats:YES] retain];
-	NSLog(@"IITransender#transendWithVibe %f", vibe);
 }
 
-
+//change the transending vibe - time beetween transends
 - (void)reVibe:(float)v
 {
 	if ([self isTransending]) {
@@ -270,7 +264,6 @@
 {
 	int s = [[NSUserDefaults standardUserDefaults] integerForKey:SPOT];
 	[self meditateWith:s];
-	NSLog(@"Remember spot %i", s);
 }
 
 //return current vibe

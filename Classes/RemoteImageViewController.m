@@ -8,47 +8,26 @@
 
 
 @implementation RemoteImageViewController
-@synthesize imageView, indica;
-
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
+@synthesize imageView, indica, image;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self loadImage];
-
 }
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+	[self.transender meditate];
+	[self.notControls lightUp];
+	[[iAlert instance] alert:@"Received Memory Warning in RemoteImageViewController" withMessage:@"Good luck!"];
 }
 
 - (void)viewDidUnload {
+	DebugLog(@"RemoteImageViewController#viewDidUnload");
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
-
 
 - (void)dealloc {
     [super dealloc];
@@ -58,56 +37,46 @@
 - (void)downloaded:(id)a 
 {	
 	[self showImage:[a image]];
-	NSLog(@"downloaded %@", a);
+	DebugLog(@"RemoteImageViewController#downloaded %@", a);
 }
 
 - (void)notDownloaded:(id)a 
 {
-	NSLog(@"Image not downloaded...");
+	DebugLog(@"RemoteImageViewController#Image not downloaded...");
 }
 
 #pragma mark load
 - (void)showImage:(UIImage*)img
 {
 	[indica stopAnimating];
-	[indica setHidden:YES];
+	[self setImage:img];
 	[self.imageView setHidden:NO];
-	[self.imageView setImage:img];
-	[self animateImage];
+	[self.imageView setImage:image];
 }
 
-- (void)loadImage 
+- (void)loadRemoteImage 
 {
-	[indica setHidden:NO];
-	[indica startAnimating];
 	UIImage *img = [[AssetRepository one] imageForURL:[self.options valueForKey:@"url"] notify:self];
 	if (img) {
 		[self showImage:img];
+		[img release];
 	}
-	
 }
 
 - (void)fakeImage
 {
-	NSLog(@"Should show a fake image?");
-}
-
-- (void)animateImage
-{
-	CATransition *animation = [CATransition animation];
-	[animation setType:kCATransitionReveal];
-	[animation setDuration:3];
-	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-	//	[animation setSubtype:kCATransitionFromTop];
-	//[[self.imageView layer] addAnimation:animation forKey:kImageAnimationKey];
+	DebugLog(@"Should show a fake image?");
 }
 
 #pragma mark IIController overrides
 - (void)stopFunctioning {
-	NSLog(@"RemoteImageViewController#stopFunctioning");
+	if (image) 
+		[image release];
+	DebugLog(@"RemoteImageViewController#stopFunctioning");
 }
 - (void)startFunctioning {
-	NSLog(@"RemoteImageViewController#startFunctioning");
+	[self loadRemoteImage];
+	DebugLog(@"RemoteImageViewController#startFunctioning");
 }
 
 

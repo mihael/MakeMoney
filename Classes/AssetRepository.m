@@ -58,7 +58,7 @@ static AssetRepository *_one = nil;
 	NSData *cached = [Asset readFromCacheFileForURL:aUrl];
 	if (cached) {
 		[image release];
-		image = [[UIImage alloc] initWithData:cached];
+		image = [[[UIImage alloc] initWithData:cached] retain];
 		return YES;
 	} else {
 		if (!downloading) {
@@ -80,23 +80,18 @@ static AssetRepository *_one = nil;
 
 - (void)downloadSucceeded:(ASIHTTPRequest*)request {
 	[image release];
-	image = [[UIImage alloc] initWithData:request.responseData];
-	NSLog(@"downloadSucceeded %@", image);
-
+	image = [[[UIImage alloc] initWithData:request.responseData] retain];
 	[Asset writeAsCacheFileForURL:url data:request.responseData];
 	[url release];
 	url = nil;
 	downloading = NO;
 //	for (id d in delegates) {
 		[self.delegate downloaded:self];
-		NSLog(@"downloadSucceeded");
 //	}
 	//[delegates removeAllObjects];
 }
 
 - (void)downloadFailed:(ASIHTTPRequest*)request {
-	NSLog(@"downloadFailed");
-
 	[url release];
 	url = nil;
 	downloading = NO;
@@ -136,7 +131,6 @@ static AssetRepository *_one = nil;
 
 - (UIImage*)imageForURL:(NSString*)url withParams:(NSString*)params notify:(id)delegate 
 {
-	NSLog(@"imageForURL %@?%@", url, params);
 	Asset *asset = [urlToAsset objectForKey:url];
 	if (!asset) {
 		asset = [[Asset alloc] init];
@@ -150,7 +144,6 @@ static AssetRepository *_one = nil;
 }
 
 - (UIImage*)imageForURL:(NSString*)url notify:(id)delegate {
-	NSLog(@"imageForURL %@", url);
 	Asset *asset = [urlToAsset objectForKey:url];
 	if (!asset) {
 		asset = [[Asset alloc] init];
@@ -164,7 +157,6 @@ static AssetRepository *_one = nil;
 }
 
 - (Asset*)assetForURL:(NSString*)url notify:(id)delegate {
-	NSLog(@"assetForURL %@", url);
 	Asset *asset = [urlToAsset objectForKey:url];
 	if (!asset) {
 		asset = [[Asset alloc] init];
@@ -198,22 +190,20 @@ static AssetRepository *_one = nil;
 }
 
 + (void)saveWithFilename:(NSString*)filename data:(NSData*)data {
-	NSLog(@"Write cache to:%@", filename);
 	[[NSFileManager defaultManager] createFileAtPath:filename contents:data attributes:nil];
+	DebugLog(@"AssetRepository# wrote: %@", filename);
 }
 
 + (NSData*)loadWithFilename:(NSString*)filename {
-	NSLog(@"loading data from file: %@", filename);
 	NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:filename];
 	NSData *ret = nil;
 	if (fh) {
-		NSLog(@"Read cache from:%@", filename);
 		ret = [fh readDataToEndOfFile];
 		[fh closeFile];
 		//[ret retain];
 		//[fh release];
 	}
-	NSLog(@"cache data loaded: %@", [ret description]);
+	DebugLog(@"AssetRepository# loaded: %@", [ret description]);
 	return ret;
 }
 

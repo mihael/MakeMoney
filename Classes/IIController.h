@@ -2,17 +2,20 @@
 //  IIController.h
 //  MakeMoney
 //
-#import <UIKit/UIKit.h>
 #import "IITransender.h"
+#import "IINotControls.h"
 
 @class IITransender;
+@class IINotControls;
 
 @interface IIController : UIViewController {
+	IINotControls* notControls;
+	IITransender* transender; //where all the content is transended from
 	NSDictionary* options;
-	IITransender* transender; //a reference to core 
 }
-@property (readwrite, retain) NSDictionary* options;
+@property (readwrite, assign) NSDictionary* options;
 @property (readwrite, assign) IITransender* transender;
+@property (readwrite, assign) IINotControls* notControls;
 
 - (void)startFunctioning;
 - (void)stopFunctioning;

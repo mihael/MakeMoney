@@ -4,9 +4,8 @@
 //
 #import "IIController.h"
 
-
 @implementation IIController
-@synthesize transender, options;
+@synthesize transender, options, notControls;
 
 - (void)startFunctioning 
 {

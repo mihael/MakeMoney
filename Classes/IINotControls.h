@@ -2,7 +2,6 @@
 //  IINotControls.h
 //  MakeMoney
 //
-#import <UIKit/UIKit.h>
 
 @protocol IINotControlsDelegate <NSObject>
 
@@ -18,7 +17,7 @@
 
 @end
 
-
+//Imagine not control.
 @interface IINotControls : UIView {
     id <IINotControlsDelegate> delegate;
     UIButton *button;
@@ -41,6 +40,9 @@
 - (void)lightUp;
 - (void)lightDown;
 - (void)lightUpOrDown;
+
+- (void)openNot; //open controls - show underbuttons
+- (void)closeNot;
 
 - (void)setBackLight:(UIImage*)image withAlpha:(CGFloat)a;
 - (void)hideBackLight;

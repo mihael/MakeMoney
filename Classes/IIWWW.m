@@ -2,58 +2,64 @@
 //  IIWWW.m
 //  MakeMoney
 //
+#import "IIFilter.h"
 #import "IIWWW.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "ASINetworkQueue.h"
 #import "JSON.h"
-#import "Filter.h"
 
 @implementation IIWWW
-@synthesize delegate, url, server, filterName;
+@synthesize delegate, server, url, params, filterName;
 
-- (id)initWithUrl:(NSString*)lru andParams:(NSString*)p
+- (id)initWithOptions:(NSDictionary*)o
 {
 	if (self = [super init]) {
-		[self setUrl:[NSURL URLWithString:lru]];
+		options = o;
+		filter = nil;
+		filterName = [options valueForKey:@"filter"];
+		if (filterName) {
+			NSString *filterClassName = [NSString stringWithFormat:@"Filter_%@", filterName];
+			Class filterClass = NSClassFromString(filterClassName);
+			if (filterClass) {
+				filter = [[[filterClass alloc] init] retain];
+			}
+		}
+		
+		[self setUrl:[NSURL URLWithString:[options valueForKey:@"url"]]];
+		page = [[options valueForKey:@"page"] intValue];
+		limit = [[options valueForKey:@"limit"] intValue];
+		params = [options valueForKey:@"params"];
+
 		server = [[[ASINetworkQueue alloc] init] retain];	
-		[server cancelAllOperations];
 		[server setRequestDidFinishSelector:@selector(fechFinished:)];
 		[server setRequestDidFailSelector:@selector(fechFailed:)];
 		[server setDelegate:self];
-		
-		//ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:self.url] autorelease];
-		//[request setRequestMethod:@"GET"];
-
-		ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:self.url] autorelease];
-		if (p) { //add params
-			NSArray* list = [p componentsSeparatedByString:@"&"];
-			NSUInteger i, count = [list count];
-			for (i = 0; i < count; i++) {
-				NSArray * tuple = [[list objectAtIndex:i] componentsSeparatedByString:@"="];
-				[request setPostValue:[tuple objectAtIndex:1] forKey:[tuple objectAtIndex:0]];
-			}
-		}
-			
-		[server addOperation:request];
 	}
 	return self;
 }
 
 - (void)dealloc {
+	[filter release];
 	[server release];
     [super dealloc];
 }
 
 - (void)fech 
 {
-	[server go];
-}
-
-- (void)fechPath:(NSString*)urlPath 
-{
-	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:[NSString stringWithFormat:@"%@/%@",self.url, urlPath]] autorelease];
-	[request setRequestMethod:@"POST"];
+	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:self.url] autorelease];
+	if (filter) { //add paging
+		[request setPostValue:[NSString stringWithFormat:@"%i", page] forKey:[filter pageParamName]];
+		[request setPostValue:[NSString stringWithFormat:@"%i", limit] forKey:[filter limitParamName]];
+	}
+	if (params) { //add params
+		NSArray* list = [params componentsSeparatedByString:@"&"];
+		NSUInteger i, count = [list count];
+		for (i = 0; i < count; i++) {
+			NSArray * tuple = [[list objectAtIndex:i] componentsSeparatedByString:@"="];
+			[request setPostValue:[tuple objectAtIndex:1] forKey:[tuple objectAtIndex:0]];
+		}
+	}
 	[server cancelAllOperations];
 	[server addOperation:request];
 	[server go];
@@ -69,21 +75,19 @@
 #pragma mark ASINetworkQueue delegate methods
 - (void)fechFailed:(ASIHTTPRequest *)request
 {
-	NSLog(@"IIWWW#fechFailed");
-
-	if ([self.delegate respondsToSelector:@selector(notFeched:)])
+	DebugLog(@"IIWWW#fechFailed");
+	if ([(id)self.delegate respondsToSelector:@selector(notFeched:)])
 		[self.delegate notFeched:[request responseString]];		
 }
 
 - (void)fechFinished:(ASIHTTPRequest *)request
 {
-	NSLog(@"IIWWW#fechFinished");
-	if ([self.delegate respondsToSelector:@selector(feched:)]) {
-		if (filterName) { //use a filter 
-			SEL filter = NSSelectorFromString([NSString stringWithFormat:@"%@:", filterName]);
-			NSLog(@"about to filter with %@",filterName);
-
-			[self.delegate feched:[[Filter performSelector:filter withObject:[request responseString]] JSONValue]];		
+	DebugLog(@"IIWWW#fechFinished");
+	if ([(id)self.delegate respondsToSelector:@selector(feched:)]) {
+		if (filter) { //use a filter 
+			//SEL filterMethod = NSSelectorFromString([NSString stringWithFormat:@"%@:", filterMethod]);
+			DebugLog(@"IIWWW#fechFinished: filtering with %@",filterName);
+			[self.delegate feched:[[filter performSelector:@selector(filter:) withObject:[request responseString]] JSONValue]];		
 		} else { 
 			[self.delegate feched:[[request responseString] JSONValue]];		
 		}

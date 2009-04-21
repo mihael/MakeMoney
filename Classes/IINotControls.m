@@ -15,7 +15,7 @@
 {
     if (self = [super initWithFrame:frame]) {
 		[self setBackgroundColor:[UIColor clearColor]];
-		backLight = [[UIImageView alloc] initWithFrame:frame];
+		backLight = [[[UIImageView alloc] initWithFrame:frame] retain];
 		[self addSubview:backLight];
 		[self hideBackLight];
 		
@@ -104,7 +104,7 @@
 
 - (void)dealloc 
 {
-	CGImageRelease(backLight);
+	[backLight release];
 	if (wach) 
 		[wach release];
 	[button release];
@@ -283,8 +283,7 @@
 - (int)chooseOneFrom:(NSString*)jsonMemories
 {
 	//TODO
-	NSLog(@"chooseOneFrom %@", jsonMemories);
-	
+	return 1;
 }
 
 
