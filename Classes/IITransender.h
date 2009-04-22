@@ -22,6 +22,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "IIController.h"
+#import "IIFilter.h"
+#import "AssetRepository.h"
+
 #define kIITransenderVibeShort 0.05
 #define kIITransenderVibeLong 2.0
 #define kIITransenderZero 0
@@ -36,11 +39,11 @@
 - (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedAll:(id)sender;
+- (void)fechingTransend;
 @end
 
-@interface IITransender : NSObject {
+@interface IITransender : NSObject <AssetDownloadDelegate> {
     id <IITransenderDelegate> delegate; //the delegate to be notified of transends
-
 	NSMutableArray *memories; //holding our memories of transends
 	int memoriesSpot; //exact position of last transended memorie
 	int memoriesCount; //cached memories count - [memories count] should be recalled only once when listing changes
@@ -83,5 +86,9 @@
 - (BOOL)isTransending;
 - (void)changeDirection;
 - (void)changeDirectionTo:(BOOL)d;
+
+#pragma mark AssetDownloadDelegate
+- (void)downloaded:(id)a;
+- (void)notDownloaded:(id)a;
 
 @end

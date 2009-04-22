@@ -27,7 +27,7 @@
 	for (i = 0; i < count; i++) {
 		NSDictionary * pik= [piks objectAtIndex:i];
 		
-		[transends appendFormat:@"{\"name\":\"RemoteImageView\", \"options\":{\"url\":\"%@\"}, %@},", [self pikchurUrlFromID:[[pik valueForKey:@"Pik"] valueForKey:@"id"]  withSize:@"l"], behavior];
+		[transends appendFormat:@"{\"name\":\"remote_image\", \"options\":{\"url\":\"%@\"}, %@},", [self pikchurUrlFromID:[[pik valueForKey:@"Pik"] valueForKey:@"id"]  withSize:@"l"], behavior];
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];
 }

@@ -61,6 +61,17 @@
 }
 
 #pragma mark IITransenderDelegate
+- (void)fechingTransend 
+{
+	DebugLog(@"IITransenderViewController#fechingTransend");
+	//TODO open progress view in notControls
+	//[notControls showIndica];
+	[notControls lightUp];
+	
+	
+}
+
+
 - (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior {
 	DebugLog(@"IITransenderViewController#transendedWithView %@ andBehavior %@", transend, behavior);
 	if (self.notControls && [transend respondsToSelector:@selector(setNotControls:)])
@@ -324,5 +335,6 @@
 	[transender changeDirectionTo:kIITransenderDirectionUp];
 	[transender invokeTransend];
 }
+
 
 @end

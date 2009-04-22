@@ -63,11 +63,15 @@
 
 - (id)initWithTransendsListing:(NSString*)aListingName andStage:(NSDictionary*)aStageName;
 
+//transender delegate
 - (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithMovie:(NSString*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedAll:(id)sender;
+- (void)fechingTransend;
+//transender delegate
+
 - (void)continueWithBehavior;
 
 - (void)transitionViewDidStart:(IITransenderView *)view;

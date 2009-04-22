@@ -4,7 +4,7 @@
 //
 #import <UIKit/UIKit.h>
 #import "IITransender.h"
-#import "MoneyTimerViewController.h"
+#import "AssetRepository.h"
 #import "JSON.h"
 #ifdef __APPLE__
 #include "TargetConditionals.h"
@@ -119,7 +119,24 @@
 		NSString *memoryName = [[memories objectAtIndex:memoriesSpot] valueForKey:@"name"];		
 		NSString *diskName = nil;
 		
-		if ([memoryName hasSuffix:@"View"]) {
+		if ([memoryName isEqualToString:@"remote_image"]){
+			
+			//start downloading the remote image async
+			//notify delegate 
+			UIImage *img = [[AssetRepository one] imageForURL:[options valueForKey:@"url"] notify:self];
+			if (img) { //cache hit
+				if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
+					[delegate transendedWithImage:img andBehavior:behavior];
+			} else {
+				//stop transending and wait for download finish
+				[self meditate];
+				//notify delegate transender is feching - vibe stop
+				if ([delegate respondsToSelector:@selector(fechingTransend)])
+					[delegate fechingTransend];
+				//TODO record timestamp to compare later
+			}
+			
+		} else if ([memoryName hasSuffix:@"View"]) {
 			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryName];
 			Class viewControllerClass = NSClassFromString(className);
 			id viewController = nil;
@@ -292,6 +309,24 @@
 - (void)changeDirectionTo:(BOOL)d 
 {
 	[self setDirection:d];
+}
+
+#pragma mark AssetDownloadDelegate
+- (void)downloaded:(id)a 
+{
+	if ([a image]) { 
+		if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
+			[delegate transendedWithImage:[a image] andBehavior:[[memories objectAtIndex:memoriesSpot] objectForKey:@"behavior"]];
+	}
+	
+}
+
+- (void)notDownloaded:(id)a
+{
+	//transend with remote_image fech failed image
+	//TODO replace image... some defaults from stage or something
+	if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
+		[delegate transendedWithImage:[UIImage imageNamed:@"0_mm_test1.jpg"] andBehavior:[[memories objectAtIndex:memoriesSpot] objectForKey:@"behavior"]];
 }
 
 @end

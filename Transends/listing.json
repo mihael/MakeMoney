@@ -6,6 +6,11 @@
 {"name":"RemoteImageView", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
 
 {"name":"FecherView", "options":{"button_title":"+25 pikchurs", "url":"https://api.pikchur.com/api/feeds/json","page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"1.38"}},
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_mage", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+
 
 {"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"radionula_screen.jpg"}, "behavior":{"stop":"true"}},
 

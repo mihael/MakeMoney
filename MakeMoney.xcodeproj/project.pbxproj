@@ -363,8 +363,6 @@
 				47C7E2490F9CBB4100789864 /* Filter_pikchur.m */,
 				47348E140F9B85E700A1D78A /* StreamingPlayerViewController.h */,
 				47348E150F9B85E700A1D78A /* StreamingPlayerViewController.m */,
-				47348B2A0F9A48DD00A1D78A /* AssetRepository.h */,
-				47348B2B0F9A48DD00A1D78A /* AssetRepository.m */,
 				47348B110F9A3CA300A1D78A /* RemoteImageViewController.h */,
 				47348B120F9A3CA300A1D78A /* RemoteImageViewController.m */,
 				473488DB0F99DF8E00A1D78A /* FechSomeViewController.h */,
@@ -533,6 +531,8 @@
 		47D796040F725A8800C52774 /* Transender */ = {
 			isa = PBXGroup;
 			children = (
+				47348B2A0F9A48DD00A1D78A /* AssetRepository.h */,
+				47348B2B0F9A48DD00A1D78A /* AssetRepository.m */,
 				47B14CEA0F7C08260017AB44 /* IIController.h */,
 				47B14CEB0F7C08260017AB44 /* IIController.m */,
 				47D796070F725A9C00C52774 /* IIMusic.h */,
