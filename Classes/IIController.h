@@ -12,8 +12,10 @@
 	IINotControls* notControls;
 	IITransender* transender; //where all the content is transended from
 	NSDictionary* options;
+	NSDictionary* behavior;
 }
-@property (readwrite, assign) NSDictionary* options;
+@property (readwrite, copy) NSDictionary* behavior;
+@property (readwrite, copy) NSDictionary* options;
 @property (readwrite, assign) IITransender* transender;
 @property (readwrite, assign) IINotControls* notControls;
 

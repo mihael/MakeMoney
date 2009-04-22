@@ -44,6 +44,9 @@
 - (void)openNot; //open controls - show underbuttons
 - (void)closeNot;
 
+- (void)spinButtonWith:(BOOL)direction;
+- (void)stillButton;
+
 - (void)setBackLight:(UIImage*)image withAlpha:(CGFloat)a;
 - (void)hideBackLight;
 - (void)showBackLight;

@@ -5,7 +5,7 @@
 #import "IIController.h"
 
 @implementation IIController
-@synthesize transender, options, notControls;
+@synthesize transender, options, notControls, behavior;
 
 - (void)startFunctioning 
 {

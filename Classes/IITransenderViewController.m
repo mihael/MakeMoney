@@ -32,7 +32,11 @@
 	self.view = skrin;
 	
 	transendEmitter1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main.png"]];
+	[transendEmitter1 setContentMode:UIViewContentModeScaleAspectFit];
 	transendEmitter2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main.png"]];
+	[transendEmitter2 setContentMode:UIViewContentModeScaleAspectFit];
+
+	
 	useEmitter1 = YES;
 	[self.view addSubview:transendEmitter1];
 	
@@ -61,16 +65,18 @@
 }
 
 #pragma mark IITransenderDelegate
+- (void)fechedTransend
+{
+	DebugLog(@"IITransenderViewController#fechedTransend");
+	[notControls stillButton];		
+}
+
 - (void)fechingTransend 
 {
 	DebugLog(@"IITransenderViewController#fechingTransend");
-	//TODO open progress view in notControls
-	//[notControls showIndica];
-	[notControls lightUp];
-	
+	[notControls spinButtonWith:[transender direction]];	
 	
 }
-
 
 - (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior {
 	DebugLog(@"IITransenderViewController#transendedWithView %@ andBehavior %@", transend, behavior);

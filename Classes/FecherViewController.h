@@ -14,4 +14,6 @@
 	IIWWW *www;
 }
 - (IBAction)buttonTouched:(id)sender;
+- (void)feched:(NSMutableArray*)listing;
+- (void)notFeched:(NSString*)err;
 @end

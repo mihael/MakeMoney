@@ -74,6 +74,15 @@
 	memoriesCount = [memories count]; //calculate size once on every listing change	
 }
 
+- (void)addMemorieWithString:(NSString*)s 
+{
+	DebugLog(@"IITransender#addMemorieWithString %@", s);
+	if (s) {
+		[self.memories addObject:[s JSONValue]];
+		memoriesCount = [memories count];
+	}
+}
+
 #pragma mark Transendence
 //vibe is time beetwen transends
 - (void)setTransendenceVibe:(float)v
@@ -129,7 +138,7 @@
 					[delegate transendedWithImage:img andBehavior:behavior];
 			} else {
 				//stop transending and wait for download finish
-				[self meditate];
+				//[self meditate];
 				//notify delegate transender is feching - vibe stop
 				if ([delegate respondsToSelector:@selector(fechingTransend)])
 					[delegate fechingTransend];
@@ -155,6 +164,11 @@
 					if ([viewController respondsToSelector:@selector(setOptions:)])
 						[viewController setOptions:options];			
 				}
+				if (behavior) {
+					if ([viewController respondsToSelector:@selector(setBehavior:)])
+						[viewController setBehavior:behavior];
+				}
+					
 				if ([delegate respondsToSelector:@selector(transendedWithView:andBehavior:)])
 					[delegate transendedWithView:viewController andBehavior:behavior];
 			} else {
@@ -314,15 +328,21 @@
 #pragma mark AssetDownloadDelegate
 - (void)downloaded:(id)a 
 {
+	if ([delegate respondsToSelector:@selector(fechedTransend)])
+		[delegate fechedTransend];
+
 	if ([a image]) { 
 		if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
 			[delegate transendedWithImage:[a image] andBehavior:[[memories objectAtIndex:memoriesSpot] objectForKey:@"behavior"]];
 	}
-	
+	[self transend];
 }
 
 - (void)notDownloaded:(id)a
 {
+	if ([delegate respondsToSelector:@selector(fechedTransend)])
+		[delegate fechedTransend];
+
 	//transend with remote_image fech failed image
 	//TODO replace image... some defaults from stage or something
 	if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])

@@ -40,6 +40,7 @@
 - (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedAll:(id)sender;
 - (void)fechingTransend;
+- (void)fechedTransend;
 @end
 
 @interface IITransender : NSObject <AssetDownloadDelegate> {
@@ -68,6 +69,7 @@
 
 - (void)rememberMemoriesWithString:(NSString*)s;
 - (void)rememberMemories:(NSMutableArray*)m;
+- (void)addMemorieWithString:(NSString*)s;
 
 - (int)currentSpot;
 - (float)currentVibe;

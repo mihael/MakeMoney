@@ -57,6 +57,51 @@
 	//magical time
 }
 
+//spining button
+- (void)spinButtonWith:(BOOL)direction
+{
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+	CGRect frame = [button frame];
+	button.layer.anchorPoint = CGPointMake(0.5, 0.5);
+	button.layer.position = CGPointMake(frame.origin.x + 0.5 * frame.size.width, frame.origin.y + 0.5 * frame.size.height);
+	[CATransaction commit];
+	
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanFalse forKey:kCATransactionDisableActions];
+	[CATransaction setValue:[NSNumber numberWithFloat:2.0] forKey:kCATransactionAnimationDuration];
+	
+	CABasicAnimation *animation;
+	animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+	if (direction) {
+		animation.fromValue = [NSNumber numberWithFloat:2 * M_PI];
+		animation.toValue = [NSNumber numberWithFloat:0.0];
+	} else {
+		animation.fromValue = [NSNumber numberWithFloat:0.0];
+		animation.toValue = [NSNumber numberWithFloat:2 * M_PI];		
+	}
+
+	animation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear];
+	//animation.delegate = self;
+	[button.layer addAnimation:animation forKey:@"rotationAnimation"];
+	
+	[CATransaction commit];
+}
+
+- (void)stillButton
+{
+	[button.layer removeAllAnimations];
+}
+
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)finished
+{
+	if (finished)
+	{
+		[self spinButton];
+	}
+}
+
 #pragma mark BackLight animations
 - (void)animateBackLightIn 
 {

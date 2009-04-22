@@ -41,13 +41,13 @@
 		NSString* listingName;
 		BOOL useEmitter1;
 
-		NSDictionary *notBehavior;
+		NSMutableDictionary *notBehavior;
 		BOOL avoidBehavior;
 		
 		BOOL animated; //should use animated transits beetween  transends
 		BOOL horizontal; //how transits look like, either leftright move or updown
 
-		NSDictionary *stage; //how should we act, behave, look like... 
+		NSMutableDictionary *stage; //how should we act, behave, look like... 
 		
 		NSArray* transitions;
 		NSArray* directions;
@@ -70,6 +70,7 @@
 - (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedAll:(id)sender;
 - (void)fechingTransend;
+- (void)fechedTransend;
 //transender delegate
 
 - (void)continueWithBehavior;
