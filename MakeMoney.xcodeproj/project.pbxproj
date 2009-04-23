@@ -11,6 +11,7 @@
 		289233A60DB2D0840083E9F9 /* FlipsideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289233A30DB2D0840083E9F9 /* FlipsideView.m */; };
 		289233AF0DB2D0DB0083E9F9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289233AB0DB2D0DB0083E9F9 /* RootViewController.m */; };
 		289233B00DB2D0DB0083E9F9 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289233AD0DB2D0DB0083E9F9 /* FlipsideViewController.m */; };
+		47041EB40FA0B42B00D7DE30 /* remote_image_fail.png in Resources */ = {isa = PBXBuildFile; fileRef = 47041EB30FA0B42B00D7DE30 /* remote_image_fail.png */; };
 		472643210F56A9530097D30A /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 472643200F56A9530097D30A /* listing.json */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
 		473488C40F991F2B00A1D78A /* IIWWW.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488C30F991F2B00A1D78A /* IIWWW.m */; };
@@ -153,6 +154,7 @@
 		289233AC0DB2D0DB0083E9F9 /* FlipsideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlipsideViewController.h; path = Classes/FlipsideViewController.h; sourceTree = "<group>"; };
 		289233AD0DB2D0DB0083E9F9 /* FlipsideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlipsideViewController.m; path = Classes/FlipsideViewController.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* MakeMoney_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MakeMoney_Prefix.pch; path = ../MakeMoney_Prefix.pch; sourceTree = "<group>"; };
+		47041EB30FA0B42B00D7DE30 /* remote_image_fail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = remote_image_fail.png; path = Artwork/remote_image_fail.png; sourceTree = "<group>"; };
 		472643200F56A9530097D30A /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = listing.json; sourceTree = "<group>"; };
 		472965420F4859C10053F946 /* Hajlov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hajlov; sourceTree = "<group>"; };
 		473488C20F991F2B00A1D78A /* IIWWW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIWWW.h; path = Classes/IIWWW.h; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 		472965380F4834F50053F946 /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				47041EB30FA0B42B00D7DE30 /* remote_image_fail.png */,
 				473489000F99E33300A1D78A /* G */,
 				473488F40F99E31C00A1D78A /* Default.png */,
 				473488F60F99E31C00A1D78A /* icon.png */,
@@ -745,6 +748,7 @@
 				47348E180F9B880700A1D78A /* StreamingPlayerView.xib in Resources */,
 				47348E490F9B8D5300A1D78A /* radionula_screen.jpg in Resources */,
 				47C7E25E0F9CC70900789864 /* FecherView.xib in Resources */,
+				47041EB40FA0B42B00D7DE30 /* remote_image_fail.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

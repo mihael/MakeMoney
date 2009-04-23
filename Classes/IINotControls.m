@@ -214,11 +214,13 @@
 #pragma mark button light 
 - (void)animateLightUp 
 {
-	CATransition *animation = [CATransition animation];
-	[animation setType:kCATransitionFade];
-	[animation setDuration:kLightSpeed];
-	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-	[[button layer] addAnimation:animation forKey:kButtonAnimationKey];
+	if (kButtonAnimated) {
+		CATransition *animation = [CATransition animation];
+		[animation setType:kCATransitionFade];
+		[animation setDuration:kLightSpeed];
+		[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+		[[button layer] addAnimation:animation forKey:kButtonAnimationKey];
+	}
 }
 
 - (void)lightDown 

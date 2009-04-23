@@ -133,8 +133,7 @@
 			
 			//get diskName from url
 			diskName = [[options valueForKey:@"url"] lastPathComponent];
-
-			//get some disk-like memory space
+			
 			NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
 			[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
 			path = [NSString stringWithFormat:@"%@/%@", path, diskName];
@@ -145,6 +144,8 @@
 				[delegate transendedWithImage:img andBehavior:behavior];
 				[img release];				
 			} else {
+				//feching could last longer than the vibe - lets meditate on this
+				[self meditate]; 
 				//notify we are feching
 				if ([delegate respondsToSelector:@selector(fechingTransend)])
 					[delegate fechingTransend];
@@ -160,38 +161,22 @@
 
 					UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];
 					[delegate transendedWithImage:img andBehavior:behavior];
-					[img release];				
-					//NSString *response = [request responseString];
+					[img release];	
 				} else {
 					DebugLog(@"IITransender#invokeTransend failed remote_image fech");
 					[[iAlert instance] alert:@"failed remote_image" withMessage:@"fech"];
 				}
+				[self transend]; //resume with transending
 			}
-			/*
-			//start downloading the remote image async
-			//notify delegate 
-			UIImage *img = //[[AssetRepository one] imageForURL:[options valueForKey:@"url"] notify:self];
-			if (img) { //cache hit
-				if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
-					[delegate transendedWithImage:img andBehavior:behavior];
-			} else {
-				//stop transending and wait for download finish
-				//[self meditate];
-				//notify delegate transender is feching - vibe stop
-				if ([delegate respondsToSelector:@selector(fechingTransend)])
-					[delegate fechingTransend];
-				//TODO record timestamp to compare later
-			}
-			*/
 		} else if ([memoryName hasSuffix:@"View"]) {
 			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryName];
 			Class viewControllerClass = NSClassFromString(className);
 			id viewController = nil;
 					
 			if ([Kriya xibExists:memoryName] ) { //load from nib if there is one
-				viewController = [[viewControllerClass alloc] initWithNibName:memoryName bundle:nil];
+				viewController = [[[viewControllerClass alloc] initWithNibName:memoryName bundle:nil] autorelease];
 			} else { //just init, view controller should load it self programmatically
-				viewController = [[viewControllerClass alloc] init]; 
+				viewController = [[[viewControllerClass alloc] init]autorelease]; 
 			}		
 			
 			//transend
@@ -211,6 +196,7 @@
 					[delegate transendedWithView:viewController andBehavior:behavior];
 			} else {
 				DebugLog(@"IITransender#invokeTransend not transended %i: %@", memoriesSpot, memoryName);
+				//TODO transend remote_image_fail
 			}	
 		
 		} else {

@@ -2,6 +2,7 @@
 //  IINotControls.h
 //  MakeMoney
 //
+#define kButtonAnimated NO
 
 @protocol IINotControlsDelegate <NSObject>
 

@@ -89,8 +89,6 @@
 		} 
 	}		
 	[self transit:transend.view]; //transit with the fresh view
-	[transendController release]; //release any previously transended views
-	transendController = nil;
 	[self setTransendController:transend];
 	if ([transendController respondsToSelector:@selector(startFunctioning)]) {
 		[transendController startFunctioning]; //start the current view if can
