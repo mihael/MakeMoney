@@ -16,6 +16,7 @@
 		[self setListingName:aListingName];
 		stage = aStage;
 		transitions = [[NSArray arrayWithObjects:kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, kCATransitionFade, nil] retain];
+		transitionIndex = kTransition;
 		directions = [[NSArray arrayWithObjects:kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom, nil] retain];
 		horizontal = [[stage valueForKey:@"horizontal"] boolValue];
 		animated = [[stage valueForKey:@"animated"] boolValue];
@@ -271,9 +272,16 @@
 		
 		if (animated) {
 			//chose transition type and direction at random from the arrays of supported transitions and directions
-			//NSUInteger transitionsIndex = random() % [transitions count];
-			//TODO - let choose transition from listing
-			NSString *transition = [transitions objectAtIndex:1];//[transitions objectAtIndex:transitionsIndex];						
+			if ([notBehavior valueForKey:@"effect"]) {
+				transitionIndex = [[notBehavior valueForKey:@"effect"] intValue];
+				if (transitionIndex>=[transitions count]) 
+					transitionIndex = random() % [transitions count];
+			} else {
+				transitionIndex = kTransition; //default is push
+			}
+			NSLog(@"transitionINDEX %i", transitionIndex);
+			NSString *transition = [transitions objectAtIndex:transitionIndex];
+
 			//NSUInteger directionsIndex = random() % [directions count];
 			NSString *dir = nil; //[directions objectAtIndex:directionsIndex];
 			
@@ -325,9 +333,11 @@
 
 - (void)notControlsClosed:(id)notControl {
 	avoidBehavior = NO;
-	[notControl lightDown];
 	[notControl hideBackLight];
-	[transender transend];
+	if ([stage valueForKey:@"transendAfterNotControlsClosed"]) {
+		//[notControl lightDown];
+		//[transender transend];	
+	}
 }
 
 - (void)leftTouch:(id)notControl {

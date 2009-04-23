@@ -5,11 +5,15 @@
 #import "MessageViewController.h"
 
 @implementation MessageViewController
-@synthesize background, indica;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	if ([options valueForKey:@"image"])
+		[background setImage:[UIImage imageNamed:[options valueForKey:@"image"]]];
+	if ([options valueForKey:@"message"])
+		[message setText:[options valueForKey:@"message"]];	
+	message.font = [UIFont fontWithName:@"Helvetica-Bold" size:23];
 }
 
 - (void)didReceiveMemoryWarning {

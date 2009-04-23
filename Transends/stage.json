@@ -1,7 +1,6 @@
 {
 "horizontal":"true",
 "animated":"true",
-"vibe":"1.0",
-"save_current_spot":"false",
-"web":"true"
+"vibe":"1.38",
+"save_current_spot":"false"
 }

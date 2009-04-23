@@ -90,6 +90,36 @@ typedef enum {
 	}
 }
 
+- (void)putMemories:(NSMutableArray*)m atSpot:(int)s
+{
+	DebugLog(@"IITransender#putMemories at spot %i", m, s);
+	if (s>-1) {
+		[self.memories insertObjects:m atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(s, [m count])]];
+		memoriesCount = [memories count]; //calculate size once on every listing change	
+	}	
+}
+
+- (void)addMemoriesWithString:(NSString*)s 
+{
+	DebugLog(@"IITransender#addMemoriesWithString %@", s);
+	if (s) {
+		[self.memories addObjectsFromArray:[s JSONValue]];
+		memoriesCount = [memories count];
+	}
+}
+
+- (void)insertMemorieWithString:(NSString*)m atSpot:(int)s
+{
+	DebugLog(@"IITransender#insertMemorieWithString %@", m);
+	if (s>-1) {
+		if (s>memoriesCount)			 
+			[self.memories addObject:[m JSONValue]];
+		else 
+			[self.memories insertObject:[m JSONValue] atIndex:s];			
+		memoriesCount = [memories count];
+	}	
+}
+
 #pragma mark Transendence
 //vibe is time beetwen transends
 - (void)setTransendenceVibe:(float)v

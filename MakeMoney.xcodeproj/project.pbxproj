@@ -14,6 +14,7 @@
 		47041EB40FA0B42B00D7DE30 /* remote_image_fail.png in Resources */ = {isa = PBXBuildFile; fileRef = 47041EB30FA0B42B00D7DE30 /* remote_image_fail.png */; };
 		47041EB70FA0CF1100D7DE30 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47041EB60FA0CF1100D7DE30 /* MessageViewController.m */; };
 		47041ED40FA0D7C800D7DE30 /* not_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47041ED30FA0D7C800D7DE30 /* not_image.jpg */; };
+		47041EE10FA1047300D7DE30 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47041EE00FA1047300D7DE30 /* MessageView.xib */; };
 		472643210F56A9530097D30A /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 472643200F56A9530097D30A /* listing.json */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
 		473488C40F991F2B00A1D78A /* IIWWW.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488C30F991F2B00A1D78A /* IIWWW.m */; };
@@ -160,6 +161,7 @@
 		47041EB50FA0CF1100D7DE30 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = Classes/MessageViewController.h; sourceTree = "<group>"; };
 		47041EB60FA0CF1100D7DE30 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = Classes/MessageViewController.m; sourceTree = "<group>"; };
 		47041ED30FA0D7C800D7DE30 /* not_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = not_image.jpg; path = Artwork/not_image.jpg; sourceTree = "<group>"; };
+		47041EE00FA1047300D7DE30 /* MessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		472643200F56A9530097D30A /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = listing.json; sourceTree = "<group>"; };
 		472965420F4859C10053F946 /* Hajlov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hajlov; sourceTree = "<group>"; };
 		473488C20F991F2B00A1D78A /* IIWWW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIWWW.h; path = Classes/IIWWW.h; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 				47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */,
 				47348E170F9B880700A1D78A /* StreamingPlayerView.xib */,
 				47C7E25D0F9CC70900789864 /* FecherView.xib */,
+				47041EE00FA1047300D7DE30 /* MessageView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -758,6 +761,7 @@
 				47C7E25E0F9CC70900789864 /* FecherView.xib in Resources */,
 				47041EB40FA0B42B00D7DE30 /* remote_image_fail.png in Resources */,
 				47041ED40FA0D7C800D7DE30 /* not_image.jpg in Resources */,
+				47041EE10FA1047300D7DE30 /* MessageView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

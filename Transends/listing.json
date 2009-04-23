@@ -1,5 +1,12 @@
 [
-{"name":"FecherView", "options":{"button_title":"+25 pikchurs", "url":"https://api.pikchur.com/api/feeds/json","page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"0.5"}},
+{"name":"MessageView", "options":{"message":"No &copy; rights here.", "image":"main.png"}, "behavior":{"stop":"false", "effect":0}},
+{"name":"MessageView", "options":{"message":"Thanks.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
+{"name":"MessageView", "options":{"message":"What You Give, is What You Want.", "image":"main.png"}, "behavior":{"stop":"false", "effect":2}},
+{"name":"MessageView", "options":{"message":"Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!", "image":"main.png"}, "behavior":{"stop":"false", "effect":3}},
+{"name":"MessageView", "options":{"message":"This Application is your Personal Money Making Mobile Application.", "image":"main.png"}, "behavior":{"stop":"false", "effect":4}},
+{"name":"MessageView", "options":{"message":"This Application is Here to Serve You.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
+
+{"name":"FecherView", "options":{"button_title":"+25 pikchurs", "url":"https://api.pikchur.com/api/feeds/json","page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"1.5"}},
 
 {"name":"FlipyView", "behavior":{"id":"-0", "stop":"true"}},
 {"name":"0_1.jpg",  "behavior":{"id":"1", "stop":"false"}},

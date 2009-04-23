@@ -9,6 +9,7 @@
 #import "IITransenderView.h"
 #import "IINotControls.h"
 #define kTransendAnimated YES
+#define kTransition 1
 
 @protocol IITransenderViewControllerDelegate <NSObject>
 - (void)transending;
@@ -50,6 +51,7 @@
 		NSMutableDictionary *stage; //how should we act, behave, look like... 
 		
 		NSArray* transitions;
+		int transitionIndex;
 		NSArray* directions;
 }
 

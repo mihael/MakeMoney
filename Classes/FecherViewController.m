@@ -55,18 +55,20 @@
 {
 	[indica stopAnimating];
 	DebugLog(@"FecherViewController#feched %@", listing);
-	[self.transender spot]; //rewind memory spot
-	
-	[self.transender rememberMemories:listing];
-	NSLog(@"AJA %@", options);
-	//go one page further
-	int page = [[options valueForKey:@"page"] intValue] + 1;	
-	NSLog(@"FecherView#feched listing fresh page %i", page);
+	//[self.transender spot]; //rewind memory spots
 
+	//inventing remote coding here - listing is the json program
+	//[self.transender rememberMemories:listing];
+	[self.transender putMemories:listing atSpot:[self.transender currentSpot]];
+	//prepare next page fecher to add last in listing - so we have next page
+	int page = [[options valueForKey:@"page"] intValue] + 1;	
 	NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:options];
-	[repaged_options setValue:[NSString stringWithFormat:@"%i",page] forKey:@"page"];
+	[repaged_options setValue:[NSString stringWithFormat:@"%i",page] forKey:@"page"];	
 	[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"name\":\"FecherView\", \"options\":%@, \"behavior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];
-	//(TODO)	[self.transender addMemories:[request responseString]];
+
+	//insert current fecher - so we have previous also
+	//[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"name\":\"FecherView\", \"options\":%@, \"behavior\":%@}", [options JSONFragment], [behavior JSONFragment]]];
+
 	if (self.notControls)
 		[self.notControls lightDown];
 	[self.transender transendNow];

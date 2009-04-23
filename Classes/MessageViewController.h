@@ -8,11 +8,6 @@
 @interface MessageViewController : IIController
 {
 	IBOutlet UIImageView* background;
-	IBOutlet UIActivityIndicatorView *indica;
+	IBOutlet UITextView* message;
 }
-@property (readonly) IBOutlet UIImageView* background;
-@property (readonly) IBOutlet UIActivityIndicatorView *indica;
-
-- (void)loadMessage;
-
 @end
