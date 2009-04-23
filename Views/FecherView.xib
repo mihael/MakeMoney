@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -53,42 +53,50 @@
 					</object>
 					<object class="IBUIActivityIndicatorView" id="70958550">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{221, 142}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<bool key="IBUIAnimating">YES</bool>
 						<int key="IBUIStyle">0</int>
 					</object>
 					<object class="IBUIButton" id="188313532">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{204, 142}, {72, 37}}</string>
+						<string key="NSFrame">{{20, 20}, {440, 280}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4yODI2MDg2OSAwLjI4MjYwODY5IDAuMjgyNjA4NjkgMAA</bytes>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">1.500000e+01</double>
+							<string key="NSName">LucidaGrande-Bold</string>
+							<double key="NSSize">3.800000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
-						<int key="IBUIButtonType">1</int>
 						<string key="IBUIHighlightedTitle"/>
 						<string key="IBUIDisabledTitle"/>
 						<string key="IBUISelectedTitle"/>
 						<string key="IBUINormalTitle"/>
-						<object class="NSColor" key="IBUIHighlightedTitleColor">
+						<object class="NSColor" key="IBUIHighlightedTitleColor" id="525491174">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
 						</object>
-						<object class="NSColor" key="IBUINormalTitleColor">
+						<reference key="IBUIDisabledTitleColor" ref="525491174"/>
+						<reference key="IBUISelectedTitleColor" ref="525491174"/>
+						<reference key="IBUINormalTitleColor" ref="525491174"/>
+						<object class="NSColor" key="IBUIHighlightedTitleShadowColor" id="802849502">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
+							<bytes key="NSRGB">MSAxIDAAA</bytes>
 						</object>
+						<reference key="IBUIDisabledTitleShadowColor" ref="802849502"/>
+						<reference key="IBUISelectedTitleShadowColor" ref="802849502"/>
+						<reference key="IBUINormalTitleShadowColor" ref="802849502"/>
 					</object>
 				</object>
 				<string key="NSFrameSize">{480, 320}</string>
@@ -212,7 +220,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>FecherViewController</string>
 					<string>UIResponder</string>
-					<string>{{155, 152}, {480, 320}}</string>
+					<string>{{171, 322}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

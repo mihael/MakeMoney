@@ -10,7 +10,7 @@
 
 - (IBAction)buttonTouched:(id)sender
 {
-	[indica setHidden:NO];
+	[indica startAnimating];
 	[button setHidden:YES];
 	[www fech];	
 }
@@ -53,7 +53,7 @@
 
 - (void)feched:(NSMutableArray*)listing
 {
-	[indica setHidden:YES];
+	[indica stopAnimating];
 	DebugLog(@"FecherViewController#feched %@", listing);
 	[self.transender spot]; //rewind memory spot
 	

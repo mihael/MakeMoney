@@ -10,6 +10,13 @@
 #include "TargetConditionals.h"
 #endif
 
+typedef enum {
+	IITransenderFailedWithImage = 0,
+	IITransenderFailedWithMovie = 1,
+	IITransenderFailedWithSound = 2,
+	IITransenderFailedWithView = 3	
+} IITransenderFailedWith;
+
 @implementation IITransender
 @synthesize memories, delegate, direction;
 
@@ -164,7 +171,7 @@
 					[img release];	
 				} else {
 					DebugLog(@"IITransender#invokeTransend failed remote_image fech");
-					[[iAlert instance] alert:@"failed remote_image" withMessage:@"fech"];
+					[self invokeTransendFailed:IITransenderFailedWithImage];
 				}
 				[self transend]; //resume with transending
 			}
@@ -196,11 +203,10 @@
 					[delegate transendedWithView:viewController andBehavior:behavior];
 			} else {
 				DebugLog(@"IITransender#invokeTransend not transended %i: %@", memoriesSpot, memoryName);
-				//TODO transend remote_image_fail
+				[self invokeTransendFailed:IITransenderFailedWithView];
 			}	
 		
 		} else {
-			
 			if ([memoryName hasPrefix:@"0"]) { //a simple 0-prefixed transend
 				diskName = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryName];
 			} else if ([memoryName hasPrefix:@"/"]) { //a direct path
@@ -212,8 +218,7 @@
 					UIImage* img = [[UIImage alloc] initWithContentsOfFile:diskName];
 					[delegate transendedWithImage:img andBehavior:behavior];
 					[img release];
-				}
-					
+				}					
 			}
 
 			//can not play sounds and movies in simulator, so do not transend
@@ -236,6 +241,28 @@
 		}
 	}	
 
+}
+
+//failed with some? happens... although it is not shit. it is manuever, so you can grow.
+- (void)invokeTransendFailed:(IITransenderFailedWith)failed 
+{
+	switch (failed) {
+		case IITransenderFailedWithImage:			
+			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			break;
+		case IITransenderFailedWithMovie:			
+			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			break;
+		case IITransenderFailedWithSound:			
+			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			break;
+		case IITransenderFailedWithView:			
+			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			break;
+		default:
+			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			break;
+	}
 }
 
 //if transending, meditate, if meditating, transend
@@ -351,30 +378,6 @@
 - (void)changeDirectionTo:(BOOL)d 
 {
 	[self setDirection:d];
-}
-
-#pragma mark AssetDownloadDelegate
-- (void)downloaded:(id)a 
-{
-	if ([delegate respondsToSelector:@selector(fechedTransend)])
-		[delegate fechedTransend];
-
-	if ([a image]) { 
-		if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
-			[delegate transendedWithImage:[a image] andBehavior:[[memories objectAtIndex:memoriesSpot] objectForKey:@"behavior"]];
-	}
-	[self transend];
-}
-
-- (void)notDownloaded:(id)a
-{
-	if ([delegate respondsToSelector:@selector(fechedTransend)])
-		[delegate fechedTransend];
-
-	//transend with remote_image fech failed image
-	//TODO replace image... some defaults from stage or something
-	if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
-		[delegate transendedWithImage:[UIImage imageNamed:@"0_mm_test1.jpg"] andBehavior:[[memories objectAtIndex:memoriesSpot] objectForKey:@"behavior"]];
 }
 
 @end
