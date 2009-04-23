@@ -257,11 +257,17 @@
 - (void)transitImage:(UIImage*)img 
 {
 	if (useEmitter1) { 
+		UIImage *gmi = [transendEmitter2 image];
 		[transendEmitter2 setImage:img];
+		[gmi release];
+		gmi = nil;
 		[self transit:transendEmitter2];
 		useEmitter1 = NO;
 	} else {
+		UIImage *gmi = [transendEmitter1 image];
 		[transendEmitter1 setImage:img];
+		[gmi release];
+		gmi = nil;
 		[self transit:transendEmitter1];
 		useEmitter1 = YES;
 	}	

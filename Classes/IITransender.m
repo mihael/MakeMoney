@@ -136,6 +136,7 @@
 			if (img) { //cache hit
 				if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
 					[delegate transendedWithImage:img andBehavior:behavior];
+				[img release];
 			} else {
 				//stop transending and wait for download finish
 				//[self meditate];
@@ -184,8 +185,12 @@
 			}
 		
 			if ([[memoryName pathExtension] isEqualToString:@"jpg"]) {
-				if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
-					[delegate transendedWithImage:[UIImage imageWithContentsOfFile:diskName] andBehavior:behavior];
+				if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)]) {
+					UIImage* img = [[UIImage alloc] initWithContentsOfFile:diskName];
+					[delegate transendedWithImage:img andBehavior:behavior];
+					[img release];
+				}
+					
 			}
 
 			//can not play sounds and movies in simulator, so do not transend
