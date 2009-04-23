@@ -135,7 +135,7 @@
 			diskName = [[options valueForKey:@"url"] lastPathComponent];
 
 			//get some disk-like memory space
-			NSString *path = [NSHomeDirectory() stringByAppendingString:@"/transends"];
+			NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
 			[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
 			path = [NSString stringWithFormat:@"%@/%@", path, diskName];
 			//if diskName exist?
@@ -155,12 +155,16 @@
 				[request start];
 				NSError *error = [request error];
 				if (!error) {
+					if ([delegate respondsToSelector:@selector(fechedTransend)])
+						[delegate fechedTransend];
+
 					UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];
 					[delegate transendedWithImage:img andBehavior:behavior];
 					[img release];				
 					//NSString *response = [request responseString];
 				} else {
 					DebugLog(@"IITransender#invokeTransend failed remote_image fech");
+					[[iAlert instance] alert:@"failed remote_image" withMessage:@"fech"];
 				}
 			}
 			/*
