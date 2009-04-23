@@ -150,6 +150,8 @@ static AssetRepository *_one = nil;
 		[urlToAsset setObject:asset forKey:url];
 		[asset release];
 	}
+	DebugLog(@"AssetRepository#imageForURL urlToAsset size: %i", [urlToAsset count]);
+
 	if (asset.image || [asset fromURL:url notify:delegate]) {
 		return asset.image;
 	}

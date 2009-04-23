@@ -355,6 +355,8 @@
 		289233A00DB2D0730083E9F9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				47348B2A0F9A48DD00A1D78A /* AssetRepository.h */,
+				47348B2B0F9A48DD00A1D78A /* AssetRepository.m */,
 				47C7E25A0F9CC59100789864 /* FecherViewController.h */,
 				47C7E25B0F9CC59100789864 /* FecherViewController.m */,
 				47C7E2460F9CBB4100789864 /* Filter_kitschmaster.h */,
@@ -531,8 +533,6 @@
 		47D796040F725A8800C52774 /* Transender */ = {
 			isa = PBXGroup;
 			children = (
-				47348B2A0F9A48DD00A1D78A /* AssetRepository.h */,
-				47348B2B0F9A48DD00A1D78A /* AssetRepository.m */,
 				47B14CEA0F7C08260017AB44 /* IIController.h */,
 				47B14CEB0F7C08260017AB44 /* IIController.m */,
 				47D796070F725A9C00C52774 /* IIMusic.h */,

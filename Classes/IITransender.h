@@ -23,8 +23,6 @@
 #import <UIKit/UIKit.h>
 #import "IIController.h"
 #import "IIFilter.h"
-#import "AssetRepository.h"
-
 #define kIITransenderVibeShort 0.05
 #define kIITransenderVibeLong 2.0
 #define kIITransenderZero 0
@@ -43,7 +41,8 @@
 - (void)fechedTransend;
 @end
 
-@interface IITransender : NSObject <AssetDownloadDelegate> {
+@interface IITransender : NSObject //<AssetDownloadDelegate> 
+{
     id <IITransenderDelegate> delegate; //the delegate to be notified of transends
 	NSMutableArray *memories; //holding our memories of transends
 	int memoriesSpot; //exact position of last transended memorie

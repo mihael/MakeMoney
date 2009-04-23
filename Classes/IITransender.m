@@ -4,8 +4,8 @@
 //
 #import <UIKit/UIKit.h>
 #import "IITransender.h"
-#import "AssetRepository.h"
 #import "JSON.h"
+#import "ASIHTTPRequest.h"
 #ifdef __APPLE__
 #include "TargetConditionals.h"
 #endif
@@ -129,14 +129,47 @@
 		NSString *diskName = nil;
 		
 		if ([memoryName isEqualToString:@"remote_image"]){
+			//do nothing until II
 			
+			//get diskName from url
+			diskName = [[options valueForKey:@"url"] lastPathComponent];
+
+			//get some disk-like memory space
+			NSString *path = [NSHomeDirectory() stringByAppendingString:@"/transends"];
+			[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
+			path = [NSString stringWithFormat:@"%@/%@", path, diskName];
+			//if diskName exist?
+			if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+				//transend with it
+				UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];
+				[delegate transendedWithImage:img andBehavior:behavior];
+				[img release];				
+			} else {
+				//notify we are feching
+				if ([delegate respondsToSelector:@selector(fechingTransend)])
+					[delegate fechingTransend];
+
+				NSURL *url = [NSURL URLWithString:[options valueForKey:@"url"]];
+				ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:url] autorelease];
+				[request setDownloadDestinationPath:path];
+				[request start];
+				NSError *error = [request error];
+				if (!error) {
+					UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];
+					[delegate transendedWithImage:img andBehavior:behavior];
+					[img release];				
+					//NSString *response = [request responseString];
+				} else {
+					DebugLog(@"IITransender#invokeTransend failed remote_image fech");
+				}
+			}
+			/*
 			//start downloading the remote image async
 			//notify delegate 
-			UIImage *img = [[AssetRepository one] imageForURL:[options valueForKey:@"url"] notify:self];
+			UIImage *img = //[[AssetRepository one] imageForURL:[options valueForKey:@"url"] notify:self];
 			if (img) { //cache hit
 				if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)])
 					[delegate transendedWithImage:img andBehavior:behavior];
-				[img release];
 			} else {
 				//stop transending and wait for download finish
 				//[self meditate];
@@ -145,7 +178,7 @@
 					[delegate fechingTransend];
 				//TODO record timestamp to compare later
 			}
-			
+			*/
 		} else if ([memoryName hasSuffix:@"View"]) {
 			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryName];
 			Class viewControllerClass = NSClassFromString(className);
