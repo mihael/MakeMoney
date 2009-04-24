@@ -1,12 +1,16 @@
 [
+{"name":"FecherView", "options":{"button_title":"+25 pikchurs", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"1.5"}},
+{"name":"FecherView", "options":{"button_title":"+kitsch", "url":"http://kitschmaster.com/kiches.json", "method":"get", "page":1, "limit":10, "filter":"kitschmaster"}, "behavior":{"stop":"true"}},
+{"name":"FecherView", "options":{"button_title":"+kokodajs", "url":"http://www.koornk.com/api/timeline/ikoodeveloper", "method":"get", "page":1, "limit":10, "params":"username=ikoodeveloper&password=ikooikoo", "filter":"koornk"}, "behavior":{"stop":"true"}},
+
 {"name":"MessageView", "options":{"message":"No &copy; rights here.", "image":"main.png"}, "behavior":{"stop":"false", "effect":0}},
 {"name":"MessageView", "options":{"message":"Thanks.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
 {"name":"MessageView", "options":{"message":"What You Give, is What You Want.", "image":"main.png"}, "behavior":{"stop":"false", "effect":2}},
 {"name":"MessageView", "options":{"message":"Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!", "image":"main.png"}, "behavior":{"stop":"false", "effect":3}},
 {"name":"MessageView", "options":{"message":"This Application is your Personal Money Making Mobile Application.", "image":"main.png"}, "behavior":{"stop":"false", "effect":4}},
 {"name":"MessageView", "options":{"message":"This Application is Here to Serve You.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
+{"name":"000000005.caf",  "behavior":{"id":"3.4", "stop":"true"}},
 
-{"name":"FecherView", "options":{"button_title":"+25 pikchurs", "url":"https://api.pikchur.com/api/feeds/json","page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"1.5"}},
 
 {"name":"FlipyView", "behavior":{"id":"-0", "stop":"true"}},
 {"name":"0_1.jpg",  "behavior":{"id":"1", "stop":"false"}},
@@ -21,9 +25,6 @@
 
 
 {"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"radionula_screen.jpg"}, "behavior":{"stop":"true"}},
-
-{"name":"FecherView", "options":{"button_title":"Get Kitsch!", "url":"http://kitschmaster.com/kiches/144.json", "filter":"kitschmaster"}, "behavior":{"stop":"true"}},
-{"name":"000000005.caf",  "behavior":{"id":"3.4", "stop":"true"}},
 
 {"name":"0_4.jpg",  "behavior":{"id":"4", "stop":"false"}},
 {"name":"0_5.jpg",  "behavior":{"id":"5", "stop":"false"}},

@@ -59,7 +59,7 @@
 
 	//inventing remote coding here - listing is the json program
 	//[self.transender rememberMemories:listing];
-	[self.transender putMemories:listing atSpot:[self.transender currentSpot]];
+	[self.transender putMemories:listing];
 	//prepare next page fecher to add last in listing - so we have next page
 	int page = [[options valueForKey:@"page"] intValue] + 1;	
 	NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:options];

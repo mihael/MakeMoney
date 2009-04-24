@@ -47,6 +47,20 @@
 
 - (void)fech 
 {
+	if ([options valueForKey:@"method"]) {
+		if ([[options valueForKey:@"method"] isEqualToString:@"form"]) {
+			[self formFech];
+		} else if ([[options valueForKey:@"method"] isEqualToString:@"post"]) {
+			[self postFech];
+		} else { //all else gets
+			[self getFech];
+		}
+	} else {
+		[self getFech];
+	}
+}
+- (void)formFech 
+{
 	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:self.url] autorelease];
 	if (filter) { //add paging
 		[request setPostValue:[NSString stringWithFormat:@"%i", page] forKey:[filter pageParamName]];
@@ -63,6 +77,26 @@
 	[server cancelAllOperations];
 	[server addOperation:request];
 	[server go];
+}
+
+- (void)postFech 
+{
+	NSURL *posturl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@=%@&%@=%@&%@", [options valueForKey:@"url"], [filter pageParamName], [options valueForKey:@"page"], [filter limitParamName], [options valueForKey:@"limit"], [options valueForKey:@"params"]]];
+	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:posturl] autorelease];
+	[request setRequestMethod:@"POST"];
+	[server cancelAllOperations];
+	[server addOperation:request];
+	[server go];		
+}
+
+- (void)getFech 
+{
+	NSURL *geturl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@=%@&%@=%@&%@", [options valueForKey:@"url"], [filter pageParamName], [options valueForKey:@"page"], [filter limitParamName], [options valueForKey:@"limit"], [options valueForKey:@"params"]]];
+	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:geturl] autorelease];
+	[request setRequestMethod:@"GET"];
+	[server cancelAllOperations];
+	[server addOperation:request];
+	[server go];	
 }
 
 - (void)setProgressDelegate:(id)d 

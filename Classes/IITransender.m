@@ -90,13 +90,11 @@ typedef enum {
 	}
 }
 
-- (void)putMemories:(NSMutableArray*)m atSpot:(int)s
+- (void)putMemories:(NSMutableArray*)m
 {
-	DebugLog(@"IITransender#putMemories at spot %i", m, s);
-	if (s>-1) {
-		[self.memories insertObjects:m atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(s, [m count])]];
-		memoriesCount = [memories count]; //calculate size once on every listing change	
-	}	
+	DebugLog(@"IITransender#putMemories at spot %i", memoriesSpot+1);
+	[self.memories insertObjects:m atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(memoriesSpot+1, [m count])]];
+	memoriesCount = [memories count]; //calculate size once on every listing change	
 }
 
 - (void)addMemoriesWithString:(NSString*)s 

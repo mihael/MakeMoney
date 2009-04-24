@@ -39,4 +39,8 @@
 - (void)setProgressDelegate:(id)d;
 - (void)fech;
 
+- (void)formFech;
+- (void)postFech;
+- (void)getFech;
+
 @end

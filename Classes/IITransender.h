@@ -70,7 +70,7 @@
 - (void)rememberMemories:(NSMutableArray*)m;
 - (void)addMemorieWithString:(NSString*)s;
 - (void)addMemoriesWithString:(NSString*)s;
-- (void)putMemories:(NSMutableArray*)m atSpot:(int)s;
+- (void)putMemories:(NSMutableArray*)m;
 - (void)insertMemorieWithString:(NSString*)m atSpot:(int)s;
 
 - (int)currentSpot;
