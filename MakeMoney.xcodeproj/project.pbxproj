@@ -16,6 +16,8 @@
 		47041ED40FA0D7C800D7DE30 /* not_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47041ED30FA0D7C800D7DE30 /* not_image.jpg */; };
 		47041EE10FA1047300D7DE30 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47041EE00FA1047300D7DE30 /* MessageView.xib */; };
 		4704209C0FA132E800D7DE30 /* Filter_koornk.m in Sources */ = {isa = PBXBuildFile; fileRef = 4704209B0FA132E800D7DE30 /* Filter_koornk.m */; };
+		470421850FA1E0F400D7DE30 /* URLPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 470421820FA1E0F400D7DE30 /* URLPair.m */; };
+		470421860FA1E0F400D7DE30 /* URLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 470421840FA1E0F400D7DE30 /* URLUtils.m */; };
 		472643210F56A9530097D30A /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 472643200F56A9530097D30A /* listing.json */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
 		473488C40F991F2B00A1D78A /* IIWWW.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488C30F991F2B00A1D78A /* IIWWW.m */; };
@@ -165,6 +167,10 @@
 		47041EE00FA1047300D7DE30 /* MessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		4704209A0FA132E800D7DE30 /* Filter_koornk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_koornk.h; path = Classes/Filter_koornk.h; sourceTree = "<group>"; };
 		4704209B0FA132E800D7DE30 /* Filter_koornk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_koornk.m; path = Classes/Filter_koornk.m; sourceTree = "<group>"; };
+		470421810FA1E0F400D7DE30 /* URLPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = URLPair.h; path = Classes/URLPair.h; sourceTree = "<group>"; };
+		470421820FA1E0F400D7DE30 /* URLPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLPair.m; path = Classes/URLPair.m; sourceTree = "<group>"; };
+		470421830FA1E0F400D7DE30 /* URLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = URLUtils.h; path = Classes/URLUtils.h; sourceTree = "<group>"; };
+		470421840FA1E0F400D7DE30 /* URLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLUtils.m; path = Classes/URLUtils.m; sourceTree = "<group>"; };
 		472643200F56A9530097D30A /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = listing.json; sourceTree = "<group>"; };
 		472965420F4859C10053F946 /* Hajlov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hajlov; sourceTree = "<group>"; };
 		473488C20F991F2B00A1D78A /* IIWWW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIWWW.h; path = Classes/IIWWW.h; sourceTree = "<group>"; };
@@ -479,6 +485,10 @@
 		4734896D0F99E69D00A1D78A /* i */ = {
 			isa = PBXGroup;
 			children = (
+				470421810FA1E0F400D7DE30 /* URLPair.h */,
+				470421820FA1E0F400D7DE30 /* URLPair.m */,
+				470421830FA1E0F400D7DE30 /* URLUtils.h */,
+				470421840FA1E0F400D7DE30 /* URLUtils.m */,
 				473488DE0F99DF8E00A1D78A /* UIApplication-Network.h */,
 				473488DF0F99DF8E00A1D78A /* UIApplication-Network.m */,
 				47EBE8BC0F4C10E1009F377E /* Reachability.h */,
@@ -821,6 +831,8 @@
 				47C7E25C0F9CC59100789864 /* FecherViewController.m in Sources */,
 				47041EB70FA0CF1100D7DE30 /* MessageViewController.m in Sources */,
 				4704209C0FA132E800D7DE30 /* Filter_koornk.m in Sources */,
+				470421850FA1E0F400D7DE30 /* URLPair.m in Sources */,
+				470421860FA1E0F400D7DE30 /* URLUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

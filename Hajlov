@@ -234,3 +234,51 @@ available effects :
 1 - Push, 
 2 - Reveal, 
 3 - Fade
+
+###################LISTING EXAMPLES########################
+{"name":"MessageView", "options":{"message":"No &copy; rights here.", "image":"main.png"}, "behavior":{"stop":"false", "effect":0}},
+{"name":"MessageView", "options":{"message":"Thanks.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
+{"name":"MessageView", "options":{"message":"What You Give, is What You Want.", "image":"main.png"}, "behavior":{"stop":"false", "effect":2}},
+{"name":"MessageView", "options":{"message":"Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!", "image":"main.png"}, "behavior":{"stop":"false", "effect":3}},
+{"name":"000000005.caf",  "behavior":{"id":"3.4", "stop":"true"}},
+{"name":"MessageView", "options":{"message":"This Application is your Personal Money Making Mobile Application.", "image":"main.png"}, "behavior":{"stop":"false", "effect":4}},
+{"name":"MessageView", "options":{"message":"This Application is Here to Serve You.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
+
+
+{"name":"FlipyView", "behavior":{"id":"-0", "stop":"true"}},
+{"name":"0_1.jpg",  "behavior":{"id":"1", "stop":"false"}},
+{"name":"0_2.jpg",  "behavior":{"id":"2", "stop":"false"}},
+{"name":"0_3.jpg",  "behavior":{"id":"3", "stop":"false"}},
+{"name":"RemoteImageView", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_mage", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+
+
+{"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"radionula_screen.jpg"}, "behavior":{"stop":"true"}},
+
+{"name":"0_4.jpg",  "behavior":{"id":"4", "stop":"false"}},
+{"name":"0_5.jpg",  "behavior":{"id":"5", "stop":"false"}},
+{"name":"0_6.jpg",  "behavior":{"id":"6", "stop":"false"}},
+{"name":"0_7.jpg",  "behavior":{"id":"7", "stop":"false"}},
+{"name":"0_mm_test1.jpg",  "behavior":{"id":"7.1", "stop":"true"}},
+{"name":"0_8.jpg",  "behavior":{"id":"8", "stop":"false"}},
+{"name":"0_9.jpg",  "behavior":{"id":"9", "stop":"false"}},
+{"name":"0_10.jpg", "behavior":{"id":"10", "stop":"false"}},
+{"name":"0_11.jpg", "behavior":{"id":"11", "stop":"false"}},
+{"name":"0_12.jpg", "behavior":{"id":"12", "stop":"false"}},
+{"name":"0_13.jpg", "behavior":{"id":"13", "stop":"false"}},
+{"name":"0_14.jpg", "behavior":{"id":"14", "stop":"false"}},
+{"name":"0_15.jpg", "behavior":{"id":"15", "stop":"false"}},
+{"name":"0_16.jpg", "behavior":{"id":"16", "stop":"false"}},
+{"name":"0_17.jpg", "behavior":{"id":"17", "stop":"false", "revibe":"1.0"}},
+{"name":"0_18.jpg", "behavior":{"id":"18", "stop":"false"}},
+{"name":"0_19.jpg", "behavior":{"id":"19", "stop":"false"}},
+{"name":"0_20.jpg", "behavior":{"id":"20", "stop":"true"}},
+{"name":"0_Movie716.mov", "behavior":{"id":"21", "stop":"false", "background":"true"}},
+{"name":"0_Movie_139.mov", "behavior":{"id":"22", "stop":"false", "background":"true"}},
+{"name":"0_Movie_140.mov", "behavior":{"id":"23", "stop":"false", "background":"true"}},
+{"name":"0_Movie_141.mov", "behavior":{"id":"24", "stop":"false", "background":"true"}},
+{"name":"FlipsideView", "behavior":{"id":"26", "stop":"true"}}

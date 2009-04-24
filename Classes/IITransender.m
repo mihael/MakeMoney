@@ -10,13 +10,6 @@
 #include "TargetConditionals.h"
 #endif
 
-typedef enum {
-	IITransenderFailedWithImage = 0,
-	IITransenderFailedWithMovie = 1,
-	IITransenderFailedWithSound = 2,
-	IITransenderFailedWithView = 3	
-} IITransenderFailedWith;
-
 @implementation IITransender
 @synthesize memories, delegate, direction;
 
@@ -184,21 +177,32 @@ typedef enum {
 				//notify we are feching
 				if ([delegate respondsToSelector:@selector(fechingTransend)])
 					[delegate fechingTransend];
-
+				DebugLog(@"IITransender#invokeTransend feching image url %@", [options valueForKey:@"url"]);
 				NSURL *url = [NSURL URLWithString:[options valueForKey:@"url"]];
+/*
+				UIImage* img = [[UIImage alloc] initWithURL:url];
+				if ([delegate respondsToSelector:@selector(fechedTransend)])
+					[delegate fechedTransend];					
+				[delegate transendedWithImage:img andBehavior:behavior];
+				[img release];
+*/				
+				
 				ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:url] autorelease];
 				[request setDownloadDestinationPath:path];
 				[request start];
 				NSError *error = [request error];
 				if (!error) {
+					UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];					
+					if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+						DebugLog(@"IITransender#invokeTransend feched image %@ saved at %@", img, path);
+					}
+					DebugLog(@"IITransender#invokeTransend feched image %@ saved at %@ with response: %@", img, path, [request responseString]);
 					if ([delegate respondsToSelector:@selector(fechedTransend)])
-						[delegate fechedTransend];
-
-					UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];
+						[delegate fechedTransend];					
 					[delegate transendedWithImage:img andBehavior:behavior];
 					[img release];	
 				} else {
-					DebugLog(@"IITransender#invokeTransend failed remote_image fech");
+					DebugLog(@"IITransender#invokeTransend failed remote_image fech %@", [options valueForKey:@"url"]);
 					[self invokeTransendFailed:IITransenderFailedWithImage];
 				}
 				[self transend]; //resume with transending

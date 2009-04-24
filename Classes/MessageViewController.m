@@ -10,7 +10,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	if ([options valueForKey:@"image"])
-		[background setImage:[UIImage imageNamed:[options valueForKey:@"image"]]];
+		[background setImage:[[UIImage alloc] initWithContentsOfFile:[options valueForKey:@"image"]]];
 	if ([options valueForKey:@"message"])
 		[message setText:[options valueForKey:@"message"]];	
 	message.font = [UIFont fontWithName:@"Helvetica-Bold" size:23];
@@ -39,10 +39,10 @@
 
 #pragma mark IIController overrides
 - (void)stopFunctioning {
-	DebugLog(@"RemoteImageViewController#stopFunctioning");
+	DebugLog(@"MessageViewController#stopFunctioning");
 }
 - (void)startFunctioning {
-	DebugLog(@"RemoteImageViewController#startFunctioning");
+	DebugLog(@"MessageViewController#startFunctioning");
 }
 
 

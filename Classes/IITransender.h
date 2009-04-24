@@ -41,6 +41,13 @@
 - (void)fechedTransend;
 @end
 
+typedef enum {
+	IITransenderFailedWithImage = 0,
+	IITransenderFailedWithMovie = 1,
+	IITransenderFailedWithSound = 2,
+	IITransenderFailedWithView = 3	
+} IITransenderFailedWith;
+
 @interface IITransender : NSObject //<AssetDownloadDelegate> 
 {
     id <IITransenderDelegate> delegate; //the delegate to be notified of transends
@@ -87,6 +94,7 @@
 - (void)rememberSpot;
 - (void)invokeTransend:(NSTimer*)timer;
 - (void)invokeTransend;
+- (void)invokeTransendFailed:(IITransenderFailedWith)failed;
 - (BOOL)isTransending;
 - (void)changeDirection;
 - (void)changeDirectionTo:(BOOL)d;
