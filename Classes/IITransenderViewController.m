@@ -48,7 +48,7 @@
     [super didReceiveMemoryWarning];
 	[transender meditate];
 	[notControls lightUp];
-	[[iAlert instance] alert:@"Received Memory Warning in TransenderViewController" withMessage:@"Good luck!"];
+	[[iAlert instance] alert:@"Received Memory Warning in IITransenderViewController" withMessage:@"Good luck!"];
 	DebugLog(@"Too many memories.");
 }
 
@@ -68,19 +68,19 @@
 #pragma mark IITransenderDelegate
 - (void)fechedTransend
 {
-	DebugLog(@"IITransenderViewController#fechedTransend");
+	DebugLog(@"#fechedTransend");
 	[notControls stillButton];		
 }
 
 - (void)fechingTransend 
 {
-	DebugLog(@"IITransenderViewController#fechingTransend");
+	DebugLog(@"#fechingTransend");
 	[notControls spinButtonWith:[transender direction]];	
 	
 }
 
 - (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior {
-	DebugLog(@"IITransenderViewController#transendedWithView %@ andBehavior %@", transend, behavior);
+	DebugLog(@"#transendedWithView %@ andBehavior %@", transend, behavior);
 	if (self.notControls && [transend respondsToSelector:@selector(setNotControls:)])
 		[transend setNotControls:self.notControls];//give the current controller access to notControls
 	[self setNotBehavior:behavior];
@@ -98,14 +98,14 @@
 }
 
 - (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior {
-	DebugLog(@"IITransenderViewController#transendedWithImage %@ andBehavior %@", transend, behavior);
+	DebugLog(@"#transendedWithImage %@ andBehavior %@", transend, behavior);
 	[self setNotBehavior:behavior];
 	[self transitImage:transend];
 	[self continueWithBehavior];
 }
 
 - (void)transendedWithMovie:(NSString*)transend andBehavior:(NSDictionary*)behavior {
-	DebugLog(@"IITransenderViewController#transendedWithMovie %@ andBehavior %@", transend, behavior);
+	DebugLog(@"#transendedWithMovie %@ andBehavior %@", transend, behavior);
 	[self setNotBehavior:behavior];
 	if ([[behavior valueForKey:@"background"] boolValue]) 
 	{
@@ -122,7 +122,7 @@
 }
 
 - (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior {
-	DebugLog(@"IITransenderViewController#transendedWithMusic %@ andBehavior %@", transend, behavior);
+	DebugLog(@"#transendedWithMusic %@ andBehavior %@", transend, behavior);
 	[self setNotBehavior:behavior];
 	//stop transending
 	[transender meditate];
@@ -141,12 +141,14 @@
 }
 
 - (void)transendedAll:(id)sender {
-	DebugLog(@"IITransenderViewController#transendedAll");
+	DebugLog(@"#transendedAll");
 }
 
 #pragma mark Behavior
 - (void)continueWithBehavior 
 {
+	[notControls showMessage:[NSString stringWithFormat:@"Spot:%i of %i Vibe:%1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
+
 	if (avoidBehavior) { //just stop and do not much else
 		[transender meditate];
 		if (delegate) {
@@ -279,9 +281,7 @@
 			} else {
 				transitionIndex = kTransition; //default is push
 			}
-			NSLog(@"transitionINDEX %i", transitionIndex);
 			NSString *transition = [transitions objectAtIndex:transitionIndex];
-
 			//NSUInteger directionsIndex = random() % [directions count];
 			NSString *dir = nil; //[directions objectAtIndex:directionsIndex];
 			
@@ -309,7 +309,7 @@
 		}
 		
 	} else {
-		DebugLog(@"IITransenderViewController# No transit. Skrin has no views.");
+		DebugLog(@"#transit skrin has no views.");
 	}
 }
 
@@ -329,6 +329,7 @@
 	[notControl lightUp];
 	[notControl showBackLight];
 	[transender meditate];
+	[notControls showMessage:[NSString stringWithFormat:@"Spot:%i of %i Vibe:%1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
 }
 
 - (void)notControlsClosed:(id)notControl {
@@ -338,6 +339,7 @@
 		//[notControl lightDown];
 		//[transender transend];	
 	}
+	[notControl hideMessage];
 }
 
 - (void)leftTouch:(id)notControl {

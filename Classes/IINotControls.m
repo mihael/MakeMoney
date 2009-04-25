@@ -5,8 +5,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IINotControls.h"
 #import "MakeMoneyAppDelegate.h"
-#define kButtonAnimationKey @"buttonViewAnimation"
-#define kBackLightAnimationKey @"backLightViewAnimation"
 
 @implementation IINotControls
 @synthesize delegate;
@@ -21,7 +19,7 @@
 		
 		notControlsFrame = frame;
 		notControlsOneButtonFrame = CGRectMake(0, 0, kPadding + kButtonSize + kPadding, kPadding + kButtonSize + kPadding);
-
+		
 		button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		[button setFrame:CGRectMake(kPadding, kPadding, kButtonSize, kButtonSize)];
 		[button setImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
@@ -42,6 +40,13 @@
 		[rightButton setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];
 		[rightButton addTarget:self action:@selector(rightButtonTouch) forControlEvents:UIControlEventTouchUpInside];
 
+		messageView = [[[UITextView alloc] initWithFrame:CGRectMake(kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding), (kLeftRightButtonSize+2*kPadding))]retain];
+		[messageView setBackgroundColor:[UIColor clearColor]];
+		[messageView setTextAlignment:UITextAlignmentCenter];
+		[messageView setTextColor:[UIColor whiteColor]];
+		[messageView setFont:[UIFont fontWithName:kMessageFontName size:kMessageFontSize]];
+		[messageView setText:@"OM OM OM"];
+		
 		[self addSubview:button];
 		[self addSubview:leftButton];
 		[self addSubview:rightButton];
@@ -150,8 +155,7 @@
 - (void)dealloc 
 {
 	[backLight release];
-	if (wach) 
-		[wach release];
+	[wach release];
 	[button release];
 	[leftButton release];
 	[rightButton release];
@@ -333,6 +337,49 @@
 	return 1;
 }
 
+#pragma mark messages
+- (void)animateMessageIn 
+{
+	CATransition *animation = [CATransition animation];
+	[animation setType:kCATransitionMoveIn];
+	[animation setDuration:0.5];
+	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+	[[messageView layer] addAnimation:animation forKey:kBackLightAnimationKey];
+	[animation setSubtype:kCATransitionFromTop];
+	[[messageView layer] addAnimation:animation forKey:kBackLightAnimationKey];
+}
 
+- (void)animateMessageOut 
+{
+	CATransition *animation = [CATransition animation];
+	[animation setType:kCATransitionPush];
+	[animation setDuration:0.5];
+	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+	[animation setSubtype:kCATransitionFromRight];
+	[[messageView layer] addAnimation:animation forKey:kBackLightAnimationKey];
+	[animation setSubtype:kCATransitionFromBottom];
+	[[messageView layer] addAnimation:animation forKey:kBackLightAnimationKey];
+}
+
+- (void)showMessage:(NSString*)message 
+{
+	if (!notOpen) {
+		[messageView setText:message];
+		if (![messageView superview]) {
+			[self addSubview:messageView];
+			[self animateMessageIn];
+		}
+	}
+}
+
+- (void)hideMessage 
+{
+	if (notOpen) {	
+		if ([messageView superview]) {
+			[messageView removeFromSuperview];
+			[self animateMessageOut];			
+		}
+	}
+}
 
 @end

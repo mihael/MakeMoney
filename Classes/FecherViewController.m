@@ -7,6 +7,7 @@
 #import "JSON.h"
 
 @implementation FecherViewController
+@synthesize button, background;
 
 - (IBAction)buttonTouched:(id)sender
 {
@@ -18,29 +19,12 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	www = [[IIWWW alloc] initWithOptions:self.options];
-	//[www setProgressDelegate:progress];
-	[www setDelegate:self];
-	
-	if ([options valueForKey:@"background"])
-		[background setImage:[UIImage imageNamed:[options valueForKey:@"background"]]];
-	if ([options valueForKey:@"button_title"])
-		[button setTitle:[options valueForKey:@"button_title"] forState:UIControlStateNormal];	
 }
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
 
 - (void)dealloc {
 	[www release];
+	www = nil;
     [super dealloc];
 }
 
@@ -54,10 +38,9 @@
 - (void)feched:(NSMutableArray*)listing
 {
 	[indica stopAnimating];
-	DebugLog(@"FecherViewController#feched %@", listing);
 	//[self.transender spot]; //rewind memory spots
 
-	//inventing remote coding here - listing is the json program
+	//inventing remote coding here - listing.json is a new way to program iphone and ipod apps
 	//[self.transender rememberMemories:listing];
 	[self.transender putMemories:listing];
 	//prepare next page fecher to add last in listing - so we have next page
@@ -74,5 +57,26 @@
 	[self.transender transendNow];
 }
 
+#pragma mark IIController
+- (void)functionalize {
+	DebugLog(@"#functionalize with %@", options);
+	[www release];
+	www = [[IIWWW alloc] initWithOptions:options];
+	//[www setProgressDelegate:progress];
+	[www setDelegate:self];
+	if ([options valueForKey:@"background"])
+		[self.background setImage:[UIImage imageNamed:[options valueForKey:@"background"]]];
+	if ([options valueForKey:@"button_title"])
+		[self.button setTitle:[options valueForKey:@"button_title"] forState:UIControlStateNormal];	
+}
+
+- (void)stopFunctioning {
+	DebugLog(@"#stopFunctioning");
+}
+
+- (void)startFunctioning {
+	DebugLog(@"#startFunctioning");
+	[button setHidden:NO];
+}
 
 @end

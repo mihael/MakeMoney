@@ -39,6 +39,7 @@
 		BOOL feeling;	
 		UIImageView *transendEmitter1;
 		UIImageView *transendEmitter2;
+		
 		NSString* listingName;
 		BOOL useEmitter1;
 

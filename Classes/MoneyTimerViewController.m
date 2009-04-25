@@ -81,6 +81,8 @@
 }
 
 #pragma mark IIController overrides
+- (void)functionalize {
+}
 - (void)stopFunctioning {
 	[self endtik];
 }

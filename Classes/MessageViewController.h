@@ -9,5 +9,6 @@
 {
 	IBOutlet UIImageView* background;
 	IBOutlet UITextView* message;
+	IBOutlet UIActivityIndicatorView *indica;
 }
 @end

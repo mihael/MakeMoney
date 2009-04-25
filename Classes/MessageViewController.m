@@ -5,43 +5,30 @@
 #import "MessageViewController.h"
 
 @implementation MessageViewController
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	if ([options valueForKey:@"image"])
-		[background setImage:[[UIImage alloc] initWithContentsOfFile:[options valueForKey:@"image"]]];
-	if ([options valueForKey:@"message"])
-		[message setText:[options valueForKey:@"message"]];	
-	message.font = [UIFont fontWithName:@"Helvetica-Bold" size:23];
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	[self.transender meditate];
-	[self.notControls lightUp];
-	[[iAlert instance] alert:@"Received Memory Warning in MessageViewController" withMessage:@"Good luck!"];
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
-- (void)dealloc {
-    [super dealloc];
-}
-
-- (void)loadMessage 
-{
-}
-
 #pragma mark IIController overrides
+- (void)functionalize {
+	message.font = [UIFont fontWithName:@"Helvetica-Bold" size:23];
+
+	if ([options valueForKey:@"background"])
+		[background setImage: [UIImage imageNamed:[options valueForKey:@"background"]]];//[[UIImage alloc] initWithContentsOfFile:[options valueForKey:@"image"]]];
+	if ([options valueForKey:@"message"])
+		[message setText:[options valueForKey:@"message"]];		
+}
+
 - (void)stopFunctioning {
 	DebugLog(@"MessageViewController#stopFunctioning");
 }
 - (void)startFunctioning {
+	if ([options valueForKey:@"background_url"]) {
+		[indica startAnimating];
+		UIImage *img = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
+		if (img) {
+			if ([img size].width > background.frame.size.width && [img size].height > background.frame.size.height)
+				[background setContentMode:UIViewContentModeCenter];
+			[background setImage:img];
+		}
+		[indica stopAnimating];
+	}
 	DebugLog(@"MessageViewController#startFunctioning");
 }
 

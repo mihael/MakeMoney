@@ -3,6 +3,10 @@
 //  MakeMoney
 //
 #define kButtonAnimated NO
+#define kButtonAnimationKey @"buttonViewAnimation"
+#define kBackLightAnimationKey @"backLightViewAnimation"
+#define kMessageFontName @"Helvetica-Bold"
+#define kMessageFontSize 18.0
 
 @protocol IINotControlsDelegate <NSObject>
 
@@ -24,9 +28,11 @@
     UIButton *button;
 	UIButton *leftButton;
 	UIButton *rightButton;
+	UITextView *messageView;
 	BOOL notOpen;
 	CGRect notControlsFrame;
 	CGRect notControlsOneButtonFrame;
+	
 	NSTimer *wach;
 	BOOL buttonInTouching;
 	BOOL buttonNotLightUp;
@@ -46,11 +52,15 @@
 - (void)closeNot;
 
 - (void)spinButtonWith:(BOOL)direction;
+- (void)spinButton;
 - (void)stillButton;
 
 - (void)setBackLight:(UIImage*)image withAlpha:(CGFloat)a;
 - (void)hideBackLight;
 - (void)showBackLight;
+
+- (void)showMessage:(NSString*)message;
+- (void)hideMessage;
 
 - (int)chooseOneFrom:(NSString*)jsonMemories; 
 

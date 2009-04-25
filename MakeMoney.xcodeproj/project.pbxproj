@@ -21,7 +21,6 @@
 		472643210F56A9530097D30A /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 472643200F56A9530097D30A /* listing.json */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
 		473488C40F991F2B00A1D78A /* IIWWW.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488C30F991F2B00A1D78A /* IIWWW.m */; };
-		473488E00F99DF8E00A1D78A /* FechSomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488DC0F99DF8E00A1D78A /* FechSomeViewController.m */; };
 		473488E10F99DF8E00A1D78A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488DD0F99DF8E00A1D78A /* main.m */; };
 		473488E20F99DF8E00A1D78A /* UIApplication-Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488DF0F99DF8E00A1D78A /* UIApplication-Network.m */; };
 		473488FA0F99E31C00A1D78A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F40F99E31C00A1D78A /* Default.png */; };
@@ -37,7 +36,6 @@
 		4734890B0F99E34900A1D78A /* littlebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 473489050F99E34900A1D78A /* littlebutton.png */; };
 		4734890C0F99E34900A1D78A /* littlehighbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 473489060F99E34900A1D78A /* littlehighbutton.png */; };
 		473489360F99E53100A1D78A /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 473489350F99E53100A1D78A /* libz.1.2.3.dylib */; };
-		47348B0B0F9A3B6100A1D78A /* FechSomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B070F9A3B6100A1D78A /* FechSomeViewController.xib */; };
 		47348B0C0F9A3B6100A1D78A /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B080F9A3B6100A1D78A /* FlipsideView.xib */; };
 		47348B0D0F9A3B6100A1D78A /* MoneyTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B090F9A3B6100A1D78A /* MoneyTimerView.xib */; };
 		47348B0E0F9A3B6100A1D78A /* RemoteImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */; };
@@ -175,8 +173,6 @@
 		472965420F4859C10053F946 /* Hajlov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hajlov; sourceTree = "<group>"; };
 		473488C20F991F2B00A1D78A /* IIWWW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIWWW.h; path = Classes/IIWWW.h; sourceTree = "<group>"; };
 		473488C30F991F2B00A1D78A /* IIWWW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIWWW.m; path = Classes/IIWWW.m; sourceTree = "<group>"; };
-		473488DB0F99DF8E00A1D78A /* FechSomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FechSomeViewController.h; path = Classes/FechSomeViewController.h; sourceTree = "<group>"; };
-		473488DC0F99DF8E00A1D78A /* FechSomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FechSomeViewController.m; path = Classes/FechSomeViewController.m; sourceTree = "<group>"; };
 		473488DD0F99DF8E00A1D78A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		473488DE0F99DF8E00A1D78A /* UIApplication-Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication-Network.h"; path = "Classes/UIApplication-Network.h"; sourceTree = "<group>"; };
 		473488DF0F99DF8E00A1D78A /* UIApplication-Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication-Network.m"; path = "Classes/UIApplication-Network.m"; sourceTree = "<group>"; };
@@ -193,7 +189,6 @@
 		473489050F99E34900A1D78A /* littlebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = littlebutton.png; path = Artwork/G/littlebutton.png; sourceTree = "<group>"; };
 		473489060F99E34900A1D78A /* littlehighbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = littlehighbutton.png; path = Artwork/G/littlehighbutton.png; sourceTree = "<group>"; };
 		473489350F99E53100A1D78A /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
-		47348B070F9A3B6100A1D78A /* FechSomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FechSomeViewController.xib; sourceTree = "<group>"; };
 		47348B080F9A3B6100A1D78A /* FlipsideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
 		47348B090F9A3B6100A1D78A /* MoneyTimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoneyTimerView.xib; sourceTree = "<group>"; };
 		47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoteImageViewController.xib; sourceTree = "<group>"; };
@@ -384,8 +379,6 @@
 				47348E150F9B85E700A1D78A /* StreamingPlayerViewController.m */,
 				47348B110F9A3CA300A1D78A /* RemoteImageViewController.h */,
 				47348B120F9A3CA300A1D78A /* RemoteImageViewController.m */,
-				473488DB0F99DF8E00A1D78A /* FechSomeViewController.h */,
-				473488DC0F99DF8E00A1D78A /* FechSomeViewController.m */,
 				479CC0F30F95172F00718563 /* MoonTimeViewController.h */,
 				479CC0F40F95172F00718563 /* MoonTimeViewController.m */,
 				47D7961F0F725B6900C52774 /* MoneyTimerViewController.h */,
@@ -503,7 +496,6 @@
 			isa = PBXGroup;
 			children = (
 				47348B150F9A3CD500A1D78A /* MoonTimeView.xib */,
-				47348B070F9A3B6100A1D78A /* FechSomeViewController.xib */,
 				47348B080F9A3B6100A1D78A /* FlipsideView.xib */,
 				47348B090F9A3B6100A1D78A /* MoneyTimerView.xib */,
 				47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */,
@@ -774,7 +766,6 @@
 				4734890A0F99E34900A1D78A /* highbutton.png in Resources */,
 				4734890B0F99E34900A1D78A /* littlebutton.png in Resources */,
 				4734890C0F99E34900A1D78A /* littlehighbutton.png in Resources */,
-				47348B0B0F9A3B6100A1D78A /* FechSomeViewController.xib in Resources */,
 				47348B0C0F9A3B6100A1D78A /* FlipsideView.xib in Resources */,
 				47348B0D0F9A3B6100A1D78A /* MoneyTimerView.xib in Resources */,
 				47348B0E0F9A3B6100A1D78A /* RemoteImageViewController.xib in Resources */,
@@ -818,7 +809,6 @@
 				47B14CEC0F7C08260017AB44 /* IIController.m in Sources */,
 				479CC0F60F95172F00718563 /* MoonTimeViewController.m in Sources */,
 				473488C40F991F2B00A1D78A /* IIWWW.m in Sources */,
-				473488E00F99DF8E00A1D78A /* FechSomeViewController.m in Sources */,
 				473488E10F99DF8E00A1D78A /* main.m in Sources */,
 				473488E20F99DF8E00A1D78A /* UIApplication-Network.m in Sources */,
 				47348B130F9A3CA300A1D78A /* IIFilter.m in Sources */,

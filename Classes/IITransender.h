@@ -48,7 +48,7 @@ typedef enum {
 	IITransenderFailedWithView = 3	
 } IITransenderFailedWith;
 
-@interface IITransender : NSObject //<AssetDownloadDelegate> 
+@interface IITransender : NSObject 
 {
     id <IITransenderDelegate> delegate; //the delegate to be notified of transends
 	NSMutableArray *memories; //holding our memories of transends
@@ -63,12 +63,13 @@ typedef enum {
 	NSString *transendsPath; //path to Transends
 	
 	BOOL direction; //indicator of moving left or right (up/down) in memories array
-	
+	NSMutableDictionary *wies; //holding all transended view controllers
 }
 
 @property (nonatomic, assign) id <IITransenderDelegate> delegate;
 @property (readwrite, retain) NSMutableArray *memories;
 @property (readwrite) BOOL direction;
+@property (readwrite, retain) NSMutableDictionary *wies;
 
 - (id)initWith:(NSString*)jsonMemories;
 - (id)init;
@@ -82,6 +83,7 @@ typedef enum {
 
 - (int)currentSpot;
 - (float)currentVibe;
+- (int)memoriesCount;
 
 - (void)spot;
 - (void)meditate;

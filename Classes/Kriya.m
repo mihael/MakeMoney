@@ -1,4 +1,5 @@
 #import "Kriya.h"
+#import "JSON.h"
 #import "MakeMoneyAppDelegate.h"
 
 @implementation Kriya
@@ -62,7 +63,39 @@
 }
 
 + (BOOL)xibExists:(NSString*)xibName {
-	( [[NSBundle mainBundle] pathForResource:xibName ofType:@"xib"] == nil) ? NO : YES;
+	return ( [[NSBundle mainBundle] pathForResource:xibName ofType:@"xib"] == nil) ? NO : YES;
+}
+
++ (void)writeWithPath:(NSString*)filepath data:(NSData*)data {
+	[[NSFileManager defaultManager] createFileAtPath:filepath contents:data attributes:nil];
+	DebugLog(@"Kriya# wrote: %@", filepath);
+}
+
++ (NSData*)loadWithPath:(NSString*)filepath {
+	NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:filepath];
+	NSData *ret = nil;
+	if (fh) {
+		ret = [fh readDataToEndOfFile];
+		[fh closeFile];
+	}
+	DebugLog(@"Kriya# loaded: %@", [ret description]);
+	return ret;
+}
+
++ (UIImage*)imageWithUrl:(NSString*)url 
+{
+	NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
+	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
+	path = [NSString stringWithFormat:@"%@/%@", path, [url lastPathComponent]];	
+	NSData* imgData = [Kriya loadWithPath:path];
+	if (!imgData) {
+		NSURL *nsurl = [NSURL URLWithString:url];
+		imgData = [NSData dataWithContentsOfURL:nsurl options:0 error:nil];
+		[Kriya writeWithPath:path data:imgData];
+	} 
+	if (imgData)
+		return [[[UIImage alloc] initWithData:imgData] autorelease];
+	return nil;
 }
 
 @end

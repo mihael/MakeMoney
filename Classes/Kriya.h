@@ -31,4 +31,10 @@
 + (NSDictionary*)stage;
 
 + (BOOL)xibExists:(NSString*)xibName;
+
+//a disk in iphone is working at the speed of light
++ (void)writeWithPath:(NSString*)filepath data:(NSData*)data;
++ (NSData*)loadWithPath:(NSString*)filepath;
++ (UIImage*)imageWithUrl:(NSString*)url; //feches image from web, caches to disk
+
 @end

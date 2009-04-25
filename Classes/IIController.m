@@ -7,55 +7,38 @@
 @implementation IIController
 @synthesize transender, options, notControls, behavior;
 
+//THIS IS CALLED ON EVERY VIEW TRANSEND - 
+//something like re-init, since transender can reuse views, they need to be re-initialized.
+- (void)functionalize 
+{
+	//write this in subclass
+}
+
+//code you implement here should start some functions or enable something after transending
 - (void)startFunctioning 
 {
 	//write this in subclass
 }
 
+//code you implement here should stop some functions or denable something 
 - (void)stopFunctioning 
 {
 	//write this in subclass
 }
 
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+//not needed to implement in subclass
 - (void)viewDidLoad {
     [super viewDidLoad];
+	[self functionalize];
 }
-*/
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
+//not needed to implement in subclass
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview
-    // Release anything that's not essential, such as cached data
-}
-
-
-- (void)dealloc {
-    [super dealloc];
+	// Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+	[self.transender meditate];
+	[self.notControls lightUp];
+	[[iAlert instance] alert:[NSString stringWithFormat:@"Received Memory Warning in %@", [self class]] withMessage:@"Good luck!"];
 }
 
 

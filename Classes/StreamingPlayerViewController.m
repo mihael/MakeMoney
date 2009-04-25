@@ -12,8 +12,6 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	[self playWithStreamURL:[self.options valueForKey:@"url"]];
-	[background setImage:[UIImage imageNamed:[self.options valueForKey:@"image"]]];
 }
 
 
@@ -69,6 +67,10 @@
 
 
 #pragma mark IIController overrides
+- (void)functionalize {
+	[self playWithStreamURL:[self.options valueForKey:@"url"]];
+	[background setImage:[UIImage imageNamed:[self.options valueForKey:@"image"]]];
+}
 - (void)stopFunctioning {
 	[streamer stop];
 	NSLog(@"StreamingPlayerViewController#stopFunctioning");

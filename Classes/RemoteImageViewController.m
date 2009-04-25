@@ -69,6 +69,9 @@
 }
 
 #pragma mark IIController overrides
+- (void)functionalize {
+}
+
 - (void)stopFunctioning {
 	if (image) 
 		[image release];

@@ -101,6 +101,8 @@
 	[[self.moonView layer] addAnimation:animation forKey:kMoonAnimationKey];
 }
 #pragma mark IIController overrides
+- (void)functionalize {
+}
 - (void)stopFunctioning {
 	NSLog(@"MoonTimeViewController#stopFunctioning");
 }

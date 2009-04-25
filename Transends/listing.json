@@ -1,5 +1,5 @@
 [
-{"name":"FecherView", "options":{"button_title":"+kokodajs", "url":"http://kitschmaster:bitbitbit888@www.koornk.com/api/recent/", "method":"post", "page":1, "limit":25, "filter":"koornk"}, "behavior":{"stop":"true"}},
-{"name":"FecherView", "options":{"button_title":"+25 pikchurs", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"1.5"}},
-{"name":"FecherView", "options":{"button_title":"+kitsch", "url":"http://kitschmaster.com/kiches.json", "method":"get", "page":1, "limit":10, "filter":"kitschmaster"}, "behavior":{"stop":"true"}}
+{"name":"FecherView", "options":{"reuse":"true", "button_title":"+3 pikchurs", "background":"0_mm_test1.jpg","url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":3, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"1.5"}},
+{"name":"FecherView", "options":{"button_title":"+25 kokodajs", "background":"main.png", "url":"http://kitschmaster:bitbitbit888@koornk.com/api/recent/", "method":"get", "page":1, "limit":25, "filter":"koornk"}, "behavior":{"stop":"true"}},
+{"name":"FecherView", "options":{"button_title":"+10 kitsch", "background":"radionula_screen.jpg", "url":"http://kitschmaster.com/kiches.json", "method":"get", "page":1, "limit":10, "filter":"kitschmaster"}, "behavior":{"stop":"true"}}
 ]

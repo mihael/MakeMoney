@@ -19,6 +19,8 @@
 @property (readwrite, assign) IITransender* transender;
 @property (readwrite, assign) IINotControls* notControls;
 
+- (void)functionalize;
 - (void)startFunctioning;
 - (void)stopFunctioning;
+
 @end

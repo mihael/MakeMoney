@@ -11,7 +11,7 @@
 #endif
 
 @implementation IITransender
-@synthesize memories, delegate, direction;
+@synthesize memories, delegate, direction, wies;
 
 #pragma mark Om Init
 // always connect with Mother Earth before acting
@@ -24,6 +24,7 @@
 	vibe = kIITransenderVibeLong; 
 	beat = nil;
 	transendsPath = [[[[NSBundle mainBundle] pathForResource:@"listing" ofType:@"json"] stringByDeletingLastPathComponent] retain];
+	wies = [[NSMutableDictionary alloc] initWithCapacity:1];
 }
 
 //for simple fast usage with 0_prefixed.jpg images, sounds and movies
@@ -59,6 +60,8 @@
 
 - (void)dealloc {
 	[transendsPath release];
+	[memories release];
+	[wies release];
     [super dealloc];
 }
 
@@ -76,7 +79,7 @@
 
 - (void)addMemorieWithString:(NSString*)s 
 {
-	DebugLog(@"IITransender#addMemorieWithString %@", s);
+	DebugLog(@"#addMemorieWithString %@", s);
 	if (s) {
 		[self.memories addObject:[s JSONValue]];
 		memoriesCount = [memories count];
@@ -85,14 +88,14 @@
 
 - (void)putMemories:(NSMutableArray*)m
 {
-	DebugLog(@"IITransender#putMemories at spot %i", memoriesSpot+1);
+	DebugLog(@"#putMemories at spot %i", memoriesSpot+1);
 	[self.memories insertObjects:m atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(memoriesSpot+1, [m count])]];
 	memoriesCount = [memories count]; //calculate size once on every listing change	
 }
 
 - (void)addMemoriesWithString:(NSString*)s 
 {
-	DebugLog(@"IITransender#addMemoriesWithString %@", s);
+	DebugLog(@"#addMemoriesWithString %@", s);
 	if (s) {
 		[self.memories addObjectsFromArray:[s JSONValue]];
 		memoriesCount = [memories count];
@@ -101,7 +104,7 @@
 
 - (void)insertMemorieWithString:(NSString*)m atSpot:(int)s
 {
-	DebugLog(@"IITransender#insertMemorieWithString %@", m);
+	DebugLog(@"#insertMemorieWithString %@", m);
 	if (s>-1) {
 		if (s>memoriesCount)			 
 			[self.memories addObject:[m JSONValue]];
@@ -149,95 +152,108 @@
 		[self computeSpot];
 
 		//transend with memoriesSpot
-		DebugLog(@"IITransender#invokeTransend %i vibe: %f", memoriesSpot, vibe);
-		
-		NSDictionary *behavior = [[memories objectAtIndex:memoriesSpot] objectForKey:@"behavior"];
-		NSDictionary *options = [[memories objectAtIndex:memoriesSpot] objectForKey:@"options"];
-		NSString *memoryName = [[memories objectAtIndex:memoriesSpot] valueForKey:@"name"];		
+		DebugLog(@"#invokeTransend %i vibe: %f", memoriesSpot, vibe);
+		NSDictionary *memory = [memories objectAtIndex:memoriesSpot];
+		NSDictionary *behavior = [memory objectForKey:@"behavior"];
+		NSDictionary *options = [memory objectForKey:@"options"];
+		NSString *memoryName = [memory valueForKey:@"name"];		
 		NSString *diskName = nil;
 		
 		if ([memoryName isEqualToString:@"remote_image"]){
-			//do nothing until II
-			
+
 			//get diskName from url
 			diskName = [[options valueForKey:@"url"] lastPathComponent];
 			
 			NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
 			[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
 			path = [NSString stringWithFormat:@"%@/%@", path, diskName];
+			
 			//if diskName exist?
 			if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+				
 				//transend with it
 				UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];
 				[delegate transendedWithImage:img andBehavior:behavior];
-				[img release];				
+				[img release];	
+				
 			} else {
+				
 				//feching could last longer than the vibe - lets meditate on this
 				[self meditate]; 
 				//notify we are feching
 				if ([delegate respondsToSelector:@selector(fechingTransend)])
 					[delegate fechingTransend];
-				DebugLog(@"IITransender#invokeTransend feching image url %@", [options valueForKey:@"url"]);
 				NSURL *url = [NSURL URLWithString:[options valueForKey:@"url"]];
-/*
-				UIImage* img = [[UIImage alloc] initWithURL:url];
+				NSData* imgData = [NSData dataWithContentsOfURL:url options:0 error:nil];
 				if ([delegate respondsToSelector:@selector(fechedTransend)])
 					[delegate fechedTransend];					
-				[delegate transendedWithImage:img andBehavior:behavior];
-				[img release];
-*/				
-				
-				ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:url] autorelease];
-				[request setDownloadDestinationPath:path];
-				[request start];
-				NSError *error = [request error];
-				if (!error) {
-					UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];					
-					if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-						DebugLog(@"IITransender#invokeTransend feched image %@ saved at %@", img, path);
-					}
-					DebugLog(@"IITransender#invokeTransend feched image %@ saved at %@ with response: %@", img, path, [request responseString]);
-					if ([delegate respondsToSelector:@selector(fechedTransend)])
-						[delegate fechedTransend];					
+				if (imgData) {
+					
+					//save for later
+					[Kriya writeWithPath:path data:imgData];
+					UIImage* img = [[UIImage alloc] initWithData:imgData];
 					[delegate transendedWithImage:img andBehavior:behavior];
-					[img release];	
+					[img release];
+					
 				} else {
-					DebugLog(@"IITransender#invokeTransend failed remote_image fech %@", [options valueForKey:@"url"]);
-					[self invokeTransendFailed:IITransenderFailedWithImage];
+					
+					[self invokeTransendFailed:IITransenderFailedWithImage];					
+				
 				}
 				[self transend]; //resume with transending
 			}
+			
 		} else if ([memoryName hasSuffix:@"View"]) {
+
 			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryName];
 			Class viewControllerClass = NSClassFromString(className);
-			id viewController = nil;
-					
-			if ([Kriya xibExists:memoryName] ) { //load from nib if there is one
-				viewController = [[[viewControllerClass alloc] initWithNibName:memoryName bundle:nil] autorelease];
-			} else { //just init, view controller should load it self programmatically
-				viewController = [[[viewControllerClass alloc] init]autorelease]; 
-			}		
-			
+			id viewController = [wies objectForKey:className];
+
+			//if not in wies then laod with or without nib
+			if (!viewController) {			
+				if ([Kriya xibExists:memoryName] ) { //load from nib if there is one
+					viewController = [[[viewControllerClass alloc] initWithNibName:memoryName bundle:nil] autorelease];
+				} else { //just init, view controller should load it self programmatically
+					viewController = [[[viewControllerClass alloc] init]autorelease]; 
+				}		
+			}
+				
 			//transend
 			if (viewController && [viewController respondsToSelector:@selector(startFunctioning)] && delegate) {
+
+				if ([viewController respondsToSelector:@selector(setTransender:)])
+					[viewController setTransender:self];
+
+				//send options to wiev, reusability
 				if (options) {
-					if ([viewController respondsToSelector:@selector(setTransender:)])
-						[viewController setTransender:self];
+					//set fresh options
 					if ([viewController respondsToSelector:@selector(setOptions:)])
 						[viewController setOptions:options];			
+					//record this wiev into wievs - reuse view object?
+					if ([options valueForKey:@"reuse"]) {
+						[wies setObject:viewController forKey:className];
+						DebugLog(@"#invokeTransend REUSING %@", className);
+					}
 				}
+				
+				//send behavior to wiev
 				if (behavior) {
 					if ([viewController respondsToSelector:@selector(setBehavior:)])
 						[viewController setBehavior:behavior];
 				}
-					
+
+				//functionalize
+				if ([viewController respondsToSelector:@selector(functionalize)])
+					[viewController functionalize];
+				
 				if ([delegate respondsToSelector:@selector(transendedWithView:andBehavior:)])
 					[delegate transendedWithView:viewController andBehavior:behavior];
+			
 			} else {
-				DebugLog(@"IITransender#invokeTransend not transended %i: %@", memoriesSpot, memoryName);
+				DebugLog(@"#invokeTransend not transended %i: %@", memoriesSpot, memoryName);
 				[self invokeTransendFailed:IITransenderFailedWithView];
 			}	
-		
+			
 		} else {
 			if ([memoryName hasPrefix:@"0"]) { //a simple 0-prefixed transend
 				diskName = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryName];
@@ -388,6 +404,12 @@
 - (float)currentVibe 
 {
 	return vibe;
+}
+
+//memories count
+- (int)memoriesCount 
+{
+	return memoriesCount;
 }
 
 //no beat, no transending
