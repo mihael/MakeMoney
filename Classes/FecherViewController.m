@@ -68,6 +68,10 @@
 		[self.background setImage:[UIImage imageNamed:[options valueForKey:@"background"]]];
 	if ([options valueForKey:@"button_title"])
 		[self.button setTitle:[options valueForKey:@"button_title"] forState:UIControlStateNormal];	
+//	button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+//	button.titleLabel.textAlignment = UITextAlignmentCenter;
+	button.lineBreakMode = UILineBreakModeWordWrap;
+	button.titleLabel.textAlignment = UITextAlignmentCenter;
 }
 
 - (void)stopFunctioning {

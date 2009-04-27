@@ -217,6 +217,11 @@ muvis
 {"name":"0_Movie_140.mov", "behavior":{"id":"23", "stop":"false", "background":"true"}},
 {"name":"0_Movie_141.mov", "behavior":{"id":"24", "stop":"false", "background":"true"}},
 
+radios
+
+{"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"screen.jpg"}, "behavior":{"stop":"true"}},
+
+
 flipside - currently unusable, since kitschmaster does not like dreamhost anymore
 
 {"name":"FlipsideView", "behavior":{"id":"26", "stop":"true"}}

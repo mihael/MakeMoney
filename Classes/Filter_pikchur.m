@@ -3,6 +3,7 @@
 //  MakeMoney
 //
 #import "Filter_pikchur.h"
+#import "JSON.h"
 
 @implementation Filter_pikchur
 

@@ -8,7 +8,7 @@
 @interface MessageViewController : IIController
 {
 	IBOutlet UIImageView* background;
-	IBOutlet UITextView* message;
+	IBOutlet UILabel* message;
 	IBOutlet UIActivityIndicatorView *indica;
 }
 @end

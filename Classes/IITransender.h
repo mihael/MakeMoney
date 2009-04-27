@@ -24,7 +24,7 @@
 #import "IIController.h"
 #import "IIFilter.h"
 #define kIITransenderVibeShort 0.05
-#define kIITransenderVibeLong 2.0
+#define kIITransenderVibeLong 10.0
 #define kIITransenderZero 0
 #define kIITransenderDirectionUp NO
 #define kIITransenderDirectionDown YES

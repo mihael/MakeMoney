@@ -7,8 +7,9 @@
 @implementation MessageViewController
 #pragma mark IIController overrides
 - (void)functionalize {
-	message.font = [UIFont fontWithName:@"Helvetica-Bold" size:23];
-
+	message.lineBreakMode = UILineBreakModeWordWrap;
+	message.numberOfLines = 0;
+	
 	if ([options valueForKey:@"background"])
 		[background setImage: [UIImage imageNamed:[options valueForKey:@"background"]]];//[[UIImage alloc] initWithContentsOfFile:[options valueForKey:@"image"]]];
 	if ([options valueForKey:@"message"])

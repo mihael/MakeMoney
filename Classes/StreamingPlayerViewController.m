@@ -9,12 +9,6 @@
 @implementation StreamingPlayerViewController
 @synthesize background;
 
-- (void)viewDidLoad
-{
-	[super viewDidLoad];
-}
-
-
 - (void)playWithStreamURL:(NSString*)url
 {
 	if (!streamer)
@@ -69,7 +63,7 @@
 #pragma mark IIController overrides
 - (void)functionalize {
 	[self playWithStreamURL:[self.options valueForKey:@"url"]];
-	[background setImage:[UIImage imageNamed:[self.options valueForKey:@"image"]]];
+	[background setImage:[UIImage imageNamed:[self.options valueForKey:@"background"]]];
 }
 - (void)stopFunctioning {
 	[streamer stop];

@@ -90,13 +90,13 @@
 						<reference key="IBUIDisabledTitleColor" ref="525491174"/>
 						<reference key="IBUISelectedTitleColor" ref="525491174"/>
 						<reference key="IBUINormalTitleColor" ref="525491174"/>
-						<object class="NSColor" key="IBUIHighlightedTitleShadowColor" id="802849502">
+						<object class="NSColor" key="IBUIHighlightedTitleShadowColor" id="312338680">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDAAA</bytes>
+							<bytes key="NSRGB">MC4yIDAuMiAwLjIAA</bytes>
 						</object>
-						<reference key="IBUIDisabledTitleShadowColor" ref="802849502"/>
-						<reference key="IBUISelectedTitleShadowColor" ref="802849502"/>
-						<reference key="IBUINormalTitleShadowColor" ref="802849502"/>
+						<reference key="IBUIDisabledTitleShadowColor" ref="312338680"/>
+						<reference key="IBUISelectedTitleShadowColor" ref="312338680"/>
+						<reference key="IBUINormalTitleShadowColor" ref="312338680"/>
 					</object>
 				</object>
 				<string key="NSFrameSize">{480, 320}</string>
