@@ -231,8 +231,11 @@ content - startups
 {"name":"0_mm_test1.jpg",  "behavior":{"id":"7.1", "stop":"true"}},
 
 views
-
 {"name":"MoonTimeView", "behavior":{"id":"3.2", "stop":"true"}},
+
+twitter
+{"name":"FecherView", "options":{"button_title":"kitschmaster's twitter", "background":"main.png","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":20, "params":"screen_name=kitschmaster", "filter":"twitter"}, "behavior":{"stop":"true"}},
+
 
 available effects : 
 0 - MoveIn, 

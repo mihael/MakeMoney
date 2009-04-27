@@ -68,7 +68,7 @@
 
 + (void)writeWithPath:(NSString*)filepath data:(NSData*)data {
 	[[NSFileManager defaultManager] createFileAtPath:filepath contents:data attributes:nil];
-	DebugLog(@"Kriya# wrote: %@", filepath);
+	//DebugLog(@"Kriya# wrote: %@", filepath);
 }
 
 + (NSData*)loadWithPath:(NSString*)filepath {
@@ -78,7 +78,7 @@
 		ret = [fh readDataToEndOfFile];
 		[fh closeFile];
 	}
-	DebugLog(@"Kriya# loaded: %@", [ret description]);
+	//DebugLog(@"Kriya# loaded: %@", [ret description]);
 	return ret;
 }
 

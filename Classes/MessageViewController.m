@@ -11,7 +11,7 @@
 	message.numberOfLines = 0;
 	
 	if ([options valueForKey:@"background"])
-		[background setImage: [UIImage imageNamed:[options valueForKey:@"background"]]];//[[UIImage alloc] initWithContentsOfFile:[options valueForKey:@"image"]]];
+		[background setImage: [transender imageNamed:[options valueForKey:@"background"]]];//[[UIImage alloc] initWithContentsOfFile:[options valueForKey:@"image"]]];
 	if ([options valueForKey:@"message"])
 		[message setText:[options valueForKey:@"message"]];		
 }
