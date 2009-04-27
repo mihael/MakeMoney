@@ -71,7 +71,7 @@
 //	button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
 //	button.titleLabel.textAlignment = UITextAlignmentCenter;
 	button.lineBreakMode = UILineBreakModeWordWrap;
-	button.titleLabel.textAlignment = UITextAlignmentCenter;
+	//button.titleLabel.textAlignment = UITextAlignmentCenter; //only SDK 3.0
 }
 
 - (void)stopFunctioning {
