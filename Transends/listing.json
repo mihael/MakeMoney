@@ -1,4 +1,6 @@
 [
+{"name":"FlipsideView", "behavior":{"stop":"true"}},
+
 {"name":"FecherView", "options":{"reuse":"true", "button_title":"Fech 10 pikchur.com images.", "background":"main.png","url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":10, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"2.5"}},
 {"name":"FecherView", "options":{"button_title":"Fech timeline from twitter.com/kitschmaster", "background":"main.png","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":20, "params":"screen_name=kitschmaster", "filter":"twitter"}, "behavior":{"stop":"true"}},
 {"name":"FecherView", "options":{"button_title":"Fech  from kitschmaster's twitter.com/home", "background":"main.png","url":"http://kitschmaster:bitbitbit888@twitter.com/statuses/friends_timeline.json", "method":"get", "page":1, "limit":25, "params":"", "filter":"twitter"}, "behavior":{"stop":"true"}},

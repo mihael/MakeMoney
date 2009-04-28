@@ -11,15 +11,9 @@
 
 @implementation FlipsideViewController
 
-- (void)didReceiveMemoryWarning {
-	[super didReceiveMemoryWarning]; 
-	[[iAlert instance] alert:@"Received Memory Warning" withMessage:@"Good luck!"];
-	DebugLog(@"Too many memories.");
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];     
+    //self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];     
 	networkQueue = [[ASINetworkQueue alloc] init];	
 	if ([[Reachability sharedReachability] internetConnectionStatus]==NotReachable) {
 		version.text = @"Please connect device to internet. Thanks.";

@@ -26,11 +26,14 @@
 	NSUInteger i, count = [kiches count];
 	for (i = 0; i < count; i++) {
 		NSDictionary* kich = [[kiches objectAtIndex:i] objectForKey:@"kich"];
+
 		NSArray* assets = [kich objectForKey:@"assets"];
 		NSUInteger i, count = [assets count];
 		for (i = 0; i < count; i++) {
 			NSDictionary * asset= [assets objectAtIndex:i];
-			[transends appendFormat:@"{\"name\":\"remote_image\", \"options\":{\"url\":\"%@\"}, %@},", [asset valueForKey:@"public_url"], behavior];
+			//[transends appendFormat:@"{\"name\":\"remote_image\", \"options\":{\"url\":\"%@\"}, %@},", [asset valueForKey:@"public_url"], behavior];
+			[transends appendFormat:@"{\"name\":\"MessageView\", \"options\":{\"message\":\"title\", \"data\":%@, \"background_url\":\"%@\"}, %@},", [kich JSONFragment], [asset valueForKey:@"public_url"], behavior];
+
 		}
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];

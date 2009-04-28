@@ -26,8 +26,10 @@
 	NSUInteger i, count = [kokodajsi count];
 	for (i = 0; i < count; i++) {
 		NSDictionary* koo = (NSDictionary*)[kokodajsi objectAtIndex:i];
+		DebugLog(@"%@", koo);
+
 		NSMutableString * status = [[[koo valueForKey:@"status"] mutableCopy] autorelease];
-		[status replaceOccurrencesOfString:@"\"" withString:@"'" options:0 range:NSMakeRange(0, [status length])];
+		//[status replaceOccurrencesOfString:@"\"" withString:@"'" options:0 range:NSMakeRange(0, [status length])];
 		//[transends appendFormat:@"{\"name\":\"MessageView\", \"options\":{\"message\":\"%@\", \"background\":\"main.png\"}, \"behavior\":{\"stop\":\"false\"}},", status];
 
 		//extract pairs
@@ -41,11 +43,11 @@
 				//add the same message for all images found in this status
 				//remove this image link from status so it does not bloat information
 				[status replaceOccurrencesOfString:urlpair.url withString:@"" options:0 range:NSMakeRange(0, [status length])];
-				[transends appendFormat:@"{\"name\":\"MessageView\", \"options\":{\"message\":\"%@\", \"background_url\":\"%@\"}, %@},", status, imageLink, behavior];
+				[transends appendFormat:@"{\"name\":\"MessageView\", \"options\":{\"message\":\"status\", \"data\":%@, \"icon_url\":\"%@\", \"background_url\":\"%@\"}, %@},", [koo JSONFragment], [koo valueForKey:@""], imageLink, behavior];
 			}
 		}
 		if (count==0) { //add just message if no image included in text
-			[transends appendFormat:@"{\"name\":\"MessageView\", \"options\":{\"message\":\"%@\", \"background\":\"main.png\"}, \"behavior\":{\"stop\":\"false\"}},", status];
+			[transends appendFormat:@"{\"name\":\"MessageView\", \"options\":{\"message\":\"status\", \"data\":%@, \"background\":\"main.png\"}, \"behavior\":{\"stop\":\"false\"}},", [koo JSONFragment], status];
 		}
 
 	}
