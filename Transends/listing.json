@@ -1,5 +1,5 @@
 [
-{"name":"MoonTimeView", "behavior":{"id":"3.1", "stop":"true"}},
+{"name":"FlipsideView", "behavior":{"stop":"true"}},
 {"name":"FecherView", "options":{"reuse":"true", "button_title":"Fech 10 pikchur.com images.", "background":"main.png","url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":10, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"2.5"}},
 {"name":"FecherView", "options":{"button_title":"kitschmaster's twitter.com/home", "background":"main.png","url":"http://kitschmaster:bitbitbit888@twitter.com/statuses/friends_timeline.json", "method":"get", "page":1, "limit":25, "params":"", "filter":"twitter"}, "behavior":{"stop":"true"}},
 {"name":"FecherView", "options":{"button_title":"kitschmaster's koornk.com/user/kitschmaster", "background":"main.png", "url":"http://kitschmaster:bitbitbit888@koornk.com/api/recent/", "method":"get", "page":1, "limit":25, "filter":"koornk"}, "behavior":{"stop":"true"}},

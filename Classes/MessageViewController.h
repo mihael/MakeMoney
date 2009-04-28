@@ -4,11 +4,12 @@
 //
 #import <UIKit/UIKit.h>
 #import "IIController.h"
-
+#import "LittleArrowView.h"
+@class LittleArrowView;
 @interface MessageViewController : IIController
 {
 	IBOutlet UIImageView* background;
-	IBOutlet UIImageView* icon;	
+	LittleArrowView* icon;	
 	IBOutlet UILabel* message;
 	IBOutlet UIActivityIndicatorView *indica;
 }

@@ -64,6 +64,7 @@
 		479C332B0F4D7A6600EBD9F3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479C332A0F4D7A6600EBD9F3 /* AudioToolbox.framework */; };
 		479C4F100FA61B37003DF1B2 /* StreamingPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */; };
 		479C4F250FA626AA003DF1B2 /* Filter_twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C4F240FA626AA003DF1B2 /* Filter_twitter.m */; };
+		479C505D0FA79480003DF1B2 /* LittleArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C505C0FA79480003DF1B2 /* LittleArrowView.m */; };
 		479CBF510F8E574400718563 /* 0_mm_test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 479CBF500F8E574400718563 /* 0_mm_test1.jpg */; };
 		479CC0F60F95172F00718563 /* MoonTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CC0F40F95172F00718563 /* MoonTimeViewController.m */; };
 		47AD8E5E0F7EC0EE001687AA /* 0_Movie716.mov in Resources */ = {isa = PBXBuildFile; fileRef = 47AD8E5D0F7EC0EE001687AA /* 0_Movie716.mov */; };
@@ -234,6 +235,8 @@
 		479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamingPlayerView.xib; sourceTree = "<group>"; };
 		479C4F230FA626AA003DF1B2 /* Filter_twitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_twitter.h; path = Classes/Filter_twitter.h; sourceTree = "<group>"; };
 		479C4F240FA626AA003DF1B2 /* Filter_twitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_twitter.m; path = Classes/Filter_twitter.m; sourceTree = "<group>"; };
+		479C505B0FA79480003DF1B2 /* LittleArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LittleArrowView.h; path = Classes/LittleArrowView.h; sourceTree = "<group>"; };
+		479C505C0FA79480003DF1B2 /* LittleArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LittleArrowView.m; path = Classes/LittleArrowView.m; sourceTree = "<group>"; };
 		479CBF500F8E574400718563 /* 0_mm_test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0_mm_test1.jpg; sourceTree = "<group>"; };
 		479CC0F30F95172F00718563 /* MoonTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoonTimeViewController.h; path = Classes/MoonTimeViewController.h; sourceTree = "<group>"; };
 		479CC0F40F95172F00718563 /* MoonTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoonTimeViewController.m; path = Classes/MoonTimeViewController.m; sourceTree = "<group>"; };
@@ -483,6 +486,8 @@
 		4734896D0F99E69D00A1D78A /* i */ = {
 			isa = PBXGroup;
 			children = (
+				479C505B0FA79480003DF1B2 /* LittleArrowView.h */,
+				479C505C0FA79480003DF1B2 /* LittleArrowView.m */,
 				470421810FA1E0F400D7DE30 /* URLPair.h */,
 				470421820FA1E0F400D7DE30 /* URLPair.m */,
 				470421830FA1E0F400D7DE30 /* URLUtils.h */,
@@ -829,6 +834,7 @@
 				470421850FA1E0F400D7DE30 /* URLPair.m in Sources */,
 				470421860FA1E0F400D7DE30 /* URLUtils.m in Sources */,
 				479C4F250FA626AA003DF1B2 /* Filter_twitter.m in Sources */,
+				479C505D0FA79480003DF1B2 /* LittleArrowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
