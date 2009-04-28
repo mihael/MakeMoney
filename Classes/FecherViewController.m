@@ -65,7 +65,7 @@
 	//[www setProgressDelegate:progress];
 	[www setDelegate:self];
 	if ([options valueForKey:@"background"])
-		[self.background setImage:[UIImage imageNamed:[options valueForKey:@"background"]]];
+		[self.background setImage:[transender imageNamed:[options valueForKey:@"background"]]];
 	if ([options valueForKey:@"button_title"])
 		[self.button setTitle:[options valueForKey:@"button_title"] forState:UIControlStateNormal];	
 //	button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;

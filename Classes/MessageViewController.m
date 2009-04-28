@@ -12,15 +12,8 @@
 	
 	if ([options valueForKey:@"background"])
 		[background setImage: [UIImage imageNamed:[options valueForKey:@"background"]]];//[[UIImage alloc] initWithContentsOfFile:[options valueForKey:@"image"]]];
-	NSString *msg = [options valueForKey:@"message"];
-	if (msg) {
-		NSDictionary *data = [options valueForKey:@"data"];
-		if (data) {
-			[message setText:[data valueForKey:msg]];		
-		} else {
-			[message setText:msg];
-		}
-	}
+	if ([options valueForKey:@"message"])
+		[message setText:[options valueForKey:@"message"]];		
 }
 
 - (void)stopFunctioning {

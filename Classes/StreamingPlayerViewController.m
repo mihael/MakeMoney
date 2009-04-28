@@ -63,7 +63,7 @@
 #pragma mark IIController overrides
 - (void)functionalize {
 	[self playWithStreamURL:[self.options valueForKey:@"url"]];
-	[background setImage:[UIImage imageNamed:[self.options valueForKey:@"background"]]];
+	[background setImage:[transender imageNamed:[self.options valueForKey:@"background"]]];
 }
 - (void)stopFunctioning {
 	[streamer stop];

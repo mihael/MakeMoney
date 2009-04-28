@@ -101,6 +101,9 @@ typedef enum {
 - (void)changeDirection;
 - (void)changeDirectionTo:(BOOL)d;
 
+- (NSString*)pathForImageNamed:(NSString*)imageName;
+- (UIImage*)imageNamed:(NSString*)imageName;
+
 #pragma mark AssetDownloadDelegate
 - (void)downloaded:(id)a;
 - (void)notDownloaded:(id)a;

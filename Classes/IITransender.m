@@ -434,4 +434,15 @@
 	[self setDirection:d];
 }
 
+//return path for image relative to this transender
+- (NSString*)pathForImageNamed:(NSString*)imageName 
+{
+	return [NSString stringWithFormat:@"%@/%@", transendsPath, imageName];
+}
+
+//return image for imageName 
+- (NSString*)imageNamed:(NSString*)imageName 
+{
+	return [UIImage imageWithContentsOfFile:[self pathForImageNamed:imageName]];
+}
 @end
