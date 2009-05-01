@@ -9,35 +9,34 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation IITransenderViewController
-@synthesize delegate, transender, transendController, feeling, listingName, notBehavior, notControls;
+@synthesize delegate, transender, transendController, feeling, notBehavior, notControls;
 
-- (id)initWithTransendsListing:(NSString*)aListingName andStage:(NSDictionary*)aStage{
+- (id)initWithTransenderProgram:(NSString*)program andStage:(NSDictionary*)aStage{
 	if (self = [super init]) {
-		[self setListingName:aListingName];
-		stage = aStage;
+		stage = [aStage mutableCopy];
 		transitions = [[NSArray arrayWithObjects:kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, kCATransitionFade, nil] retain];
 		transitionIndex = kTransition;
 		directions = [[NSArray arrayWithObjects:kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom, nil] retain];
 		horizontal = [[stage valueForKey:@"horizontal"] boolValue];
 		animated = [[stage valueForKey:@"animated"] boolValue];
+		NSString* program_json = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:program ofType:@"json"]];
+		transender = [[IITransender alloc] initWith:program_json];
+		[transender setDelegate:self];
+		DebugLog(@"IITransenderViewController# init program: %@ stage: %@", program, stage);
 	}
 	return self;
 }
 
 - (void)loadView {
-	transender = [[[IITransender alloc] initWith:[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:listingName ofType:@"json"]]] retain];
-	[transender setDelegate:self];
-
 	skrin = [[IITransenderView alloc] initWithFrame:CGRectMake(0, 0, 480, 320)];
 	skrin.delegate = self;
 	self.view = skrin;
 	
-	transendEmitter1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main.png"]];
+	transendEmitter1 = [[UIImageView alloc] initWithImage:[transender imageNamed:@"main.jpg"]];
 	[transendEmitter1 setContentMode:UIViewContentModeScaleAspectFit];
-	transendEmitter2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main.png"]];
+	transendEmitter2 = [[UIImageView alloc] initWithImage:[transender imageNamed:@"main.jpg"]];
 	[transendEmitter2 setContentMode:UIViewContentModeScaleAspectFit];
 
-	
 	useEmitter1 = YES;
 	[self.view addSubview:transendEmitter1];
 	
@@ -79,11 +78,11 @@
 	
 }
 
-- (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior {
-	DebugLog(@"#transendedWithView %@ andBehavior %@", transend, behavior);
+- (void)transendedWithView:(IIController*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior {
+	DebugLog(@"#transendedWithView %@ ions %@ ior %@", transend, ions, ior);
 	if (self.notControls && [transend respondsToSelector:@selector(setNotControls:)])
 		[transend setNotControls:self.notControls];//give the current controller access to notControls
-	[self setNotBehavior:behavior];
+	[self setNotBehavior:ior];
 	if (transendController) {  
 		if ([transendController respondsToSelector:@selector(stopFunctioning)]) {
 			[transendController stopFunctioning]; //stop the previous view if can
@@ -97,19 +96,19 @@
 	[self continueWithBehavior];
 }
 
-- (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior {
-	DebugLog(@"#transendedWithImage %@ andBehavior %@", transend, behavior);
-	[self setNotBehavior:behavior];
+- (void)transendedWithImage:(UIImage*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior  {
+	DebugLog(@"#transendedWithImage %@ ions %@ ior %@", transend, ions, ior);
+	[self setNotBehavior:ior];
 	[self transitImage:transend];
 	[self continueWithBehavior];
 }
 
-- (void)transendedWithMovie:(NSString*)transend andBehavior:(NSDictionary*)behavior {
-	DebugLog(@"#transendedWithMovie %@ andBehavior %@", transend, behavior);
-	[self setNotBehavior:behavior];
-	if ([[behavior valueForKey:@"background"] boolValue]) 
+- (void)transendedWithMovie:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior  {
+	DebugLog(@"#transendedWithMovie %@ ions %@ ior %@", transend, ions, ior);
+	[self setNotBehavior:ior];
+	if ([[ior valueForKey:@"background"] boolValue]) 
 	{
-		[self transitImage:[UIImage imageNamed:@"movie.png"]];
+		[self transitImage:[transender imageNamed:@"movie.png"]];
 	}
 	//stop transending
 	[transender meditate];
@@ -121,13 +120,13 @@
 	[self seeMovie:[NSURL fileURLWithPath:transend]];
 }
 
-- (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior {
-	DebugLog(@"#transendedWithMusic %@ andBehavior %@", transend, behavior);
-	[self setNotBehavior:behavior];
+- (void)transendedWithMusic:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior {
+	DebugLog(@"#transendedWithMusic %@ ions %@ ior %@", transend, ions, ior);
+	[self setNotBehavior:ior];
 	//stop transending
 	[transender meditate];
 	
-	if ([[behavior valueForKey:@"background"] boolValue]) 
+	if ([[ior valueForKey:@"background"] boolValue]) 
 	{
 		[self transitImage:[UIImage imageNamed:@"music.png"]];
 	}
@@ -300,7 +299,7 @@
 			}
 			
 			//be twice as fast as the transender vibe
-			NSTimeInterval duration = [transender currentVibe]/2;//kTransendAnimationSpeed;					
+			NSTimeInterval duration = [transender currentVibe]/3;//kTransendAnimationSpeed;					
 			if (replaceMe) {
 				[skrin replaceSubview:replaceMe withSubview:wiev transition:transition direction:dir duration:duration];
 			}

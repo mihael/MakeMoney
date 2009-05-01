@@ -7,5 +7,4 @@
 @interface Filter_twitter : IIFilter {
 
 }
-- (NSString*)pikchurUrlFromID:(NSString*)pikID withSize:(NSString*)sizeStr;
 @end

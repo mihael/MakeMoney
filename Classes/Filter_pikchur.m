@@ -21,14 +21,14 @@
 {
 	NSArray* piks = [[information JSONValue] objectForKey:@"Piks"];
 	
-	NSString* behavior = @"\"behavior\":{\"stop\":\"false\"}";
+	NSString* behavior = @"\"ior\":{\"stop\":\"false\"}";
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	
 	NSUInteger i, count = [piks count];
 	for (i = 0; i < count; i++) {
 		NSDictionary * pik= [piks objectAtIndex:i];
 		
-		[transends appendFormat:@"{\"name\":\"remote_image\", \"options\":{\"url\":\"%@\"}, %@},", [self pikchurUrlFromID:[[pik valueForKey:@"Pik"] valueForKey:@"id"]  withSize:@"l"], behavior];
+		[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@\"}, %@},", [self pikchurUrlFromID:[[pik valueForKey:@"Pik"] valueForKey:@"id"]  withSize:@"m"], behavior];
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];
 }

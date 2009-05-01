@@ -42,5 +42,5 @@
 - (void)formFech;
 - (void)postFech;
 - (void)getFech;
-
+- (void)invokeRequest:(id)request;
 @end

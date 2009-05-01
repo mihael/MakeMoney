@@ -1,52 +1,53 @@
 [
-{"name":"FlipsideView", "behavior":{"stop":"true"}},
-{"name":"FecherView", "options":{"reuse":"true", "button_title":"Fech 10 pikchur.com images.", "background":"main.png","url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":10, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "behavior":{"stop":"true", "revibe":"2.5"}},
-{"name":"FecherView", "options":{"button_title":"kitschmaster's twitter.com/home", "background":"main.png","url":"http://kitschmaster:bitbitbit888@twitter.com/statuses/friends_timeline.json", "method":"get", "page":1, "limit":25, "params":"", "filter":"twitter"}, "behavior":{"stop":"true"}},
-{"name":"FecherView", "options":{"button_title":"kitschmaster's koornk.com/user/kitschmaster", "background":"main.png", "url":"http://kitschmaster:bitbitbit888@koornk.com/api/recent/", "method":"get", "page":1, "limit":25, "filter":"koornk"}, "behavior":{"stop":"true"}},
-{"name":"FecherView", "options":{"button_title":"Fech kitschmaster.com/kiches", "background":"main.png", "url":"http://kitschmaster.com/kiches.json", "method":"get", "page":1, "limit":25, "filter":"kitschmaster"}, "behavior":{"stop":"true"}}
+{"ii":"FecherView", "ions":{"button_title":"aplusk's public twitterings", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":38, "params":"screen_name=aplusk", "filter":"twitter"}, "ior":{"stop":"true"}},
+{"ii":"FlipsideView", "ior":{"stop":"true"}},
 
-{"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "background":"radionula_screen.jpg"}, "behavior":{"stop":"true"}},
+{"ii":"FecherView", "ions":{"button_title":"kitschmaster's twitter.com/home", "background":"main.png","url":"http://kitschmaster:bitbitbit888@twitter.com/statuses/friends_timeline.json", "method":"get", "page":1, "limit":25, "params":"", "filter":"twitter"}, "ior":{"stop":"true"}},
+{"ii":"FecherView", "ions":{"button_title":"kitschmaster's koornk.com/user/kitschmaster", "background":"main.png", "url":"http://kitschmaster:bitbitbit888@koornk.com/api/recent/", "method":"get", "page":1, "limit":25, "filter":"koornk"}, "ior":{"stop":"true"}},
+{"ii":"FecherView", "ions":{"button_title":"Fech kitschmaster.com/kiches", "background":"main.png", "url":"http://kitschmaster.com/kiches.json", "method":"get", "page":1, "limit":25, "filter":"kitschmaster"}, "ior":{"stop":"true"}}
 
-{"name":"0_1.jpg",  "behavior":{"stop":"false"}},
-{"name":"0_2.jpg",  "behavior":{"stop":"false"}},
-{"name":"0_3.jpg",  "behavior":{"stop":"false", "revibe":1.38}},
-{"name":"MessageView", "options":{"reuse":"true", "message":"Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!", "background":"main.png"}, "behavior":{"stop":"false", "effect":3}},
-{"name":"000000005.caf",  "behavior":{"stop":"true"}},
+{"ii":"StreamingPlayerView", "ions":{"url":"http://91.185.196.3:8020/", "background":"radionula_screen.jpg"}, "ior":{"stop":"true"}},
 
-{"name":"0000000004.jpg", "behavior":{"stop":false}}, 
-{"name":"MessageView", "options":{"message":"This is a Personal Mobile Money Making Application, built with MakeMoney framework.", "background":"main.png"}, "behavior":{"stop":"false", "effect":3}},
-{"name":"0000000006.jpg", "behavior":{"stop":false}}, 
-{"name":"MessageView", "options":{"message":"Look the background changes...", "background":"main.png"}, "behavior":{"stop":"false", "effect":3}},
-{"name":"0000000010.jpg", "behavior":{"stop":false}}, 
+{"ii":"0_1.jpg",  "ior":{"stop":"false"}},
+{"ii":"0_2.jpg",  "ior":{"stop":"false"}},
+{"ii":"0_3.jpg",  "ior":{"stop":"false", "revibe":1.38}},
+{"ii":"MessageView", "ions":{"reuse":"true", "message":"Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"000000005.caf",  "ior":{"stop":"true"}},
 
-{"name":"MessageView", "options":{"message":"Everything here is adjustable.", "background":"main.png"}, "behavior":{"stop":"false", "effect":3, "revibe":2.0}},
-{"name":"MessageView", "options":{"message":"The transitions beetween images.", "background":"0000000048.jpg"}, "behavior":{"stop":"false", "effect":3}},
-{"name":"MessageView", "options":{"message":"This text.", "background":"0000000056.jpg"}, "behavior":{"stop":"false", "effect":3}},
-{"name":"MessageView", "options":{"message":"Trying to melt the screen with a heat gun.", "background":"0000000058.jpg"}, "behavior":{"stop":"false", "effect":3}},
-{"name":"MessageView", "options":{"message":"Life always feels good...", "background":"main.png"}, "behavior":{"stop":"false", "effect":2}},
+{"ii":"0000000004.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This is a Personal Mobile Money Making Application, built with MakeMoney framework.", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"0000000006.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"Look the background changes...", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"0000000010.jpg", "ior":{"stop":false}}, 
 
-{"name":"0000000076.jpg", "behavior":{"stop":false}}, 
-{"name":"0000000090.jpg", "behavior":{"stop":false}}, 
-{"name":"0000000095.jpg", "behavior":{"stop":false}}, 
-{"name":"MessageView", "options":{"message":"This should be your message...", "background":"main.png"}, "behavior":{"stop":"false", "effect":1}},
+{"ii":"MessageView", "ions":{"message":"Everything here is adjustable.", "background":"main.png"}, "ior":{"stop":"false", "effect":3, "revibe":2.0}},
+{"ii":"MessageView", "ions":{"message":"The transitions beetween images.", "background":"0000000048.jpg"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"MessageView", "ions":{"message":"This text.", "background":"0000000056.jpg"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"MessageView", "ions":{"message":"Trying to melt the screen with a heat gun.", "background":"0000000058.jpg"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"MessageView", "ions":{"message":"Life always feels good...", "background":"main.png"}, "ior":{"stop":"false", "effect":2}},
 
-{"name":"0000000107.jpg", "behavior":{"stop":false}}, 
-{"name":"0000000123.jpg", "behavior":{"stop":false}}, 
-{"name":"0000000133.jpg", "behavior":{"stop":false}}, 
-{"name":"MessageView", "options":{"message":"This Application was made with the MakeMoney framework...", "background":"main.png"}, "behavior":{"stop":"false", "effect":3}},
+{"ii":"0000000076.jpg", "ior":{"stop":false}}, 
+{"ii":"0000000090.jpg", "ior":{"stop":false}}, 
+{"ii":"0000000095.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This should be your message...", "background":"main.png"}, "ior":{"stop":"false", "effect":1}},
 
-{"name":"0000000135.jpg", "behavior":{"stop":false}}, 
-{"name":"MessageView", "options":{"message":"This could be your Application.", "background":"main.png"}, "behavior":{"stop":"false", "effect":1}},
-{"name":"0000000200.jpg", "behavior":{"stop":false}}, 
-{"name":"MessageView", "options":{"message":"This could be your Words.", "background":"main.png"}, "behavior":{"stop":"false", "effect":1}},
-{"name":"0000000107.jpg", "behavior":{"stop":false}}, 
-{"name":"MessageView", "options":{"message":"You could be your moneymaking Application.", "background":"main.png"}, "behavior":{"stop":"false"}},
+{"ii":"0000000107.jpg", "ior":{"stop":false}}, 
+{"ii":"0000000123.jpg", "ior":{"stop":false}}, 
+{"ii":"0000000133.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This Application was made with the MakeMoney framework...", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
 
-{"name":"MessageView", "options":{"message":"All you need to do is provide content.", "background":"main.png"}, "behavior":{"stop":"false"}},
-{"name":"MessageView", "options":{"message":"Content can be any content anywhere.", "background":"main.png"}, "behavior":{"stop":"false"}},
+{"ii":"0000000135.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This could be your Application.", "background":"main.png"}, "ior":{"stop":"false", "effect":1}},
+{"ii":"0000000200.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This could be your Words.", "background":"main.png"}, "ior":{"stop":"false", "effect":1}},
+{"ii":"0000000107.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"You could be your moneymaking Application.", "background":"main.png"}, "ior":{"stop":"false"}},
+
+{"ii":"MessageView", "ions":{"message":"All you need to do is provide content.", "background":"main.png"}, "ior":{"stop":"false"}},
+{"ii":"MessageView", "ions":{"message":"Content can be any content anywhere.", "background":"main.png"}, "ior":{"stop":"false"}},
 
 
-{"name":"MessageView", "options":{"message":"Let us now stream some music.", "background":"main.png"}, "behavior":{"stop":"false"}},
-{"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "background":"radionula_screen.jpg"}, "behavior":{"stop":"true"}}
+{"ii":"MessageView", "ions":{"message":"Let us now stream some music.", "background":"main.png"}, "ior":{"stop":"false"}},
+{"ii":"StreamingPlayerView", "ions":{"url":"http://91.185.196.3:8020/", "background":"radionula_screen.jpg"}, "ior":{"stop":"true"}}
 
 ]

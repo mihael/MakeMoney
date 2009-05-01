@@ -33,14 +33,14 @@
 		IITransenderView *skrin;
     	IINotControls *notControls;
 		IITransender *transender;
+
 		IIController *transendController;
+	
 		IIMusic *music;
 		NSTimer *magic;
 		BOOL feeling;	
 		UIImageView *transendEmitter1;
-		UIImageView *transendEmitter2;
-		
-		NSString* listingName;
+		UIImageView *transendEmitter2;		
 		BOOL useEmitter1;
 
 		NSMutableDictionary *notBehavior;
@@ -61,22 +61,24 @@
 @property (readwrite, assign) IINotControls *notControls;
 @property (readwrite, retain) UIViewController *transendController;
 @property (readwrite) BOOL feeling;
-@property (readwrite, retain) NSString* listingName;
 @property (readwrite, retain) NSDictionary *notBehavior;
 
-- (id)initWithTransendsListing:(NSString*)aListingName andStage:(NSDictionary*)aStageName;
+- (id)initWithTransenderProgram:(NSString*)program andStage:(NSDictionary*)aStageName;
 
 //transender delegate
-- (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior;
-- (void)transendedWithMovie:(NSString*)transend andBehavior:(NSDictionary*)behavior;
-- (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior;
-- (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior;
 - (void)transendedAll:(id)sender;
 - (void)fechingTransend;
 - (void)fechedTransend;
+- (void)continueWithBehavior;
+
+- (void)transendedWithView:(IIController*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
+- (void)transendedWithImage:(UIImage*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
+- (void)transendedWithMovie:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
+- (void)transendedWithMusic:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
+- (void)transendedWithMessage:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
+
 //transender delegate
 
-- (void)continueWithBehavior;
 
 - (void)transitionViewDidStart:(IITransenderView *)view;
 - (void)transitionViewDidFinish:(IITransenderView *)view;

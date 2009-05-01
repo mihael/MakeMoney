@@ -43,9 +43,9 @@ static MakeMoneyAppDelegate* app = nil;
 // Invoked immediately before the application terminates.
 - (void)applicationWillTerminate:(UIApplication *)application {
 	// Store current spot, so it is used the next time the app is launched
-    [[NSUserDefaults standardUserDefaults] setInteger:[[[rootViewController mainViewController] transender] currentSpot]
+    [[NSUserDefaults standardUserDefaults] setInteger:[[[rootViewController transenderViewController] transender] currentSpot]
 											   forKey:SPOT];
-	NSLog(@"Saved spot: %i", [[[rootViewController mainViewController] transender] currentSpot]);
+	NSLog(@"Saved spot: %i", [[[rootViewController transenderViewController] transender] currentSpot]);
 }
 
 - (void)dealloc {

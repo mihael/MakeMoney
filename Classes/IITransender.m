@@ -2,7 +2,6 @@
 //  IITranscender.m
 //  MakeMoney
 //
-#import <UIKit/UIKit.h>
 #import "IITransender.h"
 #import "JSON.h"
 #import "ASIHTTPRequest.h"
@@ -20,10 +19,10 @@
 	direction = kIITransenderDirectionUp;
 	memoriesSpot = kIITransenderZero - 1; //if direction is down should be + 1 here
 	memoriesCount = 0;
-	nextMemorySpot = kIITransenderZero;
 	vibe = kIITransenderVibeLong; 
 	beat = nil;
-	transendsPath = [[[[NSBundle mainBundle] pathForResource:@"listing" ofType:@"json"] stringByDeletingLastPathComponent] retain];
+	transendsPath = [[[[NSBundle mainBundle] pathForResource:@"program" ofType:@"json"] stringByDeletingLastPathComponent]retain];
+	DebugLog(@"OM OM OM PATH %@", transendsPath);
 	wies = [[NSMutableDictionary alloc] initWithCapacity:1];
 }
 
@@ -58,6 +57,11 @@
 	return self;
 }
 
+- (void)saveMemoriesAndSpotToASettingInIphone
+{
+  //TODO
+}
+
 - (void)dealloc {
 	[transendsPath release];
 	[memories release];
@@ -73,8 +77,12 @@
 
 - (void)rememberMemories:(NSMutableArray*)m 
 {
-	[self setMemories:m];
-	memoriesCount = [memories count]; //calculate size once on every listing change	
+	if (m) {
+		[self setMemories:m];
+		memoriesCount = [memories count]; //calculate size once on every listing change	
+    }else {
+		[self invokeTransendFailed:IITransenderFailedWithProgram];
+	}
 }
 
 - (void)addMemorieWithString:(NSString*)s 
@@ -83,14 +91,20 @@
 	if (s) {
 		[self.memories addObject:[s JSONValue]];
 		memoriesCount = [memories count];
+	} else {
+		[self invokeTransendFailed:IITransenderFailedWithProgram];
 	}
 }
 
 - (void)putMemories:(NSMutableArray*)m
 {
+	if (m) {
 	DebugLog(@"#putMemories at spot %i", memoriesSpot+1);
 	[self.memories insertObjects:m atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(memoriesSpot+1, [m count])]];
 	memoriesCount = [memories count]; //calculate size once on every listing change	
+	} else {
+		[self invokeTransendFailed:IITransenderFailedWithProgram];
+	}
 }
 
 - (void)addMemoriesWithString:(NSString*)s 
@@ -99,6 +113,8 @@
 	if (s) {
 		[self.memories addObjectsFromArray:[s JSONValue]];
 		memoriesCount = [memories count];
+	} else {
+		[self invokeTransendFailed:IITransenderFailedWithProgram];
 	}
 }
 
@@ -119,7 +135,7 @@
 - (void)setTransendenceVibe:(float)v
 {
 	if (v>kIITransenderVibeShort && v<kIITransenderVibeLong) {
-		vibe = v;
+		vibe = v; 
 		//DebugLog(@"IITransender#setTransendenceVibe %f", vibe);
 	}
 }
@@ -152,67 +168,60 @@
 		[self computeSpot];
 
 		//transend with memoriesSpot
-		DebugLog(@"#invokeTransend %i vibe: %f", memoriesSpot, vibe);
-		NSDictionary *memory = [memories objectAtIndex:memoriesSpot];
-		NSDictionary *behavior = [memory objectForKey:@"behavior"];
-		NSDictionary *options = [memory objectForKey:@"options"];
-		NSString *memoryName = [memory valueForKey:@"name"];		
-		NSString *diskName = nil;
-		
-		if ([memoryName isEqualToString:@"remote_image"]){
+		DebugLog(@"#invokeTransend timer:%@ spot:%i vibe: %f", timer, memoriesSpot, vibe);
 
-			//get diskName from url
-			diskName = [[options valueForKey:@"url"] lastPathComponent];
+		//read ii
+		NSDictionary *memory = [memories objectAtIndex:memoriesSpot];
+		NSDictionary *behavior = [memory objectForKey:@"ior"];
+		NSDictionary *options = [memory objectForKey:@"ions"];
+		NSString *memoryII = [memory valueForKey:@"ii"];		
+		NSString *diskII = nil;
+		
+		if ([memoryII isEqualToString:@"message"]) {
+			UIImage* background = nil;
+			//fech background_url icon_url if not yet
+
+			//feching could last longer than the vibe - lets meditate on this
+			[self meditate]; 
+			NSDate *fechTime = [NSDate date];  //record point in time
+			//notify we are feching
+			if ([delegate respondsToSelector:@selector(fechingTransend)])
+				[delegate fechingTransend];
 			
-			NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-			[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
-			path = [NSString stringWithFormat:@"%@/%@", path, diskName];
+			if ([options valueForKey:@"icon_url"])
+				[Kriya imageWithUrl:[options valueForKey:@"background_url"]];
+			if ([options valueForKey:@"background_url"])
+				background = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
+			if (!background && [options valueForKey:@"background"])
+				background = [self imageNamed:[options valueForKey:@"background"]];
+			if (!background)
+				background = [self imageNamed:@"main.jpg"];
 			
-			//if diskName exist?
-			if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-				
-				//transend with it
-				UIImage* img = [[UIImage alloc] initWithContentsOfFile:path];
-				[delegate transendedWithImage:img andBehavior:behavior];
-				[img release];	
-				
-			} else {
-				
-				//feching could last longer than the vibe - lets meditate on this
-				[self meditate]; 
-				//notify we are feching
-				if ([delegate respondsToSelector:@selector(fechingTransend)])
-					[delegate fechingTransend];
-				NSURL *url = [NSURL URLWithString:[options valueForKey:@"url"]];
-				NSData* imgData = [NSData dataWithContentsOfURL:url options:0 error:nil];
-				if ([delegate respondsToSelector:@selector(fechedTransend)])
-					[delegate fechedTransend];					
-				if (imgData) {
-					
-					//save for later
-					[Kriya writeWithPath:path data:imgData];
-					UIImage* img = [[UIImage alloc] initWithData:imgData];
-					[delegate transendedWithImage:img andBehavior:behavior];
-					[img release];
-					
-				} else {
-					
-					[self invokeTransendFailed:IITransenderFailedWithImage];					
-				
-				}
+			NSTimeInterval elapsedTime = [fechTime timeIntervalSinceNow];  
+			DebugLog(@"Fech time: %f", -elapsedTime);              
+			
+//			float vibeDiff = [vibe + elapsedTime];
+//			if (vibeDiff<)
+//TODO calculate time diff and act
+			
+			//transend
+			if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) 
+			{
+				[delegate transendedWithImage:background withIons:options withIor:behavior];
+			
 				[self transend]; //resume with transending
 			}
 			
-		} else if ([memoryName hasSuffix:@"View"]) {
+		} else if ([memoryII hasSuffix:@"View"]) {
 
-			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryName];
+			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryII];
 			Class viewControllerClass = NSClassFromString(className);
 			id viewController = [wies objectForKey:className];
 
 			//if not in wies then laod with or without nib
 			if (!viewController) {			
-				if ([Kriya xibExists:memoryName] ) { //load from nib if there is one
-					viewController = [[[viewControllerClass alloc] initWithNibName:memoryName bundle:nil] autorelease];
+				if ([Kriya xibExists:memoryII] ) { //load from nib if there is one
+					viewController = [[[viewControllerClass alloc] initWithNibName:memoryII bundle:nil] autorelease];
 				} else { //just init, view controller should load it self programmatically
 					viewController = [[[viewControllerClass alloc] init]autorelease]; 
 				}		
@@ -246,38 +255,38 @@
 				if ([viewController respondsToSelector:@selector(functionalize)])
 					[viewController functionalize];
 				
-				if ([delegate respondsToSelector:@selector(transendedWithView:andBehavior:)])
-					[delegate transendedWithView:viewController andBehavior:behavior];
+				if ([delegate respondsToSelector:@selector(transendedWithView:withIons:withIor:)])
+					[delegate transendedWithView:viewController withIons:options withIor:behavior];
 			
 			} else {
-				DebugLog(@"#invokeTransend not transended %i: %@", memoriesSpot, memoryName);
+				DebugLog(@"#invokeTransend not transended %i: %@", memoriesSpot, memoryII);
 				[self invokeTransendFailed:IITransenderFailedWithView];
 			}	
 			
 		} else {
-			if ([memoryName hasPrefix:@"0"]) { //a simple 0-prefixed transend
-				diskName = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryName];
-			} else if ([memoryName hasPrefix:@"/"]) { //a direct path
-				diskName = memoryName;
+			if ([memoryII hasPrefix:@"0"]) { //a simple 0-prefixed transend
+				diskII = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryII];
+			} else if ([memoryII hasPrefix:@"/"]) { //a direct path
+				diskII = memoryII;
 			}
 		
-			if ([[memoryName pathExtension] isEqualToString:@"jpg"]) {
-				if ([delegate respondsToSelector:@selector(transendedWithImage:andBehavior:)]) {
-					UIImage* img = [[UIImage alloc] initWithContentsOfFile:diskName];
-					[delegate transendedWithImage:img andBehavior:behavior];
+			if ([[memoryII pathExtension] isEqualToString:@"jpg"]) {
+				if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) {
+					UIImage* img = [[UIImage alloc] initWithContentsOfFile:diskII];
+					[delegate transendedWithImage:img withIons:options withIor:behavior];
 					[img release];
 				}					
 			}
 
 			//can not play sounds and movies in simulator, so do not transend
 			#if !(TARGET_IPHONE_SIMULATOR)
-			if ([[memoryName pathExtension] isEqualToString:@"mov"]) {
-				if ([delegate respondsToSelector:@selector(transendedWithMovie:andBehavior:)])
-					[delegate transendedWithMovie:diskName andBehavior:behavior];
+			if ([[memoryII pathExtension] isEqualToString:@"mov"]) {
+				if ([delegate respondsToSelector:@selector(transendedWithMovie:withIons:withIor:)])
+					[delegate transendedWithMovie:diskII withIons:options withIor:behavior];
 			}
-			if ([[memoryName pathExtension] isEqualToString:@"caf"]) {
-				if ([delegate respondsToSelector:@selector(transendedWithMusic:andBehavior:)])
-					[delegate transendedWithMusic:diskName andBehavior:behavior];
+			if ([[memoryII pathExtension] isEqualToString:@"caf"]) {
+				if ([delegate respondsToSelector:@selector(transendedWithMusic:withIons:withIor:)])
+					[delegate transendedWithMusic:diskII withIons:options withIor:behavior];
 			}		
 			#endif
 		}
@@ -294,21 +303,26 @@
 //failed with some? happens... although it is not shit. it is manuever, so you can grow.
 - (void)invokeTransendFailed:(IITransenderFailedWith)failed 
 {
+	NSDictionary* b = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"true", @"3", nil] forKeys:[NSArray arrayWithObjects:@"stop", @"effect", nil]];
 	switch (failed) {
+		case IITransenderFailedWithProgram:			
+//			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
+			DebugLog(@"Failed with program.");
+			break;
 		case IITransenderFailedWithImage:			
-			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
 		case IITransenderFailedWithMovie:			
-			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
-		case IITransenderFailedWithSound:			
-			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+		case IITransenderFailedWithMusic:			
+			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
 		case IITransenderFailedWithView:			
-			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
 		default:
-			[delegate transendedWithImage:[UIImage imageNamed:@"not_image.jpg"] andBehavior:nil];
+			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
 	}
 }
@@ -441,7 +455,7 @@
 }
 
 //return image for imageName 
-- (NSString*)imageNamed:(NSString*)imageName 
+- (UIImage*)imageNamed:(NSString*)imageName 
 {
 	return [UIImage imageWithContentsOfFile:[self pathForImageNamed:imageName]];
 }

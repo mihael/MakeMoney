@@ -236,13 +236,6 @@ views
 twitter
 {"name":"FecherView", "options":{"button_title":"kitschmaster's twitter", "background":"main.png","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":20, "params":"screen_name=kitschmaster", "filter":"twitter"}, "behavior":{"stop":"true"}},
 
-
-available effects : 
-0 - MoveIn, 
-1 - Push, 
-2 - Reveal, 
-3 - Fade
-
 ###################LISTING EXAMPLES########################
 {"name":"MessageView", "options":{"message":"No &copy; rights here.", "image":"main.png"}, "behavior":{"stop":"false", "effect":0}},
 {"name":"MessageView", "options":{"message":"Thanks.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
@@ -310,7 +303,36 @@ But since then I learned. Breaking stuff means pain, suffering, but if you can f
 Sometimes I go ahead and brake many code-parts, just to suffer the next days in debugging my little fractalic nature.
 
 I to me, seem to be, the creator of the. But behold stranger, do not take a breath without thinking your way is the best way.
-Since when is coding humans been allowed? I know when I am.
+Since when is coding humans been allowed? I know when I am, what I am. 
+
+/*
+ * IITransender programming.
+ * You do all programming for IITransender through a json formatted string with conventioned structure and naming.
+ * The program.json is a simple array, yet very cool, since each entry represents one transend = one screen = one inline Application(view),
+ *
+ * Structure looks like this:
+ * [ "ii":"(string_transend_fractal)", "ions":{(hash_transend_informations)}, "ior":{(hash_transend_behavior)} ]
+ *
+ * transend_fractal can be:
+ * "ii":"#{ACustom}View" - if you want to transend a whole view controller named #{ACustom}ViewController, subclassed from IIController
+ * "ii":"message" - if you want to display a message with or without local/remote background and/or icon, useful for almost any information to meditate upon
+ * "ii":"filename.mov" - if you just want to play a movie
+ * "ii":"filename.caf" - if you want to play a <30 second sound
+ * "ii":"filename.jpg" - if you want to transend an image
+ * 
+ * transend_informations can hold any value, but these are reserved, since they get feched magicaly:
+ * "url":"(valid_url)" - used in many transend_fractals as base url to act upon
+ * "background":"(cached_path_or_name)" - a cached image or resource image
+ * "background_url":"(url_path)" - url to be downloaded from to get the background - this always stops transending
+ * "icon":"(cached_path_or_name)" - a cached small image or resource small image
+ * 
+ * transend_behavior is used only for defining behavior of transend
+ * "effect":(integer) - can have values: 0 - MoveIn, 1 - Push, 2 - Reveal, 3 - Fade (using numbers to decrease size of req typing drastically)
+ * "stop":(true|false) - if true, calls [transender meditate], the one white button lightens up, time stops, meditate upon the transend
+ * "..." - all other values you can implement if you need
+ *
+ */
+
 
 
 

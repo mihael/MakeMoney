@@ -47,7 +47,7 @@
 	int page = [[options valueForKey:@"page"] intValue] + 1;	
 	NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:options];
 	[repaged_options setValue:[NSString stringWithFormat:@"%i",page] forKey:@"page"];	
-	[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"name\":\"FecherView\", \"options\":%@, \"behavior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];
+	[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"ii\":\"FecherView\", \"ions\":%@, \"ior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];
 
 	//insert current fecher - so we have previous also
 	//[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"name\":\"FecherView\", \"options\":%@, \"behavior\":%@}", [options JSONFragment], [behavior JSONFragment]]];
@@ -59,27 +59,29 @@
 
 #pragma mark IIController
 - (void)functionalize {
-	DebugLog(@"#functionalize with %@", options);
-	[www release];
+	//if (www)
+		[www release];
 	www = [[IIWWW alloc] initWithOptions:options];
 	//[www setProgressDelegate:progress];
 	[www setDelegate:self];
 	if ([options valueForKey:@"background"])
-		[self.background setImage:[transender imageNamed:[options valueForKey:@"background"]]];
+		[self.background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];
 	if ([options valueForKey:@"button_title"])
 		[self.button setTitle:[options valueForKey:@"button_title"] forState:UIControlStateNormal];	
-//	button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
-//	button.titleLabel.textAlignment = UITextAlignmentCenter;
-	button.lineBreakMode = UILineBreakModeWordWrap;
-	//button.titleLabel.textAlignment = UITextAlignmentCenter; //only SDK 3.0
+//only SDK 3.0
+	button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+	button.titleLabel.textAlignment = UITextAlignmentCenter;
+
+//SDK <3.0
+//	button.lineBreakMode = UILineBreakModeWordWrap;
 }
 
 - (void)stopFunctioning {
-	DebugLog(@"#stopFunctioning");
+	//DebugLog(@"#stopFunctioning");
 }
 
 - (void)startFunctioning {
-	DebugLog(@"#startFunctioning");
+	//DebugLog(@"#startFunctioning");
 	[button setHidden:NO];
 }
 

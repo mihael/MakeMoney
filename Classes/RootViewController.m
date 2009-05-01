@@ -3,7 +3,6 @@
 //  MakeMoney
 //
 #import "RootViewController.h"
-#import "FlipsideViewController.h"
 #import "IITransenderViewController.h"
 #import "IINotControls.h"
 #import "iAlert.h"
@@ -11,7 +10,7 @@
 
 @implementation RootViewController
 
-@synthesize notControls, flipsideNavigationBar, mainViewController, flipsideViewController;
+@synthesize notControls, transenderViewController;
 
 - (void)loadView {
 	UIView *primaryView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
@@ -41,74 +40,25 @@
 	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
 	[self.view addSubview:notControls];
 	
-	IITransenderViewController *viewController = [[IITransenderViewController alloc] initWithTransendsListing:@"listing" andStage:[[MakeMoneyAppDelegate app] stage]];
-    self.mainViewController = viewController;
-    [viewController release];    
-	[notControls setDelegate:self.mainViewController];
-	[self.mainViewController setNotControls:notControls];
-	[self.mainViewController setDelegate:self];
+	self.transenderViewController = [[IITransenderViewController alloc] initWithTransenderProgram:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"program"] andStage:[[MakeMoneyAppDelegate app] stage]];
+	[notControls setDelegate:transenderViewController];
+	[transenderViewController setNotControls:notControls];
+	[transenderViewController setDelegate:self];
 
-    [self.view insertSubview:mainViewController.view belowSubview:notControls];
+    [self.view insertSubview:transenderViewController.view belowSubview:notControls];
 
-	[[self.mainViewController transender] reVibe:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"vibe"] floatValue]];
+	[[transenderViewController transender] reVibe:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"vibe"] floatValue]];
 	
+	//TODO - support save_current_program - reload program from cache and remember spot if any
 	if ([[[[MakeMoneyAppDelegate app] stage] valueForKey:@"save_current_spot"] boolValue]) {
-		[[self.mainViewController transender] rememberSpot];
+		[[transenderViewController transender] rememberSpot];
 	} else {
-		[[self.mainViewController transender] transend];
+		[[transenderViewController transender] transend];
 	}
-
 }
 
-
-- (void)loadFlipsideViewController {
-    FlipsideViewController *viewController = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
-    self.flipsideViewController = viewController;
-    [viewController release];
-}
-
-//this not currently used
-- (void)toggleView {    
-	if (flipsideViewController == nil) {
-        [self loadFlipsideViewController];
-    }
-
-	flipsideViewController.view.frame = [Kriya appViewRect]; //for rotation
-	mainViewController.view.frame = [Kriya appViewRect]; //for rotation
-	
-    UIView *mainView = mainViewController.view;
-    UIView *flipsideView = flipsideViewController.view;
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:1];
-    [UIView setAnimationTransition:([mainView superview] ? UIViewAnimationTransitionFlipFromRight : UIViewAnimationTransitionFlipFromLeft) forView:self.view cache:YES];
-    
-    if ([mainView superview] != nil) {
-        [flipsideViewController viewWillAppear:YES];
-        [mainViewController viewWillDisappear:YES];
-        [mainView removeFromSuperview];
-        //[button removeFromSuperview];
-        [self.view addSubview:flipsideView];
-        //[self.view insertSubview:button aboveSubview:flipsideView];
-		//[button setHidden:NO];
-		[mainViewController viewDidDisappear:YES];
-        [flipsideViewController viewDidAppear:YES];
-    } else {
-        [mainViewController viewWillAppear:YES];
-        [flipsideViewController viewWillDisappear:YES];
-        [flipsideView removeFromSuperview];
-        [self.view addSubview:mainView];
-        //[self.view insertSubview:button aboveSubview:mainViewController.view];
-		//[mainViewController hideNotControls];
-        [flipsideViewController viewDidDisappear:YES];
-        [mainViewController viewDidAppear:YES];
-    }
-    [UIView commitAnimations];
-}
-
-
+//makemoney always runs in widescreen
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	//widescreen
     return ( (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -120,8 +70,7 @@
 
 - (void)dealloc {
 	[notControls release];
-    [mainViewController release];
-    [flipsideViewController release];
+    [transenderViewController release];
     [super dealloc];
 }
 
@@ -133,6 +82,7 @@
 	[notControls lightUp];
 }
 
+#pragma mark experiments
 - (void)rotateView270:(UIView*)w
 {
 	CGAffineTransform transform = w.transform;
@@ -150,6 +100,8 @@
 
 - (void)moviesStart {
 /*
+  TODO put the movie under the notControls view
+ 
     NSArray *windows = [[UIApplication sharedApplication] windows];
     // Locate the movie player window
     UIWindow *moviePlayerWindow = [windows objectAtIndex:1];

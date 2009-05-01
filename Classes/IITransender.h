@@ -1,5 +1,5 @@
 //
-//  IITranscender.h
+//  IITransender.h
 //  MakeMoney
 //
 /*
@@ -18,9 +18,7 @@
  * Or simply subclasses of IIController (a UIViewController subclass).
  * The only limitation are notControls which stay above Your application view. 
  *
- */
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+*/
 #import "IIController.h"
 #import "IIFilter.h"
 #define kIITransenderVibeShort 0.05
@@ -32,20 +30,22 @@
 @class IIController;
 
 @protocol IITransenderDelegate <NSObject>
-- (void)transendedWithView:(IIController*)transend andBehavior:(NSDictionary*)behavior;
-- (void)transendedWithMovie:(NSString*)transend andBehavior:(NSDictionary*)behavior;
-- (void)transendedWithMusic:(NSString*)transend andBehavior:(NSDictionary*)behavior;
-- (void)transendedWithImage:(UIImage*)transend andBehavior:(NSDictionary*)behavior;
+- (void)transendedWithView:(IIController*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
+- (void)transendedWithImage:(UIImage*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
+- (void)transendedWithMovie:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
+- (void)transendedWithMusic:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
 - (void)transendedAll:(id)sender;
 - (void)fechingTransend;
 - (void)fechedTransend;
 @end
 
 typedef enum {
-	IITransenderFailedWithImage = 0,
-	IITransenderFailedWithMovie = 1,
-	IITransenderFailedWithSound = 2,
-	IITransenderFailedWithView = 3	
+	IITransenderFailedWithView = 0,	
+	IITransenderFailedWithImage = 1,
+	IITransenderFailedWithMovie = 2,
+	IITransenderFailedWithMusic = 3,
+	IITransenderFailedWithMessage = 4,
+	IITransenderFailedWithProgram = 5
 } IITransenderFailedWith;
 
 @interface IITransender : NSObject 
@@ -53,17 +53,15 @@ typedef enum {
     id <IITransenderDelegate> delegate; //the delegate to be notified of transends
 	NSMutableArray *memories; //holding our memories of transends
 	int memoriesSpot; //exact position of last transended memorie
-	int memoriesCount; //cached memories count - [memories count] should be recalled only once when listing changes
+	int memoriesCount; //cached memories count - [memories count] should be recalled only once when program changes
 	
 	float vibe; //time beetwen transends - vibration freq.
-	NSTimer *beat;	//the beat generator and transend invoker
+	NSTimer *beat;	//the beat generator - default transend invoker
 	
-	int nextMemorySpot;
-	
-	NSString *transendsPath; //path to Transends
+	NSString *transendsPath; //path to in bundle Transends content directory
 	
 	BOOL direction; //indicator of moving left or right (up/down) in memories array
-	NSMutableDictionary *wies; //holding all transended view controllers
+	NSMutableDictionary *wies; //holding all transended controllers
 }
 
 @property (nonatomic, assign) id <IITransenderDelegate> delegate;

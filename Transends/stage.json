@@ -1,6 +1,8 @@
 {
+"program":"program",
 "horizontal":"true",
 "animated":"true",
-"vibe":"1.83",
-"save_current_spot":"false"
+"vibe":"3.83",
+"save_current_spot":"false",
+"save_current_program":"false"
 }

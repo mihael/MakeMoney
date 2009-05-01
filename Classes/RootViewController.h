@@ -2,24 +2,19 @@
 //  RootViewController.h
 //  MakeMoney
 //
-#import <UIKit/UIKit.h>
 #import "IINotControls.h"
+#import "IIController.h"
 #import "IITransenderViewController.h"
 
-@class FlipsideViewController;
 @class IINotControls;
+@class IIController;
+@class IITransenderViewController;
 
 @interface RootViewController : UIViewController <IITransenderViewControllerDelegate> {
 	IINotControls *notControls;
-    UIViewController *mainViewController;
-    UIViewController *flipsideViewController;
-    UINavigationBar *flipsideNavigationBar;
+    IITransenderViewController *transenderViewController;
+    IIController *flipsideViewController;
 }
-
 @property (nonatomic, retain) IINotControls *notControls;
-@property (nonatomic, retain) UIViewController *mainViewController;
-@property (nonatomic, retain) UINavigationBar *flipsideNavigationBar;
-@property (nonatomic, retain) UIViewController *flipsideViewController;
-
-- (void)toggleView;
+@property (nonatomic, retain) IITransenderViewController *transenderViewController;
 @end

@@ -21,7 +21,7 @@
 {
 	NSLog(@"FILTERING %@", information);
 	NSArray* kiches = [information JSONValue];
-	NSString* behavior = @"\"behavior\":{\"stop\":\"false\"}";
+	NSString* behavior = @"\"ior\":{\"stop\":\"false\"}";
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	NSUInteger i, count = [kiches count];
 	for (i = 0; i < count; i++) {
@@ -32,7 +32,7 @@
 		for (i = 0; i < count; i++) {
 			NSDictionary * asset= [assets objectAtIndex:i];
 			//[transends appendFormat:@"{\"name\":\"remote_image\", \"options\":{\"url\":\"%@\"}, %@},", [asset valueForKey:@"public_url"], behavior];
-			[transends appendFormat:@"{\"name\":\"MessageView\", \"options\":{\"message\":\"title\", \"data\":%@, \"background_url\":\"%@\"}, %@},", [kich JSONFragment], [asset valueForKey:@"public_url"], behavior];
+			[transends appendFormat:@"{\"ii\":\"MessageView\", \"options\":{\"message\":\"title\", \"data\":%@, \"background_url\":\"%@\"}, %@},", [kich JSONFragment], [asset valueForKey:@"public_url"], behavior];
 
 		}
 	}

@@ -12,6 +12,10 @@
 #define kTwitPicFormat @"http://twitpic.com/"
 
 @implementation IIFilter
+- (id)requestWith:(NSDictionary*)options
+{
+	return nil; //todo if ever needed, could be used to fech several urls based on options maybe or other magic
+}
 
 - (NSString*)filter:(NSString*)information
 {
@@ -46,14 +50,14 @@
 			pair.url = token;
 			[urlpairs addObject:pair];
 			[pair release];
-		} else if ([utils isIDToken:token]) {
+		} /*else if ([utils isIDToken:token]) {
 			URLPair *pair = [[URLPair alloc] init];
 			pair.name = [token substringFromIndex:1];
 			pair.text = [NSString stringWithFormat:@"%@", pair.name];
 			pair.url = [pair name]; //TODO insert supported something url... brings you directly to somebody, not.
 			[urlpairs addObject:pair];
 			[pair release];
-        }
+        }*/
     }
 	return urlpairs;
 }
@@ -98,12 +102,14 @@
 			if ([utils isURLToken:token]) {
 				//is token the image if it ends with "-#{size}.jpg"
 				if ([token hasSuffix:[NSString stringWithFormat:@"-full.jpg"]]) {
-					return [NSString stringWithFormat:@"%@-%@.jpg", [token substringToIndex:[token length]-8], sizeStr];
+					return [NSString stringWithFormat:@"%@%@.jpg", [token substringToIndex:[token length]-8], sizeStr];
+				} else if ([token hasPrefix:@"http://s3.amazonaws.com/twitpic/"] ) {
+					return token;
 				}
 			} 
 		}
 	} 
-	return twitPicUrl;
+	return twitPicUrl; //return original, if code failed
 }
 
 @end
