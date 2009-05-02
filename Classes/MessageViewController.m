@@ -7,6 +7,11 @@
 
 @implementation MessageViewController
 #pragma mark IIController overrides
++ (NSString*)transendFormat
+{
+	return @"{\"ii\":\"MessageView\", \"ions\":{\"message\":\"%@\", \"data\":%@, \"icon_url\":\"%@\", \"background_url\":\"%@\"}, %@},";
+}
+
 - (void)functionalize {
 	message.lineBreakMode = UILineBreakModeWordWrap;
 	message.numberOfLines = 0;

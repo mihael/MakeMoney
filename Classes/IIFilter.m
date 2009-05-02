@@ -50,14 +50,14 @@
 			pair.url = token;
 			[urlpairs addObject:pair];
 			[pair release];
-		} /*else if ([utils isIDToken:token]) {
+		} else if ([utils isIDToken:token]) {
 			URLPair *pair = [[URLPair alloc] init];
 			pair.name = [token substringFromIndex:1];
 			pair.text = [NSString stringWithFormat:@"%@", pair.name];
 			pair.url = [pair name]; //TODO insert supported something url... brings you directly to somebody, not.
 			[urlpairs addObject:pair];
 			[pair release];
-        }*/
+        }
     }
 	return urlpairs;
 }

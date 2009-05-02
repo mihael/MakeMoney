@@ -26,6 +26,15 @@
 	//write this in subclass
 }
 
+//return transend format - or how to call this IIControler subclass from program.json 
+//this is useful for inserts in filtering
++ (NSString*)transendFormat
+{
+	//implement this in subclass, else you get this
+	return @"{\"ii\":\"message\", \"ions\":{\"message\":\"%@\", \"background\":\"%@\"}, %@},";
+}
+
+
 //not needed to implement in subclass
 - (void)viewDidLoad {
     [super viewDidLoad];

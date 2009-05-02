@@ -23,4 +23,5 @@
 - (void)startFunctioning;
 - (void)stopFunctioning;
 
++ (NSString*)transendFormat;
 @end

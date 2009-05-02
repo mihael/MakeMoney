@@ -32,6 +32,8 @@
 - (void)notFeched:(NSString*)err
 {
 	DebugLog(@"FecherViewController#notFeched %@ : %@", [self.options valueForKey:@"url"], err);
+	[indica stopAnimating];
+	[button setHidden:NO];
 	
 }
 
