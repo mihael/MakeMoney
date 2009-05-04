@@ -14,6 +14,7 @@
 - (NSString*)pageParamName;
 - (NSString*)limitParamName;
 - (NSMutableArray*)extractURLPairsFrom:(NSString*)information;
+- (NSMutableArray*)extractFrom:(NSString*)information withPrefix:(NSString*)pre andSuffix:(NSString*)suf;
 
 //supported assets and userid links
 + (NSString*)assetUrl:(NSString*)url;

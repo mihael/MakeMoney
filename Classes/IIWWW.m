@@ -18,7 +18,7 @@
 		options = o;
 		filter = nil;
 		filterName = [options valueForKey:@"filter"];
-		if (filterName) {
+		if (filterName) { //program says we want to filter information after receive
 			NSString *filterClassName = [NSString stringWithFormat:@"Filter_%@", filterName];
 			Class filterClass = NSClassFromString(filterClassName);
 			if (filterClass) {
@@ -27,9 +27,12 @@
 		}
 		
 		[self setUrl:[NSURL URLWithString:[options valueForKey:@"url"]]];
-		page = [[options valueForKey:@"page"] intValue];
-		limit = [[options valueForKey:@"limit"] intValue];
-		params = [options valueForKey:@"params"];
+		if ([options valueForKey:@"page"])
+			page = [[options valueForKey:@"page"] intValue];
+		if ([options valueForKey:@"limit"])
+			limit = [[options valueForKey:@"limit"] intValue];
+		if ([options valueForKey:@"params"])
+			params = [options valueForKey:@"params"];
 
 		server = [[[ASINetworkQueue alloc] init] retain];	
 		[server setRequestDidFinishSelector:@selector(fechFinished:)];

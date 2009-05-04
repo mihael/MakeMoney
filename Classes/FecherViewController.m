@@ -45,15 +45,20 @@
 	//inventing remote coding here - listing.json is a new way to program iphone and ipod apps
 	//[self.transender rememberMemories:listing];
 	[self.transender putMemories:listing];
-	//prepare next page fecher to add last in listing - so we have next page
-	int page = [[options valueForKey:@"page"] intValue] + 1;	
-	NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:options];
-	[repaged_options setValue:[NSString stringWithFormat:@"%i",page] forKey:@"page"];	
-	[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"ii\":\"FecherView\", \"ions\":%@, \"ior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];
-
-	//insert current fecher - so we have previous also
-	//[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"name\":\"FecherView\", \"options\":%@, \"behavior\":%@}", [options JSONFragment], [behavior JSONFragment]]];
-
+	
+	if ([options valueForKey:@"page"]) { //program says we want automatic repage
+		NSUInteger page = [[options valueForKey:@"page"] intValue];
+		int page_plus = [[options valueForKey:@"page_plus"] intValue];
+		if (page_plus<=0) {
+			page_plus = 1;
+		}
+		NSUInteger nextPage = page + page_plus;	
+		NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:options];
+		[repaged_options setValue:[NSString stringWithFormat:@"%i",nextPage] forKey:@"page"];	
+		
+		[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"ii\":\"FecherView\", \"ions\":%@, \"ior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];
+	}
+	
 	if (self.notControls)
 		[self.notControls lightDown];
 	[self.transender transendNow];

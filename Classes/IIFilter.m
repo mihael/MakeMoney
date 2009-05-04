@@ -62,6 +62,34 @@
 	return urlpairs;
 }
 
+//this scans for something like image urls... very basic and simple, no xml parsing shit
+//whatever you need and can be put beetwen prefix and suffix 
+// example <img src="$$$"> -> pre => <img src=" suf => "
+- (NSMutableArray*)extractFrom:(NSString*)information withPrefix:(NSString*)pre andSuffix:(NSString*)suf
+{
+	NSUInteger info_length = [information length];
+	NSUInteger pre_length = [pre length];
+	NSMutableArray *urls = [NSMutableArray arrayWithCapacity:1];
+	NSScanner *scanner = [NSScanner scannerWithString:information];
+	NSString *url;
+	BOOL foundOne;
+	while (![scanner isAtEnd]) {
+		url = nil;
+		foundOne = NO;
+		[scanner scanUpToString:pre intoString:nil]; //move to next occurence of pre
+		if ([scanner scanLocation] + pre_length < info_length)
+		{
+			[scanner setScanLocation:[scanner scanLocation]+[pre length]];//move to the end of prefix		
+			foundOne = [scanner scanUpToString:suf intoString:&url]; //fech data up to next occurence of suf
+			if (foundOne && url) {
+				[urls addObject:url];
+				NSLog(@"EXTRACTED %@", url);
+			}
+		}
+	}
+	return urls;
+}
+
 //$$$supported sharing experiences are returned magically, others are nil$$$
 + (NSString*)assetUrl:(NSString*)url 
 {

@@ -63,7 +63,7 @@
 				NSUInteger x, uc = [user_ids count];
 				for (x = 0; x < uc; x++) {
 					NSString* user_id = [user_ids objectAtIndex:x];
-					[transends appendFormat:@"{\"ii\":\"FecherView\", \"ions\":{\"button_title\":\"fech %@\", \"background\":\"main.png\", \"url\":\"http://twitter.com/statuses/user_timeline.json\", \"method\":\"get\", \"page\":1, \"params\":\"screen_name=%@\", \"filter\":\"twitter\"}, %@},", user_id, user_id, k_ior_stop];
+					[transends appendFormat:@"{\"ii\":\"FecherView\", \"ions\":{\"button_title\":\"Fech %@?\", \"background\":\"main.png\", \"url\":\"http://twitter.com/statuses/user_timeline.json\", \"method\":\"get\", \"page\":1, \"params\":\"screen_name=%@\", \"filter\":\"twitter\"}, %@},", user_id, user_id, k_ior_stop];
 				}
 			}
 

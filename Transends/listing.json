@@ -1,4 +1,6 @@
 [
+{"ii":"FecherView", "ions":{"button_title":"fech", "background":"main.png", "url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":13, "params":"screen_name=pater_simonasic", "filter":"twitter"}, "ior":{"stop":"true"}},
+
 {"ii":"FecherView", "ions":{"button_title":"aplusk's public twitterings", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":38, "params":"screen_name=aplusk", "filter":"twitter"}, "ior":{"stop":"true"}},
 {"ii":"FlipsideView", "ior":{"stop":"true"}},
 

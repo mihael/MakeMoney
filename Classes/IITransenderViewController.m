@@ -83,7 +83,7 @@
 	if (self.notControls && [transend respondsToSelector:@selector(setNotControls:)])
 		[transend setNotControls:self.notControls];//give the current controller access to notControls
 	[self setNotBehavior:ior];
-	if (transendController) {  
+	if (![ior valueForKey:@"non_stop_functioning"]) {  //do not stop functioning
 		if ([transendController respondsToSelector:@selector(stopFunctioning)]) {
 			[transendController stopFunctioning]; //stop the previous view if can
 		} 

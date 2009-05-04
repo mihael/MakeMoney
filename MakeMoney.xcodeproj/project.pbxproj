@@ -20,6 +20,7 @@
 		470421860FA1E0F400D7DE30 /* URLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 470421840FA1E0F400D7DE30 /* URLUtils.m */; };
 		472643210F56A9530097D30A /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 472643200F56A9530097D30A /* listing.json */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
+		472EA6740FAEEF0000B3F18B /* Filter_hai_galery.m in Sources */ = {isa = PBXBuildFile; fileRef = 472EA6720FAEEF0000B3F18B /* Filter_hai_galery.m */; };
 		473488C40F991F2B00A1D78A /* IIWWW.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488C30F991F2B00A1D78A /* IIWWW.m */; };
 		473488E10F99DF8E00A1D78A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488DD0F99DF8E00A1D78A /* main.m */; };
 		473488E20F99DF8E00A1D78A /* UIApplication-Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488DF0F99DF8E00A1D78A /* UIApplication-Network.m */; };
@@ -72,6 +73,7 @@
 		479C55310FAAFE92003DF1B2 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C552B0FAAFE92003DF1B2 /* SBJsonBase.m */; };
 		479C55320FAAFE92003DF1B2 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C552C0FAAFE92003DF1B2 /* SBJsonParser.m */; };
 		479C55330FAAFE92003DF1B2 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C552D0FAAFE92003DF1B2 /* SBJsonWriter.m */; };
+		479C56A20FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 479C56A10FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.m */; };
 		479CBF510F8E574400718563 /* 0_mm_test1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 479CBF500F8E574400718563 /* 0_mm_test1.jpg */; };
 		479CC0F60F95172F00718563 /* MoonTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CC0F40F95172F00718563 /* MoonTimeViewController.m */; };
 		47AD8E5E0F7EC0EE001687AA /* 0_Movie716.mov in Resources */ = {isa = PBXBuildFile; fileRef = 47AD8E5D0F7EC0EE001687AA /* 0_Movie716.mov */; };
@@ -180,6 +182,8 @@
 		470421840FA1E0F400D7DE30 /* URLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLUtils.m; path = Classes/URLUtils.m; sourceTree = "<group>"; };
 		472643200F56A9530097D30A /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = listing.json; path = Transends/listing.json; sourceTree = SOURCE_ROOT; };
 		472965420F4859C10053F946 /* Hajlov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hajlov; sourceTree = "<group>"; };
+		472EA6720FAEEF0000B3F18B /* Filter_hai_galery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_hai_galery.m; path = Classes/Filter_hai_galery.m; sourceTree = "<group>"; };
+		472EA6730FAEEF0000B3F18B /* Filter_hai_galery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_hai_galery.h; path = Classes/Filter_hai_galery.h; sourceTree = "<group>"; };
 		473488C20F991F2B00A1D78A /* IIWWW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIWWW.h; path = Classes/IIWWW.h; sourceTree = "<group>"; };
 		473488C30F991F2B00A1D78A /* IIWWW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIWWW.m; path = Classes/IIWWW.m; sourceTree = "<group>"; };
 		473488DD0F99DF8E00A1D78A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -254,6 +258,8 @@
 		479C552B0FAAFE92003DF1B2 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonBase.m; path = Classes/SBJsonBase.m; sourceTree = "<group>"; };
 		479C552C0FAAFE92003DF1B2 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonParser.m; path = Classes/SBJsonParser.m; sourceTree = "<group>"; };
 		479C552D0FAAFE92003DF1B2 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = Classes/SBJsonWriter.m; sourceTree = "<group>"; };
+		479C56A00FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_kitschmaster_brickbox.h; path = Classes/Filter_kitschmaster_brickbox.h; sourceTree = "<group>"; };
+		479C56A10FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_kitschmaster_brickbox.m; path = Classes/Filter_kitschmaster_brickbox.m; sourceTree = "<group>"; };
 		479CBF500F8E574400718563 /* 0_mm_test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0_mm_test1.jpg; sourceTree = "<group>"; };
 		479CC0F30F95172F00718563 /* MoonTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoonTimeViewController.h; path = Classes/MoonTimeViewController.h; sourceTree = "<group>"; };
 		479CC0F40F95172F00718563 /* MoonTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoonTimeViewController.m; path = Classes/MoonTimeViewController.m; sourceTree = "<group>"; };
@@ -459,6 +465,10 @@
 		4704209D0FA132F500D7DE30 /* IIFilters */ = {
 			isa = PBXGroup;
 			children = (
+				472EA6720FAEEF0000B3F18B /* Filter_hai_galery.m */,
+				472EA6730FAEEF0000B3F18B /* Filter_hai_galery.h */,
+				479C56A00FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.h */,
+				479C56A10FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.m */,
 				479C4F230FA626AA003DF1B2 /* Filter_twitter.h */,
 				479C4F240FA626AA003DF1B2 /* Filter_twitter.m */,
 				47C7E2460F9CBB4100789864 /* Filter_kitschmaster.h */,
@@ -869,6 +879,8 @@
 				479C55310FAAFE92003DF1B2 /* SBJsonBase.m in Sources */,
 				479C55320FAAFE92003DF1B2 /* SBJsonParser.m in Sources */,
 				479C55330FAAFE92003DF1B2 /* SBJsonWriter.m in Sources */,
+				479C56A20FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.m in Sources */,
+				472EA6740FAEEF0000B3F18B /* Filter_hai_galery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
