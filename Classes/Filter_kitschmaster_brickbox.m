@@ -17,7 +17,7 @@
 	return @"limit";
 }
 
-- (NSString*)filter:(NSString*)information
+- (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
 	NSLog(@"FILTERING %@", information);
 	NSArray* kiches = [information JSONValue];

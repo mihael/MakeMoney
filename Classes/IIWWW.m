@@ -27,8 +27,10 @@
 		}
 		
 		[self setUrl:[NSURL URLWithString:[options valueForKey:@"url"]]];
+		page = 1;
 		if ([options valueForKey:@"page"])
 			page = [[options valueForKey:@"page"] intValue];
+		limit = 38;
 		if ([options valueForKey:@"limit"])
 			limit = [[options valueForKey:@"limit"] intValue];
 		if ([options valueForKey:@"params"])
@@ -37,6 +39,7 @@
 		server = [[[ASINetworkQueue alloc] init] retain];	
 		[server setRequestDidFinishSelector:@selector(fechFinished:)];
 		[server setRequestDidFailSelector:@selector(fechFailed:)];
+
 		[server setDelegate:self];
 	}
 	return self;
@@ -46,6 +49,28 @@
 	[filter release];
 	[server release];
     [super dealloc];
+}
+//********************************************************************
+- (void)fechUpdateWithParams:(NSDictionary*)p
+{
+	//post to upload url
+	if ([options valueForKey:@"update_url"]) {
+		NSMutableString* prams = [NSMutableString stringWithString:@""];
+		if (p) {			
+			for (id param in p) {
+				[prams appendFormat:@"%@=%@&", param, [p valueForKey:param]];
+			}
+			if ([prams hasSuffix:@"&"])
+				prams = [prams substringToIndex:[prams length]-1];
+		}
+		NSURL *posturl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@&%@", [options valueForKey:@"update_url"], prams, [options valueForKey:@"update_params"]]];
+
+		ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:posturl] autorelease];
+		[request setRequestMethod:@"POST"];
+		[server cancelAllOperations];
+		[server addOperation:request];
+		[server go];		
+	}
 }
 
 - (void)fech 
@@ -85,6 +110,7 @@
 	[server go];
 }
 
+//TODO rewrite this posting thing, so it becomes more inteligent about the params
 - (void)postFech 
 {
 	NSURL *posturl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@=%@&%@=%@&%@", [options valueForKey:@"url"], [filter pageParamName], [options valueForKey:@"page"], [filter limitParamName], [options valueForKey:@"limit"], [options valueForKey:@"params"]]];
@@ -134,12 +160,16 @@
 		if (filter) { //use a filter 
 			//SEL filterMethod = NSSelectorFromString([NSString stringWithFormat:@"%@:", filterMethod]);
 			DebugLog(@"IIWWW#fechFinished: filtering with %@",filterName);
-			[self.delegate feched:[[filter performSelector:@selector(filter:) withObject:[request responseString]] JSONValue]];		
+			[self.delegate feched:[[filter performSelector:@selector(filter:withOptions:) withObject:[request responseString] withObject:options] JSONValue]];		
 		} else { 
-			[self.delegate feched:[[request responseString] JSONValue]];		
+			if ([[request responseString] hasPrefix:@"["] || [[request responseString] hasPrefix:@"{"]) {
+				[self.delegate feched:[[request responseString] JSONValue]];
+			} else {
+				[self.delegate feched:[request responseString]];				
+			}
+				 
 		}
 	}
-
 }
 	
 @end

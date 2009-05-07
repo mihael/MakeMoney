@@ -37,14 +37,14 @@
 	
 }
 
-- (void)feched:(NSMutableArray*)listing
+- (void)feched:(id)information
 {
 	[indica stopAnimating];
 	//[self.transender spot]; //rewind memory spots
 
 	//inventing remote coding here - listing.json is a new way to program iphone and ipod apps
 	//[self.transender rememberMemories:listing];
-	[self.transender putMemories:listing];
+	[self.transender putMemories:information];
 	
 	if ([options valueForKey:@"page"]) { //program says we want automatic repage
 		NSUInteger page = [[options valueForKey:@"page"] intValue];

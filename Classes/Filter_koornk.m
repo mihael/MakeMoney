@@ -18,7 +18,7 @@
 	return @"limit";
 }
 
-- (NSString*)filter:(NSString*)information
+- (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
 	NSArray* kokodajsi = [[information JSONValue] objectForKey:@"list"];
 	NSString* behavior = @"\"ior\":{\"stop\":\"false\"}";

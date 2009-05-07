@@ -10,7 +10,7 @@
 @class IIFilter;
 
 @protocol IIWWWDelegate
-- (void)feched:(NSMutableArray*)listing;
+- (void)feched:(id)information;
 - (void)notFeched:(NSString*)err;
 @end
 
@@ -37,10 +37,17 @@
 
 - (id)initWithOptions:(NSDictionary*)o;
 - (void)setProgressDelegate:(id)d;
-- (void)fech;
 
+//generic for any request you like
+- (void)invokeRequest:(id)request;
+
+//feching information from web
+- (void)fech;
 - (void)formFech;
 - (void)postFech;
 - (void)getFech;
-- (void)invokeRequest:(id)request;
+
+ //feching is also posting information to web
+- (void)fechUpdateWithParams:(NSDictionary*)p;
+//TODO- (void)fechUpdateWithImage:(UIImage*)i andParams:(NSDictionary*)p;
 @end

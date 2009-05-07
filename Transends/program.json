@@ -1,10 +1,11 @@
 [
-{"ii":"MessageView", "ions":{"reuse":"true", "message":"Steve Rack", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"MessageView", "ions":{"reuse":"true", "message":"@mr_foto", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
 {"ii":"0_1.jpg",  "ior":{"stop":"false"}},
 {"ii":"0_2.jpg",  "ior":{"stop":"false"}},
 {"ii":"0_3.jpg",  "ior":{"stop":"false"}},
 {"ii":"MessageView", "ions":{"message":"Welcome to your personal money making mobile iphone and ipod application!", "background":"main.png"}, "ior":{"stop":"false", "effect":2, "revibe":3.83}},
 
-{"ii":"FecherView", "ions":{"button_title":"Fech Recent Artwork", "background":"main.png", "url":"http://hireanillustrator.com/v2/gallery", "method":"get", "page":1, "params":"g2_itemId=13876", "filter":"hai_galery"}, "ior":{"stop":"true"}},
-{"ii":"FecherView", "ions":{"button_title":"Fech Recent Twitts", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=steverack", "filter":"twitter"}, "ior":{"stop":"true"}}
+{"ii":"FecherView", "ions":{"button_title":"Fech recent photos", "background":"main.png", "url":"http://galerija.mr-foto.net/v/skisova_trznica_2009/nocni_program/", "method":"get", "page":1, "filter":"wp_gallery", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true"}},
+
+{"ii":"FecherView", "ions":{"button_title":"Fech recent twitter", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=mr_foto", "filter":"twitter"}, "ior":{"stop":"true"}}
 ]

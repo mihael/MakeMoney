@@ -17,7 +17,7 @@
 	return @"data[api][feeds][timeline][limit]";
 }
 
-- (NSString*)filter:(NSString*)information
+- (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
 	NSArray* piks = [[information JSONValue] objectForKey:@"Piks"];
 	

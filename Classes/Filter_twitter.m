@@ -19,7 +19,7 @@
 	return @"count";
 }
 
-- (NSString*)filter:(NSString*)information
+- (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
 	NSArray* twits = [information JSONValue];
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];

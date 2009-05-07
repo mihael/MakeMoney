@@ -9,8 +9,8 @@
 //this class should be overriden if you want to filter IWWW feches
 @interface IIFilter : NSObject {
 }
-- (id)requestWith:(NSDictionary*)options;
-- (NSString*)filter:(NSString*)information;
+
+- (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options;
 - (NSString*)pageParamName;
 - (NSString*)limitParamName;
 - (NSMutableArray*)extractURLPairsFrom:(NSString*)information;

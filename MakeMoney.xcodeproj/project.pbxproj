@@ -18,6 +18,10 @@
 		4704209C0FA132E800D7DE30 /* Filter_koornk.m in Sources */ = {isa = PBXBuildFile; fileRef = 4704209B0FA132E800D7DE30 /* Filter_koornk.m */; };
 		470421850FA1E0F400D7DE30 /* URLPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 470421820FA1E0F400D7DE30 /* URLPair.m */; };
 		470421860FA1E0F400D7DE30 /* URLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 470421840FA1E0F400D7DE30 /* URLUtils.m */; };
+		4707D7790FB0928D00094125 /* KopterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4707D7780FB0928D00094125 /* KopterViewController.m */; };
+		4707D7870FB093DB00094125 /* KopterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4707D7860FB093DB00094125 /* KopterView.xib */; };
+		4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707D8500FB2D86400094125 /* CoreLocation.framework */; };
+		4707D8B20FB3104D00094125 /* Filter_wp_gallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 4707D8B10FB3104D00094125 /* Filter_wp_gallery.m */; };
 		472643210F56A9530097D30A /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 472643200F56A9530097D30A /* listing.json */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
 		472EA6740FAEEF0000B3F18B /* Filter_hai_galery.m in Sources */ = {isa = PBXBuildFile; fileRef = 472EA6720FAEEF0000B3F18B /* Filter_hai_galery.m */; };
@@ -180,6 +184,12 @@
 		470421820FA1E0F400D7DE30 /* URLPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLPair.m; path = Classes/URLPair.m; sourceTree = "<group>"; };
 		470421830FA1E0F400D7DE30 /* URLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = URLUtils.h; path = Classes/URLUtils.h; sourceTree = "<group>"; };
 		470421840FA1E0F400D7DE30 /* URLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLUtils.m; path = Classes/URLUtils.m; sourceTree = "<group>"; };
+		4707D7770FB0928D00094125 /* KopterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KopterViewController.h; path = Classes/KopterViewController.h; sourceTree = "<group>"; };
+		4707D7780FB0928D00094125 /* KopterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KopterViewController.m; path = Classes/KopterViewController.m; sourceTree = "<group>"; };
+		4707D7860FB093DB00094125 /* KopterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KopterView.xib; sourceTree = "<group>"; };
+		4707D8500FB2D86400094125 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4707D8B00FB3104D00094125 /* Filter_wp_gallery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_wp_gallery.h; path = Classes/Filter_wp_gallery.h; sourceTree = "<group>"; };
+		4707D8B10FB3104D00094125 /* Filter_wp_gallery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_wp_gallery.m; path = Classes/Filter_wp_gallery.m; sourceTree = "<group>"; };
 		472643200F56A9530097D30A /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = listing.json; path = Transends/listing.json; sourceTree = SOURCE_ROOT; };
 		472965420F4859C10053F946 /* Hajlov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hajlov; sourceTree = "<group>"; };
 		472EA6720FAEEF0000B3F18B /* Filter_hai_galery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_hai_galery.m; path = Classes/Filter_hai_galery.m; sourceTree = "<group>"; };
@@ -359,6 +369,7 @@
 				479C332B0F4D7A6600EBD9F3 /* AudioToolbox.framework in Frameworks */,
 				4783DCF80F6AD894007CBA02 /* QuartzCore.framework in Frameworks */,
 				473489360F99E53100A1D78A /* libz.1.2.3.dylib in Frameworks */,
+				4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +408,8 @@
 		289233A00DB2D0730083E9F9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				4707D7770FB0928D00094125 /* KopterViewController.h */,
+				4707D7780FB0928D00094125 /* KopterViewController.m */,
 				4704209D0FA132F500D7DE30 /* IIFilters */,
 				47041EB50FA0CF1100D7DE30 /* MessageViewController.h */,
 				47041EB60FA0CF1100D7DE30 /* MessageViewController.m */,
@@ -432,6 +445,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				4796C73B0F41E53D002F2C2A /* Entitlements.plist */,
 				473489350F99E53100A1D78A /* libz.1.2.3.dylib */,
+				4707D8500FB2D86400094125 /* CoreLocation.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -465,8 +479,10 @@
 		4704209D0FA132F500D7DE30 /* IIFilters */ = {
 			isa = PBXGroup;
 			children = (
-				472EA6720FAEEF0000B3F18B /* Filter_hai_galery.m */,
+				4707D8B00FB3104D00094125 /* Filter_wp_gallery.h */,
+				4707D8B10FB3104D00094125 /* Filter_wp_gallery.m */,
 				472EA6730FAEEF0000B3F18B /* Filter_hai_galery.h */,
+				472EA6720FAEEF0000B3F18B /* Filter_hai_galery.m */,
 				479C56A00FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.h */,
 				479C56A10FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.m */,
 				479C4F230FA626AA003DF1B2 /* Filter_twitter.h */,
@@ -542,6 +558,7 @@
 				47C7E25D0F9CC70900789864 /* FecherView.xib */,
 				47041EE00FA1047300D7DE30 /* MessageView.xib */,
 				479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */,
+				4707D7860FB093DB00094125 /* KopterView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -827,6 +844,7 @@
 				479C52A40FAAC244003DF1B2 /* movie.jpg in Resources */,
 				479C52A50FAAC244003DF1B2 /* music.jpg in Resources */,
 				479C549A0FAAEE73003DF1B2 /* program.json in Resources */,
+				4707D7870FB093DB00094125 /* KopterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,6 +899,8 @@
 				479C55330FAAFE92003DF1B2 /* SBJsonWriter.m in Sources */,
 				479C56A20FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.m in Sources */,
 				472EA6740FAEEF0000B3F18B /* Filter_hai_galery.m in Sources */,
+				4707D7790FB0928D00094125 /* KopterViewController.m in Sources */,
+				4707D8B20FB3104D00094125 /* Filter_wp_gallery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

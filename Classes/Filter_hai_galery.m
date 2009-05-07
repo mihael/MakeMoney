@@ -18,7 +18,7 @@
 	return @"limit";
 }
 
-- (NSString*)filter:(NSString*)information
+- (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
 	//NSLog(@"FILTERING HAI %@", information);
 	NSMutableArray* urls = [self extractFrom:information withPrefix:@"<img src=\"gallery2/main.php?g2_view=core.DownloadItem" andSuffix:@"\""];

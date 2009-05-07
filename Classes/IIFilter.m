@@ -12,12 +12,7 @@
 #define kTwitPicFormat @"http://twitpic.com/"
 
 @implementation IIFilter
-- (id)requestWith:(NSDictionary*)options
-{
-	return nil; //todo if ever needed, could be used to fech several urls based on options maybe or other magic
-}
-
-- (NSString*)filter:(NSString*)information
+- (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
 	//override this
 	return information; //default filter does not do anything

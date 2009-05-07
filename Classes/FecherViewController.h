@@ -17,6 +17,6 @@
 @property (readonly) IBOutlet UIImageView *background;
 
 - (IBAction)buttonTouched:(id)sender;
-- (void)feched:(NSMutableArray*)listing;
+- (void)feched:(id)information;
 - (void)notFeched:(NSString*)err;
 @end

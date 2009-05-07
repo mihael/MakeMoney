@@ -44,7 +44,7 @@
 			}
 
 		}
-	}
+	} 
 	
 	if ([options valueForKey:@"background_url"]) {
 		[indica startAnimating];
