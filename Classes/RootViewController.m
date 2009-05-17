@@ -14,31 +14,40 @@
 
 - (void)loadView {
 	UIView *primaryView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-	primaryView.backgroundColor = [UIColor clearColor];
-	// Start in landscape orientation, and stay that way
-	UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-	if (orientation == UIInterfaceOrientationPortrait) {
-		CGAffineTransform transform = primaryView.transform;
-		// Use the status bar frame to determine the center point of the window's content area.
-		CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-		CGRect bounds = CGRectMake(0, 0, statusBarFrame.size.height, statusBarFrame.origin.x);
-		CGPoint center = CGPointMake(60.0, bounds.size.height / 2.0);
-		// Set the center point of the view to the center point of the window's content area.
-		primaryView.center = center;
-		// Rotate the view 90 degrees around its new center point.
-		transform = CGAffineTransformRotate(transform, (M_PI / 2.0));
-		primaryView.transform = transform;
-	}   
-	self.view = primaryView;
-	[primaryView release]; 
+    primaryView.backgroundColor = [UIColor clearColor];
+	
+    // Start in landscape orientation, and stay that way
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (orientation == UIInterfaceOrientationLandscapeRight) 
+    {
+        CGAffineTransform transform = primaryView.transform;
+		
+        // Use the status bar frame to determine the center point of the window's content area.
+        CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+        CGRect bounds = CGRectMake(0, 0, statusBarFrame.size.height, statusBarFrame.origin.x);
+        CGPoint center = CGPointMake(60.0, bounds.size.height / 2.0);
+		
+        // Set the center point of the view to the center point of the window's content area.
+        primaryView.center = center;
+		
+        // Rotate the view 90 degrees around its new center point.
+        transform = CGAffineTransformRotate(transform, (M_PI / 2.0));
+        primaryView.transform = transform;
+    }   
+	
+    self.view = primaryView;
+    [primaryView release];      
+	
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] retain];
+	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
 	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
+	[notControls setCanOpen:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"button_opens_not_controls"] boolValue]];
 	[self.view addSubview:notControls];
+	[notControls setNotController:self];
 	
 	self.transenderViewController = [[IITransenderViewController alloc] initWithTransenderProgram:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"program"] andStage:[[MakeMoneyAppDelegate app] stage]];
 	[notControls setDelegate:transenderViewController];

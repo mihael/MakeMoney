@@ -54,4 +54,11 @@ static MakeMoneyAppDelegate* app = nil;
     [super dealloc];
 }
 
+- (void)application:(UIApplication *)application willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation duration:(NSTimeInterval)duration;
+{
+    // This prevents the view from autorotating to portrait in the simulator
+    if ((newStatusBarOrientation == UIInterfaceOrientationPortrait) || (newStatusBarOrientation == UIInterfaceOrientationPortraitUpsideDown))
+        [application setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
+}
+
 @end

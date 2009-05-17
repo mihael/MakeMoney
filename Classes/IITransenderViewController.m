@@ -18,7 +18,7 @@
 		transitionIndex = kTransition;
 		directions = [[NSArray arrayWithObjects:kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom, nil] retain];
 		horizontal = [[stage valueForKey:@"horizontal"] boolValue];
-		animated = [[stage valueForKey:@"animated"] boolValue];
+		animated = [[stage valueForKey:@"animated"] boolValue];		
 		NSString* program_json = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:program ofType:@"json"]];
 		transender = [[IITransender alloc] initWith:program_json];
 		[transender setDelegate:self];

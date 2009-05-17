@@ -20,11 +20,15 @@
 - (void)notControlsOpened:(id)notControl;//called when controls go open
 - (void)notControlsClosed:(id)notControl;//called when controls go close
 
+- (void)picked:(NSDictionary*)info;//returnes selected image,images
 @end
 
 //Imagine not control.
-@interface IINotControls : UIView {
+@interface IINotControls : UIView <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
     id <IINotControlsDelegate> delegate;
+	id notController;
+    id pickDelegate;
+	
     UIButton *button;
 	UIButton *leftButton;
 	UIButton *rightButton;
@@ -37,11 +41,22 @@
 	BOOL buttonInTouching;
 	BOOL buttonNotLightUp;
 	UIImageView *backLight;
+	BOOL canOpen;
+	BOOL bigButton;
+	UIView *underView;
 }
 @property (nonatomic, assign) id <IINotControlsDelegate> delegate;
+@property (nonatomic, assign) id notController;
+@property (nonatomic, assign) id pickDelegate;
+@property (readwrite) BOOL canOpen;
+@property (readwrite) BOOL bigButton;
 
-//TODO- (void)spaceUp; open the space without underbuttons and let user change direction and speed of transending
-//TODO- (void)spaceDown;
+- (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options;
+
+- (void)pickInView:(UIView*)inView; //open image picker and let select
+
+- (void)spaceUp; //open the space without 
+- (void)spaceDown;
 
 - (void)openOrCloseNotControls:(NSTimer*)timer;
 - (void)lightUp;
@@ -52,8 +67,13 @@
 - (void)closeNot;
 
 - (void)spinButtonWith:(BOOL)direction;
-- (void)spinButton;
 - (void)stillButton;
+
+//remove self from underView
+- (void)unable;
+//add self back to underView
+- (void)able;
+
 
 - (void)setBackLight:(UIImage*)image withAlpha:(CGFloat)a;
 - (void)hideBackLight;

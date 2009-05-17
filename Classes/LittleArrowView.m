@@ -46,45 +46,52 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-	CGRect b = rect;
-    CGContextRef context = UIGraphicsGetCurrentContext();
+	if (roundSize<=0)
+		roundSize = 5;
+	if (alpha<=0)
+		alpha = 1.0;
+	
+	if (imageRef) {
+		CGRect b = rect;
+		CGContextRef context = UIGraphicsGetCurrentContext();
 
-	//set alpha
-	CGContextSetAlpha(context, alpha);
+		//set alpha
+		CGContextSetAlpha(context, alpha);
 
-	// flip the coordinate system to avoid upside-down image drawing
-	CGContextTranslateCTM(context, 0.0, b.size.height);
-	CGContextScaleCTM(context, 1.0, -1.0);
-	
-	CGFloat w = b.size.width;
-	CGFloat h = b.size.height;
-	
-	// setup rounded-rect clip
-	CGContextBeginPath (context);
-	CGContextMoveToPoint(context,w/2, 0);
-	CGContextAddLineToPoint(context, w, 0);//CGContextAddArcToPoint(context, w, 0, w, h/2, roundSize);
-	CGContextAddLineToPoint(context, w,h);//CGContextAddArcToPoint(context, w, h, w/2, h, roundSize);
-	CGContextAddLineToPoint(context, w/2, h);
-	
-	CGContextAddArcToPoint(context, 0, h, 0, h/2, roundSize);
-	CGContextAddArcToPoint(context, 0, 0, w/2, 0, roundSize);
-	CGContextClosePath (context);
-	CGContextClip (context);
-	
-	// draw image with rounded-rect clip
-	CGContextDrawImage (context, b, imageRef);
-/*	
-	// outline 
-	 CGContextSetLineWidth(context, 2.f);
-	 CGContextSetRGBStrokeColor(context, 0.5f, 0.5f, 0.5f, 0.2f);
-	 CGContextBeginPath (context);
-	 CGContextMoveToPoint(context,w/2, 0);
-	 CGContextAddArcToPoint(context, w, 0, w, h/2, roundSize);
-	 CGContextAddArcToPoint(context, w, h, w/2, h, roundSize);
-	 CGContextAddArcToPoint(context, 0, h, 0, h/2, roundSize);
-	 CGContextAddArcToPoint(context, 0, 0, w/2, 0, roundSize);
-	 CGContextClosePath(context);
-	 CGContextStrokePath(context);*/
+		// flip the coordinate system to avoid upside-down image drawing
+		CGContextTranslateCTM(context, 0.0, b.size.height);
+		CGContextScaleCTM(context, 1.0, -1.0);
+		
+		CGFloat w = b.size.width;
+		CGFloat h = b.size.height;
+		
+		// setup rounded-rect clip
+		CGContextBeginPath (context);
+		CGContextMoveToPoint(context,w/2, 0);
+		CGContextAddLineToPoint(context, w, 0);//CGContextAddArcToPoint(context, w, 0, w, h/2, roundSize);
+		CGContextAddLineToPoint(context, w,h);//CGContextAddArcToPoint(context, w, h, w/2, h, roundSize);
+		CGContextAddLineToPoint(context, w/2, h);
+		
+		CGContextAddArcToPoint(context, 0, h, 0, h/2, roundSize);
+		CGContextAddArcToPoint(context, 0, 0, w/2, 0, roundSize);
+		CGContextClosePath (context);
+		CGContextClip (context);
+		
+		// draw image with rounded-rect clip
+		CGContextDrawImage (context, b, imageRef);
+	/*	
+		// outline 
+		 CGContextSetLineWidth(context, 2.f);
+		 CGContextSetRGBStrokeColor(context, 0.5f, 0.5f, 0.5f, 0.2f);
+		 CGContextBeginPath (context);
+		 CGContextMoveToPoint(context,w/2, 0);
+		 CGContextAddArcToPoint(context, w, 0, w, h/2, roundSize);
+		 CGContextAddArcToPoint(context, w, h, w/2, h, roundSize);
+		 CGContextAddArcToPoint(context, 0, h, 0, h/2, roundSize);
+		 CGContextAddArcToPoint(context, 0, 0, w/2, 0, roundSize);
+		 CGContextClosePath(context);
+		 CGContextStrokePath(context);*/
+	}
 }
 
 - (void)dealloc {

@@ -1,6 +1,6 @@
 [
 
-{"ii":"KopterView", "ions":{"experimental":"true", "reuse":"true", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":100, "update":"http://raddarkopter:raddarkopter999@koornk.com/api/update"}, "ior":{"stop":"true", "effect":3}},
+{"ii":"KopterView", "ions":{"experimental":"true", "reuse":"true", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update"}, "ior":{"stop":"true"}}
 
 {"ii":"FecherView", "ions":{"button_title":"fech", "background":"main.png", "url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":13, "params":"screen_name=pater_simonasic", "filter":"twitter"}, "ior":{"stop":"true"}},
 

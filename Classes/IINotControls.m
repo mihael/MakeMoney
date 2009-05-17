@@ -7,23 +7,38 @@
 #import "MakeMoneyAppDelegate.h"
 
 @implementation IINotControls
-@synthesize delegate;
+@synthesize notController, delegate, pickDelegate, canOpen, bigButton;
 
-- (id)initWithFrame:(CGRect)frame 
+- (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options
 {
     if (self = [super initWithFrame:frame]) {
 		[self setBackgroundColor:[UIColor clearColor]];
 		backLight = [[[UIImageView alloc] initWithFrame:frame] retain];
 		[self addSubview:backLight];
 		[self hideBackLight];
-		
+		canOpen = [[options valueForKey:@"button_opens_not_controls"]boolValue];
+		bigButton = [[options valueForKey:@"big_button"]boolValue];
 		notControlsFrame = frame;
-		notControlsOneButtonFrame = CGRectMake(0, 0, kPadding + kButtonSize + kPadding, kPadding + kButtonSize + kPadding);
+		
+		NSUInteger buttonSize = kButtonSize;
+		if (bigButton)
+			buttonSize = kBigButtonSize;
+		
+		notControlsOneButtonFrame = CGRectMake(0, 0, kPadding + buttonSize + kPadding, kPadding + buttonSize + kPadding);
 		
 		button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-		[button setFrame:CGRectMake(kPadding, kPadding, kButtonSize, kButtonSize)];
-		[button setImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
-		[button setImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateHighlighted];
+		NSUInteger x = frame.size.width - (2*kPadding+buttonSize);
+		if ([[options valueForKey:@"button_on_left"] boolValue]) 
+			x = kPadding;
+		
+		[button setFrame:CGRectMake(x, kPadding, buttonSize, kButtonSize)];
+		if (bigButton) {
+			[button setImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+			[button setImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateHighlighted];
+		} else {
+			[button setImage:[UIImage imageNamed:@"littlebutton.png"] forState:UIControlStateNormal];
+			[button setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];		
+		}
 		[button addTarget:self action:@selector(buttonTouched) forControlEvents:UIControlEventTouchUpInside];
 		[button addTarget:self action:@selector(buttonTouching) forControlEvents:UIControlEventTouchDown];
 
@@ -98,12 +113,29 @@
 	[button.layer removeAllAnimations];
 }
 
+- (void)unable
+{
+	//remove self from superview, but save superview
+	if ([self superview]) {
+		underView = [self superview];
+		[self removeFromSuperview];
+	}
+
+}
+
+- (void)able
+{
+	//if superview is saved exists add self to it
+	if (underView)
+		[underView addSubview:self];
+		
+}
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)finished
 {
 	if (finished)
 	{
-		[self spinButton];
+		[self spinButtonWith:YES];
 	}
 }
 
@@ -114,7 +146,6 @@
 	[animation setType:kCATransitionMoveIn];
 	[animation setDuration:0.5];
 	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-	[[backLight layer] addAnimation:animation forKey:kBackLightAnimationKey];
 	[animation setSubtype:kCATransitionFromTop];
 	[[backLight layer] addAnimation:animation forKey:kBackLightAnimationKey];
 }
@@ -125,8 +156,6 @@
 	[animation setType:kCATransitionPush];
 	[animation setDuration:0.5];
 	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-	[animation setSubtype:kCATransitionFromRight];
-	[[backLight layer] addAnimation:animation forKey:kBackLightAnimationKey];
 	[animation setSubtype:kCATransitionFromBottom];
 	[[backLight layer] addAnimation:animation forKey:kBackLightAnimationKey];
 }
@@ -185,18 +214,32 @@
 	[animation setSubtype:kCATransitionFromLeft];
 	[[rightButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 }
+#pragma mark empty space
+- (void)spaceUp  //open the space without 
+{
+	[self setFrame:notControlsFrame];
+}
+
+- (void)spaceDown
+{
+	[self setFrame:notControlsOneButtonFrame];
+}
+
 
 #pragma mark opening and closing
 - (void)openNot 
 {
-	leftButton.hidden = NO;
-	rightButton.hidden = NO;
-	notOpen = NO;
-	[self animateButtonsIn];
-	[self setFrame:notControlsFrame];
-	if (delegate) {
-		if ([delegate respondsToSelector:@selector(notControlsOpened:)]) {
-			[delegate notControlsOpened:self];
+	if (canOpen)
+	{
+		leftButton.hidden = NO;
+		rightButton.hidden = NO;
+		notOpen = NO;
+		[self animateButtonsIn];
+		[self setFrame:notControlsFrame];
+		if (delegate) {
+			if ([delegate respondsToSelector:@selector(notControlsOpened:)]) {
+				[delegate notControlsOpened:self];
+			}
 		}
 	}
 }
@@ -381,5 +424,83 @@
 		}
 	}
 }
+
+#pragma mark picking images
+- (void)pickInView:(UIView*)inView 
+{
+	UIActionSheet *as = [[[UIActionSheet alloc] initWithFrame:inView.frame] autorelease];
+	[as setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+	int cancelButtonIndex = 1;
+	
+	[as addButtonWithTitle:@"Select photo from library"];//0
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+		[as addButtonWithTitle:@"Take photo with camera"];//1
+		cancelButtonIndex = 2;
+	}
+	[as addButtonWithTitle:@"Cancel"];//2
+	
+	[as setCancelButtonIndex:cancelButtonIndex];
+	
+	[as setDelegate:self];
+	[as showInView:inView];
+	
+}
+
+#pragma mark UIActionSheetDelegate methods
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (notController) {
+		UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
+		[picker setDelegate:self];
+		[picker setAllowsImageEditing:NO];
+		[[picker navigationBar] setHidden:YES];	
+		[picker setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+		
+		switch (buttonIndex) {
+			case 1:
+				if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+					[picker setSourceType:UIImagePickerControllerSourceTypeCamera];			
+					[notController presentModalViewController:picker animated:YES];
+				}
+				break;
+			case 0:
+				[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];			
+				[notController presentModalViewController:picker animated:YES];
+				break;
+			default:		
+				break;
+		}	
+	}
+}
+
+#pragma mark UIImagePickerControllerDelegate methods
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info 
+{
+	[picker dismissModalViewControllerAnimated:YES];
+	UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
+	DebugLog(@"Picked image for sending to pikchur: w=%f, h=%f", image.size.width, image.size.height);
+	//NSLog(@"what else do we have %@", editingInfo);
+	if (image) {
+		if (pickDelegate)
+			[pickDelegate picked:info];
+	}
+}
+
+/*
+ - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+ [picker dismissModalViewControllerAnimated:YES];
+ DebugLog(@"Picked image for sending to pikchur: w=%f, h=%f", image.size.width, image.size.height);
+ //NSLog(@"what else do we have %@", editingInfo);
+ if (image) {
+ [www uploadWithPikchur:image withDescription:@"raddarkopter" andLocation:location];
+ }
+ }*/
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+	[picker dismissModalViewControllerAnimated:YES];
+	if (pickDelegate)
+		[pickDelegate picked:nil];
+}
+
+
 
 @end

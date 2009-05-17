@@ -4,7 +4,8 @@
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation Kriya
-+ (CGRect)appViewRect {
++ (CGRect)appViewRect 
+{
 	CGRect screen = [[UIScreen mainScreen] applicationFrame];
 	CGFloat c_w = screen.size.height;
 	CGFloat c_h = screen.size.width;	
@@ -15,7 +16,8 @@
 	return CGRectMake(0.0, 0.0, c_w, c_h);
 }
 
-+ (NSInteger)appRunCount {
++ (NSInteger)appRunCount 
+{
 	if (![[NSUserDefaults standardUserDefaults] objectForKey:RUNS]){
 		NSLog(@"Om Om Om Kriya Babaji Namah Om Om Om");
 		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:RUNS];
@@ -24,32 +26,39 @@
 	return [[NSUserDefaults standardUserDefaults] integerForKey:RUNS];	
 }
 
-+ (void)incrementAppRunCount {
++ (void)incrementAppRunCount 
+{
 	[[NSUserDefaults standardUserDefaults] setInteger:([Kriya appRunCount] + 1) forKey:RUNS];
 	[[NSUserDefaults standardUserDefaults] synchronize];	
 }
 
-+ (void)prayInCode {
++ (void)prayInCode 
+{
 	NSLog(@"OM NAMAH SHIVAYA %@ OM KRIYA BABAJI NAMAH OM", PRAYER);
 }
 
-+ (NSString*)deviceId {
++ (NSString*)deviceId 
+{
 	return [[UIDevice currentDevice] uniqueIdentifier];
 }
 
-+ (NSString*)brickbox_url {
++ (NSString*)brickbox_url 
+{
 	return [NSString stringWithFormat:@"http://kitschmaster.com/brickboxes/%@/%@", APP_TITLE, [Kriya deviceId]];
 }
 
-+ (NSString*)support_url {
++ (NSString*)support_url 
+{
 	return [NSString stringWithFormat:@"http://kitschmaster.com/brickboxes/%@", APP_SUPPORT_URL];
 }
 
-+ (NSString*)kitsch_url {
++ (NSString*)kitsch_url 
+{
 	return [NSString stringWithFormat:@"http://kitschmaster.com/kiches/%@", APP_URL];
 }
 
-+ (NSString*)howManyTimes:(int)i {
++ (NSString*)howManyTimes:(int)i 
+{
 	if (i==0) {
 		return @"zero times";
 	} else if (i == 1) {
@@ -59,20 +68,24 @@
 	}
 }
 
-+ (NSDictionary*)stage {
++ (NSDictionary*)stage 
+{
 	return [[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"stage" ofType:@"json"]] JSONValue];
 }
 
-+ (BOOL)xibExists:(NSString*)xibName {
++ (BOOL)xibExists:(NSString*)xibName 
+{
 	return ( [[NSBundle mainBundle] pathForResource:xibName ofType:@"xib"] == nil) ? NO : YES;
 }
 
-+ (void)writeWithPath:(NSString*)filepath data:(NSData*)data {
++ (void)writeWithPath:(NSString*)filepath data:(NSData*)data 
+{
 	[[NSFileManager defaultManager] createFileAtPath:filepath contents:data attributes:nil];
 	//DebugLog(@"Kriya# wrote: %@", filepath);
 }
 
-+ (NSData*)loadWithPath:(NSString*)filepath {
++ (NSData*)loadWithPath:(NSString*)filepath 
+{
 	NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:filepath];
 	NSData *ret = nil;
 	if (fh) {
@@ -82,6 +95,16 @@
 	//DebugLog(@"Kriya# loaded: %@", [ret description]);
 	return ret;
 }
+
++ (NSString*)imageWithInMemoryImage:(UIImage*)image 
+{
+	NSString *generatedPath = [NSString stringWithFormat:@"%i", [[NSDate date] timeIntervalSinceNow]];
+	NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
+	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
+	path = [NSString stringWithFormat:@"%@/%@", path, [Kriya md5:generatedPath]];	
+	[Kriya writeWithPath:path data:UIImageJPEGRepresentation(image, 1.0)];
+	return generatedPath;
+} 
 
 + (UIImage*)imageWithUrl:(NSString*)url 
 {
@@ -99,7 +122,8 @@
 	return nil;
 }
 
-+ (NSString*)md5:(NSString*) str {
++ (NSString*)md5:(NSString*)str 
+{
 	const char *cStr = [str UTF8String];
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
 	CC_MD5( cStr, strlen(cStr), result );

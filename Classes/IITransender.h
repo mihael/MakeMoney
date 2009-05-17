@@ -78,6 +78,8 @@ typedef enum {
 - (void)addMemoriesWithString:(NSString*)s;
 - (void)putMemories:(NSMutableArray*)m;
 - (void)insertMemorieWithString:(NSString*)m atSpot:(int)s;
+- (void)trimMemories;
+- (void)vipeCurrentMemorie;
 
 - (int)currentSpot;
 - (float)currentVibe;

@@ -78,7 +78,7 @@
 			foundOne = [scanner scanUpToString:suf intoString:&url]; //fech data up to next occurence of suf
 			if (foundOne && url) {
 				[urls addObject:url];
-				NSLog(@"EXTRACTED %@", url);
+				//DebugLog(@"EXTRACTED %@", url);
 			}
 		}
 	}

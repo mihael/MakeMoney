@@ -5,6 +5,10 @@
 #import "ASIHTTPRequest.h"
 #import "ASINetworkQueue.h"
 #import "IIFilter.h"
+#import <CoreLocation/CoreLocation.h>
+
+#define kPikchurUploadURL @"http://api.pikchur.com/api/post/json"
+#define kPikchurAPIKey @"plusOOts6YVcBSFGgT0jaA"
 
 @class ASINetworkQueue;
 @class IIFilter;
@@ -50,4 +54,11 @@
  //feching is also posting information to web
 - (void)fechUpdateWithParams:(NSDictionary*)p;
 //TODO- (void)fechUpdateWithImage:(UIImage*)i andParams:(NSDictionary*)p;
+
+//supported pikchur upload supply it in ions like this: "pikchur":"username@password"
+- (NSString*)uploadWithPikchur:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location;
+
+//authenticate with pikchur and save auth_key for later use
+- (void)authenticateWithPikchur;
+
 @end

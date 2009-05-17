@@ -21,7 +21,6 @@
     [super viewDidLoad];
 }
 
-
 - (void)dealloc {
 	[www release];
 	www = nil;
@@ -41,10 +40,13 @@
 {
 	[indica stopAnimating];
 	//[self.transender spot]; //rewind memory spots
-
-	//inventing remote coding here - listing.json is a new way to program iphone and ipod apps
-	//[self.transender rememberMemories:listing];
-	[self.transender putMemories:information];
+	//[self.transender rememberMemories:listing]; //replaces transender mem
+	if ([options valueForKey:@"message"]) { //delete self from program, if this is an automatic fech
+		[self.transender trimMemories]; //trim all that follows
+		[self.transender vipeCurrentMemorie]; //vipe self
+	}
+	
+	[self.transender putMemories:information]; //inserts into transender mem
 	
 	if ([options valueForKey:@"page"]) { //program says we want automatic repage
 		NSUInteger page = [[options valueForKey:@"page"] intValue];
@@ -61,7 +63,9 @@
 	
 	if (self.notControls)
 		[self.notControls lightDown];
-	[self.transender transendNow];
+
+	//do not wait for timer, since data is already feched
+	[self.transender transend];
 }
 
 #pragma mark IIController
@@ -71,16 +75,21 @@
 	www = [[IIWWW alloc] initWithOptions:options];
 	//[www setProgressDelegate:progress];
 	[www setDelegate:self];
+
 	if ([options valueForKey:@"background"])
 		[self.background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];
-	if ([options valueForKey:@"button_title"])
+	if ([options valueForKey:@"button_title"]) {
 		[self.button setTitle:[options valueForKey:@"button_title"] forState:UIControlStateNormal];	
-//only SDK 3.0
+		[self.button setEnabled:YES];
+	} else if ([options valueForKey:@"message"]) {
+		[self.button setTitle:[options valueForKey:@"message"] forState:UIControlStateNormal];	
+		[self.button setEnabled:NO];
+	} else {
+		[self.button setTitle:@"+fech" forState:UIControlStateNormal];
+		[self.button setEnabled:YES];
+	}
 	button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
 	button.titleLabel.textAlignment = UITextAlignmentCenter;
-
-//SDK <3.0
-//	button.lineBreakMode = UILineBreakModeWordWrap;
 }
 
 - (void)stopFunctioning {
@@ -90,6 +99,8 @@
 - (void)startFunctioning {
 	//DebugLog(@"#startFunctioning");
 	[button setHidden:NO];
+	[www fech];
+
 }
 
 @end

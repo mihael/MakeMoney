@@ -11,4 +11,7 @@
 - (BOOL) isURLToken:(NSString*)token;
 - (BOOL) isIDToken:(NSString*)token;
 - (BOOL) isWhiteSpace:(NSString*)aString;
+
++ (NSString*) encodeHTTP:(NSString*)aString;
+
 @end

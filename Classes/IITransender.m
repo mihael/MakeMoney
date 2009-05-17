@@ -84,7 +84,7 @@
 		[self invokeTransendFailed:IITransenderFailedWithProgram];
 	}
 }
-
+//adds memories to the end pf program
 - (void)addMemorieWithString:(NSString*)s 
 {
 	DebugLog(@"#addMemorieWithString %@", s);
@@ -96,10 +96,11 @@
 	}
 }
 
+//inserts memories at spot
 - (void)putMemories:(NSMutableArray*)m
 {
 	if (m) {
-	DebugLog(@"#putMemories at spot %i", memoriesSpot+1);
+	DebugLog(@"#putMemories %i at spot %i", [m count], memoriesSpot+1);
 	[self.memories insertObjects:m atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(memoriesSpot+1, [m count])]];
 	memoriesCount = [memories count]; //calculate size once on every listing change	
 	} else {
@@ -107,6 +108,7 @@
 	}
 }
 
+//adds memorie to the end of program
 - (void)addMemoriesWithString:(NSString*)s 
 {
 	DebugLog(@"#addMemoriesWithString %@", s);
@@ -118,6 +120,7 @@
 	}
 }
 
+//inserts memorie at spot
 - (void)insertMemorieWithString:(NSString*)m atSpot:(int)s
 {
 	DebugLog(@"#insertMemorieWithString %@", m);
@@ -129,6 +132,36 @@
 		memoriesCount = [memories count];
 	}	
 }
+
+//deletes memories from current spot - only up direction
+- (void)trimMemories
+{
+	if (direction == kIITransenderDirectionUp) {
+		for (NSUInteger i=(memoriesCount-1); i>memoriesSpot; i--) {
+			[self.memories removeObjectAtIndex:i];
+			DebugLog(@"trimming one spot %i", i);
+		}
+		
+	}
+}
+
+- (void)vipeCurrentMemorie
+{
+	[self.memories removeObjectAtIndex:memoriesSpot];
+	memoriesCount = [self.memories count];
+	
+	if (direction == kIITransenderDirectionUp) {
+		if (memoriesSpot - 1 < kIITransenderZero)
+			memoriesSpot = memoriesCount;
+		memoriesSpot--; 
+	} else {
+		if (memoriesSpot + 1 >= memoriesCount)
+			memoriesSpot = kIITransenderZero - 1; 
+		memoriesSpot++; 
+	}	
+	DebugLog(@"viped current memorie now at %i", memoriesSpot);
+}
+
 
 #pragma mark Transendence
 //vibe is time beetwen transends
@@ -177,6 +210,7 @@
 		NSString *memoryII = [memory valueForKey:@"ii"];		
 		NSString *diskII = nil;
 		
+		//see what kind of transend this is and act		
 		if ([memoryII isEqualToString:@"message"]) {
 			UIImage* background = nil;
 			//fech background_url icon_url if not yet
@@ -189,7 +223,7 @@
 				[delegate fechingTransend];
 			
 			if ([options valueForKey:@"icon_url"])
-				[Kriya imageWithUrl:[options valueForKey:@"background_url"]];
+				[Kriya imageWithUrl:[options valueForKey:@"icon_url"]];
 			if ([options valueForKey:@"background_url"])
 				background = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
 			if (!background && [options valueForKey:@"background"])
@@ -209,7 +243,7 @@
 			{
 				[delegate transendedWithImage:background withIons:options withIor:behavior];
 			
-				[self transend]; //resume with transending
+				//[self transend]; //resume with transending
 			}
 			
 		} else if ([memoryII hasSuffix:@"View"]) {
@@ -308,6 +342,7 @@
 		case IITransenderFailedWithProgram:			
 //			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			DebugLog(@"Failed with program.");
+			[self meditate];
 			break;
 		case IITransenderFailedWithImage:			
 			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];

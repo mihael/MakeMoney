@@ -50,5 +50,4 @@
 	[[iAlert instance] alert:[NSString stringWithFormat:@"Received Memory Warning in %@", [self class]] withMessage:@"Good luck!"];
 }
 
-
 @end
