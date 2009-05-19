@@ -98,7 +98,7 @@
 
 + (NSString*)imageWithInMemoryImage:(UIImage*)image 
 {
-	NSString *generatedPath = [NSString stringWithFormat:@"%i", [[NSDate date] timeIntervalSinceNow]];
+	NSString *generatedPath = [NSString stringWithFormat:@"%i", [[NSDate date] timeIntervalSince1970]*-1];
 	NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
 	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
 	path = [NSString stringWithFormat:@"%@/%@", path, [Kriya md5:generatedPath]];	

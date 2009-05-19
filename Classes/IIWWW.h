@@ -8,6 +8,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 #define kPikchurUploadURL @"http://api.pikchur.com/api/post/json"
+#define kPikchurAuthURL @"https://api.pikchur.com/auth/json"
 #define kPikchurAPIKey @"plusOOts6YVcBSFGgT0jaA"
 
 @class ASINetworkQueue;
@@ -56,9 +57,11 @@
 //TODO- (void)fechUpdateWithImage:(UIImage*)i andParams:(NSDictionary*)p;
 
 //supported pikchur upload supply it in ions like this: "pikchur":"username@password"
-- (NSString*)uploadWithPikchur:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location;
+- (void)fechUploadWithPikchur:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location andProgress:(id)progressDelegate;
 
+//this is sync
 //authenticate with pikchur and save auth_key for later use
 - (void)authenticateWithPikchur;
+- (BOOL)isAuthenticatedWithPikchur;
 
 @end

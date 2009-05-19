@@ -5,6 +5,7 @@
 #import "IIController.h"
 #import "IIWWW.h"
 #import "LittleArrowView.h"
+#import "iProgressView.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #define kKopterRadius 3000 //3km 
@@ -20,19 +21,24 @@
 
 @class IIWWW;
 @class LittleArrowView;
+@class iProgressView;
 
 @interface KopterViewController : IIController <MKMapViewDelegate, MKReverseGeocoderDelegate, IIWWWDelegate, CLLocationManagerDelegate>
 {
 	IBOutlet UIImageView* background;
 	IBOutlet UILabel* message;
 	IBOutlet UIActivityIndicatorView* indica;
+	iProgressView* progressView;
 
 	UIToolbar* kopterbar;
 	UIBarButtonItem *kopterButton;
 	UIBarButtonItem *pickButton;
-
 	UIView* overKopter;
 	IBOutlet LittleArrowView* littleArrowView;
+	BOOL imageSelected;
+	NSString* selectedImagePath;
+	NSString* locationText;
+
 	IIWWW *www;
 	CLLocation *location;
 	CLLocation *pastLocation;
@@ -60,5 +66,7 @@
 
 - (void)kopterHere;
 - (void)kopterClear;
+
+- (void)raddarkopterWith:(NSString*)text;
 
 @end

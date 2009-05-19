@@ -66,6 +66,7 @@
 		477386810F4ACCB20044085E /* NSHTTPCookieAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 477386740F4ACCB20044085E /* NSHTTPCookieAdditions.m */; };
 		477416DA0FC098B900FB7A1E /* kepo.png in Resources */ = {isa = PBXBuildFile; fileRef = 477416D90FC098B900FB7A1E /* kepo.png */; };
 		477416DD0FC0992000FB7A1E /* iAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477416DC0FC0992000FB7A1E /* iAnnotationView.m */; };
+		477416EC0FC1346600FB7A1E /* iProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477416EB0FC1346600FB7A1E /* iProgressView.m */; };
 		477ABD4E0F45641100696306 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD480F45641100696306 /* UIKit.framework */; };
 		477ABD4F0F45641100696306 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD490F45641100696306 /* Foundation.framework */; };
 		477ABD500F45641100696306 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD4A0F45641100696306 /* CoreGraphics.framework */; };
@@ -262,6 +263,8 @@
 		477416D90FC098B900FB7A1E /* kepo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kepo.png; path = Artwork/kepo.png; sourceTree = "<group>"; };
 		477416DB0FC0992000FB7A1E /* iAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iAnnotationView.h; sourceTree = "<group>"; };
 		477416DC0FC0992000FB7A1E /* iAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iAnnotationView.m; sourceTree = "<group>"; };
+		477416EA0FC1346600FB7A1E /* iProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iProgressView.h; sourceTree = "<group>"; };
+		477416EB0FC1346600FB7A1E /* iProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iProgressView.m; sourceTree = "<group>"; };
 		477ABD480F45641100696306 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		477ABD490F45641100696306 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		477ABD4A0F45641100696306 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -582,6 +585,8 @@
 				4773866D0F4ACCB20044085E /* iAlert.m */,
 				477416DB0FC0992000FB7A1E /* iAnnotationView.h */,
 				477416DC0FC0992000FB7A1E /* iAnnotationView.m */,
+				477416EA0FC1346600FB7A1E /* iProgressView.h */,
+				477416EB0FC1346600FB7A1E /* iProgressView.m */,
 			);
 			name = i;
 			sourceTree = "<group>";
@@ -949,6 +954,7 @@
 				4759131B0FBA076F0079FA20 /* Filter_promet_webcam.m in Sources */,
 				47231FA60FBA376C00D49E87 /* FecherListViewController.m in Sources */,
 				477416DD0FC0992000FB7A1E /* iAnnotationView.m in Sources */,
+				477416EC0FC1346600FB7A1E /* iProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

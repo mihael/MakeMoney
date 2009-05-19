@@ -41,47 +41,73 @@
 		}
 		[geoCoder setCoordinate:location.coordinate];
 		[geoCoder start];
+		[progressView setHidden:NO];
+		[progressView setText:@"Please wait..."];		
 	}
 }
 
 - (IBAction)pickButtonPushed:(id)sender {
-	[notControls setPickDelegate:self];
-	[notControls pickInView:worldView];
+	if (![www isAuthenticatedWithPikchur]) {
+		progressView.hidden = NO;
+		[progressView setText:@"Authenticating for image uploads."];
+		[progressView setProgress:0];
+		[www authenticateWithPikchur];
+	} else {
+		[notControls setPickDelegate:self];
+		[notControls pickInView:worldView];
+	}
 }
 
 #pragma mark notControls pick delegate
 - (void)picked:(NSDictionary*)info
 {
-	DebugLog(@"uploading...");
 	if (info) {
-		NSString *image_path = [Kriya imageWithInMemoryImage:[info valueForKey:UIImagePickerControllerOriginalImage]];
-		[littleArrowView setImage:[Kriya imageWithUrl:image_path]];
-		/*		[indica setHidden:NO];
-		[indica startAnimating];
-		NSString* success = [www uploadWithPikchur:image_path withDescription:@"raddarkopter" andLocation:location];
-		DebugLog(@"uploaded : %@", success);
-		[indica stopAnimating];*/
+		[selectedImagePath release];
+		selectedImagePath = [[Kriya imageWithInMemoryImage:[info valueForKey:UIImagePickerControllerOriginalImage]] retain];
+		[littleArrowView setImage:[Kriya imageWithUrl:selectedImagePath]];
+		imageSelected = YES;
 	}
 }
 
 #pragma mark MKReverseGeocoderDelegate methods
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error 
 {
-	NSArray *keys = [NSArray arrayWithObjects:@"status", nil];
-	NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"#raddarkopter lat:%F lon:%F .", location.coordinate.latitude, location.coordinate.longitude], nil];
-	NSDictionary *params = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
-	[www fechUpdateWithParams:params];
+	//NSArray *keys = [NSArray arrayWithObjects:@"status", nil];
+	//NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"#raddarkopter lat:%F lon:%F .", location.coordinate.latitude, location.coordinate.longitude], nil];
+	//NSDictionary *params = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+	[[iAlert instance] alert:@"Reverse Geocoder" withMessage:@"You are not located :)"];
+}
+
+- (void)uploadSelectedImage
+{
+	[www fechUploadWithPikchur:selectedImagePath withDescription:locationText andLocation:location andProgress:progressView];
 }
 
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
 {
-	
-	[worldView setCenterCoordinate:placemark.coordinate];
+	locationText = [[NSString stringWithFormat:@"#raddarkopter lat:%F lon:%F . %@, %@", placemark.coordinate.latitude, placemark.coordinate.longitude, [placemark locality], [placemark country]] retain];	
 	KopterPlaceMark *p=[[[KopterPlaceMark alloc] initWithCoordinate:placemark.coordinate]autorelease];
+	[worldView setCenterCoordinate:placemark.coordinate];
 	[worldView addAnnotation:p];
-	
+	//if image, send to pikchur and get back url, then send position with url
+	[progressView setHidden:NO];
+	[progressView setText:[NSString stringWithFormat:@"%@, %@", [placemark locality], [placemark country]]];
+	[progressView setNeedsDisplay];
+	if (imageSelected) {		
+		DebugLog(@"SENDING KOPTER POSITION with image %@", selectedImagePath);
+		[self uploadSelectedImage];
+	} else {
+		//just send position
+		DebugLog(@"SENDING KOPTER POSITION");
+		[self raddarkopterWith:locationText];
+	}
+}
+
+- (void)raddarkopterWith:(NSString*)text
+{
+	//send raddarkopter position
 	NSArray *keys = [NSArray arrayWithObjects:@"status", nil];
-	NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"#raddarkopter lat:%F lon:%F . %@, %@", placemark.coordinate.latitude, placemark.coordinate.longitude, [placemark locality], [placemark country]], nil];
+	NSArray *objects = [NSArray arrayWithObjects:text, nil];
 	NSDictionary *params = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
 	[www fechUpdateWithParams:params];
 }
@@ -148,15 +174,25 @@
 #pragma mark IIWWWDelegate
 - (void)notFeched:(NSString*)err
 {
-	DebugLog(@"#notFeched %@ : %@", [self.options valueForKey:@"url"], err);
-	//[indica stopAnimating];	
-	
+	DebugLog(@"#notFeched %@ : %@", [self.options valueForKey:@"url"], err);	
 }
 
 - (void)feched:(id)information
 {
 	if ([information isKindOfClass:[NSDictionary class]]) { //fresh list of locations, lets build it
-		if ([information valueForKey:@"list"]) {
+
+		if ([information valueForKey:@"auth_key"]) {
+			//this comes from authenticating with pikchur for the first and last time
+			progressView.hidden = YES;
+			[notControls setPickDelegate:self];
+			[notControls pickInView:worldView];
+		} else if ([information valueForKey:@"post"]) {
+			//this comes from pikchur after uploading
+			//send kopter position with pikchururl
+			[self raddarkopterWith:[NSString stringWithFormat:@"%@ %@", locationText, [[information valueForKey:@"post"] valueForKey:@"url"]]];
+			
+		} else if ([information valueForKey:@"list"]) {
+			//this comes from @raddarkopter
 			if (kopters) {
 				[kopters release];//replace previous kopters with fresh kopter locations
 				kopters = nil;
@@ -190,11 +226,16 @@
 			DebugLog(@"feched %i kopters", [kopters count]);
 
 		} else if ([information valueForKey:@"status"]) {
-				//this must be the returned status
-				DebugLog(@"REKORDED %@", information);			
+			//this must be the returned status
+			DebugLog(@"REKORDED %@", information);		
+			progressView.hidden = YES;
+			imageSelected = NO;
+			selectedImagePath = nil;
+			[littleArrowView setImage:nil];
+			[littleArrowView setHidden:YES];
 		} else {
 				//unknown things
-				DebugLog(@"REKORDED %@", information);
+				DebugLog(@"UNKNOWN REKORDED %@", information);
 		}
 	} else {
 		//this shuld nut hupen
@@ -288,7 +329,6 @@
 - (void)kopterHere
 {
 	if (!overKopter) {
-		//overKopter = [[UIView alloc] initWithFrame:CGRectMake(63, 2, 100, 40)];
 		overKopter = [[UIView alloc] initWithFrame:CGRectMake(0, 44, 480, 276)];
 		[overKopter setBackgroundColor:[UIColor blueColor]];
 		[overKopter setAlpha:0.38];
@@ -304,7 +344,7 @@
 		[overKopter addSubview:msg];
 	}
 	[self animateKopter];
-	[self.view addSubview:overKopter];
+	[self.view insertSubview:overKopter aboveSubview:progressView];
 }
 
 - (void)kopterClear 
@@ -360,8 +400,14 @@
 		[littleArrowView addTarget:self action:@selector(pickButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:littleArrowView];
 		[self.view insertSubview:kopterbar belowSubview:littleArrowView];
-
+		imageSelected = NO;
 	}	
+	if (!progressView) {
+		progressView = [[iProgressView alloc] initWithFrame:self.view.frame];
+		[self.view addSubview:progressView];
+		progressView.hidden = YES;
+	}
+	
 }
 
 - (void)stopFunctioning {
@@ -381,7 +427,8 @@
 }
 
 - (void)dealloc {
-	[littleArrowView dealloc];
+	[locationText release];
+	[littleArrowView release];
 	[tiktak invalidate];
 	[fecher invalidate];
 	[tiktak release];

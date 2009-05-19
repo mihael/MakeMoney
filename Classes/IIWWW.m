@@ -147,7 +147,7 @@
 - (void)invokeRequest:(id)request
 {
 	if ([request respondsToSelector:@selector(start)]) {
-		[server cancelAllOperations];
+		//[server cancelAllOperations];
 		[server addOperation:request];
 		[server go];
 		DebugLog(@"invokeRequest");
@@ -159,6 +159,38 @@
 	if (server) {
 		[server setDownloadProgressDelegate:d];
 	}
+}
+#pragma mark ASIHTTPRequest delegate
+- (void)imageUploadFailed:(ASIHTTPRequest *)request 
+{
+	if ([(id)self.delegate respondsToSelector:@selector(notFeched:)])
+		[self.delegate notFeched:[request responseString]];		
+}
+
+- (void)imageUploadFinished:(ASIHTTPRequest *)request 
+{
+	if ([(id)self.delegate respondsToSelector:@selector(feched:)]) {
+		NSError *error = [request error];
+		if (!error) {
+			NSDictionary *messages = [[request responseString] JSONValue];
+			DebugLog(@"PIKCHUR RESPONSE: %@", messages);
+			if ( messages==NULL || [[messages valueForKey:@"type"] isEqual:@"ERROR"]){
+				if (messages!=NULL) {
+					DebugLog(@"Pikchur error: %@", [messages valueForKey:@"message"]);
+					[self.delegate notFeched:[request responseString]];		
+				} else {
+					DebugLog(@"Pikchur failed");
+					[self.delegate notFeched:[request responseString]];		
+				}
+			} else if ([messages valueForKey:@"auth_key"]!=NULL){
+				DebugLog(@"Pikchur auth_key: %@", [messages valueForKey:@"auth_key"]);		
+				[[NSUserDefaults standardUserDefaults] setValue:[messages valueForKey:@"auth_key"] forKey:@"pikchur_auth_key"];
+				[self.delegate feched:messages];
+			} else if ([messages valueForKey:@"post"]!=NULL) {
+				[self.delegate feched:messages];
+			}
+		}
+	}	
 }
 
 #pragma mark ASINetworkQueue delegate methods
@@ -188,7 +220,70 @@
 	}
 }
 	
-#pragma mark image uploading supports pikchur
+
+#pragma mark Pikchur API 
+- (void)fechUploadWithPikchur:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location andProgress:(id)progressDelegate
+{
+	NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
+	NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
+	
+	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kPikchurUploadURL]] autorelease];
+	if (progressDelegate)
+		[request setDownloadProgressDelegate:progressDelegate];
+	
+	NSString *stringBoundary = [NSString stringWithString:@"0xKhTmLbOuNdArY"];
+	NSMutableData *postBody = [NSMutableData data];
+	[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"dataAPIimage\"; filename=\"upload.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];		
+	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithUrl:imagePath]], 0.9)];
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[request setPostBody:postBody];
+	[request setPostValue:username forKey:@"data[api][username]"];
+	[request setPostValue:password forKey:@"data[api][password]"];
+	//[request setPostValue:@"" forKey:@"data[api][origin]"];
+	[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
+	[request setPostValue:@"plusOOts6YVcBSFGgT0jaA" forKey:@"data[api][key]"];
+	[request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"] forKey:@"data[api][auth_key]"];
+	[request setPostValue:description forKey:@"data[api][status]"];
+	[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].latitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lat]"];
+	[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].longitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lon]"];	
+	
+	//doit
+	[request setDelegate:self];
+	[request setDidFailSelector:@selector(imageUploadFailed:)];
+	[request setDidFinishSelector:@selector(imageUploadFinished:)];
+	[request start];
+}
+
+- (void)authenticateWithPikchur {
+	if (![[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"]) {
+		DebugLog(@"#authenticateWithPikchur");
+		NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
+		NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
+		
+		ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kPikchurAuthURL]] autorelease];
+		[request setPostValue:username forKey:@"data[api][username]"];
+		[request setPostValue:password forKey:@"data[api][password]"];
+		[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
+		[request setPostValue:kPikchurAPIKey forKey:@"data[api][key]"];
+
+		[request setDelegate:self];
+		[request setDidFailSelector:@selector(imageUploadFailed:)];
+		[request setDidFinishSelector:@selector(imageUploadFinished:)];
+		[request start];
+	}
+} 
+
+- (BOOL)isAuthenticatedWithPikchur 
+{
+	if ([[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"])
+		return YES;
+	return NO;
+}
+
+#pragma mark image scaling and rotating
 - (UIImage*)scaleAndRotateImage:(UIImage*)image {  
 	int kMaxResolution = 1024; // Or whatever  
 	
@@ -295,133 +390,5 @@
 	
 	return imageCopy;  
 }  
-
-#pragma mark Pikchur API 
-
-- (NSString*)uploadWithPikchur:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location {
-	[self authenticateWithPikchur];
-	NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
-	NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
-	
-	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kPikchurUploadURL]] autorelease];
-
-	NSString *stringBoundary = [NSString stringWithString:@"0xKhTmLbOuNdArY"];
-	NSMutableData *postBody = [NSMutableData data];
-	[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-/*
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][auth_key]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][key]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[kPikchurAPIKey dataUsingEncoding:NSUTF8StringEncoding]];
-	
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][username]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[username dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][password]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[password dataUsingEncoding:NSUTF8StringEncoding]];
-	
-	
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][status]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[description dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][origin]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[@"MTI" dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	
-	if (location) {
-		[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][geo][lat]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-		[postBody appendData:[[NSString stringWithFormat:@"%F",[location coordinate].latitude] dataUsingEncoding:NSUTF8StringEncoding]];
-		//[postBody appendData:[@"46.055" dataUsingEncoding:NSUTF8StringEncoding]];//LJUBLJANA
-		[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-		[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][geo][lon]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-		[postBody appendData:[[NSString stringWithFormat:@"%F",[location coordinate].longitude] dataUsingEncoding:NSUTF8StringEncoding]];
-		//[postBody appendData:[@"14.514" dataUsingEncoding:NSUTF8StringEncoding]];//LJUBLJANA		
-		[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	}
-	*/
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"dataAPIimage\"; filename=\"upload.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	[postBody appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-	
-	
-	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithUrl:imagePath]], 0.9)];
-	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-	
-	[request setPostBody:postBody];
-	
-	
-	//**********************************
-	
-	[request setPostValue:username forKey:@"data[api][username]"];
-	[request setPostValue:password forKey:@"data[api][password]"];
-	//[request setPostValue:@"" forKey:@"data[api][origin]"];
-	[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
-	[request setPostValue:@"plusOOts6YVcBSFGgT0jaA" forKey:@"data[api][key]"];
-	[request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"] forKey:@"data[api][auth_key]"];
-	[request setPostValue:description forKey:@"data[api][status]"];
-	[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].latitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lat]"];
-	[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].longitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lon]"];	
-	
-	//[request setPostValue:UIImageJPEGRepresentation([Kriya imageWithUrl:imagePath], 0.9) forKey:@"dataAPIimage"];
-	//[request setShouldStreamPostDataFromDisk:YES];
-	//[request setFile:imagePath forKey:@"dataAPIimage"];
-	//[request setPostBody:<#(NSMutableData *)#>]
-	[request start];
-	
-	NSError *error = [request error];
-	if (!error) {
-		NSDictionary *messages = [[request responseString] JSONValue];
-		DebugLog(@"PIKCHUR RESPONSE: %@", messages);
-		if ( messages==NULL || [[messages valueForKey:@"type"] isEqual:@"ERROR"]){
-			if (messages!=NULL) {
-				DebugLog(@"Pikchur error: %@", [messages valueForKey:@"message"]);
-				return nil;
-			} else {
-				DebugLog(@"Pikchur failed");
-				return nil;
-			}
-		} else if ([messages valueForKey:@"auth_key"]!=NULL){
-			DebugLog(@"#uploadWithPikchur auth_key: %@", [messages valueForKey:@"auth_key"]);		
-			return nil;
-		} else if ([messages valueForKey:@"post"]!=NULL) {
-			return [[messages valueForKey:@"post"] valueForKey:@"url"];
-		}
-	}
-	DebugLog(@"Error: %@", error);
-	return nil;
-}
-
-- (void)authenticateWithPikchur {
-	if (![[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"]) {
-		DebugLog(@"#authenticateWithPikchur");
-		NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
-		NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
-		
-		ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kPikchurUploadURL]] autorelease];
-		[request setPostValue:username forKey:@"data[api][username]"];
-		[request setPostValue:password forKey:@"data[api][password]"];
-		[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
-		[request setPostValue:@"plusOOts6YVcBSFGgT0jaA" forKey:@"data[api][key]"];
-
-		[request start];
-		NSError *error = [request error];
-		if (!error) {
-			NSDictionary *messages = [[request responseString] JSONValue];
-			if ( messages==NULL || [[messages valueForKey:@"type"] isEqual:@"ERROR"]){
-					if (messages!=NULL) {
-						DebugLog(@"Pikchur error: %@", [messages valueForKey:@"message"]);
-					} else {
-						DebugLog(@"Pikchur failed");
-					}
-			} else if ([messages valueForKey:@"auth_key"]!=NULL){
-				[[NSUserDefaults standardUserDefaults] setValue:[messages valueForKey:@"auth_key"] forKey:@"pikchur_auth_key"];
-				DebugLog(@"#authenticateWithPikchur auth_key : %@", [messages valueForKey:@"auth_key"]);		
-			}	
-		}
-	}
-} 
 
 @end
