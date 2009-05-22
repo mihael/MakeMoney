@@ -1,0 +1,147 @@
+
+#0.0.1 <- 0.0.0
+
+=
+šiškaputana, nič od tega kar sem prej natipko, ne bom naredjo. dobre zamisli je dobro zavreči, če razmišljanje o njih pripelje v nejasnost.
+preprostost torej najdem skozi ljubezen do samega sebe. ko vem, česa nočem, o tistem ne razmišljam.
+
+= 22.maj.2009
+thinking about goldcut - cutting the transender program into two pieces, one can switch beetween by simple shaking
+first part would work as a menu second as content or whatever other simple way to use.
+
+
+#0.0.0 22.maj.2009
+progress report created
+
+
+
+
+READ A LEGEND ABOUT HOW THE Progress WAS USED:
+
+#bugfix + code was broken, feature did not work/behave as expected or was breaking other code
+#visionary + code nobody ordered, but has spiritual potential and behind-the-scene value, grown directly from the developers mind or whomevers hearts desire
+#theeye + code implemented for theeye is like code implemented directly for God-Goddes/SelfNature, usually accompanied with great motivation for doing good
+#zoom + code did work, but this change made it powerful, look better and taste fine
+#submit + submit (used standalone)
+#cut + proposal (used standalone)
+
+EXAMPLE FROM @ikoodeveloper at Koornk:
+
+#0.9.12.3 -> 0.9.12.4
+bugfix + cool font for posting
+
+#0.9.12.2 -> 0.9.12.3
+bugfix + the line between cells disappearing sometimes
+bugfix + sometimes a line of text was clipped
+
+#0.9.12.1 -> 0.9.12.2
+bugfix + show image with aspect ratio while posting
+bugfix + revert to white background for posting, revert to default textview font
+bugfix + rewrite cells layout completely
+bugfix + center timeline loading indicator 
+bugfix + refresh recent on startups
+bugfix + add space between pikchur url and text
+theeye + icon changes: recent mentions replies settings
+
+#0.9.12 -> 0.9.12.1
+bugfix + you are waiting text removed
+bugfix + "open link in safari?" in "use link in cluck?" without "?"
+bugfix + using link from Cluck detail crashed ikoo
+bugfix + rewert colors for posting view 
+bugfix + space between keyboard and toolbar back to 0
+theeye + in cluck detail, list "links and users" from cluck and "links" from cluck reply
+
+cut + ikoo 0.9.12 Appstore Submit Proposal
+
+#0.9.11 -> 0.9.12
+theeye + shake device to refresh current timeline while viewing timeline
+visionary + ask for cache cleaning if very dirty 
+visionary + koo posting view rewrite: programatic view loading - just to get it rotating properly :)
+visionary + Kitsch can be rotated
+theeye + prepared code for deleting clucks, a cool, currently nonexistent feature of Koornk API
+theeye + show small image above textview while posting, only if image picked
+zoom + rotating pictures now works the way as people would expect it to work
+zoom + rotating the device in hand is fully working and supported in all views
+
+#0.9.10 -> 0.9.11
+theeye + webview background changed to white, was being cleared to black before, added: You are waiting...
+zoom + load only small version of Kitsch assets
+zoom + fully rotational timelines
+zoom + koo posting rotational
+zoom + zomming pikchurs
+zoom + remember selected timeline between startups
+theeye + some minor visual changes
+
+#0.9.9 -> 0.9.10
+zoom + have an action sheet in every link view, asking: do yo want to open in safari or use in cluck or cancel
+
+#0.9.8 -> 0.9.9
+bugfix + webview was crashing, go ahead, you try loading a web page with a nil url 
+
+#0.9.7 -> 0.9.8
+theeye + when on EDGE, do not animate post view back to timelines, just show spinner
+
+#0.9.6 -> 0.9.7
+bugfix + bottom bar hides only when called from recent, mentions or replies
+visionary + kitschmaster.com integration finished
+visionary + blessed and charged the code with spiritual healing love
+
+#0.9.1 -> 0.9.6
+visionary + added kitschmaster.com integration - with webview! and slides!
+theeye + disable posting buttons while posting and posting and posting
+visionary + reserve "http://pikchur.com/xxx".length chars for pikchur link, when posting
+visionary + hiding the bottom tolbar for more space when viewing clucks, timelines, pikchurs, kiches, webpages...
+
+#0.8.16 -> 0.9.1
+zoom + loads and loads of "small" fixes, improvements and stuff that made me happy
+zoom + location accuracy 100m, 
+zoom + pikchur upload pop up removed
+zoom + reloading timelines improvements
+
+#0.8.15 -> 0.8.16
+theeye - removed "Fetching..." labels and stuff like that
+
+#0.8.12 -> 0.8.15
+zoom + made pikchur viewer behave smarter
+theeye + full reply to in detail
+theeye + detail inline pikchur under text - reversed urls order
+theeye + settings tuned
+theeye + Theta Beta in version description
+
+#0.8.11 -> 0.8.12
+theeye + inline web
+
+#0.8.10 -> 0.8.11
+zoom +  replies can be seen now
+theeye  inline pikchurs in detail view
+
+#0.8.9 -> 0.8.10
+visionary + moved to 2.2 SDK
+zoom + moved JSON framework inside the project
+bugfix + was not authenticating with pikchur
+
+#0.8.8 -> 0.8.9
+zoom + better versioning
+
+#0.8.7 -> 0.8.8
+zoom + small code fixes, for stability
+
+#0.8.5 -> 0.8.7
+theeye + tapping icon in timelines fetches original user image, tapping in cluck detail replies
+zoom + try to fix rotational problem - needs testing
+
+#0.8.3 -> 0.8.5
+theeye + listcell value width was too small
+zoom + after taping the send button imediately animate back - no need for user to tap close
+bugfix + natsulions legacy Configuration.h+m replaced by a simple iConfig.h+m
+
+#0.8.2 -> 0.8.3
+visionary + prepared picture selection for ipod touch
+
+#0.8.1 -> 0.8.2
+zoom + press postButton cleans replyId and onekoo
+bugfix + mentions caching repaired
+
+#0.8.0 -> 0.8.1
+visionary + build with xcode 3.1.2 and iphone2.2 sdk
+
