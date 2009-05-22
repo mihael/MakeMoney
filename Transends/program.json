@@ -1,5 +1,2 @@
 [
-{"ii":"KopterView", "ions":{"experimental":"true", "reuse":"true", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true"}},
-
-{"ii":"FecherListView", "ions":{"background":"main.jpg", "url":"http://www.promet.si", "params":"id=25", "method":"get", "filter":"promet_list", "filter_base_url":"http://www.promet.si"}, "ior":{"stop":"true"}}
 ]

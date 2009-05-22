@@ -224,20 +224,24 @@
 			
 			if ([options valueForKey:@"icon_url"])
 				[Kriya imageWithUrl:[options valueForKey:@"icon_url"]];
-			if ([options valueForKey:@"background_url"])
+			if ([options valueForKey:@"background_url"]) {
+				if ([options valueForKey:@"refech"]) { //remove feched then, and refech
+					[Kriya clearImageWithUrl:[options valueForKey:@"background_url"]];
+				}
 				background = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
+			}
 			if (!background && [options valueForKey:@"background"])
 				background = [self imageNamed:[options valueForKey:@"background"]];
 			if (!background)
 				background = [self imageNamed:@"main.jpg"];
 			
+			//notify we feched
+			if ([delegate respondsToSelector:@selector(fechedTransend)])
+				[delegate fechedTransend];
+			
 			NSTimeInterval elapsedTime = [fechTime timeIntervalSinceNow];  
 			DebugLog(@"Fech time: %f", -elapsedTime);              
-			
-//			float vibeDiff = [vibe + elapsedTime];
-//			if (vibeDiff<)
-//TODO calculate time diff and act
-			
+						
 			//transend
 			if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) 
 			{

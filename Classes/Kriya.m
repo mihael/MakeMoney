@@ -122,6 +122,14 @@
 	return nil;
 }
 
++ (void)clearImageWithUrl:(NSString*)url 
+{
+	NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
+	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
+	path = [NSString stringWithFormat:@"%@/%@", path, [Kriya md5:url]];	
+	[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+}
+
 + (NSString*)md5:(NSString*)str 
 {
 	const char *cStr = [str UTF8String];

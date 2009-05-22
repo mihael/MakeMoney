@@ -20,7 +20,7 @@
 
 - (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
-	DebugLog(@"FILTERING WP %@", information);
+	//DebugLog(@"FILTERING WP %@", information);
 	NSString* base_url = @"";
 	if (options) {
 		if (![options valueForKey:@"filter_base_url"]) {
@@ -35,7 +35,7 @@
 	NSUInteger i, count = [urls count];
 	for (i = 0; i < count; i++) {
 		NSString* link = [urls objectAtIndex:i];
-		[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@/%@\"}, %@},", base_url, [link stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"], k_ior_notstop];
+		[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@/%@\"}, %@},", base_url, [link stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"], k_ior_stop_space];
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];
 }

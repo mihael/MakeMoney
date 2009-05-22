@@ -12,6 +12,19 @@
 #define kTwitPicFormat @"http://twitpic.com/"
 
 @implementation IIFilter
+
+- (id)prepareRequestFor:(NSDictionary*)options 
+{
+	//override this if you want to prepare requests from within filter code
+	return nil;
+}
+
+- (NSArray*)prepareRequestsFor:(NSDictionary*)options
+{
+	//override this if you want to prepare requests from within filter code
+	return nil;
+}
+
 - (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
 	//override this

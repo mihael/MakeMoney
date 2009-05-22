@@ -2,14 +2,20 @@
 //  IIFilter.h
 //  MakeMoney
 //
-//some usables, when writing a filter
+
+//usable Behaviors, for when writing IIFilter subclasses
 #define k_ior_stop @"\"ior\":{\"stop\":\"true\"}"
 #define k_ior_notstop @"\"ior\":{\"stop\":\"false\"}"
+#define k_ior_stop_space @"\"ior\":{\"stop\":\"true\", \"space\":\"true\"}"
+#define k_ior_notstop_space @"\"ior\":{\"stop\":\"false\", \"space\":\"true\"}}"
+#define k_ior_stop_notspace @"\"ior\":{\"stop\":\"true\", \"space\":\"false\"}}"
+#define k_ior_notstop_notspace @"\"ior\":{\"stop\":\"false\", \"space\":\"false\"}}"
 
-//this class should be overriden if you want to filter IWWW feches
+//this class should be overriden if you want to filter IIWWW feches auto-magically
 @interface IIFilter : NSObject {
 }
-
+- (id)prepareRequestFor:(NSDictionary*)options;
+- (NSArray*)prepareRequestsFor:(NSDictionary*)options;
 - (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options;
 - (NSString*)pageParamName;
 - (NSString*)limitParamName;

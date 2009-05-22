@@ -32,22 +32,33 @@
 
 	IIFilter *filter;
 	NSString *filterName;
-
+	
+	BOOL cancel;
 }
 @property (nonatomic, assign) id <IIWWWDelegate> delegate;
 @property (readonly, retain) ASINetworkQueue *server;
 @property (readwrite, retain) NSURL *url;
 @property (readwrite, retain) NSString *params;
 @property (readwrite, retain) NSString *filterName;
+@property (readwrite, retain) NSDictionary *options;
 
 - (id)initWithOptions:(NSDictionary*)o;
+- (void)loadOptions:(NSDictionary*)o;
+
 - (void)setProgressDelegate:(id)d;
 
-//generic for any request you like
+
+//generic for any sync request you like
 - (void)invokeRequest:(id)request;
 
+//generic for any async request you like
+- (void)envokeRequest:(id)request;
+
 //feching information from web
-- (void)fech;
+- (void)cancelFech; //cancel all operation
+- (void)fech; //fech whatever is set in options
+
+//fech methods - called automagically
 - (void)formFech;
 - (void)postFech;
 - (void)getFech;
@@ -58,6 +69,7 @@
 
 //supported pikchur upload supply it in ions like this: "pikchur":"username@password"
 - (void)fechUploadWithPikchur:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location andProgress:(id)progressDelegate;
+- (UIImage*)scaleAndRotateImage:(UIImage*)image;
 
 //this is sync
 //authenticate with pikchur and save auth_key for later use

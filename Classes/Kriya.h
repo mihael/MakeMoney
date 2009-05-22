@@ -39,8 +39,10 @@
 
 + (NSString*)imageWithInMemoryImage:(UIImage*)image;
 + (UIImage*)imageWithUrl:(NSString*)url; //feches image from web, caches to disk
++ (void)clearImageWithUrl:(NSString*)url; //clears feched image
 
 //create some hash
 + (NSString*)md5:(NSString*)str;
 
+//+ (*)textWithPath:(NSString*)filepath
 @end

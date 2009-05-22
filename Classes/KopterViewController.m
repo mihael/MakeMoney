@@ -6,26 +6,19 @@
 #import <CoreLocation/CoreLocation.h>
 #import "JSON.h"
 #import "URLUtils.h"
-#import "iAnnotationView.h"
 #import <MapKit/MapKit.h>
 #import <QuartzCore/QuartzCore.h>
 
 @implementation KopterPlaceMark
-@synthesize coordinate;
+@synthesize coordinate, title;
 
-- (NSString *)subtitle
+-(id)initWithCoordinate:(CLLocationCoordinate2D)c andTitle:(NSString*)t
 {
-	return @"Put some text here";
-}
-
-- (NSString *)title
-{
-	return @"kopter";
-}
-
--(id)initWithCoordinate:(CLLocationCoordinate2D)c
-{
-	coordinate=c;
+	self = [super init];
+	if (self!=nil) {
+		coordinate = c;
+		[self setTitle:t];
+	}
 	return self;
 }
 @end
@@ -34,23 +27,19 @@
 
 - (IBAction)kopterButtonPushed:(id)sender 
 { 
-	if (location) {
-		if (!geoCoder) {
-			geoCoder=[[MKReverseGeocoder alloc] initWithCoordinate:location.coordinate];
-			geoCoder.delegate=self;
-		}
-		[geoCoder setCoordinate:location.coordinate];
-		[geoCoder start];
-		[progressView setHidden:NO];
-		[progressView setText:@"Please wait..."];		
+	if (geoCoder) {
+		[geoCoder release];
+		geoCoder = nil;
 	}
+	geoCoder=[[MKReverseGeocoder alloc] initWithCoordinate:location.coordinate];
+	[geoCoder setDelegate:self];
+	[geoCoder start];
+	[notControls setProgress:@"Locating ..." animated:YES];
 }
 
 - (IBAction)pickButtonPushed:(id)sender {
 	if (![www isAuthenticatedWithPikchur]) {
-		progressView.hidden = NO;
-		[progressView setText:@"Authenticating for image uploads."];
-		[progressView setProgress:0];
+		[notControls setProgress:@"Preparing uploads..." animated:YES];
 		[www authenticateWithPikchur];
 	} else {
 		[notControls setPickDelegate:self];
@@ -65,6 +54,7 @@
 		[selectedImagePath release];
 		selectedImagePath = [[Kriya imageWithInMemoryImage:[info valueForKey:UIImagePickerControllerOriginalImage]] retain];
 		[littleArrowView setImage:[Kriya imageWithUrl:selectedImagePath]];
+		[littleArrowView setHidden:NO];
 		imageSelected = YES;
 	}
 }
@@ -75,55 +65,80 @@
 	//NSArray *keys = [NSArray arrayWithObjects:@"status", nil];
 	//NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"#raddarkopter lat:%F lon:%F .", location.coordinate.latitude, location.coordinate.longitude], nil];
 	//NSDictionary *params = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
-	[[iAlert instance] alert:@"Reverse Geocoder" withMessage:@"You are not located :)"];
+	[[iAlert instance] alert:@"Reverse Geocoder" withMessage:@"You are not located."];
 }
 
 - (void)uploadSelectedImage
 {
-	[www fechUploadWithPikchur:selectedImagePath withDescription:locationText andLocation:location andProgress:progressView];
+	[notControls setProgress:@"Uploading ..." animated:YES];
+	[www fechUploadWithPikchur:selectedImagePath withDescription:locationText andLocation:location andProgress:nil];
 }
 
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
 {
-	locationText = [[NSString stringWithFormat:@"#raddarkopter lat:%F lon:%F . %@, %@", placemark.coordinate.latitude, placemark.coordinate.longitude, [placemark locality], [placemark country]] retain];	
-	KopterPlaceMark *p=[[[KopterPlaceMark alloc] initWithCoordinate:placemark.coordinate]autorelease];
+	NSString *shortUrl = [self googleMapsUrlFor:placemark.coordinate];
+	if (shortUrl!=nil) {
+		locationText = [[NSString stringWithFormat:@"#raddarkopter lat:%F lon:%F %@, %@ %@", placemark.coordinate.latitude, placemark.coordinate.longitude, [placemark locality], [placemark country], shortUrl] retain];	
+	} else {
+		locationText = [[NSString stringWithFormat:@"#raddarkopter lat:%F lon:%F %@, %@", placemark.coordinate.latitude, placemark.coordinate.longitude, [placemark locality], [placemark country]] retain];	
+	}
+	
+	KopterPlaceMark *p=[[[KopterPlaceMark alloc] initWithCoordinate:placemark.coordinate andTitle:@"YOU"] autorelease];
 	[worldView setCenterCoordinate:placemark.coordinate];
 	[worldView addAnnotation:p];
 	//if image, send to pikchur and get back url, then send position with url
-	[progressView setHidden:NO];
-	[progressView setText:[NSString stringWithFormat:@"%@, %@", [placemark locality], [placemark country]]];
-	[progressView setNeedsDisplay];
 	if (imageSelected) {		
 		DebugLog(@"SENDING KOPTER POSITION with image %@", selectedImagePath);
 		[self uploadSelectedImage];
 	} else {
 		//just send position
 		DebugLog(@"SENDING KOPTER POSITION");
-		[self raddarkopterWith:locationText];
+		[self raddarkopterWith:locationText];			
 	}
+}
+
+//get short link for google maps 
+- (NSString*)googleMapsUrlFor:(CLLocationCoordinate2D)coor
+{
+	NSString *mapsUrl = [NSString stringWithFormat:@"http://maps.google.com/maps/mm?ll=%F,%F",coor.latitude, coor.longitude];
+	//NSString *mapsUrl = @"http://maps.google.com/maps/mm?ll=46.055,14.514"; //LJUBLJANA
+	
+	NSString *longUrl = [NSString stringWithFormat:@"http://is.gd/api.php?longurl=%@",[URLUtils encodeHTTP:mapsUrl]];
+	NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: longUrl] cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:30];
+	NSURLResponse *response;
+	NSError *error;
+	NSData *returnData = [NSURLConnection sendSynchronousRequest:urlRequest
+											   returningResponse:&response 
+														   error:&error];
+	NSString *shortUrl = [[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding] autorelease];
+
+	if (error) 
+		return nil;
+	return shortUrl;
+
 }
 
 - (void)raddarkopterWith:(NSString*)text
 {
+	[notControls setProgress:@"Updating ..." animated:YES];
 	//send raddarkopter position
 	NSArray *keys = [NSArray arrayWithObjects:@"status", nil];
 	NSArray *objects = [NSArray arrayWithObjects:text, nil];
-	NSDictionary *params = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+	NSDictionary *params = [NSDictionary dictionaryWithObjects:objects forKeys:keys];	
 	[www fechUpdateWithParams:params];
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation{
-	iAnnotationView *annView=[[iAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
-/*	MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
+	//iAnnotationView *annView=[[iAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
+	MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"currentloc"];
 	annView.animatesDrop=TRUE;
 	if([annotation title]==@"kopter")
 	{
-		[annView setPinColor:MKPinAnnotationColorGreen];
-	}
-	else
-	{
 		[annView setPinColor:MKPinAnnotationColorRed];
-	}*/
+	} else {
+		[annView setPinColor:MKPinAnnotationColorPurple];
+		
+	}
 	return annView;
 }
 
@@ -144,8 +159,8 @@
 - (void)locationManager:(CLLocationManager *)manager
 	didUpdateToLocation:(CLLocation *)newLocation
 		   fromLocation:(CLLocation *)oldLocation {
-	DebugLog(@"Got location: %d, %d", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
 	[manager stopUpdatingLocation];
+	DebugLog(@"Got location: %d, %d", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
 	
 	if (location){
 		[location release];
@@ -162,7 +177,7 @@
 	
 	[worldView setRegion:region animated:TRUE];
 	DebugLog(@"Location changed to Lat:%F Lon:%F", location.coordinate.latitude, location.coordinate.longitude);
-	if (!tiktak)
+	if (!tiktak) //have loc, start checking for kopters
 		[self startik];
 }
 
@@ -174,6 +189,8 @@
 #pragma mark IIWWWDelegate
 - (void)notFeched:(NSString*)err
 {
+	[notControls setProgress:nil animated:NO];
+	//[[iAlert instance] alert: withMessage:@"Please retry? Thanks."];
 	DebugLog(@"#notFeched %@ : %@", [self.options valueForKey:@"url"], err);	
 }
 
@@ -181,17 +198,19 @@
 {
 	if ([information isKindOfClass:[NSDictionary class]]) { //fresh list of locations, lets build it
 
-		if ([information valueForKey:@"auth_key"]) {
+		if ([information valueForKey:@"auth_key"]) 
+		{
 			//this comes from authenticating with pikchur for the first and last time
-			progressView.hidden = YES;
-			[notControls setPickDelegate:self];
-			[notControls pickInView:worldView];
-		} else if ([information valueForKey:@"post"]) {
+			[notControls setProgress:nil animated:YES];
+		} 
+		else if ([information valueForKey:@"post"]) 
+		{
 			//this comes from pikchur after uploading
 			//send kopter position with pikchururl
 			[self raddarkopterWith:[NSString stringWithFormat:@"%@ %@", locationText, [[information valueForKey:@"post"] valueForKey:@"url"]]];
-			
-		} else if ([information valueForKey:@"list"]) {
+		} 
+		else if ([information valueForKey:@"list"]) 
+		{
 			//this comes from @raddarkopter
 			if (kopters) {
 				[kopters release];//replace previous kopters with fresh kopter locations
@@ -207,52 +226,49 @@
 					NSString *lon_s;
 					[scanner scanUpToString:@"lat:" intoString:nil]; //move to next occurence of pre
 					[scanner setScanLocation:[scanner scanLocation] + 4]; //move past :
-					[scanner scanUpToString:@" " intoString:&lat_s];
+					[scanner scanUpToString:@" lon:" intoString:&lat_s];
 					[scanner setScanLocation:[scanner scanLocation] + 5]; //move past lon:
-					[scanner scanUpToString:@" ." intoString:&lon_s]; //scan up to latlon end
+					[scanner scanUpToString:@" " intoString:&lon_s]; //scan up to latlon end
 					CLLocationDegrees lat = [lat_s doubleValue];
 					CLLocationDegrees lon = [lon_s doubleValue];
-					//DebugLog(@"LONGITUDE VALUE [%@] [%@]", lat_s, lon_s);
-					//DebugLog(@"LONGITUDE VALUE %F %F", lat, lon);
-
 					CLLocation *loc = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
 					[kopters addObject:loc];
-					//DebugLog(@"added kopter %@", loc);
 					[loc release];
-				} else {
-					//DebugLog(@"not a kopter");
-				} //if it is not a raddarkopter rekord, just drop it
+				}//if it is not a raddarkopter rekord, just drop it
 			}
 			DebugLog(@"feched %i kopters", [kopters count]);
-
-		} else if ([information valueForKey:@"status"]) {
+		} 
+		else if ([information valueForKey:@"status"]) 
+		{
 			//this must be the returned status
 			DebugLog(@"REKORDED %@", information);		
-			progressView.hidden = YES;
+			[notControls setProgress:nil animated:YES];
 			imageSelected = NO;
-			selectedImagePath = nil;
-			[littleArrowView setImage:nil];
 			[littleArrowView setHidden:YES];
-		} else {
+		} 
+		else 
+		{
 				//unknown things
 				DebugLog(@"UNKNOWN REKORDED %@", information);
+				[notControls setProgress:nil animated:YES];
+
 		}
 	} else {
 		//this shuld nut hupen
 		DebugLog(@"THIS SHOULD NOT HAPPEN %@", information);
+		[notControls setProgress:nil animated:YES];
 	}
 }
-#pragma mark NSTimer
+#pragma mark timed feching 
 - (void)startfecher 
 {
-	//DebugLog(@"startik");
 	if (fecher) {
-		DebugLog(@"IS IT HERE?");
-		if ([fecher respondsToSelector:@selector(invalidate)])
-			[fecher invalidate];
+		DebugLog(@"startik");
+		[fecher invalidate];
 		[fecher release];
+		fecher = nil;
 	}
-	fecher = [[NSTimer scheduledTimerWithTimeInterval:10.0
+	fecher = [[NSTimer scheduledTimerWithTimeInterval:kFecherSpeed
 											   target:self 
 											 selector:@selector(fech:)
 											 userInfo:nil
@@ -271,6 +287,7 @@
 	if (tiktak) {
 		[tiktak invalidate];
 		[tiktak release];
+		tiktak = nil;
 	}
 	tiktak = [[NSTimer scheduledTimerWithTimeInterval:1.0
 											   target:self 
@@ -280,24 +297,30 @@
 }
 
 - (void)taktik:(NSTimer*)t {
-	//check how far we moved from last known location
-	//if far enough, check if any kopters are in radius of current location
-	//DebugLog(@"taktik");
 	if (location&&kopters) {
 		for(id kopter in kopters) {
-		    CLLocationDistance distance = [location getDistanceFrom:(CLLocation*)kopter];
+		    CLLocationDistance kopterDistanceFromCurrentLocation = [location getDistanceFrom:(CLLocation*)kopter];
 			//DebugLog(@"distance from %@ to %@", location, kopter);
 			//DebugLog(@"distance = %f", distance);
-			if (distance<=kKopterRadius) {
-				//notifiy
-				//DebugLog(@"KOPTER!");
-				[self kopterHere];
-				//flashhhlajts
-				MKPlacemark *p = [[[MKPlacemark alloc] initWithCoordinate:[(CLLocation*)kopter coordinate] addressDictionary:nil] autorelease];
-				//add placemark
-				[worldView addAnnotation:p];
-
-				break;
+			if (kopterDistanceFromCurrentLocation<=kKopterRadius) {
+				BOOL rekognajzd = NO;
+				for (id a in [worldView annotations]) {
+					if ( [[a title] isEqualToString:@"KOPTER"] && //compare only with kopters, not YOU
+						 [a coordinate].latitude==[kopter coordinate].latitude &&
+						 [a coordinate].longitude==[kopter coordinate].longitude) {
+						rekognajzd = YES;
+						break;
+					}
+				}
+				if (!rekognajzd) {//not yet projected unto the mind, just do it then
+					DebugLog(@"KOPTER HERE!");
+					[self kopterHere];
+					//flashhhlajts
+					KopterPlaceMark *p = [[[KopterPlaceMark alloc] initWithCoordinate:[(CLLocation*)kopter coordinate] andTitle:@"KOPTER"] autorelease];
+					//add placemark
+					[worldView addAnnotation:p];
+					//break; //break if kopter added
+				}
 			}
 		}
 	}
@@ -305,13 +328,18 @@
 
 //end all timers
 - (void)endtiks {
+	DebugLog(@"endtiks");
 	if (tiktak) {
 		[tiktak invalidate];
 		[tiktak release];
+		tiktak = nil;
+		DebugLog(@"endtiks tiktak");
 	}
 	if (fecher) {
 		[fecher invalidate];
 		[fecher release];
+		fecher = nil;
+		DebugLog(@"endtiks fecher");
 	}
 }
 
@@ -343,13 +371,16 @@
 		
 		[overKopter addSubview:msg];
 	}
+	if (!overKopter.superview) {
+		[self.view addSubview:overKopter];
+	}
 	[self animateKopter];
-	[self.view insertSubview:overKopter aboveSubview:progressView];
 }
 
 - (void)kopterClear 
 {
-	[overKopter removeFromSuperview];
+	if (overKopter.superview)
+		[overKopter removeFromSuperview];
 }
 
 #pragma mark IIController overrides
@@ -357,7 +388,6 @@
 	if (www)
 		[www release];
 	www = [[IIWWW alloc] initWithOptions:options];
-	//[www setProgressDelegate:progress];
 	[www setDelegate:self];
 	if ([options valueForKey:@"background"])
 		[background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];	
@@ -385,40 +415,34 @@
 
 	if (!kopterbar) {
 		kopterbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 480, 44)] autorelease];
-		[kopterbar setBarStyle:UIBarStyleBlackOpaque];
+		[kopterbar setBarStyle:UIBarStyleBlackTranslucent];
 		
 		UIBarButtonItem *flexi = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];		
 		UIBarButtonItem *fixi = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil] autorelease];		
 		[fixi setWidth:44.0];
 		kopterButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"finger.png"] style:UIBarButtonItemStylePlain target:self action:@selector(kopterButtonPushed:)] autorelease];	
-		[kopterButton setWidth:44.0];
 		pickButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"photo_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(pickButtonPushed:)] autorelease];		
-		[pickButton setWidth:44.0];
-		[kopterbar setItems:[NSArray arrayWithObjects:flexi, kopterButton, pickButton, fixi, nil]];
+		[kopterbar setItems:[NSArray arrayWithObjects:fixi, flexi, kopterButton, flexi, pickButton, nil]];
 		
-		littleArrowView = [[LittleArrowView alloc] initWithFrame:CGRectMake(442, 2, 38, 38) image:nil round:10 alpha:1.0];
+		littleArrowView = [[LittleArrowView alloc] initWithFrame:CGRectMake(436, 0, 44, 44) image:nil round:10 alpha:1.0];
 		[littleArrowView addTarget:self action:@selector(pickButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:littleArrowView];
 		[self.view insertSubview:kopterbar belowSubview:littleArrowView];
 		imageSelected = NO;
 	}	
-	if (!progressView) {
-		progressView = [[iProgressView alloc] initWithFrame:self.view.frame];
-		[self.view addSubview:progressView];
-		progressView.hidden = YES;
-	}
-	
 }
 
 - (void)stopFunctioning {
-	//[self endtiks];
-	DebugLog(@"KopteriewController#stopFunctioning");
-	//[self dislocatus];
+	[self endtiks];
+	[self dislocatus];
+	DebugLog(@"#stopFunctioning");
 }
 - (void)startFunctioning {
-	DebugLog(@"KopterViewController#startFunctioning");
+	DebugLog(@"#startFunctioning");
 	//this is ljubljana, default loc
-	location = [[CLLocation alloc] initWithLatitude:46.055 longitude:14.514];
+	if (!location) {
+		location = [[CLLocation alloc] initWithLatitude:46.055 longitude:14.514];
+	}		
 //	CLLocation *location2 = [[CLLocation alloc] initWithLatitude:46.056 longitude:14.514];
 //	DebugLog(@"distance between ljubljanas %F", [location getDistanceFrom:location2]);
 	[self locatus];
@@ -430,9 +454,11 @@
 	[locationText release];
 	[littleArrowView release];
 	[tiktak invalidate];
-	[fecher invalidate];
 	[tiktak release];
+	tiktak = nil;
+	[fecher invalidate];
 	[fecher release];
+	fecher = nil;
 	[overKopter release];
 	[location release];
 	[locationManager release];

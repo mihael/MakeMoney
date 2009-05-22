@@ -11,14 +11,11 @@
 
 - (IBAction)buttonTouched:(id)sender
 {
-	[indica startAnimating];
+	[notControls setProgress:@"Preparing ..." animated:YES];
 	[button setHidden:YES];
+	[www loadOptions:[options copy]]; //start with initial options
+	[notControls setProgress:@"Refreshing ..." animated:YES];	
 	[www fech];	
-}
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
 }
 
 - (void)dealloc {
@@ -30,54 +27,89 @@
 #pragma mark IIWWWDelegate
 - (void)notFeched:(NSString*)err
 {
-	DebugLog(@"FecherViewController#notFeched %@ : %@", [self.options valueForKey:@"url"], err);
-	[indica stopAnimating];
-	[button setHidden:NO];
-	
+	if ([options valueForKey:@"fech_all"]) { //program says we want all pages available
+		//this is a fail, probably no more pages
+		//repress error
+		DebugLog(@"#notFeched probably finished feching all pages");
+	} else {
+		DebugLog(@"#notFeched %@ : %@", [[www options] valueForKey:@"url"], err);
+	}
+	[button setHidden:NO];	
+	[notControls setProgress:nil animated:YES];
+	[notControls lightDown];			
+	[self.transender transend];			
 }
 
 - (void)feched:(id)information
 {
-	[indica stopAnimating];
-	//[self.transender spot]; //rewind memory spots
-	//[self.transender rememberMemories:listing]; //replaces transender mem
-	if ([options valueForKey:@"message"]) { //delete self from program, if this is an automatic fech
-		[self.transender trimMemories]; //trim all that follows
-		[self.transender vipeCurrentMemorie]; //vipe self
-	}
-	
-	[self.transender putMemories:information]; //inserts into transender mem
-	
-	if ([options valueForKey:@"page"]) { //program says we want automatic repage
-		NSUInteger page = [[options valueForKey:@"page"] intValue];
-		int page_plus = [[options valueForKey:@"page_plus"] intValue];
-		if (page_plus<=0) {
-			page_plus = 1;
-		}
-		NSUInteger nextPage = page + page_plus;	
-		NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:options];
-		[repaged_options setValue:[NSString stringWithFormat:@"%i",nextPage] forKey:@"page"];	
-		
-		[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"ii\":\"FecherView\", \"ions\":%@, \"ior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];
-	}
-	
-	if (self.notControls)
-		[self.notControls lightDown];
+	if (information) {	
 
-	//do not wait for timer, since data is already feched
-	[self.transender transend];
+		if ([options valueForKey:@"message"]&&!trimmedSelf) { //delete self from program, if this is an automatic fech
+			[self.transender trimMemories]; //trim all that follows
+			[self.transender vipeCurrentMemorie]; //vipe self
+			trimmedSelf = YES;
+		}
+		
+		if ([[www options] valueForKey:@"page"]) { 
+			NSUInteger page = [[[www options] valueForKey:@"page"] intValue];
+			//repage
+			int page_plus = [[[www options] valueForKey:@"page_plus"] intValue];
+			if (page_plus<=0) {
+				page_plus = 1;
+			}
+			NSUInteger nextPage = page + page_plus;	
+			NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:[www options]];
+			[repaged_options setValue:[NSString stringWithFormat:@"%i",nextPage] forKey:@"page"];				
+			
+			[self.transender putMemories:information];
+			//DebugLog(@"FECH ALL %@", information);
+
+			if ([options valueForKey:@"fech_all"]) { //program says we want all pages available
+				//this should add images from all pages
+				[www loadOptions:repaged_options];
+				[notControls setProgress:[NSString stringWithFormat:@"Feching page %i ...", nextPage] animated:NO];
+				[www fech];				
+			} else { //half-automatic
+				[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"ii\":\"FecherView\", \"ions\":%@, \"ior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];				
+				[notControls setProgress:nil animated:YES];
+				[notControls lightDown];			
+				[self.transender transend];			
+			}
+
+		} else { //no repaging, just one fech
+			[self.transender putMemories:information]; //inserts into transender mem
+			[notControls setProgress:nil animated:YES];
+			[notControls lightDown];			
+			[self.transender transend];			
+		}		
+	} else {
+		//probably all is feched
+		[notControls setProgress:nil animated:YES];
+		[notControls lightDown];			
+		[self.transender transend];			
+	}
+
 }
 
 #pragma mark IIController
 - (void)functionalize {
-	//if (www)
-		[www release];
-	www = [[IIWWW alloc] initWithOptions:options];
-	//[www setProgressDelegate:progress];
-	[www setDelegate:self];
+	if (!www) {
+		www = [[IIWWW alloc] initWithOptions:[options copy]];//make a copy, man
+		[www setDelegate:self];
+	}
+	
+	trimmedSelf = NO;
 
-	if ([options valueForKey:@"background"])
+	if ([options valueForKey:@"background_url"]) {
+		[self.background setImage:[Kriya imageWithUrl:[options valueForKey:@"background_url"]]];
+	} else if ([options valueForKey:@"background"]) {
 		[self.background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];
+	}
+	
+	if (![self.background image]) {
+		[self.background setImage:[self.transender imageNamed:@"main.jpg"]];
+	}
+	
 	if ([options valueForKey:@"button_title"]) {
 		[self.button setTitle:[options valueForKey:@"button_title"] forState:UIControlStateNormal];	
 		[self.button setEnabled:YES];
@@ -93,14 +125,18 @@
 }
 
 - (void)stopFunctioning {
-	//DebugLog(@"#stopFunctioning");
+	[www cancelFech];
+	[notControls setProgress:nil animated:YES];	
+	DebugLog(@"#stopFunctioning");
 }
 
 - (void)startFunctioning {
-	//DebugLog(@"#startFunctioning");
 	[button setHidden:NO];
-	[www fech];
-
+	if ([options valueForKey:@"message"]) {
+		[notControls setProgress:@"Feching page ..." animated:YES];
+		[www fech];
+	}
+	DebugLog(@"#startFunctioning");
 }
 
 @end

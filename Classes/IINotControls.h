@@ -2,18 +2,28 @@
 //  IINotControls.h
 //  MakeMoney
 //
+#import "iProgressView.h"
+#import "iAccelerometerSensor.h"
+#define kProgressorAnimationKey @"progressorViewAnimation"
 #define kButtonAnimated NO
 #define kButtonAnimationKey @"buttonViewAnimation"
 #define kBackLightAnimationKey @"backLightViewAnimation"
 #define kMessageFontName @"Helvetica-Bold"
 #define kMessageFontSize 18.0
 
+#define kHorizontalSwipeDragMin  12
+#define kVerticalSwipeDragMax 4
+
 @protocol IINotControlsDelegate <NSObject>
+- (void)shake:(id)notControl;//device was shaked
 
 - (void)leftTouch:(id)notControl; //left underbutton touch
 - (void)rightTouch:(id)notControl; //right underbutton touch
-//TODO- (void)spaceTouch; //empty space touch - can be while openNot
-//TODO- (void)spaceSwipe; //empty space swipe - can be while openNot
+- (void)spaceTouch:(id)notControl touchPoint:(CGPoint)point; //empty space touch - can be while openNot && spaceUp
+- (void)spaceSwipeRight:(id)notControl; //empty space swipe - can be while openNot
+- (void)spaceSwipeLeft:(id)notControl; //empty space swipe - can be while openNot
+//- (void)spacePinch:(CGPoint)touchPoint; //empty space swipe - can be while openNot
+//- (void)spaceSwipe:(CGPoint)touchPoint; //empty space swipe - can be while openNot
 
 - (void)oneTap:(id)notControl; //button tapped once
 
@@ -23,8 +33,10 @@
 - (void)picked:(NSDictionary*)info;//returnes selected image,images
 @end
 
+@class iProgressView;
+
 //Imagine not control.
-@interface IINotControls : UIView <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+@interface IINotControls : UIView <iAccelerometerSensorDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
     id <IINotControlsDelegate> delegate;
 	id notController;
     id pickDelegate;
@@ -32,39 +44,56 @@
     UIButton *button;
 	UIButton *leftButton;
 	UIButton *rightButton;
-	UITextView *messageView;
-	BOOL notOpen;
+	UILabel *messageView;
 	CGRect notControlsFrame;
 	CGRect notControlsOneButtonFrame;
+	UIImageView *backLight;
+	NSTimer *wach;	
+	UIView *underView;
+	iProgressView *progressor;
 	
-	NSTimer *wach;
+	CGPoint startTouchPosition;
 	BOOL buttonInTouching;
 	BOOL buttonNotLightUp;
-	UIImageView *backLight;
+	BOOL notOpen;
 	BOOL canOpen;
 	BOOL bigButton;
-	UIView *underView;
+	
 }
 @property (nonatomic, assign) id <IINotControlsDelegate> delegate;
 @property (nonatomic, assign) id notController;
 @property (nonatomic, assign) id pickDelegate;
+@property (readonly) BOOL notOpen;
 @property (readwrite) BOOL canOpen;
 @property (readwrite) BOOL bigButton;
+@property (readonly) iProgressView *progressor;
 
 - (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options;
 
 - (void)pickInView:(UIView*)inView; //open image picker and let select
 
+//the space without is the topmost view, the view where the button lies
 - (void)spaceUp; //open the space without 
 - (void)spaceDown;
+
+//can use for simple messages with activity indica
+//shows transparent panel with indica and text above, when set to nil, hides
+//the progressor view always brings up the space without, so nobody can tap other buttons while displayed
+- (void)setProgress:(NSString*)progress animated:(BOOL)animated;
+- (void)animateProgressorIn;
+- (void)animateProgressorOut;
+- (void)animateProgressorChange;
+
+
+
 
 - (void)openOrCloseNotControls:(NSTimer*)timer;
 - (void)lightUp;
 - (void)lightDown;
 - (void)lightUpOrDown;
 
-- (void)openNot; //open controls - show underbuttons
-- (void)closeNot;
+- (void)openNotControls; //open controls - show underbuttons
+- (void)closeNotControls;
 
 - (void)spinButtonWith:(BOOL)direction;
 - (void)stillButton;
@@ -83,5 +112,13 @@
 - (void)hideMessage;
 
 - (int)chooseOneFrom:(NSString*)jsonMemories; 
+
+- (void)accelerometerDetected;
+
+//touching overrides
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+//- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 
 @end

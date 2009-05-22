@@ -10,8 +10,8 @@
 @interface FecherViewController : IIController <IIWWWDelegate> {
 	IBOutlet UIImageView *background;
 	IBOutlet UIButton *button;
-	IBOutlet UIActivityIndicatorView *indica;
 	IIWWW *www;
+	BOOL trimmedSelf;
 }
 @property (readonly) IBOutlet UIButton *button;
 @property (readonly) IBOutlet UIImageView *background;

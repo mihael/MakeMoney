@@ -18,6 +18,14 @@
 		4704209C0FA132E800D7DE30 /* Filter_koornk.m in Sources */ = {isa = PBXBuildFile; fileRef = 4704209B0FA132E800D7DE30 /* Filter_koornk.m */; };
 		470421850FA1E0F400D7DE30 /* URLPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 470421820FA1E0F400D7DE30 /* URLPair.m */; };
 		470421860FA1E0F400D7DE30 /* URLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 470421840FA1E0F400D7DE30 /* URLUtils.m */; };
+		4705A5A60FC54FCA005DA8FC /* Filter_wp_gallery_list.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705A5A50FC54FCA005DA8FC /* Filter_wp_gallery_list.m */; };
+		4705A8860FC5EA60005DA8FC /* iAccelerometerSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705A8810FC5EA60005DA8FC /* iAccelerometerSensor.m */; };
+		4705A8870FC5EA60005DA8FC /* iAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705A8830FC5EA60005DA8FC /* iAnnotationView.m */; };
+		4705A8880FC5EA60005DA8FC /* iProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705A8850FC5EA60005DA8FC /* iProgressView.m */; };
+		4705A9780FC60058005DA8FC /* mr_foto_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4705A9760FC60058005DA8FC /* mr_foto_icon.png */; };
+		4705A9790FC60058005DA8FC /* mr_foto_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4705A9770FC60058005DA8FC /* mr_foto_image.png */; };
+		4705A98B0FC603D4005DA8FC /* kepo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4705A98A0FC603D4005DA8FC /* kepo_icon.png */; };
+		4705AAA90FC709E4005DA8FC /* Progress in Resources */ = {isa = PBXBuildFile; fileRef = 4705AAA80FC709E4005DA8FC /* Progress */; };
 		4707D7790FB0928D00094125 /* KopterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4707D7780FB0928D00094125 /* KopterViewController.m */; };
 		4707D7870FB093DB00094125 /* KopterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4707D7860FB093DB00094125 /* KopterView.xib */; };
 		4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707D8500FB2D86400094125 /* CoreLocation.framework */; };
@@ -65,8 +73,6 @@
 		477386800F4ACCB20044085E /* Kriya.m in Sources */ = {isa = PBXBuildFile; fileRef = 477386720F4ACCB20044085E /* Kriya.m */; };
 		477386810F4ACCB20044085E /* NSHTTPCookieAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 477386740F4ACCB20044085E /* NSHTTPCookieAdditions.m */; };
 		477416DA0FC098B900FB7A1E /* kepo.png in Resources */ = {isa = PBXBuildFile; fileRef = 477416D90FC098B900FB7A1E /* kepo.png */; };
-		477416DD0FC0992000FB7A1E /* iAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477416DC0FC0992000FB7A1E /* iAnnotationView.m */; };
-		477416EC0FC1346600FB7A1E /* iProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477416EB0FC1346600FB7A1E /* iProgressView.m */; };
 		477ABD4E0F45641100696306 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD480F45641100696306 /* UIKit.framework */; };
 		477ABD4F0F45641100696306 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD490F45641100696306 /* Foundation.framework */; };
 		477ABD500F45641100696306 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD4A0F45641100696306 /* CoreGraphics.framework */; };
@@ -195,6 +201,18 @@
 		470421820FA1E0F400D7DE30 /* URLPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLPair.m; path = Classes/URLPair.m; sourceTree = "<group>"; };
 		470421830FA1E0F400D7DE30 /* URLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = URLUtils.h; path = Classes/URLUtils.h; sourceTree = "<group>"; };
 		470421840FA1E0F400D7DE30 /* URLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = URLUtils.m; path = Classes/URLUtils.m; sourceTree = "<group>"; };
+		4705A5A40FC54FCA005DA8FC /* Filter_wp_gallery_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_wp_gallery_list.h; path = Classes/Filter_wp_gallery_list.h; sourceTree = "<group>"; };
+		4705A5A50FC54FCA005DA8FC /* Filter_wp_gallery_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_wp_gallery_list.m; path = Classes/Filter_wp_gallery_list.m; sourceTree = "<group>"; };
+		4705A8800FC5EA60005DA8FC /* iAccelerometerSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iAccelerometerSensor.h; path = Classes/iAccelerometerSensor.h; sourceTree = "<group>"; };
+		4705A8810FC5EA60005DA8FC /* iAccelerometerSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iAccelerometerSensor.m; path = Classes/iAccelerometerSensor.m; sourceTree = "<group>"; };
+		4705A8820FC5EA60005DA8FC /* iAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iAnnotationView.h; path = Classes/iAnnotationView.h; sourceTree = "<group>"; };
+		4705A8830FC5EA60005DA8FC /* iAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iAnnotationView.m; path = Classes/iAnnotationView.m; sourceTree = "<group>"; };
+		4705A8840FC5EA60005DA8FC /* iProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iProgressView.h; path = Classes/iProgressView.h; sourceTree = "<group>"; };
+		4705A8850FC5EA60005DA8FC /* iProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iProgressView.m; path = Classes/iProgressView.m; sourceTree = "<group>"; };
+		4705A9760FC60058005DA8FC /* mr_foto_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mr_foto_icon.png; path = Artwork/mr_foto_icon.png; sourceTree = "<group>"; };
+		4705A9770FC60058005DA8FC /* mr_foto_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mr_foto_image.png; path = Artwork/mr_foto_image.png; sourceTree = "<group>"; };
+		4705A98A0FC603D4005DA8FC /* kepo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kepo_icon.png; path = Artwork/kepo_icon.png; sourceTree = "<group>"; };
+		4705AAA80FC709E4005DA8FC /* Progress */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Progress; sourceTree = "<group>"; };
 		4707D7770FB0928D00094125 /* KopterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KopterViewController.h; path = Classes/KopterViewController.h; sourceTree = "<group>"; };
 		4707D7780FB0928D00094125 /* KopterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KopterViewController.m; path = Classes/KopterViewController.m; sourceTree = "<group>"; };
 		4707D7860FB093DB00094125 /* KopterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KopterView.xib; sourceTree = "<group>"; };
@@ -261,10 +279,6 @@
 		477386730F4ACCB20044085E /* NSHTTPCookieAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSHTTPCookieAdditions.h; path = Classes/NSHTTPCookieAdditions.h; sourceTree = "<group>"; };
 		477386740F4ACCB20044085E /* NSHTTPCookieAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSHTTPCookieAdditions.m; path = Classes/NSHTTPCookieAdditions.m; sourceTree = "<group>"; };
 		477416D90FC098B900FB7A1E /* kepo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kepo.png; path = Artwork/kepo.png; sourceTree = "<group>"; };
-		477416DB0FC0992000FB7A1E /* iAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iAnnotationView.h; sourceTree = "<group>"; };
-		477416DC0FC0992000FB7A1E /* iAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iAnnotationView.m; sourceTree = "<group>"; };
-		477416EA0FC1346600FB7A1E /* iProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iProgressView.h; sourceTree = "<group>"; };
-		477416EB0FC1346600FB7A1E /* iProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iProgressView.m; sourceTree = "<group>"; };
 		477ABD480F45641100696306 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		477ABD490F45641100696306 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		477ABD4A0F45641100696306 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -467,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				472965420F4859C10053F946 /* Hajlov */,
+				4705AAA80FC709E4005DA8FC /* Progress */,
 				477386850F4ACCCD0044085E /* Kriya */,
 				281C6CD70DB2D82200F60ACC /* AppViews */,
 				080E96DDFE201D6D7F000001 /* AppRoot */,
@@ -514,6 +529,8 @@
 				4759131A0FBA076F0079FA20 /* Filter_promet_webcam.m */,
 				475912E10FB9756F0079FA20 /* Filter_promet_list.h */,
 				475912E20FB9756F0079FA20 /* Filter_promet_list.m */,
+				4705A5A40FC54FCA005DA8FC /* Filter_wp_gallery_list.h */,
+				4705A5A50FC54FCA005DA8FC /* Filter_wp_gallery_list.m */,
 				4707D8B00FB3104D00094125 /* Filter_wp_gallery.h */,
 				4707D8B10FB3104D00094125 /* Filter_wp_gallery.m */,
 				472EA6730FAEEF0000B3F18B /* Filter_hai_galery.h */,
@@ -535,6 +552,9 @@
 		472965380F4834F50053F946 /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				4705A98A0FC603D4005DA8FC /* kepo_icon.png */,
+				4705A9760FC60058005DA8FC /* mr_foto_icon.png */,
+				4705A9770FC60058005DA8FC /* mr_foto_image.png */,
 				477416D90FC098B900FB7A1E /* kepo.png */,
 				47EB30920FBE29C90013C02F /* photo_icon.png */,
 				4723232B0FBDCCC300D49E87 /* finger.png */,
@@ -571,6 +591,12 @@
 		4734896D0F99E69D00A1D78A /* i */ = {
 			isa = PBXGroup;
 			children = (
+				4705A8800FC5EA60005DA8FC /* iAccelerometerSensor.h */,
+				4705A8810FC5EA60005DA8FC /* iAccelerometerSensor.m */,
+				4705A8820FC5EA60005DA8FC /* iAnnotationView.h */,
+				4705A8830FC5EA60005DA8FC /* iAnnotationView.m */,
+				4705A8840FC5EA60005DA8FC /* iProgressView.h */,
+				4705A8850FC5EA60005DA8FC /* iProgressView.m */,
 				479C505B0FA79480003DF1B2 /* LittleArrowView.h */,
 				479C505C0FA79480003DF1B2 /* LittleArrowView.m */,
 				470421810FA1E0F400D7DE30 /* URLPair.h */,
@@ -583,10 +609,6 @@
 				47EBE8BD0F4C10E1009F377E /* Reachability.m */,
 				4773866C0F4ACCB20044085E /* iAlert.h */,
 				4773866D0F4ACCB20044085E /* iAlert.m */,
-				477416DB0FC0992000FB7A1E /* iAnnotationView.h */,
-				477416DC0FC0992000FB7A1E /* iAnnotationView.m */,
-				477416EA0FC1346600FB7A1E /* iProgressView.h */,
-				477416EB0FC1346600FB7A1E /* iProgressView.m */,
 			);
 			name = i;
 			sourceTree = "<group>";
@@ -894,6 +916,10 @@
 				4723232E0FBDCCC300D49E87 /* overfinger.png in Resources */,
 				47EB30930FBE29C90013C02F /* photo_icon.png in Resources */,
 				477416DA0FC098B900FB7A1E /* kepo.png in Resources */,
+				4705A9780FC60058005DA8FC /* mr_foto_icon.png in Resources */,
+				4705A9790FC60058005DA8FC /* mr_foto_image.png in Resources */,
+				4705A98B0FC603D4005DA8FC /* kepo_icon.png in Resources */,
+				4705AAA90FC709E4005DA8FC /* Progress in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -953,8 +979,10 @@
 				475912E30FB9756F0079FA20 /* Filter_promet_list.m in Sources */,
 				4759131B0FBA076F0079FA20 /* Filter_promet_webcam.m in Sources */,
 				47231FA60FBA376C00D49E87 /* FecherListViewController.m in Sources */,
-				477416DD0FC0992000FB7A1E /* iAnnotationView.m in Sources */,
-				477416EC0FC1346600FB7A1E /* iProgressView.m in Sources */,
+				4705A5A60FC54FCA005DA8FC /* Filter_wp_gallery_list.m in Sources */,
+				4705A8860FC5EA60005DA8FC /* iAccelerometerSensor.m in Sources */,
+				4705A8870FC5EA60005DA8FC /* iAnnotationView.m in Sources */,
+				4705A8880FC5EA60005DA8FC /* iProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

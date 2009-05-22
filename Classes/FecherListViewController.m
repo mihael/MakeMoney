@@ -9,80 +9,88 @@
 @implementation FecherListViewController
 @synthesize fecherList, background;
 
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
 - (void)dealloc {
+	[fecherList release];
 	[www release];
-	www = nil;
     [super dealloc];
 }
+#pragma mark refreshing button
+- (IBAction)refresh:(id)sender 
+{
+	[notControls setProgress:@"Preparing ..." animated:YES];
+	[www loadOptions:[options copy]]; //start with initial options
+	[fecherList release];
+	fecherList = nil;
+	fecherList = [[NSArray alloc] init];
+	selectedFech = 0;
+	[fecherTable reloadData];
+	[notControls setProgress:@"Refreshing ..." animated:YES];
+	[www fech];
+}
+
 
 #pragma mark IIWWWDelegate
 - (void)notFeched:(NSString*)err
 {
-	DebugLog(@"#notFeched %@ : %@", [self.options valueForKey:@"url"], err);
-	[indica stopAnimating];
+	[notControls setProgress:nil animated:YES];	
+	if ([options valueForKey:@"fech_all"]) { //program says we want all pages available
+		//this is a fail, probably no more pages
+		//repress error
+		DebugLog(@"#notFeched probably finished feching all pages");
+	} else {
+		DebugLog(@"#notFeched %@ : %@", [[www options] valueForKey:@"url"], err);
+	}
 }
 
 - (void)feched:(id)information
 {
-	[indica stopAnimating];
-	//[self.transender spot]; //rewind memory spots
-	//[self.transender rememberMemories:listing]; //replaces transender mem
-	//[self.transender trimMemoriesBeyondSpot:[self.transender currentSpot]];
-	//[self.transender putMemories:information]; //inserts into transender mem
-	//[fecherList release];
-	[self setFecherList:information];
-	
-	if ([options valueForKey:@"page"]) { //program says we want automatic repage
-		NSUInteger page = [[options valueForKey:@"page"] intValue];
-		int page_plus = [[options valueForKey:@"page_plus"] intValue];
-		if (page_plus<=0) {
-			page_plus = 1;
+	if (information) {
+		if ([[www options] valueForKey:@"page"]) { 
+			NSUInteger page = [[[www options] valueForKey:@"page"] intValue];
+			//repage
+			int page_plus = [[[www options] valueForKey:@"page_plus"] intValue];
+			if (page_plus<=0) {
+				page_plus = 1;
+			}
+			NSUInteger nextPage = page + page_plus;	
+			NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:[www options]];
+			[repaged_options setValue:[NSString stringWithFormat:@"%i",nextPage] forKey:@"page"];				
+			
+			if ([options valueForKey:@"fech_all"]) { //program says we want all pages available
+				//this should fech all pages
+				//add current informations
+				//DebugLog(@"FECH ALL %@", information);
+				NSMutableArray *addedFecherList = [NSMutableArray arrayWithArray:[self fecherList]];
+				[addedFecherList addObjectsFromArray:information];
+				@synchronized(fecherList) {
+					[self setFecherList:[NSArray arrayWithArray:addedFecherList]];
+				}
+				[fecherTable reloadData];			
+				//reset www with repaged and call www again
+				[www loadOptions:repaged_options];
+				//refech				
+				[notControls setProgress:[NSString stringWithFormat:@"Feching page %i ...", nextPage - 1] animated:NO];
+				[www fech];
+
+			} else { //program says we want half-automatic repage
+				//this runs once and is done
+				@synchronized(fecherList) {
+					[self setFecherList:information];
+				}
+				[fecherTable reloadData];			
+				[notControls setProgress:nil animated:YES];					
+				[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"ii\":\"FecherListView\", \"ions\":%@, \"ior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];
+			}
+		} else { //no page param
+			@synchronized(fecherList) {
+				[self setFecherList:information];
+			}
+			[fecherTable reloadData];			
+			[notControls setProgress:nil animated:YES];	
 		}
-		NSUInteger nextPage = page + page_plus;	
-		NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:options];
-		[repaged_options setValue:[NSString stringWithFormat:@"%i",nextPage] forKey:@"page"];	
-		
-		[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"ii\":\"FecherListView\", \"ions\":%@, \"ior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];
+	} else { //if no information just close progress
+		[notControls setProgress:nil animated:YES];	
 	}
-	
-	
-	//update fecherList table
-	[fecherTable reloadData];
-	//scroll to remembered position	
-	NSUInteger ii[2] = {0, selectedFech};
-	NSIndexPath* iP = [NSIndexPath indexPathWithIndexes:ii length:2];
-	//[fecherTable scrollToRowAtIndexPath:iP atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    [fecherTable selectRowAtIndexPath:iP animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-}
-
-#pragma mark IIController
-- (void)functionalize {
-	if ([options valueForKey:@"background"])
-		[self.background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];
-
-	if (www)
-		[www release];
-	www = [[IIWWW alloc] initWithOptions:options];
-	[www setDelegate:self];
-	fecherList = [[NSArray alloc] init];
-	selectedFech = 0;
-	selectedFech = [[NSUserDefaults standardUserDefaults] integerForKey:kSelectedFech];
-}
-
-- (void)stopFunctioning {
-	//DebugLog(@"#stopFunctioning");
-}
-
-- (void)startFunctioning {
-	//DebugLog(@"#startFunctioning");
-	[indica startAnimating];
-	[www fech];
 }
 
 #pragma mark UITableViewDelegate methods
@@ -119,6 +127,7 @@
 		[cell.textLabel setNumberOfLines:0];
 //		[cell.textLabel setMinimumFontSize:13.0];
 		[cell. textLabel setTextColor:[UIColor whiteColor]];
+		
 	}		
 	//update
 	[cell.textLabel setText:[[fech valueForKey:@"ions"] valueForKey:@"message"]];
@@ -131,13 +140,91 @@
 	@synchronized(fecherList) {
 		fech = [fecherList objectAtIndex:[indexPath row]];
 	}
-	DebugLog(@"selected %@", fech);
+	//DebugLog(@"selected %@", fech);
 	selectedFech = [indexPath row];
 	[[NSUserDefaults standardUserDefaults] setInteger:selectedFech forKey:kSelectedFech];
 
 	[self.transender trimMemories];
 	[self.transender putMemories:[NSMutableArray arrayWithObject:fech]];
 	[self.transender transend];
+}
+
+#pragma mark IIController
+//this method is repeated on each transend, so must be careful how you implement things
+- (void)functionalize {
+	if (!listbar) {
+		listbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 480, 44)] autorelease];
+		[listbar setBarStyle:UIBarStyleBlackTranslucent];
+		
+		UIBarButtonItem *flexi = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];		
+		UIBarButtonItem *fixi = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil] autorelease];		
+		[fixi setWidth:44.0];
+		title = [[[UIBarButtonItem alloc] initWithTitle:[options valueForKey:@"title"] style:UIBarButtonItemStylePlain target:self action:@selector(refresh:)] autorelease];	
+		button = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"photo_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refresh:)] autorelease];		
+		[listbar setItems:[NSArray arrayWithObjects:fixi, flexi, title, flexi, button, nil]];
+		
+		littleArrowView = [[LittleArrowView alloc] initWithFrame:CGRectMake(436, 0, 44, 44) image:nil round:10 alpha:1.0];
+		[littleArrowView addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:littleArrowView];
+		[self.view insertSubview:listbar belowSubview:littleArrowView];
+	}	
+	
+	if ([options valueForKey:@"background"])
+		[self.background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];
+	if ([options valueForKey:@"title"]) {
+		[title setTitle:[options valueForKey:@"title"]];
+	} else {
+		[title setTitle:@""];
+	}
+
+	if ([options valueForKey:@"button_icon"]) {
+		[button setImage:[transender imageNamed:[options valueForKey:@"button_icon"]]];
+	} else {
+		[button setImage:nil];
+		[button setEnabled:NO];
+	}
+	if ([options valueForKey:@"icon"])
+		[littleArrowView setImage:[transender imageNamed:[options valueForKey:@"icon"]]];
+	
+	if (!www) {
+		www = [[IIWWW alloc] initWithOptions:[options copy]];//make a copy, man
+		[www setDelegate:self];
+	}
+	if (!fecherList) {
+		fecherList = [[NSArray alloc] init];
+		selectedFech = 0;
+	}
+	
+}
+
+- (void)stopFunctioning {
+	[www cancelFech];
+	[notControls setProgress:nil animated:YES];	
+	//save current state if asked
+	if ([options valueForKey:@"restore_key"])
+		[[NSUserDefaults standardUserDefaults] setValue:fecherList forKey:[options valueForKey:@"restore_key"]];
+	DebugLog(@"#stopFunctioning");
+}
+
+- (void)startFunctioning {
+	selectedFech = [[NSUserDefaults standardUserDefaults] integerForKey:kSelectedFech];
+	if ([options valueForKey:@"restore_key"]&&[[NSUserDefaults standardUserDefaults] valueForKey:[options valueForKey:@"restore_key"]]) {
+		[fecherList release];
+		fecherList = nil;
+		fecherList = [[NSArray alloc] initWithArray:[[NSUserDefaults standardUserDefaults] valueForKey:[options valueForKey:@"restore_key"]]];		
+		[fecherTable reloadData];
+		//DebugLog(@"START FUNC with restore %@", [options valueForKey:@"restore_key"]);
+		//try to reselect
+		if (selectedFech>0&&selectedFech<[fecherList count]) {
+			NSIndexPath *p = [NSIndexPath indexPathForRow:selectedFech inSection:0];
+			[fecherTable selectRowAtIndexPath:p animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+		}
+	} else {
+		[notControls setProgress:@"Feching ..." animated:YES];
+		//[www loadOptions:[options copy]];
+		[www fech];
+	}
+	DebugLog(@"#startFunctioning");
 }
 
 

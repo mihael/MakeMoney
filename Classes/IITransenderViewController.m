@@ -79,20 +79,27 @@
 }
 
 - (void)transendedWithView:(IIController*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior {
-	DebugLog(@"#transendedWithView %@ ions %@ ior %@", transend, ions, ior);
+	DebugLog(@"#transendedWithView %@ ions %@ ior %@", transend, ions, ior);	
+	[self setNotBehavior:ior];
 	if (self.notControls && [transend respondsToSelector:@selector(setNotControls:)])
 		[transend setNotControls:self.notControls];//give the current controller access to notControls
-	[self setNotBehavior:ior];
-	if (![ior valueForKey:@"non_stop_functioning"]) {  //do not stop functioning
-		if ([transendController respondsToSelector:@selector(stopFunctioning)]) {
-			[transendController stopFunctioning]; //stop the previous view if can
-		} 
-	}		
+
+	if ([transendController respondsToSelector:@selector(stopFunctioning)]) {
+		[transendController stopFunctioning]; //stop the previous controller 
+	} 
+
 	[self transit:transend.view]; //transit with the fresh view
-	[self setTransendController:transend];
+	
+	if (transendController!=transend) {//save controller if changed
+		[self setTransendController:transend]; 
+	} else {
+		DebugLog(@"#transendedWithView again");
+	}
+
 	if ([transendController respondsToSelector:@selector(startFunctioning)]) {
 		[transendController startFunctioning]; //start the current view if can
 	}
+
 	[self continueWithBehavior];
 }
 
@@ -150,6 +157,7 @@
 
 	if (avoidBehavior) { //just stop and do not much else
 		[transender meditate];
+		[notControls lightUp];
 		if (delegate) {
 			if ([delegate respondsToSelector:@selector(meditating)]) {
 				[delegate meditating];
@@ -159,6 +167,7 @@
 		if (notBehavior) {
 			BOOL stop = [[notBehavior valueForKey:@"stop"] boolValue];
 			if (stop) {
+				[notControls lightUp];
 				if ([transender isTransending]) { //no need to meditate if already meditating
 					[transender meditate];
 					if (delegate) {
@@ -168,6 +177,7 @@
 					}								
 				}
 			} else {
+				[notControls lightDown];
 				if (![transender isTransending]) { //no need to transend if already transending
 					[transender transend];
 					if (delegate) {
@@ -180,8 +190,15 @@
 			if (revibe) {
 				[transender reVibe:[revibe floatValue]];
 			}
+			NSString *space= [notBehavior valueForKey:@"space"];
+			DebugLog(@"SETTING BEHAVIOR space %@", space);
+			if ([space isEqualToString:@"up"]||[space isEqualToString:@"true"])
+				[notControls spaceUp];
+			if ([space isEqualToString:@"down"]||[space isEqualToString:@"false"])
+				[notControls spaceDown];
 		} else { //transend if no notbehavior 
 			[transender transend];
+			[notControls lightDown];
 			if (delegate) {
 				if ([delegate respondsToSelector:@selector(transending:)])
 					[delegate transending];
@@ -313,6 +330,10 @@
 }
 
 #pragma mark IINotControlsDelegate
+- (void)shake:(id)notControl { //device is shaked
+	[transender meditateWith:0];
+}
+
 - (void)oneTap:(id)notControl { //button was just tapped
 	if ([transender isTransending]) {
 		[notControl lightUp];
@@ -351,5 +372,33 @@
 	[transender invokeTransend];
 }
 
+- (void)spaceTouch:(id)notControl touchPoint:(CGPoint)point { //space was just tapped
+	if ([notControl notOpen]) { //use only when not open notControls
+		if ([transender isTransending]) {
+			[notControl lightUp];
+			[transender meditate];
+		} else {
+			[notControl lightDown];
+			[transender transend];
+		}		
+	}
+}
+
+- (void)spaceSwipeRight:(id)notControl { //empty space swipe - can be while openNot
+	if (![notControl notOpen]) {
+		[transender changeDirectionTo:kIITransenderDirectionUp];
+		[transender invokeTransend];
+	}
+}
+
+- (void)spaceSwipeLeft:(id)notControl { //empty space swipe - can be while openNot
+	if (![notControl notOpen]) {
+		[transender changeDirectionTo:kIITransenderDirectionDown];
+		[transender invokeTransend];
+	}
+}
+
+- (void)picked:(id)notControl {
+}
 
 @end

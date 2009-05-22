@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
+	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, 480.0, 320.0) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
 	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
 	[notControls setCanOpen:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"button_opens_not_controls"] boolValue]];
 	[self.view addSubview:notControls];
@@ -85,10 +85,10 @@
 
 #pragma mark IITransenderViewControllerDelegate
 - (void)transending {
-	[notControls lightDown];
+	//[notControls lightDown];
 }
 - (void)meditating {
-	[notControls lightUp];
+	//[notControls lightUp];
 }
 
 #pragma mark experiments

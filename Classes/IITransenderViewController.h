@@ -70,13 +70,10 @@
 - (void)fechingTransend;
 - (void)fechedTransend;
 - (void)continueWithBehavior;
-
 - (void)transendedWithView:(IIController*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
 - (void)transendedWithImage:(UIImage*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
 - (void)transendedWithMovie:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
 - (void)transendedWithMusic:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
-- (void)transendedWithMessage:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
-
 //transender delegate
 
 

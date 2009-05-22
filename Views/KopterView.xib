@@ -49,7 +49,7 @@
 					<object class="IBMKMapView" id="298915951">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{0, 44}, {480, 320}}</string>
+						<string key="NSFrameSize">{480, 364}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -226,8 +226,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>background</string>
 							<string>indica</string>
-							<string>kopterButton</string>
-							<string>kopterbar</string>
 							<string>littleArrowView</string>
 							<string>message</string>
 							<string>worldView</string>
@@ -236,8 +234,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIImageView</string>
 							<string>UIActivityIndicatorView</string>
-							<string>UIButton</string>
-							<string>UIToolbar</string>
 							<string>LittleArrowView</string>
 							<string>UILabel</string>
 							<string>MKMapView</string>

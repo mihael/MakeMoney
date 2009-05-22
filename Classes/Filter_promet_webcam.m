@@ -42,7 +42,7 @@
 		if ([uc count] > 2) {
 			NSString* link = [uc objectAtIndex:2];
 			//DebugLog(@"LINK %@", link);
-			[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@\"}, %@},", [URLUtils encodeHTTP:link], k_ior_stop];		
+			[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"refech\":\"true\", \"background_url\":\"%@\"}, %@},", [URLUtils encodeHTTP:link], k_ior_stop_space];		
 		}
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];

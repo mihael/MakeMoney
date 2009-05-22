@@ -12,7 +12,7 @@
 }
 
 - (id)initWithFrame:(CGRect)frame text:(NSString*)t{
-	CGRect r = CGRectInset(frame, 100, 88);
+	CGRect r = CGRectInset(frame, 144, 88);
     if (self = [super initWithFrame:r]) {
         // Initialization code
 		text = [[UILabel alloc] initWithFrame:CGRectMake(kPad, kPad, r.size.width-kPad, 44)];
@@ -32,7 +32,7 @@
 		[indica startAnimating];
 		[self addSubview:indica];
 		[self setBackgroundColor: [UIColor clearColor]];
-		[self setAlpha:0.83];
+		[self setAlpha:0.38];
     }
     return self;
 }
@@ -45,8 +45,8 @@
 	//CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
 	//CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0); 	
 	//CGRect drawrect = CGRectMake(touch1.x, touch1.y, touch2.x - touch1.x, touch2.y - touch1.y);
-	CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
-	//CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+	CGContextSetFillColorWithColor(context, [UIColor grayColor].CGColor);
+	CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
 	CGRect drawrect = rect;
 	CGFloat radius = 13.0;	
 	CGFloat minx = CGRectGetMinX(drawrect), midx = CGRectGetMidX(drawrect), maxx = CGRectGetMaxX(drawrect);
@@ -105,7 +105,7 @@
 - (void)setProgress:(float)p 
 {
 	if (p<=0) {
-		[progress setHidden:NO];		
+		[progress setHidden:YES];		
 	} else {
 		[progress setHidden:NO];
 		[progress setProgress:p];		

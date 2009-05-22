@@ -5,9 +5,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IINotControls.h"
 #import "MakeMoneyAppDelegate.h"
+#import "iProgressView.h"
+#import "iAccelerometerSensor.h"
 
 @implementation IINotControls
-@synthesize notController, delegate, pickDelegate, canOpen, bigButton;
+@synthesize notController, delegate, pickDelegate, notOpen, canOpen, bigButton, progressor;
 
 - (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options
 {
@@ -16,6 +18,7 @@
 		backLight = [[[UIImageView alloc] initWithFrame:frame] retain];
 		[self addSubview:backLight];
 		[self hideBackLight];
+		notOpen = YES;
 		canOpen = [[options valueForKey:@"button_opens_not_controls"]boolValue];
 		bigButton = [[options valueForKey:@"big_button"]boolValue];
 		notControlsFrame = frame;
@@ -55,19 +58,25 @@
 		[rightButton setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];
 		[rightButton addTarget:self action:@selector(rightButtonTouch) forControlEvents:UIControlEventTouchUpInside];
 
-		messageView = [[[UITextView alloc] initWithFrame:CGRectMake(kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding), (kLeftRightButtonSize+2*kPadding))]retain];
+		messageView = [[[UILabel alloc] initWithFrame:CGRectMake(kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding), (kLeftRightButtonSize+2*kPadding))]retain];
 		[messageView setBackgroundColor:[UIColor clearColor]];
 		[messageView setTextAlignment:UITextAlignmentCenter];
 		[messageView setTextColor:[UIColor whiteColor]];
 		[messageView setFont:[UIFont fontWithName:kMessageFontName size:kMessageFontSize]];
 		[messageView setText:@"OM OM OM"];
+			
+		progressor = [[iProgressView alloc] initWithFrame:self.frame text:nil];
+		[progressor setHidden:YES];
 		
 		[self addSubview:button];
 		[self addSubview:leftButton];
 		[self addSubview:rightButton];
-		[self closeNot];
+		[self addSubview:progressor];
+		[self closeNotControls];
 		buttonInTouching = NO;
 		buttonNotLightUp = YES;
+		[iAccelerometerSensor instance].delegate=self;
+		DebugLog(@"iAcc %@", [iAccelerometerSensor instance]);
     }
     return self;
 }
@@ -77,6 +86,17 @@
 	//magical time
 }
 
+- (void)dealloc 
+{
+	[backLight release];
+	[wach release];
+	[button release];
+	[leftButton release];
+	[rightButton release];
+    [super dealloc];
+}
+
+#pragma mark spinning
 //spining button
 - (void)spinButtonWith:(BOOL)direction
 {
@@ -113,6 +133,7 @@
 	[button.layer removeAllAnimations];
 }
 
+#pragma mark from superview remover
 - (void)unable
 {
 	//remove self from superview, but save superview
@@ -131,6 +152,7 @@
 		
 }
 
+#pragma mark animation callback 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)finished
 {
 	if (finished)
@@ -180,17 +202,6 @@
 	[self animateBackLightIn];
 }
 
-
-- (void)dealloc 
-{
-	[backLight release];
-	[wach release];
-	[button release];
-	[leftButton release];
-	[rightButton release];
-    [super dealloc];
-}
-
 #pragma mark button animations
 - (void)animateButtonsIn 
 {
@@ -227,7 +238,7 @@
 
 
 #pragma mark opening and closing
-- (void)openNot 
+- (void)openNotControls 
 {
 	if (canOpen)
 	{
@@ -235,7 +246,7 @@
 		rightButton.hidden = NO;
 		notOpen = NO;
 		[self animateButtonsIn];
-		[self setFrame:notControlsFrame];
+		[self spaceUp];
 		if (delegate) {
 			if ([delegate respondsToSelector:@selector(notControlsOpened:)]) {
 				[delegate notControlsOpened:self];
@@ -244,13 +255,13 @@
 	}
 }
 
-- (void)closeNot 
+- (void)closeNotControls
 {
 	leftButton.hidden = YES;
 	rightButton.hidden = YES;
 	notOpen = YES;
 	[self animateButtonsOut];
-	[self setFrame:notControlsOneButtonFrame];
+	[self spaceDown];
 	if (delegate) {
 		if ([delegate respondsToSelector:@selector(notControlsClosed:)]) {
 			[delegate notControlsClosed:self];
@@ -299,10 +310,10 @@
 {
 	if (notOpen) {
 		//[button setBackgroundImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateNormal];
-		[self openNot];
+		[self openNotControls];
 	} else {
 		//[button setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
-		[self closeNot];
+		[self closeNotControls];
 	}	
 }
 
@@ -380,6 +391,85 @@
 	return 1;
 }
 
+#pragma mark progressor 
+- (void)setProgress:(NSString*)progress animated:(BOOL)animated 
+{
+	if ([progressor isHidden])
+	{
+		if (progress!=nil) { //show and set text
+			[self spaceUp];
+			[progressor setHidden:NO];
+			[progressor setText:progress];
+			if (animated)
+				[self animateProgressorIn];			
+		}
+	} else { //not hidden
+		if (progress==nil) { //remove progressor if nil progress sent
+			[progressor setHidden:YES];
+			if (animated)
+				[self animateProgressorOut];
+			[self spaceDown];
+		} else { //change text 
+			[progressor setText:progress];
+			if (animated)
+				[self animateProgressorChange];
+		}
+	}
+}
+
+- (void)animateProgressorChange
+{
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+	CGRect frame = [progressor frame];
+	progressor.layer.anchorPoint = CGPointMake(0.5, 0.5);
+	progressor.layer.position = CGPointMake(frame.origin.x + 0.5 * frame.size.width, frame.origin.y + 0.5 * frame.size.height);
+	[CATransaction commit];
+	
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanFalse forKey:kCATransactionDisableActions];
+	[CATransaction setValue:[NSNumber numberWithFloat:2.0] forKey:kCATransactionAnimationDuration];
+	
+	CABasicAnimation *animation;
+	animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+	int r = arc4random() % 33;
+
+	if (r%2 == 0) {
+		animation.fromValue = [NSNumber numberWithFloat:2 * M_PI];
+		animation.toValue = [NSNumber numberWithFloat:0.0];
+	} else {
+		DebugLog(@"RIGHT");
+		animation.fromValue = [NSNumber numberWithFloat:0.0];
+		animation.toValue = [NSNumber numberWithFloat:2 * M_PI];		
+	}
+	
+	animation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear];
+	//animation.delegate = self;
+	[progressor.layer addAnimation:animation forKey:@"progressorChangeAnimation"];
+	
+	[CATransaction commit];
+}
+
+- (void)animateProgressorIn 
+{
+	CATransition *animation = [CATransition animation];
+	[animation setType:kCATransitionMoveIn];
+	[animation setSubtype:kCATransitionFromTop];
+	[animation setDuration:0.38];
+	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+	[[progressor layer] addAnimation:animation forKey:kProgressorAnimationKey];
+}
+
+- (void)animateProgressorOut 
+{
+	CATransition *animation = [CATransition animation];
+	[animation setType:kCATransitionMoveIn];
+	[animation setSubtype:kCATransitionFromBottom];
+	[animation setDuration:0.38];
+	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+	[animation setSubtype:kCATransitionFromRight];
+	[[progressor layer] addAnimation:animation forKey:kProgressorAnimationKey];
+}
 #pragma mark messages
 - (void)animateMessageIn 
 {
@@ -501,6 +591,67 @@
 		[pickDelegate picked:nil];
 }
 
+#pragma mark iAccelerometerSensorDelegate
+- (void)accelerometerDetected 
+{
+	DebugLog(@"SHAKE");
+	if (delegate) {
+		if ([delegate respondsToSelector:@selector(shake:)]) {
+			[delegate shake:self];
+		}
+	}
+}
 
+#pragma mark touches
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
+{
+    UITouch *touch = [touches anyObject];
+	
+/*TODO double taps for space
+	if([touch tapCount] == 2) {
+        // Process a double-tap gesture
+		if (delegate) {
+			if ([delegate respondsToSelector:@selector(spaceTouch:)]) {
+				[delegate spaceTouch:[]];
+			}
+		}
+    }
+*/	
+	if (delegate) {
+		if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)]) {
+ 			[delegate spaceTouch:self touchPoint:[touch locationInView:self]];
+		}
+	}
+}
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    startTouchPosition = [touch locationInView:self];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	if (delegate) {
+		UITouch *touch = [touches anyObject];
+		CGPoint currentTouchPosition = [touch locationInView:self];
+		// If the swipe tracks correctly.
+		if (fabsf(startTouchPosition.x - currentTouchPosition.x) >= kHorizontalSwipeDragMin &&
+			fabsf(startTouchPosition.y - currentTouchPosition.y) <= kVerticalSwipeDragMax)
+		{
+			// It appears to be a swipe.
+			if (startTouchPosition.x < currentTouchPosition.x) {
+				if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)])
+					[delegate spaceSwipeLeft:self];
+			} else {
+				if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)])
+					[delegate spaceSwipeRight:self];
+			}
+		} else {
+			// Process a non-swipe event.
+		}
+	}
+}
 
 @end

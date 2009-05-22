@@ -11,44 +11,54 @@
 #import "URLUtils.h"
 
 @implementation IIWWW
-@synthesize delegate, server, url, params, filterName;
+@synthesize delegate, server, url, params, filterName, options;
 
 - (id)initWithOptions:(NSDictionary*)o
 {
 	if (self = [super init]) {
-		options = o;
-		filter = nil;
-		filterName = [options valueForKey:@"filter"];
-		if (filterName) { //program says we want to filter information after receive
-			NSString *filterClassName = [NSString stringWithFormat:@"Filter_%@", filterName];
-			Class filterClass = NSClassFromString(filterClassName);
-			if (filterClass) {
-				filter = [[[filterClass alloc] init] retain];
-			}
-		}
-		
-		[self setUrl:[NSURL URLWithString:[options valueForKey:@"url"]]];
-		page = 1;
-		if ([options valueForKey:@"page"])
-			page = [[options valueForKey:@"page"] intValue];
-		limit = 38;
-		if ([options valueForKey:@"limit"])
-			limit = [[options valueForKey:@"limit"] intValue];
-		if ([options valueForKey:@"params"])
-			params = [options valueForKey:@"params"];
-
-		server = [[[ASINetworkQueue alloc] init] retain];	
-		[server setRequestDidFinishSelector:@selector(fechFinished:)];
-		[server setRequestDidFailSelector:@selector(fechFailed:)];
-
-		[server setDelegate:self];
+		[self loadOptions:o];
 	}
 	return self;
 }
 
-- (void)dealloc {
+- (void)loadOptions:(NSDictionary*)o
+{
+	[self setOptions:o];
 	[filter release];
+	filter = nil;
+	[self setFilterName:[options valueForKey:@"filter"]];
+	if (filterName) { //program says we want to filter information after receive
+		NSString *filterClassName = [NSString stringWithFormat:@"Filter_%@", filterName];
+		Class filterClass = NSClassFromString(filterClassName);
+		if (filterClass) {
+			filter = [[[filterClass alloc] init] retain];
+		}
+	}
+	
+	[self setUrl:[NSURL URLWithString:[options valueForKey:@"url"]]];
+	page = 1;
+	if ([options valueForKey:@"page"])
+		page = [[options valueForKey:@"page"] intValue];
+	limit = 38;
+	if ([options valueForKey:@"limit"])
+		limit = [[options valueForKey:@"limit"] intValue];
+	if ([options valueForKey:@"params"])
+		params = [options valueForKey:@"params"];
 	[server release];
+	server = nil;
+	server = [[[ASINetworkQueue alloc] init] retain];	
+	[server setRequestDidFinishSelector:@selector(fechFinished:)];
+	[server setRequestDidFailSelector:@selector(fechFailed:)];	
+	[server setDelegate:self];	
+}
+
+- (void)dealloc {
+	[options release];
+	options = nil;	
+	[filter release];
+	filter = nil;
+	[server release];
+	server = nil;
     [super dealloc];
 }
 //********************************************************************
@@ -66,19 +76,23 @@
 				[request setPostValue:[p valueForKey:parameter_name] forKey:parameter_name];				
 			}
 		}
-	
-		[server cancelAllOperations];
-		[server addOperation:request];
-		[server go];		
+		[self invokeRequest:request];
 	}
 }
 
+- (void)cancelFech  //cancel all operation
+{
+	cancel = YES;
+}
+
+//fech - this is all you need for various downloads
 - (void)fech 
 {
 	if ([options valueForKey:@"method"]) {
 		if ([[options valueForKey:@"method"] isEqualToString:@"custom"]) {
-			if ([filter respondsToSelector:@selector(requestWith:)])  //filter holds custom implementation for feching urls
-				[self invokeRequest:[filter requestWith:options]];
+			if ([filter respondsToSelector:@selector(prepareRequestFor:)])  //filter holds custom implementation for feching urls
+				[self envokeRequest:[filter prepareRequestFor:options]];
+			//TODO envokeRequests... prepareRequests
 		} else if ([[options valueForKey:@"method"] isEqualToString:@"form"]) {
 			[self formFech];
 		} else if ([[options valueForKey:@"method"] isEqualToString:@"post"]) {
@@ -93,10 +107,17 @@
 - (void)formFech 
 {
 	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:self.url] autorelease];
-	if (filter) { //add paging TODO if filter respoond to
-		[request setPostValue:[NSString stringWithFormat:@"%i", page] forKey:[filter pageParamName]];
-		[request setPostValue:[NSString stringWithFormat:@"%i", limit] forKey:[filter limitParamName]];
+	NSString *limitParamName = @"limit";
+	NSString *pageParamName = @"page";	
+	if (filter) {
+		limitParamName = [filter limitParamName];
+		pageParamName = [filter pageParamName];
 	}
+
+	[request setPostValue:[NSString stringWithFormat:@"%i", page] forKey:pageParamName];
+	if ([options valueForKey:@"limit"]) 
+		[request setPostValue:[NSString stringWithFormat:@"%i", limit] forKey:limitParamName];
+	
 	if (params) { //add params
 		NSArray* list = [params componentsSeparatedByString:@"&"];
 		NSUInteger i, count = [list count];
@@ -105,9 +126,7 @@
 			[request setPostValue:[tuple objectAtIndex:1] forKey:[tuple objectAtIndex:0]];
 		}
 	}
-	[server cancelAllOperations];
-	[server addOperation:request];
-	[server go];
+	[self invokeRequest:request];
 }
 
 //TODO rewrite this posting thing, so it becomes more inteligent about the params
@@ -116,9 +135,7 @@
 	NSURL *posturl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@=%@&%@=%@&%@", [options valueForKey:@"url"], [filter pageParamName], [options valueForKey:@"page"], [filter limitParamName], [options valueForKey:@"limit"], [options valueForKey:@"params"]]];
 	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:posturl] autorelease];
 	[request setRequestMethod:@"POST"];
-	[server cancelAllOperations];
-	[server addOperation:request];
-	[server go];		
+	[self invokeRequest:request];
 }
 
 - (void)getFech 
@@ -131,7 +148,11 @@
 	}
 	NSMutableString *parametrs = [NSMutableString stringWithString:@"?"];
 	if ([options valueForKey:@"page"]) { //program wants paging
-		[parametrs appendFormat:@"%@=%@&%@=%@&", pageParamName, [options valueForKey:@"page"], limitParamName, [options valueForKey:@"limit"]];
+		if ([options valueForKey:@"limit"]) {
+			[parametrs appendFormat:@"%@=%@&%@=%@&", pageParamName, [options valueForKey:@"page"], limitParamName, [options valueForKey:@"limit"]];
+		} else {
+			[parametrs appendFormat:@"%@=%@&", pageParamName, [options valueForKey:@"page"]];		
+		}
 	}
 
 	if ([options valueForKey:@"params"]) {
@@ -141,11 +162,16 @@
 	DebugLog(@"#getFech %@",geturl);
 	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:geturl] autorelease];
 	[request setRequestMethod:@"GET"];
-	[self invokeRequest:request];
+	[request setDelegate:self];
+	[request setDidFailSelector:@selector(fechFailed:)];
+	[request setDidFinishSelector:@selector(fechFinished:)];
+	[self envokeRequest:request];
 }
 
+#pragma mark invoke a request with server
 - (void)invokeRequest:(id)request
 {
+	cancel = NO;
 	if ([request respondsToSelector:@selector(start)]) {
 		//[server cancelAllOperations];
 		[server addOperation:request];
@@ -154,17 +180,28 @@
 	}
 }
 
+#pragma mark invoke a request async without server
+- (void)envokeRequest:(id)request
+{
+	cancel = NO;
+	NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
+	[queue addOperation:request];
+	DebugLog(@"envokeRequest");
+}
+
+#pragma mark progressing
 - (void)setProgressDelegate:(id)d 
 {
 	if (server) {
 		[server setDownloadProgressDelegate:d];
 	}
 }
+
 #pragma mark ASIHTTPRequest delegate
 - (void)imageUploadFailed:(ASIHTTPRequest *)request 
 {
 	if ([(id)self.delegate respondsToSelector:@selector(notFeched:)])
-		[self.delegate notFeched:[request responseString]];		
+		[self.delegate notFeched:@"Upload failed."];		
 }
 
 - (void)imageUploadFinished:(ASIHTTPRequest *)request 
@@ -180,7 +217,7 @@
 					[self.delegate notFeched:[request responseString]];		
 				} else {
 					DebugLog(@"Pikchur failed");
-					[self.delegate notFeched:[request responseString]];		
+					[self.delegate notFeched:@"Pikchur failed"];		
 				}
 			} else if ([messages valueForKey:@"auth_key"]!=NULL){
 				DebugLog(@"Pikchur auth_key: %@", [messages valueForKey:@"auth_key"]);		
@@ -197,18 +234,26 @@
 - (void)fechFailed:(ASIHTTPRequest *)request
 {
 	DebugLog(@"#fechFailed");
-	if ([(id)self.delegate respondsToSelector:@selector(notFeched:)])
-		[self.delegate notFeched:[request responseString]];		
+	if (!cancel) {
+		if ([(id)self.delegate respondsToSelector:@selector(notFeched:)])
+			[self.delegate notFeched:[request responseString]];		
+	}
 }
 
 - (void)fechFinished:(ASIHTTPRequest *)request
 {
 	DebugLog(@"#fechFinished");
-	if ([(id)self.delegate respondsToSelector:@selector(feched:)]) {
+	if (!cancel) {
 		if (filter) { //use a filter 
 			//SEL filterMethod = NSSelectorFromString([NSString stringWithFormat:@"%@:", filterMethod]);
-			DebugLog(@"#fechFinished: filtering with %@",filterName);
-			[self.delegate feched:[[filter performSelector:@selector(filter:withOptions:) withObject:[request responseString] withObject:options] JSONValue]];		
+			DebugLog(@"#filtering with %@", filterName);
+			NSString *filtered_information = [filter performSelector:@selector(filter:withOptions:) withObject:[request responseString] withObject:options];
+			DebugLog(@"#filtered with %@", filterName);
+			if (filtered_information) {
+				[self.delegate feched:[filtered_information JSONValue]];		
+			} else {
+				[self.delegate feched:nil];
+			}
 		} else { 
 			if ([[request responseString] hasPrefix:@"["] || [[request responseString] hasPrefix:@"{"]) {
 				[self.delegate feched:[[request responseString] JSONValue]];
@@ -254,7 +299,8 @@
 	[request setDelegate:self];
 	[request setDidFailSelector:@selector(imageUploadFailed:)];
 	[request setDidFinishSelector:@selector(imageUploadFinished:)];
-	[request start];
+	[self envokeRequest:request];
+	DebugLog(@"REQUESTING UPLOAD");
 }
 
 - (void)authenticateWithPikchur {
