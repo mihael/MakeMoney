@@ -1,2 +1,9 @@
 [
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}},
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"0_1.jpg",  "ior":{"stop":"false"}},
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"0_2.jpg",  "ior":{"stop":"false"}},
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"0_3.jpg",  "ior":{"stop":"false"}},
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"KopterView", "ions":{"reuse":"true", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true", "space":"down"}},
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"promet_si", "icon":"kepo_icon.png", "background":"main.jpg", "url":"http://www.promet.si", "params":"id=25", "method":"get", "filter":"promet_list", "filter_base_url":"http://www.promet.si"}, "ior":{"stop":"true", "space":"down"}},
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"Fech recent twitter", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=mr_foto", "filter":"twitter"}, "ior":{"stop":"true"}}
 ]

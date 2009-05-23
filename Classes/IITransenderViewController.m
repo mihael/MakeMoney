@@ -22,7 +22,14 @@
 		NSString* program_json = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:program ofType:@"json"]];
 		transender = [[IITransender alloc] initWith:program_json];
 		[transender setDelegate:self];
-		DebugLog(@"IITransenderViewController# init program: %@ stage: %@", program, stage);
+		DebugLog(@"#initWithTransenderProgram: %@ andStage: %@", program, stage);
+		if ([stage valueForKey:@"goldcut"]) {
+			int goldcut = [[stage valueForKey:@"goldcut"] intValue];
+			if (goldcut>-2) { //-1 disables
+				[transender goldcutAt:goldcut];
+				DebugLog(@"#initWithTransenderProgram: goldcutAt: %i", goldcut);
+			}
+		}
 	}
 	return self;
 }
@@ -191,7 +198,6 @@
 				[transender reVibe:[revibe floatValue]];
 			}
 			NSString *space= [notBehavior valueForKey:@"space"];
-			DebugLog(@"SETTING BEHAVIOR space %@", space);
 			if ([space isEqualToString:@"up"]||[space isEqualToString:@"true"])
 				[notControls spaceUp];
 			if ([space isEqualToString:@"down"]||[space isEqualToString:@"false"])

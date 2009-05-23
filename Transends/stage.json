@@ -7,5 +7,6 @@
 "button_on_left":"true",
 "button_opens_not_controls":"true",
 "save_current_spot":"false",
-"save_current_program":"false"
+"save_current_program":"false",
+"goldcut":3
 }

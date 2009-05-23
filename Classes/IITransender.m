@@ -19,6 +19,7 @@
 	direction = kIITransenderDirectionUp;
 	memoriesSpot = kIITransenderZero - 1; //if direction is down should be + 1 here
 	memoriesCount = 0;
+	memoriesGoldcut = -1;
 	vibe = kIITransenderVibeLong; 
 	beat = nil;
 	transendsPath = [[[[NSBundle mainBundle] pathForResource:@"program" ofType:@"json"] stringByDeletingLastPathComponent]retain];
@@ -182,14 +183,35 @@
 //find next memories position based on direction and current value of memoriesSpot(currently holding the last transended position)
 - (void)computeSpot 
 {
+	BOOL rflow = NO;
 	if (direction == kIITransenderDirectionUp) {
-		if (memoriesSpot + 1 >= memoriesCount) //reinventing circular motion
+		if (memoriesSpot + 1 >= memoriesCount) {//reinventing circular motion
+			rflow = YES;
 			memoriesSpot = kIITransenderZero - 1; //if overflow jump to begining of array
+		}
 		memoriesSpot++; //simply increase spot - then transend with this spot
-	} else {
-		if (memoriesSpot - 1 < kIITransenderZero) //reinventing circular motion
-			memoriesSpot = memoriesCount; //if underflow jump to end of array
+		if (memoriesGoldcut>-1&&memoriesGoldcut<memoriesCount){ //golden cutting is enabled
+			if (rflow) { //crossing upper piece of transender program
+				memoriesSpot = memoriesGoldcut + 1;
+			} else {
+				if (memoriesSpot==memoriesGoldcut+1) 
+					memoriesSpot = kIITransenderZero; //back to first piece start
+			}
+		}			
+	} else { //kIITransenderDirectionDown
+		if (memoriesSpot - 1 < kIITransenderZero) {//reinventing circular motion
+			rflow = YES;
+			memoriesSpot = memoriesCount; //if underflow jump to end of array of memories
+		}
 		memoriesSpot--; //simply decrease spot - then transend with this spot		
+		if (memoriesGoldcut>-1&&memoriesGoldcut<memoriesCount){ //golden cutting is enabled
+			if (rflow) { //crossing lower piece of transender program
+				memoriesSpot = memoriesGoldcut;
+			} else {
+				if (memoriesSpot==memoriesGoldcut) 
+					memoriesSpot = memoriesCount - 1; //back to last piece end
+			}			
+		}
 	}
 }
 
@@ -485,6 +507,16 @@
 - (void)changeDirectionTo:(BOOL)d 
 {
 	[self setDirection:d];
+}
+
+//enable and set the goldcut
+- (void)goldcutAt:(int)goldcut 
+{
+	if (goldcut>-2) {
+		memoriesGoldcut = goldcut; //goldcutting enabled
+	} else {
+		memoriesGoldcut = -1; //disable cuttinggold
+	}
 }
 
 //return path for image relative to this transender

@@ -24,6 +24,7 @@
 #define kIITransenderVibeShort 0.05
 #define kIITransenderVibeLong 10.0
 #define kIITransenderZero 0
+#define kIITransenderGoldCutZero 0
 #define kIITransenderDirectionUp NO
 #define kIITransenderDirectionDown YES
 
@@ -54,6 +55,7 @@ typedef enum {
 	NSMutableArray *memories; //holding our memories of transends
 	int memoriesSpot; //exact position of last transended memorie
 	int memoriesCount; //cached memories count - [memories count] should be recalled only once when program changes
+	int memoriesGoldcut; //goldcut - splits memories into two virtual memories - one could be used for menus
 	
 	float vibe; //time beetwen transends - vibration freq.
 	NSTimer *beat;	//the beat generator - default transend invoker
@@ -100,6 +102,7 @@ typedef enum {
 - (BOOL)isTransending;
 - (void)changeDirection;
 - (void)changeDirectionTo:(BOOL)d;
+- (void)goldcutAt:(int)goldcut;
 
 - (NSString*)pathForImageNamed:(NSString*)imageName;
 - (UIImage*)imageNamed:(NSString*)imageName;
