@@ -26,6 +26,7 @@
 		4705A9790FC60058005DA8FC /* mr_foto_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4705A9770FC60058005DA8FC /* mr_foto_image.png */; };
 		4705A98B0FC603D4005DA8FC /* kepo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4705A98A0FC603D4005DA8FC /* kepo_icon.png */; };
 		4705AAA90FC709E4005DA8FC /* Progress in Resources */ = {isa = PBXBuildFile; fileRef = 4705AAA80FC709E4005DA8FC /* Progress */; };
+		4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4705ABAF0FC964FB005DA8FC /* Settings.bundle */; };
 		4707D7790FB0928D00094125 /* KopterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4707D7780FB0928D00094125 /* KopterViewController.m */; };
 		4707D7870FB093DB00094125 /* KopterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4707D7860FB093DB00094125 /* KopterView.xib */; };
 		4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707D8500FB2D86400094125 /* CoreLocation.framework */; };
@@ -213,6 +214,7 @@
 		4705A9770FC60058005DA8FC /* mr_foto_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mr_foto_image.png; path = Artwork/mr_foto_image.png; sourceTree = "<group>"; };
 		4705A98A0FC603D4005DA8FC /* kepo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kepo_icon.png; path = Artwork/kepo_icon.png; sourceTree = "<group>"; };
 		4705AAA80FC709E4005DA8FC /* Progress */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Progress; sourceTree = "<group>"; };
+		4705ABAF0FC964FB005DA8FC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		4707D7770FB0928D00094125 /* KopterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KopterViewController.h; path = Classes/KopterViewController.h; sourceTree = "<group>"; };
 		4707D7780FB0928D00094125 /* KopterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KopterViewController.m; path = Classes/KopterViewController.m; sourceTree = "<group>"; };
 		4707D7860FB093DB00094125 /* KopterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KopterView.xib; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 			children = (
 				472965420F4859C10053F946 /* Hajlov */,
 				4705AAA80FC709E4005DA8FC /* Progress */,
+				4705ABAF0FC964FB005DA8FC /* Settings.bundle */,
 				477386850F4ACCCD0044085E /* Kriya */,
 				281C6CD70DB2D82200F60ACC /* AppViews */,
 				080E96DDFE201D6D7F000001 /* AppRoot */,
@@ -920,6 +923,7 @@
 				4705A9790FC60058005DA8FC /* mr_foto_image.png in Resources */,
 				4705A98B0FC603D4005DA8FC /* kepo_icon.png in Resources */,
 				4705AAA90FC709E4005DA8FC /* Progress in Resources */,
+				4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

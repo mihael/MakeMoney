@@ -3,10 +3,11 @@
 "horizontal":"true",
 "animated":"true",
 "vibe":"1.83",
+"direction_changes":"false",
 "big_button":"false",
 "button_on_left":"true",
 "button_opens_not_controls":"true",
 "save_current_spot":"false",
 "save_current_program":"false",
-"goldcut":3
+"goldcut":-1
 }

@@ -35,7 +35,7 @@
 	NSUInteger i, count = [urls count];
 	for (i = 0; i < count; i++) {
 		NSString* link = [urls objectAtIndex:i];
-		[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@/%@\"}, %@},", base_url, [link stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"], k_ior_stop_space];
+		[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@/%@\"}, %@},", base_url, [link stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"], k_ior_notstop_space];
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];
 }

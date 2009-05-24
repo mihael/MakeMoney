@@ -351,26 +351,29 @@
 }
 
 - (void)notControlsOpened:(id)notControl {
+	[transender meditate];
 	avoidBehavior = YES;
 	[notControl lightUp];
 	[notControl showBackLight];
-	[transender meditate];
 	[notControls showMessage:[NSString stringWithFormat:@"Spot:%i of %i Vibe:%1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
 }
 
 - (void)notControlsClosed:(id)notControl {
 	avoidBehavior = NO;
 	[notControl hideBackLight];
-	if ([stage valueForKey:@"transendAfterNotControlsClosed"]) {
-		//[notControl lightDown];
-		//[transender transend];	
-	}
 	[notControl hideMessage];
+	[self continueWithBehavior];
 }
 
 - (void)leftTouch:(id)notControl {
 	[transender changeDirectionTo:kIITransenderDirectionDown];
 	[transender invokeTransend];
+	if ([stage valueForKey:@"direction_changes"]) {
+		BOOL changes = [[stage valueForKey:@"direction_changes"] boolValue];
+		if (!changes)
+			[transender changeDirectionTo:kIITransenderDirectionUp];
+	}
+	
 }
 
 - (void)rightTouch:(id)notControl {

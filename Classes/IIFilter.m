@@ -101,8 +101,12 @@
 //$$$supported sharing experiences are returned magically, others are nil$$$
 + (NSString*)assetUrl:(NSString*)url 
 {
+	NSString * size = [[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_download_size"];
+	if (!size) 
+		size = @"l";
+	
 	if ([IIFilter isPikchurUrl:url]) {
-		return [IIFilter pikchurAssetUrlFrom:url withSize:@"l"];
+		return [IIFilter pikchurAssetUrlFrom:url withSize:size];
 	} else if ([IIFilter isTwitPicUrl:url]){
 		return [IIFilter twitPicAssetUrlFrom:url withSize:@"full"];		
 	} 

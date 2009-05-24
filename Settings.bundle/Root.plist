@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Title</key>
+	<string>MakeMoney</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Vibe</string>
+			<key>Key</key>
+			<string>vibe</string>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>DefaultValue</key>
+			<real>0.38</real>
+			<key>Values</key>
+			<array>
+				<real>0.38</real>
+				<real>0.4</real>
+				<real>0.5</real>
+				<real>0.83</real>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>Auto refresh disabled</string>
+				<string>1 Minute</string>
+				<string>2 Minutes</string>
+				<string>3 Minutes</string>
+				<string>5 Minutes</string>
+				<string>10 Minutes</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Pikchur download size</string>
+			<key>Key</key>
+			<string>pikchur_download_size</string>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>DefaultValue</key>
+			<string>l</string>
+			<key>Values</key>
+			<array>
+				<string>l</string>
+				<string>m</string>
+				<string>s</string>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>Large</string>
+				<string>Medium</string>
+				<string>Small</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

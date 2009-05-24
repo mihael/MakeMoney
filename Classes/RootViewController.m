@@ -56,7 +56,13 @@
 
     [self.view insertSubview:transenderViewController.view belowSubview:notControls];
 
-	[[transenderViewController transender] reVibe:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"vibe"] floatValue]];
+
+	float vibe = [[[NSUserDefaults standardUserDefaults] valueForKey:@"vibe"] floatValue];
+	if (vibe>=kIITransenderVibeShort) {
+		[[transenderViewController transender] reVibe:vibe];	
+	} else {
+		[[transenderViewController transender] reVibe:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"vibe"] floatValue]];
+	}
 	
 	//TODO - support save_current_program - reload program from cache and remember spot if any
 	if ([[[[MakeMoneyAppDelegate app] stage] valueForKey:@"save_current_spot"] boolValue]) {
