@@ -7,6 +7,7 @@
 #import "MakeMoneyAppDelegate.h"
 #import "iProgressView.h"
 #import "iAccelerometerSensor.h"
+#import "AudioStreamer.h"
 
 @implementation IINotControls
 @synthesize notController, delegate, pickDelegate, notOpen, canOpen, bigButton, progressor;
@@ -76,7 +77,6 @@
 		buttonInTouching = NO;
 		buttonNotLightUp = YES;
 		[iAccelerometerSensor instance].delegate=self;
-		DebugLog(@"iAcc %@", [iAccelerometerSensor instance]);
     }
     return self;
 }
@@ -594,7 +594,6 @@
 #pragma mark iAccelerometerSensorDelegate
 - (void)accelerometerDetected 
 {
-	DebugLog(@"SHAKE");
 	if (delegate) {
 		if ([delegate respondsToSelector:@selector(shake:)]) {
 			[delegate shake:self];
@@ -607,21 +606,21 @@
 {
     UITouch *touch = [touches anyObject];
 	
-/*TODO double taps for space
-	if([touch tapCount] == 2) {
+	if([touch tapCount] >= 2) {
         // Process a double-tap gesture
 		if (delegate) {
 			if ([delegate respondsToSelector:@selector(spaceTouch:)]) {
-				[delegate spaceTouch:[]];
+				[delegate spaceDoubleTouch:self touchPoint:[touch locationInView:self]];
 			}
 		}
-    }
-*/	
-	if (delegate) {
-		if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)]) {
- 			[delegate spaceTouch:self touchPoint:[touch locationInView:self]];
+    } else {
+		if (delegate) {
+			if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)]) {
+				[delegate spaceTouch:self touchPoint:[touch locationInView:self]];
+			}
 		}
 	}
+	
 }
 
 
@@ -652,6 +651,61 @@
 			// Process a non-swipe event.
 		}
 	}
+}
+
+#pragma mark Streamer
+- (void)playStop { //stop playing
+	if (streamer)
+		[streamer stop];
+}
+
+- (void)playWithStreamUrl:(NSString*)url
+{
+	if (!streamer)
+	{
+		NSString *escapedValue =
+		[(NSString *)CFURLCreateStringByAddingPercentEscapes(
+															 nil,
+															 (CFStringRef)url,
+															 NULL,
+															 NULL,
+															 kCFStringEncodingUTF8)
+		 autorelease];
+		
+		NSURL *stream_url = [NSURL URLWithString:escapedValue];
+		streamer = [[AudioStreamer alloc] initWithURL:stream_url];
+		[streamer
+		 addObserver:self
+		 forKeyPath:@"isPlaying"
+		 options:0
+		 context:nil];
+		[streamer start];
+	} else	{
+		[streamer stop];
+	}
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+						change:(NSDictionary *)change context:(void *)context
+{
+	if ([keyPath isEqual:@"isPlaying"])
+	{
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		
+		if ([(AudioStreamer *)object isPlaying]) {
+			//do nothing while playing stream
+		} else	{ //release otherways?
+			[streamer removeObserver:self forKeyPath:@"isPlaying"];
+			[streamer release];
+			streamer = nil;
+		}
+		
+		[pool release];
+		return;
+	}
+	
+	[super observeValueForKeyPath:keyPath ofObject:object change:change
+						  context:context];
 }
 
 @end

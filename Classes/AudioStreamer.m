@@ -659,10 +659,11 @@ void ReadStreamCallBack
 		{
 			[self stop];
 
-#ifdef TARGET_OS_IPHONE			
+#ifdef TARGET_OS_IPHONE	
+			/* suppress for now, until have better solution 
 			UIAlertView *alert =
 				[[UIAlertView alloc]
-					initWithTitle:NSLocalizedStringFromTable(@"Audio Error", @"Errors", nil)
+					initWithTitle:NSLocalizedStringFromTable(@"Audio", @"Errors", nil)
 					message:NSLocalizedStringFromTable(@"Attempt to play streaming audio failed.", @"Errors", nil)
 					delegate:self
 					cancelButtonTitle:@"OK"
@@ -673,10 +674,11 @@ void ReadStreamCallBack
 				withObject:nil
 				waitUntilDone:YES];
 			[alert release];
+			 */
 #else
 			NSAlert *alert =
 				[NSAlert
-					alertWithMessageText:NSLocalizedString(@"Audio Error", @"")
+					alertWithMessageText:NSLocalizedString(@"Audio", @"")
 					defaultButton:NSLocalizedString(@"OK", @"")
 					alternateButton:nil
 					otherButton:nil

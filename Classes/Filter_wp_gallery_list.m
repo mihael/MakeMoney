@@ -52,7 +52,7 @@
 		}
 		
 		if (v_url)
-			[transends appendFormat:@"{\"ii\":\"FecherView\", \"ions\":{\"message\":\"%@\", \"url\":\"%@/%@\", \"page\":1, \"fech_all\":\"true\", \"filter\":\"wp_gallery\", \"filter_base_url\":\"%@\", \"background_url\":\"%@/%@\"}, %@},", url_title, base_url, v_url, base_url, base_url, d_url, k_ior_stop];
+			[transends appendFormat:@"{\"ii\":\"FecherView\", \"ions\":{\"restore_key\":\"wp_fecher_%i\", \"message\":\"%@\", \"url\":\"%@/%@\", \"page\":1, \"fech_all\":\"true\", \"filter\":\"wp_gallery\", \"filter_base_url\":\"%@\", \"background_url\":\"%@/%@\"}, %@},", i, url_title, base_url, v_url, base_url, base_url, d_url, k_ior_stop_space];
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];
 }

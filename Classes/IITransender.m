@@ -142,7 +142,6 @@
 			[self.memories removeObjectAtIndex:i];
 			DebugLog(@"trimming one spot %i", i);
 		}
-		
 	}
 }
 
@@ -159,8 +158,8 @@
 		if (memoriesSpot + 1 >= memoriesCount)
 			memoriesSpot = kIITransenderZero - 1; 
 		memoriesSpot++; 
-	}	
-	DebugLog(@"viped current memorie now at %i", memoriesSpot);
+	}
+	DebugLog(@"viped current memorie, current spot %i", memoriesSpot);
 }
 
 

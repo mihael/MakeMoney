@@ -26,6 +26,24 @@
 	//write this in subclass
 }
 
+//persist some controller needed object beetween startups
+- (void)persistObject:(id)o
+{
+	if ([options valueForKey:@"restore_key"]&&o!=nil) {
+		[[NSUserDefaults standardUserDefaults] setObject:o forKey:[options valueForKey:@"restore_key"]];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
+}
+
+//load some controller needed object beetween startups
+- (id)persistedObject 
+{
+	if ([options valueForKey:@"restore_key"]) {
+		return [[NSUserDefaults standardUserDefaults] objectForKey:[options valueForKey:@"restore_key"]];
+	}
+	return nil;
+}
+
 //return transend format - or how to call this IIControler subclass from program.json 
 //this is useful for inserts in filtering
 + (NSString*)transendFormat

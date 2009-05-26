@@ -22,6 +22,8 @@
 - (void)functionalize;
 - (void)startFunctioning;
 - (void)stopFunctioning;
+- (void)persistObject:(id)o;
+- (id)persistedObject;
 
 + (NSString*)transendFormat;
 @end

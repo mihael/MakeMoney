@@ -11,7 +11,7 @@
 
 - (IBAction)buttonTouched:(id)sender
 {
-	[notControls setProgress:@"Preparing ..." animated:YES];
+	[notControls setProgress:@"Refreshing ..." animated:YES];
 	[button setHidden:YES];
 	[www loadOptions:[options copy]]; //start with initial options
 	[notControls setProgress:@"Refreshing ..." animated:YES];	
@@ -61,13 +61,16 @@
 			NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:[www options]];
 			[repaged_options setValue:[NSString stringWithFormat:@"%i",nextPage] forKey:@"page"];				
 			
+			NSMutableArray *addedFecherList = [NSMutableArray arrayWithArray:[self persistedObject]];
+			[addedFecherList addObjectsFromArray:information];
+			
 			[self.transender putMemories:information];
 			//DebugLog(@"FECH ALL %@", information);
 
 			if ([options valueForKey:@"fech_all"]) { //program says we want all pages available
 				//this should add images from all pages
 				[www loadOptions:repaged_options];
-				[notControls setProgress:[NSString stringWithFormat:@"Feching page %i ...", nextPage] animated:NO];
+				[notControls setProgress:[NSString stringWithFormat:@"Pulling page %i ...", nextPage] animated:YES];
 				[www fech];				
 			} else { //half-automatic
 				[self.transender addMemorieWithString:[NSString stringWithFormat:@"{\"ii\":\"FecherView\", \"ions\":%@, \"ior\":%@}", [repaged_options JSONFragment], [behavior JSONFragment]]];				
@@ -75,9 +78,13 @@
 				[notControls lightDown];			
 				[self.transender transend];			
 			}
+			//cache
+			[self saveFecherList:[NSArray arrayWithArray:addedFecherList]];
 
 		} else { //no repaging, just one fech
 			[self.transender putMemories:information]; //inserts into transender mem
+			//cache
+			[self saveFecherList:information];
 			[notControls setProgress:nil animated:YES];
 			[notControls lightDown];			
 			[self.transender transend];			
@@ -88,7 +95,25 @@
 		[notControls lightDown];			
 		[self.transender transend];			
 	}
+}
 
+- (void)saveFecherList:(NSArray*)list
+{
+	[self persistObject:list];
+}
+
+- (void)cacheFeched:(NSArray*)list
+{
+	if (list) {	
+		if ([options valueForKey:@"message"]&&!trimmedSelf) { //delete self from program, if this is an automatic fech
+			[self.transender trimMemories]; //trim all that follows
+			[self.transender vipeCurrentMemorie]; //vipe self
+			trimmedSelf = YES;
+		}
+		[self.transender putMemories:list];		
+		[self.notControls lightDown];
+		[self.transender transendNow];
+	}			
 }
 
 #pragma mark IIController
@@ -122,6 +147,8 @@
 	}
 	button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
 	button.titleLabel.textAlignment = UITextAlignmentCenter;
+	
+	
 }
 
 - (void)stopFunctioning {
@@ -133,10 +160,28 @@
 - (void)startFunctioning {
 	[button setHidden:NO];
 	if ([options valueForKey:@"message"]) {
-		[notControls setProgress:@"Feching page ..." animated:YES];
-		[www fech];
+		[notControls setProgress:@"Pulling page ..." animated:YES];
+		if ([options valueForKey:@"restore_key"]) {
+			id info = [self persistedObject]; //[[NSUserDefaults standardUserDefaults] objectForKey:[[www options] valueForKey:@"restore_key"]];
+			if (info && [info isKindOfClass:[NSArray class]]) {
+				if ([info count]>0) {//load from cache
+					DebugLog(@"#fech loaded from cached object");
+					[self cacheFeched:info];
+					[notControls setProgress:nil animated:YES];
+				} else {
+					DebugLog(@"#refeching cached object");
+					[www fech];							
+				}
+			} else {
+				DebugLog(@"#refeching cached object");
+				[www fech];			
+			}
+		} else { //normal handling, not use cache
+			[www fech];					
+		}
 	}
 	DebugLog(@"#startFunctioning");
+	
 }
 
 @end

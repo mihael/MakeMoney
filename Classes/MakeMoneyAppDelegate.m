@@ -25,27 +25,30 @@ static MakeMoneyAppDelegate* app = nil;
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-	//[[UIApplication sharedApplication] setStatusBarHidden:YES];
-	//[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:RUNS];
-	//[[NSUserDefaults standardUserDefaults] synchronize];
 	app = self;
 	[Kriya prayInCode];
 	[self setStage:[Kriya stage]];
-	
+	[self brickboxStartup];
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	rootViewController = [[[RootViewController alloc] init] retain];
-	
+	rootViewController = [[[RootViewController alloc] init] retain];	
 	[window addSubview:[rootViewController view]];
     [window makeKeyAndVisible];
 	[Kriya incrementAppRunCount];
 }
 
-// Invoked immediately before the application terminates.
 - (void)applicationWillTerminate:(UIApplication *)application {
 	// Store current spot, so it is used the next time the app is launched
     [[NSUserDefaults standardUserDefaults] setInteger:[[[rootViewController transenderViewController] transender] currentSpot]
 											   forKey:SPOT];
-	NSLog(@"Saved spot: %i", [[[rootViewController transenderViewController] transender] currentSpot]);
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	DebugLog(@"Terminated with spot: %i", [[[rootViewController transenderViewController] transender] currentSpot]);
+}
+
+- (void)application:(UIApplication *)application willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation duration:(NSTimeInterval)duration;
+{
+    // This prevents the view from autorotating to portrait in the simulator
+    if ((newStatusBarOrientation == UIInterfaceOrientationPortrait) || (newStatusBarOrientation == UIInterfaceOrientationPortraitUpsideDown))
+        [application setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
 }
 
 - (void)dealloc {
@@ -54,11 +57,34 @@ static MakeMoneyAppDelegate* app = nil;
     [super dealloc];
 }
 
-- (void)application:(UIApplication *)application willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation duration:(NSTimeInterval)duration;
+#pragma mark registration and startup count
+- (void)brickboxStartup 
 {
-    // This prevents the view from autorotating to portrait in the simulator
-    if ((newStatusBarOrientation == UIInterfaceOrientationPortrait) || (newStatusBarOrientation == UIInterfaceOrientationPortraitUpsideDown))
-        [application setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
+	//ensure EDGE network comes on
+	NSURL *brickboxUrl = [NSURL URLWithString:[Kriya brickbox_url]];
+	[[Reachability sharedReachability] setHostName:[brickboxUrl host]];
+	[[Reachability sharedReachability] remoteHostStatus];
+
+	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:brickboxUrl] autorelease];
+	[request setRequestMethod:@"POST"];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(brickboxStartupFinished:)];
+	[request setDidFailSelector:@selector(brickboxStartupFailed:)];
+	NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
+	[queue addOperation:request];	
+}
+
+- (void)brickboxStartupFinished:(ASIHTTPRequest *)request
+{
+	NSInteger startupz = [[request responseString] intValue];
+	[[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%@ was purchased %@.", APP_TITLE, [Kriya howManyTimes:startupz]] forKey:STARTUPS];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+- (void)brickboxStartupFailed:(ASIHTTPRequest *)request
+{
+	DebugLog(@"Failed brickbox startup.");
 }
 
 @end

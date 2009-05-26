@@ -8,6 +8,26 @@
 	<array>
 		<dict>
 			<key>Title</key>
+			<string>Style</string>
+			<key>Key</key>
+			<string>horizontal</string>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>DefaultValue</key>
+			<string>true</string>
+			<key>Values</key>
+			<array>
+				<string>false</string>
+				<string>true</string>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>Vertical</string>
+				<string>Horizontal</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Title</key>
 			<string>Vibe</string>
 			<key>Key</key>
 			<string>vibe</string>
@@ -18,21 +38,20 @@
 			<key>Values</key>
 			<array>
 				<real>0.38</real>
-				<real>0.4</real>
-				<real>0.5</real>
 				<real>0.83</real>
-				<integer>1</integer>
-				<integer>2</integer>
-				<integer>3</integer>
+				<real>1.38</real>
+				<real>1.83</real>
+				<real>2.38</real>
+				<real>2.83</real>
 			</array>
 			<key>Titles</key>
 			<array>
-				<string>Auto refresh disabled</string>
-				<string>1 Minute</string>
-				<string>2 Minutes</string>
-				<string>3 Minutes</string>
-				<string>5 Minutes</string>
-				<string>10 Minutes</string>
+				<string>2.63Hz</string>
+				<string>1.2Hz</string>
+				<string>0.72Hz</string>
+				<string>0.55Hz</string>
+				<string>0.42Hz</string>
+				<string>0.35Hz</string>
 			</array>
 		</dict>
 		<dict>

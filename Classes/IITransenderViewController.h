@@ -37,7 +37,6 @@
 		IIController *transendController;
 	
 		IIMusic *music;
-		NSTimer *magic;
 		BOOL feeling;	
 		UIImageView *transendEmitter1;
 		UIImageView *transendEmitter2;		
@@ -54,6 +53,9 @@
 		NSArray* transitions;
 		int transitionIndex;
 		NSArray* directions;
+
+		NSTimer *magicHide;
+		UIView* infoView;
 }
 
 @property (nonatomic, assign) id <IITransenderViewControllerDelegate> delegate;
@@ -64,6 +66,10 @@
 @property (readwrite, retain) NSDictionary *notBehavior;
 
 - (id)initWithTransenderProgram:(NSString*)program andStage:(NSDictionary*)aStageName;
+
+//infoView
+- (void)showInfoView;
+- (void)hideInfoView:(NSTimer*)timer;
 
 //transender delegate
 - (void)transendedAll:(id)sender;

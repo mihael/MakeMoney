@@ -17,7 +17,7 @@
 #pragma mark refreshing button
 - (IBAction)refresh:(id)sender 
 {
-	[notControls setProgress:@"Preparing ..." animated:YES];
+	[notControls setProgress:@"Refreshing ..." animated:YES];
 	[www loadOptions:[options copy]]; //start with initial options
 	[fecherList release];
 	fecherList = nil;
@@ -69,7 +69,7 @@
 				//reset www with repaged and call www again
 				[www loadOptions:repaged_options];
 				//refech				
-				[notControls setProgress:[NSString stringWithFormat:@"Feching page %i ...", nextPage - 1] animated:NO];
+				[notControls setProgress:[NSString stringWithFormat:@"Pulling page %i ...", nextPage - 1] animated:YES];
 				[www fech];
 
 			} else { //program says we want half-automatic repage
@@ -125,17 +125,21 @@
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reusemi"] autorelease];
 		[cell.textLabel setLineBreakMode:UILineBreakModeWordWrap];
 		[cell.textLabel setNumberOfLines:0];
-//		[cell.textLabel setMinimumFontSize:13.0];
-		[cell. textLabel setTextColor:[UIColor whiteColor]];
-		
+		[cell.textLabel setTextColor:[UIColor whiteColor]];
+		[cell.imageView setImage:[transender imageNamed:@"photo_icon.png"]];
+		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];		
+		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
 	}		
 	//update
 	[cell.textLabel setText:[[fech valueForKey:@"ions"] valueForKey:@"message"]];
+	//[cell.imageView setImage:[Kriya imageWithUrl:[[fech valueForKey:@"ions"] valueForKey:@"background_url"]]];
 	
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[notControls setProgress:@" " animated:YES];
+
 	NSDictionary* fech = nil;
 	@synchronized(fecherList) {
 		fech = [fecherList objectAtIndex:[indexPath row]];
@@ -147,6 +151,7 @@
 	[self.transender trimMemories];
 	[self.transender putMemories:[NSMutableArray arrayWithObject:fech]];
 	[self.transender transend];
+
 }
 
 #pragma mark IIController
@@ -199,7 +204,7 @@
 
 - (void)stopFunctioning {
 	[www cancelFech];
-	[notControls setProgress:nil animated:YES];	
+	//[notControls setProgress:nil animated:YES];	
 	//save current state if asked
 	if ([options valueForKey:@"restore_key"])
 		[[NSUserDefaults standardUserDefaults] setValue:fecherList forKey:[options valueForKey:@"restore_key"]];
@@ -220,10 +225,12 @@
 			[fecherTable selectRowAtIndexPath:p animated:YES scrollPosition:UITableViewScrollPositionMiddle];
 		}
 	} else {
-		[notControls setProgress:@"Feching ..." animated:YES];
+		[notControls setProgress:@"Pulling ..." animated:YES];
 		//[www loadOptions:[options copy]];
 		[www fech];
 	}
+	
+	[self becomeFirstResponder];
 	DebugLog(@"#startFunctioning");
 }
 

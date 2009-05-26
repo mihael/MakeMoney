@@ -4,18 +4,6 @@
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation Kriya
-+ (CGRect)appViewRect 
-{
-	CGRect screen = [[UIScreen mainScreen] applicationFrame];
-	CGFloat c_w = screen.size.height;
-	CGFloat c_h = screen.size.width;	
-	if ([[[MakeMoneyAppDelegate app] rootViewController] interfaceOrientation] == UIInterfaceOrientationPortrait) {
-		c_w = screen.size.width;
-		c_h = screen.size.height; 
-	}	
-	return CGRectMake(0.0, 0.0, c_w, c_h);
-}
-
 + (NSInteger)appRunCount 
 {
 	if (![[NSUserDefaults standardUserDefaults] objectForKey:RUNS]){

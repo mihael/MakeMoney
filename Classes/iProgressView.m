@@ -14,10 +14,13 @@
 - (id)initWithFrame:(CGRect)frame text:(NSString*)t{
 	CGRect r = CGRectInset(frame, 144, 88);
     if (self = [super initWithFrame:r]) {
-        // Initialization code
+		strokeColor = [UIColor clearColor];
+		fillColor = [UIColor blackColor];
+		textColor = [UIColor whiteColor];
+		
 		text = [[UILabel alloc] initWithFrame:CGRectMake(kPad, kPad, r.size.width-kPad, 44)];
-		text.font = [UIFont systemFontOfSize:18];
-		text.textColor = [UIColor whiteColor];
+		text.font = [UIFont boldSystemFontOfSize:19];
+		text.textColor = textColor;
 		text.textAlignment = UITextAlignmentCenter;
 		text.backgroundColor = [UIColor clearColor];
 		if (t)
@@ -32,7 +35,7 @@
 		[indica startAnimating];
 		[self addSubview:indica];
 		[self setBackgroundColor: [UIColor clearColor]];
-		[self setAlpha:0.38];
+		[self setAlpha:0.83];
     }
     return self;
 }
@@ -45,8 +48,8 @@
 	//CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
 	//CGContextSetRGBFillColor(context, 1.0, 0.0, 0.0, 1.0); 	
 	//CGRect drawrect = CGRectMake(touch1.x, touch1.y, touch2.x - touch1.x, touch2.y - touch1.y);
-	CGContextSetFillColorWithColor(context, [UIColor grayColor].CGColor);
-	CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
+	CGContextSetFillColorWithColor(context, fillColor.CGColor);
+	CGContextSetStrokeColorWithColor(context, strokeColor.CGColor);
 	CGRect drawrect = rect;
 	CGFloat radius = 13.0;	
 	CGFloat minx = CGRectGetMinX(drawrect), midx = CGRectGetMidX(drawrect), maxx = CGRectGetMaxX(drawrect);
@@ -92,6 +95,22 @@
 	CGContextDrawPath(context, kCGPathFill);
 	CGContextFillPath(context);
 */
+}
+
+- (void)setFill:(UIColor*)c 
+{
+	fillColor = c;
+}
+
+- (void)setStroke:(UIColor*)c 
+{
+	strokeColor = c;
+}
+
+- (void)setTextColor:(UIColor*)c 
+{
+	textColor = c;
+	text.textColor = textColor;
 }
 
 

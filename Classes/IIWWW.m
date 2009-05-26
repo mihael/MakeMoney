@@ -9,6 +9,7 @@
 #import "ASINetworkQueue.h"
 #import "JSON.h"
 #import "URLUtils.h"
+#import "Reachability.h"
 
 @implementation IIWWW
 @synthesize delegate, server, url, params, filterName, options;
@@ -50,6 +51,10 @@
 	[server setRequestDidFinishSelector:@selector(fechFinished:)];
 	[server setRequestDidFailSelector:@selector(fechFailed:)];	
 	[server setDelegate:self];	
+
+	//ensure EDGE network comes on
+	[[Reachability sharedReachability] setHostName:[[NSURL URLWithString:[options valueForKey:@"url"]] host]];
+	[[Reachability sharedReachability] remoteHostStatus];
 }
 
 - (void)dealloc {
@@ -62,6 +67,14 @@
     [super dealloc];
 }
 //********************************************************************
+- (BOOL)checkNetPresence
+{
+	if ([[Reachability sharedReachability] internetConnectionStatus]==NotReachable) {
+		return NO;
+	}
+	return YES;
+}
+
 - (void)fechUpdateWithParams:(NSDictionary*)p
 {
 	//post to upload url
@@ -88,22 +101,28 @@
 //fech - this is all you need for various downloads
 - (void)fech 
 {
-	if ([options valueForKey:@"method"]) {
-		if ([[options valueForKey:@"method"] isEqualToString:@"custom"]) {
-			if ([filter respondsToSelector:@selector(prepareRequestFor:)])  //filter holds custom implementation for feching urls
-				[self envokeRequest:[filter prepareRequestFor:options]];
-			//TODO envokeRequests... prepareRequests
-		} else if ([[options valueForKey:@"method"] isEqualToString:@"form"]) {
-			[self formFech];
-		} else if ([[options valueForKey:@"method"] isEqualToString:@"post"]) {
-			[self postFech];
-		} else { //all else gets
+	if ([self checkNetPresence]) {
+		if ([options valueForKey:@"method"]) {
+			if ([[options valueForKey:@"method"] isEqualToString:@"custom"]) {
+				if ([filter respondsToSelector:@selector(prepareRequestFor:)])  //filter holds custom implementation for feching urls
+					[self envokeRequest:[filter prepareRequestFor:options]];
+				//TODO envokeRequests... prepareRequests
+			} else if ([[options valueForKey:@"method"] isEqualToString:@"form"]) {
+				[self formFech];
+			} else if ([[options valueForKey:@"method"] isEqualToString:@"post"]) {
+				[self postFech];
+			} else { //all else gets
+				[self getFech];
+			}
+		} else {
 			[self getFech];
 		}
 	} else {
-		[self getFech];
+		[self fechFailed:nil];
+		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];
 	}
 }
+
 - (void)formFech 
 {
 	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:self.url] autorelease];
@@ -180,7 +199,7 @@
 	}
 }
 
-#pragma mark invoke a request async without server
+#pragma mark invoke a request async 
 - (void)envokeRequest:(id)request
 {
 	cancel = NO;
@@ -235,8 +254,13 @@
 {
 	DebugLog(@"#fechFailed");
 	if (!cancel) {
-		if ([(id)self.delegate respondsToSelector:@selector(notFeched:)])
-			[self.delegate notFeched:[request responseString]];		
+		if ([(id)self.delegate respondsToSelector:@selector(notFeched:)]) {
+			if (request) {
+				[self.delegate notFeched:[request responseString]];		
+			} else {
+				[self.delegate notFeched:nil];
+			}
+		}
 	}
 }
 

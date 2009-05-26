@@ -18,6 +18,9 @@
 		transitionIndex = kTransition;
 		directions = [[NSArray arrayWithObjects:kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom, nil] retain];
 		horizontal = [[stage valueForKey:@"horizontal"] boolValue];
+		if ([[NSUserDefaults standardUserDefaults] valueForKey:@"horizontal"]) {
+			horizontal = ([[[NSUserDefaults standardUserDefaults] valueForKey:@"horizontal"] isEqualToString:@"true"]);
+		}
 		animated = [[stage valueForKey:@"animated"] boolValue];		
 		NSString* program_json = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:program ofType:@"json"]];
 		transender = [[IITransender alloc] initWith:program_json];
@@ -27,7 +30,7 @@
 			int goldcut = [[stage valueForKey:@"goldcut"] intValue];
 			if (goldcut>-2) { //-1 disables
 				[transender goldcutAt:goldcut];
-				DebugLog(@"#initWithTransenderProgram: goldcutAt: %i", goldcut);
+				DebugLog(@"#goldcutAt: %i", goldcut);
 			}
 		}
 	}
@@ -46,8 +49,8 @@
 
 	useEmitter1 = YES;
 	[self.view addSubview:transendEmitter1];
-	
 	avoidBehavior = NO;
+	[self showInfoView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,9 +62,12 @@
 }
 
 - (void)dealloc {
-	if (transendController) {
-		[transendController release];
+	if (magicHide) {
+		[magicHide invalidate];
+		[magicHide release];
+		magicHide = nil;
 	}
+	[transendController release];
 	[transendEmitter2 release];
 	[transendEmitter1 release];
 	[skrin release];
@@ -69,6 +75,43 @@
 	[transitions release];
 	[directions release];
     [super dealloc];
+}
+#pragma mark Startup info view
+- (void)showInfoView 
+{
+	infoView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 320)] autorelease];
+	[infoView setBackgroundColor:[UIColor clearColor]];
+	UILabel *version = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 160)] autorelease];		
+	UILabel *startups = [[[UILabel alloc] initWithFrame:CGRectMake(0, 160, 480, 160)] autorelease];
+	version.text = [NSString stringWithFormat:@"Version %@", [MakeMoneyAppDelegate version]];
+	startups.text = [[NSUserDefaults standardUserDefaults] valueForKey:STARTUPS];
+	version.backgroundColor = [UIColor clearColor];
+	startups.backgroundColor = [UIColor clearColor];
+	version.textColor = [UIColor whiteColor];
+	startups.textColor = [UIColor whiteColor];
+	version.font = [UIFont systemFontOfSize:38];
+	startups.font = [UIFont systemFontOfSize:23];
+	version.textAlignment = UITextAlignmentCenter;
+	startups.textAlignment = UITextAlignmentCenter;
+	[infoView addSubview:version];
+	[infoView addSubview:startups];
+	[self.view addSubview:infoView];
+	magicHide = [[NSTimer scheduledTimerWithTimeInterval:kButtonSpeed*2
+											 target:self 
+										   selector:@selector(hideInfoView:)
+										   userInfo:nil
+											repeats:NO] retain];		
+}
+
+- (void)hideInfoView:(NSTimer*)timer
+{
+	if (magicHide) {
+		[magicHide invalidate];
+		[magicHide release];
+		magicHide = nil;
+	}
+	if ([infoView superview]!=nil)
+		[infoView removeFromSuperview];	
 }
 
 #pragma mark IITransenderDelegate
@@ -337,6 +380,7 @@
 
 #pragma mark IINotControlsDelegate
 - (void)shake:(id)notControl { //device is shaked
+	[transender meditate];
 	[transender meditateWith:0];
 }
 
@@ -390,6 +434,14 @@
 			[notControl lightDown];
 			[transender transend];
 		}		
+	}
+}
+
+- (void)spaceDoubleTouch:(id)notControl touchPoint:(CGPoint)point { //space was just tapped
+	if ([notControl notOpen]) { //use only when not open notControls
+		[notControl lightUp];
+		[transender meditate];
+		[transender meditateWith:0];
 	}
 }
 

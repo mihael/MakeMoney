@@ -46,6 +46,11 @@
 	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, 480.0, 320.0) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
 	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
 	[notControls setCanOpen:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"button_opens_not_controls"] boolValue]];
+	if ([[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]) {
+		[notControls playWithStreamUrl:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]];
+//		DebugLog(@"#noise_url: %@ / %@", notControls, [stage valueForKey:@"noise_url"]);
+	}
+	
 	[self.view addSubview:notControls];
 	[notControls setNotController:self];
 	
@@ -92,9 +97,12 @@
 #pragma mark IITransenderViewControllerDelegate
 - (void)transending {
 	//[notControls lightDown];
+	[[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+
 }
 - (void)meditating {
 	//[notControls lightUp];
+	[[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
 #pragma mark experiments

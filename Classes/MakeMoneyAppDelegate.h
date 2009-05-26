@@ -26,5 +26,7 @@
 + (NSString*) version;
 + (MakeMoneyAppDelegate*) app;
 
+- (void)brickboxStartup;
+
 @end
 

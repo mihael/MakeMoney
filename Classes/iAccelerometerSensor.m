@@ -59,14 +59,8 @@ static iAccelerometerSensor *_sharedInstance;
 }
 
 - (void)updateForShakes {
-	DebugLog(@"UPDATE FOR SHAKES");
-	//if ([[ikooConfiguration instance] shakeToReload]) {
-		[UIAccelerometer sharedAccelerometer].delegate = self;
-		[UIAccelerometer sharedAccelerometer].updateInterval = 0.05;
-	//} else {
-		//[UIAccelerometer sharedAccelerometer].delegate = nil;
-		//[UIAccelerometer sharedAccelerometer].updateInterval = 1.0;
-	//}
+	[UIAccelerometer sharedAccelerometer].delegate = self;
+	[UIAccelerometer sharedAccelerometer].updateInterval = 0.05;
 }
 
 

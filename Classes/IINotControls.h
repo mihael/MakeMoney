@@ -4,6 +4,8 @@
 //
 #import "iProgressView.h"
 #import "iAccelerometerSensor.h"
+#import "AudioStreamer.h"
+
 #define kProgressorAnimationKey @"progressorViewAnimation"
 #define kButtonAnimated NO
 #define kButtonAnimationKey @"buttonViewAnimation"
@@ -20,6 +22,7 @@
 - (void)leftTouch:(id)notControl; //left underbutton touch
 - (void)rightTouch:(id)notControl; //right underbutton touch
 - (void)spaceTouch:(id)notControl touchPoint:(CGPoint)point; //empty space touch - can be while openNot && spaceUp
+- (void)spaceDoubleTouch:(id)notControl touchPoint:(CGPoint)point; //empty space double touch - can be while openNot && spaceUp
 - (void)spaceSwipeRight:(id)notControl; //empty space swipe - can be while openNot
 - (void)spaceSwipeLeft:(id)notControl; //empty space swipe - can be while openNot
 //- (void)spacePinch:(CGPoint)touchPoint; //empty space swipe - can be while openNot
@@ -34,6 +37,8 @@
 @end
 
 @class iProgressView;
+@class AudioStreamer;
+
 
 //Imagine not control.
 @interface IINotControls : UIView <iAccelerometerSensorDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
@@ -51,6 +56,7 @@
 	NSTimer *wach;	
 	UIView *underView;
 	iProgressView *progressor;
+	AudioStreamer *streamer;
 	
 	CGPoint startTouchPosition;
 	BOOL buttonInTouching;
@@ -71,6 +77,9 @@
 - (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options;
 
 - (void)pickInView:(UIView*)inView; //open image picker and let select
+- (void)playWithStreamUrl:(NSString*)url; //play background noises
+
+- (void)playStop; //stop playing
 
 //the space without is the topmost view, the view where the button lies
 - (void)spaceUp; //open the space without 

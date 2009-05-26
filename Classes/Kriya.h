@@ -9,12 +9,11 @@
 
 #define SPOT @"kriya_spot"
 #define RUNS @"kriya_runs"
+#define STARTUPS @"kriya_worldwide_application_startups"
 
 @interface Kriya : NSObject {
 
 }
-
-+ (CGRect)appViewRect;
 
 + (NSInteger)appRunCount;
 + (void)incrementAppRunCount;
