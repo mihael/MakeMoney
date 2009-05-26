@@ -322,6 +322,24 @@
 #pragma mark View Transitioning
 - (void)transitImage:(UIImage*)img 
 {
+
+	if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"fill"]) {
+		transendEmitter1.contentMode = UIViewContentModeScaleAspectFill;
+		transendEmitter2.contentMode = UIViewContentModeScaleAspectFill;
+	}
+	if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"fit"]) {
+		transendEmitter1.contentMode = UIViewContentModeScaleAspectFit;
+		transendEmitter2.contentMode = UIViewContentModeScaleAspectFit;
+	}
+	if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"scale"]) {
+		transendEmitter1.contentMode = UIViewContentModeScaleToFill;
+		transendEmitter2.contentMode = UIViewContentModeScaleToFill;
+	}
+	if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"center"]) {
+		transendEmitter1.contentMode = UIViewContentModeCenter;
+		transendEmitter2.contentMode = UIViewContentModeCenter;
+	}
+	
 	if (useEmitter1) { 
 		[transendEmitter2 setImage:img];
 		[self transit:transendEmitter2];

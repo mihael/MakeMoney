@@ -6,8 +6,8 @@
 
 @mr_foto 2
 [
-{"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}},
-{"ii":"FecherView", "ions":{"reuse":"true", "button_title":"Fech recent twitter", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=mr_foto", "filter":"twitter"}, "ior":{"stop":"true"}}
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}}
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"Fech recent twitter", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=mr_foto", "filter":"twitter"}, "ior":{"stop":"true"}}
 ]
 
 @mr_foto 1
@@ -15,6 +15,53 @@
 {"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}},
 ]
 
+@moonoom 1 #TODO
+[
+{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "content_mode":"center"}}
+{"ii":"MoonTimeView", "ior":{"stop":"true", "content_mode":"center"}}
+]
+
+@MakeMoneyFrameworkDemo 1 #TODO
+[
+{"ii":"0_1.jpg",  "ior":{"stop":"false"}},
+{"ii":"0_2.jpg",  "ior":{"stop":"false"}},
+{"ii":"0_3.jpg",  "ior":{"stop":"false", "revibe":1.38}},
+{"ii":"MessageView", "ions":{"reuse":"true", "message":"Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"000000005.caf",  "ior":{"stop":"true"}},
+
+{"ii":"0000000004.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This is a Personal Mobile Money Making Application, built with MakeMoney framework.", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"0000000006.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"Look the background changes...", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"0000000010.jpg", "ior":{"stop":false}}, 
+
+{"ii":"MessageView", "ions":{"message":"Everything here is adjustable.", "background":"main.png"}, "ior":{"stop":"false", "effect":3, "revibe":2.0}},
+{"ii":"MessageView", "ions":{"message":"The transitions beetween images.", "background":"0000000048.jpg"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"MessageView", "ions":{"message":"This text.", "background":"0000000056.jpg"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"MessageView", "ions":{"message":"Trying to melt the screen with a heat gun.", "background":"0000000058.jpg"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"MessageView", "ions":{"message":"Life always feels good...", "background":"main.png"}, "ior":{"stop":"false", "effect":2}},
+
+{"ii":"0000000076.jpg", "ior":{"stop":false}}, 
+{"ii":"0000000090.jpg", "ior":{"stop":false}}, 
+{"ii":"0000000095.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This should be your message...", "background":"main.png"}, "ior":{"stop":"false", "effect":1}},
+
+{"ii":"0000000107.jpg", "ior":{"stop":false}}, 
+{"ii":"0000000123.jpg", "ior":{"stop":false}}, 
+{"ii":"0000000133.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This Application was made with the MakeMoney framework...", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+
+{"ii":"0000000135.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This could be your Application.", "background":"main.png"}, "ior":{"stop":"false", "effect":1}},
+{"ii":"0000000200.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"This could be your Words.", "background":"main.png"}, "ior":{"stop":"false", "effect":1}},
+{"ii":"0000000107.jpg", "ior":{"stop":false}}, 
+{"ii":"MessageView", "ions":{"message":"You could be your moneymaking Application.", "background":"main.png"}, "ior":{"stop":"false"}},
+
+{"ii":"MessageView", "ions":{"message":"All you need to do is provide content.", "background":"main.png"}, "ior":{"stop":"false"}},
+{"ii":"MessageView", "ions":{"message":"Content can be any content anywhere.", "background":"main.png"}, "ior":{"stop":"false"}}
+
+]
 
 #cache
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"0_1.jpg",  "ior":{"stop":"false"}},
@@ -27,6 +74,11 @@
 
 #examples v1.0
 [
+{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "content_mode":"center"}},
+{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "content_mode":"scale"}},
+{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "content_mode":"fill"}},
+{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "content_mode":"fit"}},
+
 {"ii":"KopterView", "ions":{"experimental":"true", "reuse":"true", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update"}, "ior":{"stop":"true"}}
 
 {"ii":"FecherView", "ions":{"button_title":"fech", "background":"main.png", "url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":13, "params":"screen_name=pater_simonasic", "filter":"twitter"}, "ior":{"stop":"true"}},
