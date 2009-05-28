@@ -1,4 +1,3 @@
 [
-{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "space":"up", "content_mode":"center"}},
-{"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}
+{"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}}
 ]

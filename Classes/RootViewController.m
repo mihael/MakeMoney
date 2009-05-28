@@ -45,13 +45,11 @@
     [super viewDidLoad];	
 	BOOL wwwapp = [[[[MakeMoneyAppDelegate app] stage] valueForKey:@"wwwapp"] boolValue];
 	if (wwwapp) {
-		[[Reachability sharedReachability] setHostName:@"apple.com"];
+		[[Reachability sharedReachability] setHostName:@"google.com"];
 		if ([[Reachability sharedReachability] remoteHostStatus]==NotReachable) {
-			[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];	
+			[[iAlert instance] alert:@"Network" withMessage:@"Please connect device to internet. Thanks."];	
 		}
 	}
-
-	
 	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, 480.0, 320.0) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
 	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
 	[notControls setCanOpen:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"button_opens_not_controls"] boolValue]];

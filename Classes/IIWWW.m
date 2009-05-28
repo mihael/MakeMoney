@@ -72,7 +72,7 @@
 //********************************************************************
 - (BOOL)hasWWWAccess
 {
-	return ([[Reachability sharedReachability] internetConnectionStatus]==NotReachable);
+	return ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable);
 }
 
 - (void)fechUpdateWithParams:(NSDictionary*)p
