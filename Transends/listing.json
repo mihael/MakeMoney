@@ -1,25 +1,50 @@
-@raddarkopter 1
+@radionula 1.0
+[
+{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "space":"up", "content_mode":"center"}},
+{"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}
+]
+
+@moonpreview 1 #rejected
+[
+{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "space":"up", "content_mode":"center"}},
+{"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}
+]
+
+@raddarkopter 1 #waiting for 3.0
 [
 {"ii":"KopterView", "ions":{"reuse":"true", "title":"thanks to www.promet.si", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true", "space":"down"}},
 {"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"promet_si", "icon":"kepo_icon.png", "background":"main.jpg", "url":"http://www.promet.si", "params":"id=25", "method":"get", "filter":"promet_list", "filter_base_url":"http://www.promet.si"}, "ior":{"stop":"true", "space":"down"}}
 ]
 
-@mr_foto 2
+@mr_foto 2 #waiting for 3.0
 [
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}}
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"Fech recent twitter", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=mr_foto", "filter":"twitter"}, "ior":{"stop":"true"}}
 ]
 
-@mr_foto 1
+@mr_foto 1 #waiting for binary
 [
-{"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}},
+{"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}}
 ]
 
-@moonoom 1 #TODO
+@djtwitter #experimental
 [
-{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "content_mode":"center"}}
-{"ii":"MoonTimeView", "ior":{"stop":"true", "content_mode":"center"}}
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"djgoatboy twitter mix", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":10, "params":"screen_name=djgoatboy", "filter":"twitter"}, "ior":{"stop":"true"}}
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"kitschmaster twitter mix", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":10, "params":"screen_name=kitschmaster", "filter":"twitter"}, "ior":{"stop":"true"}}
 ]
+
+@pikchur #experimental 
+[
+{"ii":"UploadView", "ions":{"reuse":"true", "title":"pikchur", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true", "space":"down"}},
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"pikchur ", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":20, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true", "space":"down"}}
+
+]
+	@beerchase #experimental
+	# 
+	[
+
+	]
+
 
 @MakeMoneyFrameworkDemo 1 #TODO
 [

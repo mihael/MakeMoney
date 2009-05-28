@@ -11,6 +11,5 @@
 	IBOutlet UIImageView* background;
 	LittleArrowView* icon;	
 	IBOutlet UILabel* message;
-	IBOutlet UIActivityIndicatorView *indica;
 }
 @end

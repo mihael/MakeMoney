@@ -8,9 +8,10 @@
 #import "iProgressView.h"
 #import "iAccelerometerSensor.h"
 #import "AudioStreamer.h"
+#import "Reachability.h"
 
 @implementation IINotControls
-@synthesize notController, delegate, pickDelegate, notOpen, canOpen, bigButton, progressor;
+@synthesize notController, delegate, pickDelegate, notOpen, canOpen, bigButton, progressor, canSpaceTouch;
 
 - (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options
 {
@@ -69,14 +70,21 @@
 		progressor = [[iProgressView alloc] initWithFrame:self.frame text:nil];
 		[progressor setHidden:YES];
 		
+		wwwView = [[iWWWView alloc] initWithFrame:CGRectInset(self.frame, 57, 57)];
+		
+		[wwwView setHidden:YES];
+		
 		[self addSubview:button];
 		[self addSubview:leftButton];
 		[self addSubview:rightButton];
+		[self addSubview:wwwView];
 		[self addSubview:progressor];
 		[self closeNotControls];
 		buttonInTouching = NO;
 		buttonNotLightUp = YES;
 		[iAccelerometerSensor instance].delegate=self;
+		
+		canSpaceTouch = YES; //always send touches to delegate
     }
     return self;
 }
@@ -397,6 +405,7 @@
 	if ([progressor isHidden])
 	{
 		if (progress!=nil) { //show and set text
+			[self setCanSpaceTouch:NO];
 			[self spaceUp];
 			[progressor setHidden:NO];
 			[progressor setText:progress];
@@ -409,6 +418,7 @@
 			if (animated)
 				[self animateProgressorOut];
 			[self spaceDown];
+			[self setCanSpaceTouch:YES];			
 		} else { //change text 
 			[progressor setText:progress];
 			if (animated)
@@ -609,13 +619,14 @@
 	if([touch tapCount] >= 2) {
         // Process a double-tap gesture
 		if (delegate) {
-			if ([delegate respondsToSelector:@selector(spaceTouch:)]) {
+			if (canSpaceTouch&&[delegate respondsToSelector:@selector(spaceTouch:)]) {
 				[delegate spaceDoubleTouch:self touchPoint:[touch locationInView:self]];
 			}
 		}
     } else {
 		if (delegate) {
-			if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)]) {
+			if (canSpaceTouch&&[delegate respondsToSelector:@selector(spaceTouch:touchPoint:)]) {
+				
 				[delegate spaceTouch:self touchPoint:[touch locationInView:self]];
 			}
 		}
@@ -663,23 +674,25 @@
 {
 	if (!streamer)
 	{
-		NSString *escapedValue =
-		[(NSString *)CFURLCreateStringByAddingPercentEscapes(
-															 nil,
-															 (CFStringRef)url,
-															 NULL,
-															 NULL,
-															 kCFStringEncodingUTF8)
-		 autorelease];
-		
-		NSURL *stream_url = [NSURL URLWithString:escapedValue];
-		streamer = [[AudioStreamer alloc] initWithURL:stream_url];
-		[streamer
-		 addObserver:self
-		 forKeyPath:@"isPlaying"
-		 options:0
-		 context:nil];
-		[streamer start];
+		if ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable) {
+			NSString *escapedValue =
+			[(NSString *)CFURLCreateStringByAddingPercentEscapes(
+																 nil,
+																 (CFStringRef)url,
+																 NULL,
+																 NULL,
+																 kCFStringEncodingUTF8)
+			 autorelease];
+			
+			NSURL *stream_url = [NSURL URLWithString:escapedValue];
+			streamer = [[AudioStreamer alloc] initWithURL:stream_url];
+			[streamer
+			 addObserver:self
+			 forKeyPath:@"isPlaying"
+			 options:0
+			 context:nil];
+			[streamer start];
+		}
 	} else	{
 		[streamer stop];
 	}
@@ -706,6 +719,24 @@
 	
 	[super observeValueForKeyPath:keyPath ofObject:object change:change
 						  context:context];
+}
+
+#pragma mark WWW
+- (void)wwwWithUrl:(NSString*)url 
+{
+	[wwwView setHidden:NO];
+	[wwwView setUrl:url];
+}
+
+- (void)wwwWithYutubUrl:(NSString*)yutub_url 
+{
+	[wwwView setHidden:NO];
+	[wwwView setYutubUrl:yutub_url];
+}
+
+- (void)wwwClear 
+{
+	[wwwView setHidden:YES];
 }
 
 @end

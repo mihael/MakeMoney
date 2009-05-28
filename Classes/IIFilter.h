@@ -30,7 +30,16 @@
 //twitpic
 + (BOOL)isTwitPicUrl:(NSString*)url;
 + (NSString*)twitPicAssetUrlFrom:(NSString*)twitPicUrl withSize:(NSString*)sizeStr;
-	
+//audio stream
++ (BOOL)isStreamUrl:(NSString*)url;
++ (NSString*)streamAssetUrlFrom:(NSString*)url;
+//twitter style @userid	
 + (BOOL)isUserId:(NSString*)user_id;
+//yutub
++ (BOOL)isYutubUrl:(NSString*)url;
++ (NSString*)yutubAssetUrlFrom:(NSString*)url;
+
+//decoders
++ (NSString*)decode_bit_ly:(NSString*)encodedUrl;
 
 @end

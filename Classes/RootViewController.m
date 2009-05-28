@@ -7,6 +7,7 @@
 #import "IINotControls.h"
 #import "iAlert.h"
 #import "MakeMoneyAppDelegate.h"
+#import "Reachability.h"
 
 @implementation RootViewController
 
@@ -41,14 +42,26 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    [super viewDidLoad];	
+	BOOL wwwapp = [[[[MakeMoneyAppDelegate app] stage] valueForKey:@"wwwapp"] boolValue];
+	if (wwwapp) {
+		[[Reachability sharedReachability] setHostName:@"apple.com"];
+		if ([[Reachability sharedReachability] remoteHostStatus]==NotReachable) {
+			[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];	
+		}
+	}
 
+	
 	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, 480.0, 320.0) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
 	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
 	[notControls setCanOpen:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"button_opens_not_controls"] boolValue]];
-	if ([[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]) {
+	NSString *noise_url = [[NSUserDefaults standardUserDefaults] valueForKey:@"noise"];
+	if ([noise_url hasPrefix:@"null"]) {
+		//no noise. thanks.
+	} else if ([noise_url hasPrefix:@"http://"]) {
+		[notControls playWithStreamUrl:noise_url];
+	} else if ([[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]) {
 		[notControls playWithStreamUrl:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]];
-//		DebugLog(@"#noise_url: %@ / %@", notControls, [stage valueForKey:@"noise_url"]);
 	}
 	
 	[self.view addSubview:notControls];

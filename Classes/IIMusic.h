@@ -2,7 +2,6 @@
 //  IIMusic.h
 //  MakeMoney
 //
-#import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioServices.h>
 @protocol IIMusicDelegate
   - (void)heardMusic:(id)sender;

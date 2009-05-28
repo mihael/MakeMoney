@@ -97,6 +97,14 @@
 	}
 	return urls;
 }
+//shorters
++ (NSString*)redirectedUrlMaybe:(NSString*)r 
+{
+	if ([r hasPrefix:@"http://bit.ly/"]) {
+		return [self decode_bit_ly:r];
+	} 
+	return nil;
+}
 
 //$$$supported sharing experiences are returned magically, others are nil$$$
 + (NSString*)assetUrl:(NSString*)url 
@@ -105,11 +113,21 @@
 	if (!size) 
 		size = @"l";
 	
-	if ([IIFilter isPikchurUrl:url]) {
-		return [IIFilter pikchurAssetUrlFrom:url withSize:size];
-	} else if ([IIFilter isTwitPicUrl:url]){
-		return [IIFilter twitPicAssetUrlFrom:url withSize:@"full"];		
-	} 
+	NSString *urlMagic = [IIFilter redirectedUrlMaybe:url];
+	
+	if (!urlMagic) {
+		urlMagic = url;
+	}
+	
+	if ([IIFilter isPikchurUrl:urlMagic]) {
+		return [IIFilter pikchurAssetUrlFrom:urlMagic withSize:size];
+	} else if ([IIFilter isTwitPicUrl:urlMagic]) {
+		return [IIFilter twitPicAssetUrlFrom:urlMagic withSize:@"full"];		
+	} else if ([IIFilter isStreamUrl:urlMagic]) {
+		return [IIFilter streamAssetUrlFrom:urlMagic];
+	} else if ([IIFilter isYutubUrl:urlMagic]) {
+		return [IIFilter yutubAssetUrlFrom:urlMagic];
+	}
 	return nil;
 }
 
@@ -152,4 +170,78 @@
 	return twitPicUrl; //return original, if code failed
 }
 
+//userid
++ (BOOL)isUserId:(NSString*)userid
+{
+	return [userid hasPrefix:@"@"];
+}
+
+//audio streams
++ (BOOL)isStreamUrl:(NSString*)url {
+	NSString *fileExtension = [url pathExtension];
+	if ([fileExtension isEqual:@"mp3"])
+	{
+		return YES;
+	}
+	else if ([fileExtension isEqual:@"wav"])
+	{
+		return YES;
+	}
+	else if ([fileExtension isEqual:@"aifc"])
+	{
+		return YES;
+	}
+	else if ([fileExtension isEqual:@"aiff"])
+	{
+		return YES;
+	}
+	else if ([fileExtension isEqual:@"m4a"])
+	{
+		return YES;
+	}
+	else if ([fileExtension isEqual:@"mp4"])
+	{
+		return YES;
+	}
+	else if ([fileExtension isEqual:@"caf"])
+	{
+		return YES;
+	}
+	else if ([fileExtension isEqual:@"aac"])
+	{
+		return YES;
+	}
+	return NO;
+}
+
++ (NSString*)streamAssetUrlFrom:(NSString*)url 
+{
+	return url;
+}
+
+//yutub
++ (BOOL)isYutubUrl:(NSString*)url 
+{
+	return [url hasPrefix:@"http://www.youtube.com/watch?v="];
+}
+
++ (NSString*)yutubAssetUrlFrom:(NSString*)url 
+{
+	return url;
+}
+
+//stupid little redirectors, because stupid little web is based on stupid little 140 chars
++ (NSString*)decode_bit_ly:(NSString*)encodedUrl
+{
+	ASIHTTPRequest* request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:encodedUrl]]autorelease];
+	[request start];
+	NSError *error = [request error];
+	if (!error) {
+		NSArray *tokens = [[request responseString] componentsSeparatedByString:@"'"];
+		NSString *decodedUrl = [tokens objectAtIndex:1];
+		DebugLog(@"decode_bit_ly decoded %@", decodedUrl);
+		return decodedUrl;
+	} 	
+	return encodedUrl;
+}
 @end

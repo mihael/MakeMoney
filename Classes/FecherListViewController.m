@@ -204,10 +204,11 @@
 
 - (void)stopFunctioning {
 	[www cancelFech];
-	//[notControls setProgress:nil animated:YES];	
+	[notControls setProgress:nil animated:YES];	
 	//save current state if asked
 	if ([options valueForKey:@"restore_key"])
 		[[NSUserDefaults standardUserDefaults] setValue:fecherList forKey:[options valueForKey:@"restore_key"]];
+
 	DebugLog(@"#stopFunctioning");
 }
 

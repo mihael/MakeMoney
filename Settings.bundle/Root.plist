@@ -8,6 +8,26 @@
 	<array>
 		<dict>
 			<key>Title</key>
+			<string>Background radio</string>
+			<key>Key</key>
+			<string>noise</string>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>DefaultValue</key>
+			<string>http://91.185.196.3:8020/</string>
+			<key>Titles</key>
+			<array>
+				<string>RadioNULA</string>
+				<string>Off</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>http://91.185.196.3:8020/</string>
+				<string>null</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Title</key>
 			<string>Style</string>
 			<key>Key</key>
 			<string>horizontal</string>

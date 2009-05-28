@@ -5,6 +5,8 @@
 #import "iProgressView.h"
 #import "iAccelerometerSensor.h"
 #import "AudioStreamer.h"
+#import "iWWWView.h"
+#import "iIconView.h"
 
 #define kProgressorAnimationKey @"progressorViewAnimation"
 #define kButtonAnimated NO
@@ -38,7 +40,8 @@
 
 @class iProgressView;
 @class AudioStreamer;
-
+@class iWWWView;
+@class iIconView;
 
 //Imagine not control.
 @interface IINotControls : UIView <iAccelerometerSensorDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
@@ -57,6 +60,7 @@
 	UIView *underView;
 	iProgressView *progressor;
 	AudioStreamer *streamer;
+	iWWWView *wwwView;
 	
 	CGPoint startTouchPosition;
 	BOOL buttonInTouching;
@@ -64,6 +68,7 @@
 	BOOL notOpen;
 	BOOL canOpen;
 	BOOL bigButton;
+	BOOL canSpaceTouch;
 	
 }
 @property (nonatomic, assign) id <IINotControlsDelegate> delegate;
@@ -72,14 +77,21 @@
 @property (readonly) BOOL notOpen;
 @property (readwrite) BOOL canOpen;
 @property (readwrite) BOOL bigButton;
+@property (readwrite) BOOL canSpaceTouch;
 @property (readonly) iProgressView *progressor;
 
 - (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options;
 
 - (void)pickInView:(UIView*)inView; //open image picker and let select
-- (void)playWithStreamUrl:(NSString*)url; //play background noises
 
+//noise streamer
+- (void)playWithStreamUrl:(NSString*)url; //play background noises
 - (void)playStop; //stop playing
+
+//www display
+- (void)wwwWithYutubUrl:(NSString*)yutub_url;
+- (void)wwwWithUrl:(NSString*)url;
+- (void)wwwClear;
 
 //the space without is the topmost view, the view where the button lies
 - (void)spaceUp; //open the space without 

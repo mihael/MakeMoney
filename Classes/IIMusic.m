@@ -3,7 +3,6 @@
 //  MakeMoney
 //
 #import "IIMusic.h"
-
 @implementation IIMusic
 @synthesize delegate;
 
@@ -12,8 +11,7 @@ static IIMusic* music = nil;
 static void Heard (SystemSoundID  SSID, void* myself) {
 	AudioServicesRemoveSystemSoundCompletion (SSID);
 	if (music.delegate) {
-		if ([music.delegate respondsToSelector:@selector(heardMusic:)])
-			[music.delegate heardMusic:myself];
+		[music.delegate heardMusic:myself];
 	}
 }
 
@@ -65,7 +63,6 @@ static void Heard (SystemSoundID  SSID, void* myself) {
 -(void)heard {
 	AudioServicesDisposeSystemSoundID(musicID);
 	if (delegate) {
-		if ([delegate respondsToSelector:@selector(heardMusic:)])
 			[delegate heardMusic:self];
 	}	
 }

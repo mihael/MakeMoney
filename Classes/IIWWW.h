@@ -44,6 +44,7 @@
 
 - (id)initWithOptions:(NSDictionary*)o;
 - (void)loadOptions:(NSDictionary*)o;
+- (BOOL)hasWWWAccess;
 
 - (void)setProgressDelegate:(id)d;
 
@@ -62,6 +63,10 @@
 - (void)formFech;
 - (void)postFech;
 - (void)getFech;
+
+//asi delegates
+- (void)fechFailed:(ASIHTTPRequest *)request;
+- (void)fechFinished:(ASIHTTPRequest *)request;
 
  //feching is also posting information to web
 - (void)fechUpdateWithParams:(NSDictionary*)p;

@@ -23,8 +23,14 @@
 }
 
 - (void)loadOptions:(NSDictionary*)o
-{
+{	
 	[self setOptions:o];
+	//ensure EDGE network comes on
+	[[Reachability sharedReachability] setHostName:[[NSURL URLWithString:[options valueForKey:@"url"]] host]];
+	if (![self hasWWWAccess]) {
+		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];	
+	}
+	
 	[filter release];
 	filter = nil;
 	[self setFilterName:[options valueForKey:@"filter"]];
@@ -52,9 +58,6 @@
 	[server setRequestDidFailSelector:@selector(fechFailed:)];	
 	[server setDelegate:self];	
 
-	//ensure EDGE network comes on
-	[[Reachability sharedReachability] setHostName:[[NSURL URLWithString:[options valueForKey:@"url"]] host]];
-	[[Reachability sharedReachability] remoteHostStatus];
 }
 
 - (void)dealloc {
@@ -67,12 +70,9 @@
     [super dealloc];
 }
 //********************************************************************
-- (BOOL)checkNetPresence
+- (BOOL)hasWWWAccess
 {
-	if ([[Reachability sharedReachability] internetConnectionStatus]==NotReachable) {
-		return NO;
-	}
-	return YES;
+	return ([[Reachability sharedReachability] internetConnectionStatus]==NotReachable);
 }
 
 - (void)fechUpdateWithParams:(NSDictionary*)p
@@ -101,7 +101,7 @@
 //fech - this is all you need for various downloads
 - (void)fech 
 {
-	if ([self checkNetPresence]) {
+	if ([self hasWWWAccess]) {
 		if ([options valueForKey:@"method"]) {
 			if ([[options valueForKey:@"method"] isEqualToString:@"custom"]) {
 				if ([filter respondsToSelector:@selector(prepareRequestFor:)])  //filter holds custom implementation for feching urls
@@ -118,8 +118,8 @@
 			[self getFech];
 		}
 	} else {
-		[self fechFailed:nil];
 		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];
+		[self fechFailed:nil];
 	}
 }
 
@@ -151,6 +151,7 @@
 //TODO rewrite this posting thing, so it becomes more inteligent about the params
 - (void)postFech 
 {
+	
 	NSURL *posturl = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@=%@&%@=%@&%@", [options valueForKey:@"url"], [filter pageParamName], [options valueForKey:@"page"], [filter limitParamName], [options valueForKey:@"limit"], [options valueForKey:@"params"]]];
 	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:posturl] autorelease];
 	[request setRequestMethod:@"POST"];
@@ -239,8 +240,10 @@
 					[self.delegate notFeched:@"Pikchur failed"];		
 				}
 			} else if ([messages valueForKey:@"auth_key"]!=NULL){
-				DebugLog(@"Pikchur auth_key: %@", [messages valueForKey:@"auth_key"]);		
+				DebugLog(@"Pikchur auth_key: %@ user_id", [messages valueForKey:@"auth_key"], [messages valueForKey:@"auth_key"]);		
 				[[NSUserDefaults standardUserDefaults] setValue:[messages valueForKey:@"auth_key"] forKey:@"pikchur_auth_key"];
+				[[NSUserDefaults standardUserDefaults] setValue:[messages valueForKey:@"auth_key"] forKey:@"pikchur_user_id"];
+				[[NSUserDefaults standardUserDefaults] synchronize];
 				[self.delegate feched:messages];
 			} else if ([messages valueForKey:@"post"]!=NULL) {
 				[self.delegate feched:messages];
@@ -313,7 +316,7 @@
 	[request setPostValue:password forKey:@"data[api][password]"];
 	//[request setPostValue:@"" forKey:@"data[api][origin]"];
 	[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
-	[request setPostValue:@"plusOOts6YVcBSFGgT0jaA" forKey:@"data[api][key]"];
+	[request setPostValue:kPikchurAPIKey forKey:@"data[api][key]"];
 	[request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"] forKey:@"data[api][auth_key]"];
 	[request setPostValue:description forKey:@"data[api][status]"];
 	[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].latitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lat]"];

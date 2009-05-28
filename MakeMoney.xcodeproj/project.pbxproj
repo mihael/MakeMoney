@@ -27,6 +27,8 @@
 		4705A98B0FC603D4005DA8FC /* kepo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4705A98A0FC603D4005DA8FC /* kepo_icon.png */; };
 		4705AAA90FC709E4005DA8FC /* Progress in Resources */ = {isa = PBXBuildFile; fileRef = 4705AAA80FC709E4005DA8FC /* Progress */; };
 		4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4705ABAF0FC964FB005DA8FC /* Settings.bundle */; };
+		4705B02E0FCC4656005DA8FC /* iWWWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705B02D0FCC4656005DA8FC /* iWWWView.m */; };
+		4705B1000FCD8674005DA8FC /* iIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705B0FF0FCD8674005DA8FC /* iIconView.m */; };
 		4707D7790FB0928D00094125 /* KopterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4707D7780FB0928D00094125 /* KopterViewController.m */; };
 		4707D7870FB093DB00094125 /* KopterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4707D7860FB093DB00094125 /* KopterView.xib */; };
 		4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707D8500FB2D86400094125 /* CoreLocation.framework */; };
@@ -215,6 +217,11 @@
 		4705A98A0FC603D4005DA8FC /* kepo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = kepo_icon.png; path = Artwork/kepo_icon.png; sourceTree = "<group>"; };
 		4705AAA80FC709E4005DA8FC /* Progress */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Progress; sourceTree = "<group>"; };
 		4705ABAF0FC964FB005DA8FC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		4705AFA50FCC2DA8005DA8FC /* prep_stage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prep_stage.json; sourceTree = "<group>"; };
+		4705B02C0FCC4656005DA8FC /* iWWWView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iWWWView.h; sourceTree = "<group>"; };
+		4705B02D0FCC4656005DA8FC /* iWWWView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iWWWView.m; sourceTree = "<group>"; };
+		4705B0FE0FCD8674005DA8FC /* iIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iIconView.h; sourceTree = "<group>"; };
+		4705B0FF0FCD8674005DA8FC /* iIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iIconView.m; sourceTree = "<group>"; };
 		4707D7770FB0928D00094125 /* KopterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KopterViewController.h; path = Classes/KopterViewController.h; sourceTree = "<group>"; };
 		4707D7780FB0928D00094125 /* KopterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KopterViewController.m; path = Classes/KopterViewController.m; sourceTree = "<group>"; };
 		4707D7860FB093DB00094125 /* KopterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KopterView.xib; sourceTree = "<group>"; };
@@ -600,6 +607,8 @@
 				4705A8830FC5EA60005DA8FC /* iAnnotationView.m */,
 				4705A8840FC5EA60005DA8FC /* iProgressView.h */,
 				4705A8850FC5EA60005DA8FC /* iProgressView.m */,
+				4705B0FE0FCD8674005DA8FC /* iIconView.h */,
+				4705B0FF0FCD8674005DA8FC /* iIconView.m */,
 				479C505B0FA79480003DF1B2 /* LittleArrowView.h */,
 				479C505C0FA79480003DF1B2 /* LittleArrowView.m */,
 				470421810FA1E0F400D7DE30 /* URLPair.h */,
@@ -612,6 +621,8 @@
 				47EBE8BD0F4C10E1009F377E /* Reachability.m */,
 				4773866C0F4ACCB20044085E /* iAlert.h */,
 				4773866D0F4ACCB20044085E /* iAlert.m */,
+				4705B02C0FCC4656005DA8FC /* iWWWView.h */,
+				4705B02D0FCC4656005DA8FC /* iWWWView.m */,
 			);
 			name = i;
 			sourceTree = "<group>";
@@ -719,6 +730,7 @@
 			children = (
 				479C54990FAAEE73003DF1B2 /* program.json */,
 				47B14D570F7E09360017AB44 /* stage.json */,
+				4705AFA50FCC2DA8005DA8FC /* prep_stage.json */,
 				472643200F56A9530097D30A /* listing.json */,
 				47348E470F9B8D5300A1D78A /* radionula_screen.jpg */,
 				479CBF500F8E574400718563 /* 0_mm_test1.jpg */,
@@ -987,6 +999,8 @@
 				4705A8860FC5EA60005DA8FC /* iAccelerometerSensor.m in Sources */,
 				4705A8870FC5EA60005DA8FC /* iAnnotationView.m in Sources */,
 				4705A8880FC5EA60005DA8FC /* iProgressView.m in Sources */,
+				4705B02E0FCC4656005DA8FC /* iWWWView.m in Sources */,
+				4705B1000FCD8674005DA8FC /* iIconView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

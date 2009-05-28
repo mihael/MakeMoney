@@ -2,6 +2,7 @@
 //  IITranscender.m
 //  MakeMoney
 //
+#import "Reachability.h"
 #import "IITransender.h"
 #import "JSON.h"
 #import "ASIHTTPRequest.h"
@@ -233,44 +234,51 @@
 		
 		//see what kind of transend this is and act		
 		if ([memoryII isEqualToString:@"message"]) {
-			UIImage* background = nil;
-			//fech background_url icon_url if not yet
+			
+			if ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable) {
 
-			//feching could last longer than the vibe - lets meditate on this
-			[self meditate]; 
-			NSDate *fechTime = [NSDate date];  //record point in time
-			//notify we are feching
-			if ([delegate respondsToSelector:@selector(fechingTransend)])
-				[delegate fechingTransend];
-			
-			if ([options valueForKey:@"icon_url"])
-				[Kriya imageWithUrl:[options valueForKey:@"icon_url"]];
-			if ([options valueForKey:@"background_url"]) {
-				if ([options valueForKey:@"refech"]) { //remove feched then, and refech
-					[Kriya clearImageWithUrl:[options valueForKey:@"background_url"]];
+				UIImage* background = nil;
+				//fech background_url icon_url if not yet
+
+				//feching could last longer than the vibe - lets meditate on this
+				[self meditate]; 
+				//NSDate *fechTime = [NSDate date];  //record point in time
+				//notify we are feching
+				if ([delegate respondsToSelector:@selector(fechingTransend)])
+					[delegate fechingTransend];
+				
+				if ([options valueForKey:@"icon_url"])
+					[Kriya imageWithUrl:[options valueForKey:@"icon_url"]];
+				if ([options valueForKey:@"background_url"]) {
+					if ([options valueForKey:@"refech"]) { //remove feched then, and refech
+						[Kriya clearImageWithUrl:[options valueForKey:@"background_url"]];
+					}
+					background = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
 				}
-				background = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
+				if (!background && [options valueForKey:@"background"])
+					background = [self imageNamed:[options valueForKey:@"background"]];
+				if (!background)
+					background = [self imageNamed:@"main.jpg"];
+				
+				//notify we feched
+				if ([delegate respondsToSelector:@selector(fechedTransend)])
+					[delegate fechedTransend];
+				
+				//NSTimeInterval elapsedTime = [fechTime timeIntervalSinceNow];  
+				//DebugLog(@"Fech time: %f", -elapsedTime);              
+							
+				//transend
+				if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) 
+				{
+					[delegate transendedWithImage:background withIons:options withIor:behavior];
+				
+					//[self transend]; //resume with transending
+				}
+			} else {
+				[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];
+				[self invokeTransendFailed:IITransenderFailedWithMessage];
 			}
-			if (!background && [options valueForKey:@"background"])
-				background = [self imageNamed:[options valueForKey:@"background"]];
-			if (!background)
-				background = [self imageNamed:@"main.jpg"];
-			
-			//notify we feched
-			if ([delegate respondsToSelector:@selector(fechedTransend)])
-				[delegate fechedTransend];
-			
-			NSTimeInterval elapsedTime = [fechTime timeIntervalSinceNow];  
-			DebugLog(@"Fech time: %f", -elapsedTime);              
-						
-			//transend
-			if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) 
-			{
-				[delegate transendedWithImage:background withIons:options withIor:behavior];
-			
-				//[self transend]; //resume with transending
-			}
-			
+
 		} else if ([memoryII hasSuffix:@"View"]) {
 
 			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryII];

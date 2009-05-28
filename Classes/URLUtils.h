@@ -13,5 +13,6 @@
 - (BOOL) isWhiteSpace:(NSString*)aString;
 
 + (NSString*) encodeHTTP:(NSString*)aString;
++ (NSString*) decodeHTTP:(NSString*)aString;
 
 @end

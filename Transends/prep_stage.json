@@ -1,5 +1,4 @@
 {
-"wwwapp":"true",
 "program":"program",
 "horizontal":"true",
 "animated":"true",
@@ -11,6 +10,10 @@
 "save_current_spot":"false",
 "save_current_program":"false",
 "goldcut":-1,
-"noise_url":"http://91.185.196.3:8020/"
+"noise_url":"http://kitschmaster.com/assets/0000/0204/kitschinka.caf"
+
+radionula "noise_url":"http://91.185.196.3:8020/"
+alpski val "noise_url":"http://stream.estrela.si:8000/" 
+
 
 }

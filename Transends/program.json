@@ -1,3 +1,4 @@
 [
-{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "content_mode":"center"}}
+{"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "space":"up", "content_mode":"center"}},
+{"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}
 ]

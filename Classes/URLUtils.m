@@ -120,4 +120,14 @@
 	return s;
 }
 
++ (NSString*) decodeHTTP:(NSString*)aString {
+//	NSString *decaped = (NSString*)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)aString, NULL, NULL, kCFStringEncodingUTF8);
+	NSMutableString *s = [[aString mutableCopy] autorelease];
+	[s replaceOccurrencesOfString:@"&amp;" withString:@"&" options:0 range:NSMakeRange(0, [s length])];
+	[s replaceOccurrencesOfString:@"%2B" withString:@"+" options:0 range:NSMakeRange(0, [s length])];
+	[s replaceOccurrencesOfString:@"%3F" withString:@"?" options:0 range:NSMakeRange(0, [s length])];
+	//[decaped release];
+	return s;
+}
+
 @end
