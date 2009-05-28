@@ -122,18 +122,27 @@
 	}
 	UITableViewCell *cell = (UITableViewCell*)[tv dequeueReusableCellWithIdentifier:@"reusemi"];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reusemi"] autorelease];
-		[cell.textLabel setLineBreakMode:UILineBreakModeWordWrap];
-		[cell.textLabel setNumberOfLines:0];
-		[cell.textLabel setTextColor:[UIColor whiteColor]];
-		[cell.imageView setImage:[transender imageNamed:@"photo_icon.png"]];
+		/* SDK 2.x
+		 */
+		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:@"reusemi"] autorelease];
+		cell.textColor = [UIColor whiteColor];
+		cell.lineBreakMode = UILineBreakModeWordWrap;
+		/* SDK 3.0
+		 cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reusemi"] autorelease];
+		 [cell.textLabel setLineBreakMode:UILineBreakModeWordWrap];
+		 [cell.textLabel setNumberOfLines:0];
+		 [cell.textLabel setTextColor:[UIColor whiteColor]];
+		 [cell.imageView setImage:[transender imageNamed:@"photo_icon.png"]];
+		 */
 		[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];		
 		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
 	}		
 	//update
-	[cell.textLabel setText:[[fech valueForKey:@"ions"] valueForKey:@"message"]];
+	//SDK 2.x
+	[cell setText:[[fech valueForKey:@"ions"] valueForKey:@"message"]];
+	//SDK 3.0
+	//[cell.textLabel setText:[[fech valueForKey:@"ions"] valueForKey:@"message"]];
 	//[cell.imageView setImage:[Kriya imageWithUrl:[[fech valueForKey:@"ions"] valueForKey:@"background_url"]]];
-	
 	return cell;
 }
 

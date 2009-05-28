@@ -553,7 +553,7 @@
 		[picker setDelegate:self];
 		[picker setAllowsImageEditing:NO];
 		[[picker navigationBar] setHidden:YES];	
-		[picker setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+		//[picker setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 		
 		switch (buttonIndex) {
 			case 1:

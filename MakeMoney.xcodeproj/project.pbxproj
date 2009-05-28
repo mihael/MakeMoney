@@ -20,7 +20,6 @@
 		470421860FA1E0F400D7DE30 /* URLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 470421840FA1E0F400D7DE30 /* URLUtils.m */; };
 		4705A5A60FC54FCA005DA8FC /* Filter_wp_gallery_list.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705A5A50FC54FCA005DA8FC /* Filter_wp_gallery_list.m */; };
 		4705A8860FC5EA60005DA8FC /* iAccelerometerSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705A8810FC5EA60005DA8FC /* iAccelerometerSensor.m */; };
-		4705A8870FC5EA60005DA8FC /* iAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705A8830FC5EA60005DA8FC /* iAnnotationView.m */; };
 		4705A8880FC5EA60005DA8FC /* iProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705A8850FC5EA60005DA8FC /* iProgressView.m */; };
 		4705A9780FC60058005DA8FC /* mr_foto_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4705A9760FC60058005DA8FC /* mr_foto_icon.png */; };
 		4705A9790FC60058005DA8FC /* mr_foto_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4705A9770FC60058005DA8FC /* mr_foto_image.png */; };
@@ -29,13 +28,11 @@
 		4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4705ABAF0FC964FB005DA8FC /* Settings.bundle */; };
 		4705B2E60FCF2121005DA8FC /* iIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705B2E30FCF2121005DA8FC /* iIconView.m */; };
 		4705B2E70FCF2121005DA8FC /* iWWWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705B2E50FCF2121005DA8FC /* iWWWView.m */; };
-		4707D7790FB0928D00094125 /* KopterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4707D7780FB0928D00094125 /* KopterViewController.m */; };
 		4707D7870FB093DB00094125 /* KopterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4707D7860FB093DB00094125 /* KopterView.xib */; };
 		4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707D8500FB2D86400094125 /* CoreLocation.framework */; };
 		4707D8B20FB3104D00094125 /* Filter_wp_gallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 4707D8B10FB3104D00094125 /* Filter_wp_gallery.m */; };
 		47231FA60FBA376C00D49E87 /* FecherListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47231FA50FBA376C00D49E87 /* FecherListViewController.m */; };
 		47231FB70FBA381000D49E87 /* FecherListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47231FB60FBA381000D49E87 /* FecherListView.xib */; };
-		472322CD0FBB820C00D49E87 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 472322CC0FBB820C00D49E87 /* MapKit.framework */; };
 		4723232D0FBDCCC300D49E87 /* finger.png in Resources */ = {isa = PBXBuildFile; fileRef = 4723232B0FBDCCC300D49E87 /* finger.png */; };
 		4723232E0FBDCCC300D49E87 /* overfinger.png in Resources */ = {isa = PBXBuildFile; fileRef = 4723232C0FBDCCC300D49E87 /* overfinger.png */; };
 		472643210F56A9530097D30A /* listing.json in Resources */ = {isa = PBXBuildFile; fileRef = 472643200F56A9530097D30A /* listing.json */; };
@@ -208,8 +205,6 @@
 		4705A5A50FC54FCA005DA8FC /* Filter_wp_gallery_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_wp_gallery_list.m; path = Classes/Filter_wp_gallery_list.m; sourceTree = "<group>"; };
 		4705A8800FC5EA60005DA8FC /* iAccelerometerSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iAccelerometerSensor.h; path = Classes/iAccelerometerSensor.h; sourceTree = "<group>"; };
 		4705A8810FC5EA60005DA8FC /* iAccelerometerSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iAccelerometerSensor.m; path = Classes/iAccelerometerSensor.m; sourceTree = "<group>"; };
-		4705A8820FC5EA60005DA8FC /* iAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iAnnotationView.h; path = Classes/iAnnotationView.h; sourceTree = "<group>"; };
-		4705A8830FC5EA60005DA8FC /* iAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iAnnotationView.m; path = Classes/iAnnotationView.m; sourceTree = "<group>"; };
 		4705A8840FC5EA60005DA8FC /* iProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iProgressView.h; path = Classes/iProgressView.h; sourceTree = "<group>"; };
 		4705A8850FC5EA60005DA8FC /* iProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iProgressView.m; path = Classes/iProgressView.m; sourceTree = "<group>"; };
 		4705A9760FC60058005DA8FC /* mr_foto_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mr_foto_icon.png; path = Artwork/mr_foto_icon.png; sourceTree = "<group>"; };
@@ -222,8 +217,6 @@
 		4705B2E30FCF2121005DA8FC /* iIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iIconView.m; path = Classes/iIconView.m; sourceTree = "<group>"; };
 		4705B2E40FCF2121005DA8FC /* iWWWView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iWWWView.h; path = Classes/iWWWView.h; sourceTree = "<group>"; };
 		4705B2E50FCF2121005DA8FC /* iWWWView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iWWWView.m; path = Classes/iWWWView.m; sourceTree = "<group>"; };
-		4707D7770FB0928D00094125 /* KopterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KopterViewController.h; path = Classes/KopterViewController.h; sourceTree = "<group>"; };
-		4707D7780FB0928D00094125 /* KopterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KopterViewController.m; path = Classes/KopterViewController.m; sourceTree = "<group>"; };
 		4707D7860FB093DB00094125 /* KopterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KopterView.xib; sourceTree = "<group>"; };
 		4707D8500FB2D86400094125 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4707D8B00FB3104D00094125 /* Filter_wp_gallery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_wp_gallery.h; path = Classes/Filter_wp_gallery.h; sourceTree = "<group>"; };
@@ -231,7 +224,6 @@
 		47231FA40FBA376C00D49E87 /* FecherListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FecherListViewController.h; path = Classes/FecherListViewController.h; sourceTree = "<group>"; };
 		47231FA50FBA376C00D49E87 /* FecherListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FecherListViewController.m; path = Classes/FecherListViewController.m; sourceTree = "<group>"; };
 		47231FB60FBA381000D49E87 /* FecherListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FecherListView.xib; sourceTree = "<group>"; };
-		472322CC0FBB820C00D49E87 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4723232B0FBDCCC300D49E87 /* finger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finger.png; path = Artwork/finger.png; sourceTree = "<group>"; };
 		4723232C0FBDCCC300D49E87 /* overfinger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = overfinger.png; path = Artwork/overfinger.png; sourceTree = "<group>"; };
 		472643200F56A9530097D30A /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = listing.json; path = Transends/listing.json; sourceTree = SOURCE_ROOT; };
@@ -420,7 +412,6 @@
 				4783DCF80F6AD894007CBA02 /* QuartzCore.framework in Frameworks */,
 				473489360F99E53100A1D78A /* libz.1.2.3.dylib in Frameworks */,
 				4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */,
-				472322CD0FBB820C00D49E87 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,8 +450,6 @@
 		289233A00DB2D0730083E9F9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				4707D7770FB0928D00094125 /* KopterViewController.h */,
-				4707D7780FB0928D00094125 /* KopterViewController.m */,
 				4704209D0FA132F500D7DE30 /* IIFilters */,
 				47041EB50FA0CF1100D7DE30 /* MessageViewController.h */,
 				47041EB60FA0CF1100D7DE30 /* MessageViewController.m */,
@@ -517,7 +506,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				472322CC0FBB820C00D49E87 /* MapKit.framework */,
 				473489350F99E53100A1D78A /* libz.1.2.3.dylib */,
 				4707D8500FB2D86400094125 /* CoreLocation.framework */,
 				4783DCF70F6AD894007CBA02 /* QuartzCore.framework */,
@@ -607,8 +595,6 @@
 				4705B2E50FCF2121005DA8FC /* iWWWView.m */,
 				4705A8800FC5EA60005DA8FC /* iAccelerometerSensor.h */,
 				4705A8810FC5EA60005DA8FC /* iAccelerometerSensor.m */,
-				4705A8820FC5EA60005DA8FC /* iAnnotationView.h */,
-				4705A8830FC5EA60005DA8FC /* iAnnotationView.m */,
 				4705A8840FC5EA60005DA8FC /* iProgressView.h */,
 				4705A8850FC5EA60005DA8FC /* iProgressView.m */,
 				479C505B0FA79480003DF1B2 /* LittleArrowView.h */,
@@ -990,14 +976,12 @@
 				479C55330FAAFE92003DF1B2 /* SBJsonWriter.m in Sources */,
 				479C56A20FACD2EA003DF1B2 /* Filter_kitschmaster_brickbox.m in Sources */,
 				472EA6740FAEEF0000B3F18B /* Filter_hai_galery.m in Sources */,
-				4707D7790FB0928D00094125 /* KopterViewController.m in Sources */,
 				4707D8B20FB3104D00094125 /* Filter_wp_gallery.m in Sources */,
 				475912E30FB9756F0079FA20 /* Filter_promet_list.m in Sources */,
 				4759131B0FBA076F0079FA20 /* Filter_promet_webcam.m in Sources */,
 				47231FA60FBA376C00D49E87 /* FecherListViewController.m in Sources */,
 				4705A5A60FC54FCA005DA8FC /* Filter_wp_gallery_list.m in Sources */,
 				4705A8860FC5EA60005DA8FC /* iAccelerometerSensor.m in Sources */,
-				4705A8870FC5EA60005DA8FC /* iAnnotationView.m in Sources */,
 				4705A8880FC5EA60005DA8FC /* iProgressView.m in Sources */,
 				4705B2E60FCF2121005DA8FC /* iIconView.m in Sources */,
 				4705B2E70FCF2121005DA8FC /* iWWWView.m in Sources */,

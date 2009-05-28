@@ -145,8 +145,8 @@
 		[self.button setTitle:@"+fech" forState:UIControlStateNormal];
 		[self.button setEnabled:YES];
 	}
-	button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
-	button.titleLabel.textAlignment = UITextAlignmentCenter;
+	//button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+	//button.titleLabel.textAlignment = UITextAlignmentCenter;
 	
 	
 }
