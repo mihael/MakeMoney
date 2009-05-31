@@ -1,0 +1,19 @@
+//
+//  Filter_pikchur_people.m
+//  MakeMoney
+//
+#import "Filter_pikchur_people.h"
+
+@implementation Filter_pikchur_people
+
+- (NSString*)pageParamName
+{
+	return @"data[api][feeds][piks][page]";
+}
+
+- (NSString*)limitParamName
+{
+	return @"data[api][feeds][piks][limit]";
+}
+
+@end

@@ -1,3 +1,4 @@
 [
-{"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}}
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "message":"+2", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":2, "params":"data[api][feeds][type]=people&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][auth_key]=vGGQIlldkFn807sI6fOkd8yIKsxgGtHMCJ5FfZePeRf4pvOhBo1LQcieB8zldJT0&data[api][feeds][user_id]=2270&data[api][feeds][include][piks]=true", "filter":"pikchur_people"}, "ior":{"stop":"true", "space":"down"}}
+
 ]

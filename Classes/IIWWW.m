@@ -25,6 +25,8 @@
 - (void)loadOptions:(NSDictionary*)o
 {	
 	[self setOptions:o];
+	DebugLog(@"LOADOPTIONS page:%i", [[self.options valueForKey:@"page"]intValue]);
+	
 	//ensure EDGE network comes on
 	[[Reachability sharedReachability] setHostName:[[NSURL URLWithString:[options valueForKey:@"url"]] host]];
 	if (![self hasWWWAccess]) {
@@ -51,6 +53,11 @@
 		limit = [[options valueForKey:@"limit"] intValue];
 	if ([options valueForKey:@"params"])
 		params = [options valueForKey:@"params"];
+	
+	if ([options valueForKey:@"pikchur"]) {
+	}
+	
+	
 	[server release];
 	server = nil;
 	server = [[[ASINetworkQueue alloc] init] retain];	
@@ -58,6 +65,8 @@
 	[server setRequestDidFailSelector:@selector(fechFailed:)];	
 	[server setDelegate:self];	
 
+	
+	
 }
 
 - (void)dealloc {

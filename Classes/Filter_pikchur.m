@@ -21,7 +21,7 @@
 {
 	NSArray* piks = [[information JSONValue] objectForKey:@"Piks"];
 	
-	NSString* behavior = @"\"ior\":{\"stop\":\"false\"}";
+	NSString* behavior = k_ior_notstop_space;
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	
 	NSUInteger i, count = [piks count];

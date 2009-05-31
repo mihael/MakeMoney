@@ -4,13 +4,14 @@
 {"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}
 ]
 
-@moonpreview 1 #rejected
+@moonpreview 1 #review
 [
 {"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "space":"up", "content_mode":"center"}},
 {"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}
 ]
 
 @raddarkopter 1 #waiting for 3.0
+# {"type":"Pikchur","auth_key":"c2cD5shuM6BRrlas1dkOQMyIKsxgGtHMCJ5FfZePeRffN1uLF3gYjMQGUX21F6fz","user_id":"5213"}
 [
 {"ii":"KopterView", "ions":{"reuse":"true", "title":"thanks to www.promet.si", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true", "space":"down"}},
 {"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"promet_si", "icon":"kepo_icon.png", "background":"main.jpg", "url":"http://www.promet.si", "params":"id=25", "method":"get", "filter":"promet_list", "filter_base_url":"http://www.promet.si"}, "ior":{"stop":"true", "space":"down"}}
@@ -22,7 +23,7 @@
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"Fech recent twitter", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=mr_foto", "filter":"twitter"}, "ior":{"stop":"true"}}
 ]
 
-@mr_foto 1 #waiting for binary
+@mr_foto 1 #review
 [
 {"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}}
 ]
@@ -38,13 +39,21 @@
 {"ii":"UploadView", "ions":{"reuse":"true", "title":"pikchur", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true", "space":"down"}},
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"pikchur ", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":20, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true", "space":"down"}}
 
+#pikchur beerchase
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"+25", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":25, "params":"data[api][feeds][type]=people&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][auth_key]=cyfET7o9OzWOuQXp0QKxdsyIKsxgGtHMCJ5FfZePeRfJb2STF8t&data[api][feeds][user_id]=6238&data[api][feeds][include][piks]=true", "filter":"pikchur_people"}, "ior":{"stop":"true", "space":"down"}}
+
+#pikchur raddarkopter
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"+25", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":25, "params":"data[api][feeds][type]=people&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][auth_key]=c2cD5shuM6BRrlas1dkOQMyIKsxgGtHMCJ5FfZePeRffN1uLF3gYjMQGUX21F6fz&data[api][feeds][user_id]=5213&data[api][feeds][include][piks]=true", "filter":"pikchur_people"}, "ior":{"stop":"true", "space":"down"}}
+
+#pikchur pikchurdeveloper
+{"type":"Pikchur","auth_key":"vGGQIlldkFn807sI6fOkd8yIKsxgGtHMCJ5FfZePeRf4pvOhBo1LQcieB8zldJT0","user_id":"2270"}
+{"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "message":" ", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":2, "params":"data[api][feeds][type]=people&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][auth_key]=vGGQIlldkFn807sI6fOkd8yIKsxgGtHMCJ5FfZePeRf4pvOhBo1LQcieB8zldJT0&data[api][feeds][user_id]=2270&data[api][feeds][include][piks]=true", "filter":"pikchur_people"}, "ior":{"stop":"true", "space":"down"}}
 ]
 	@beerchase #experimental
-	# 
+	# beerchase pikchur auth: {"type":"Pikchur","auth_key":"cyfET7o9OzWOuQXp0QKxdsyIKsxgGtHMCJ5FfZePeRfJb2STF8t\/NjfaFMeRtimM","user_id":"6238"}
 	[
 
 	]
-
 
 @MakeMoneyFrameworkDemo 1 #TODO
 [

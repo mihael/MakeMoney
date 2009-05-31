@@ -122,6 +122,7 @@
 		47AD915B0F800830001687AA /* 0_Movie_141.mov in Resources */ = {isa = PBXBuildFile; fileRef = 47AD91570F80082F001687AA /* 0_Movie_141.mov */; };
 		47B14CEC0F7C08260017AB44 /* IIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B14CEB0F7C08260017AB44 /* IIController.m */; };
 		47B14D580F7E09360017AB44 /* stage.json in Resources */ = {isa = PBXBuildFile; fileRef = 47B14D570F7E09360017AB44 /* stage.json */; };
+		47C7C5020FD27D860028DFCC /* Filter_pikchur_people.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C7C5010FD27D860028DFCC /* Filter_pikchur_people.m */; };
 		47C7E24A0F9CBB4100789864 /* Filter_kitschmaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C7E2470F9CBB4100789864 /* Filter_kitschmaster.m */; };
 		47C7E24B0F9CBB4100789864 /* Filter_pikchur.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C7E2490F9CBB4100789864 /* Filter_pikchur.m */; };
 		47C7E25C0F9CC59100789864 /* FecherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C7E25B0F9CC59100789864 /* FecherViewController.m */; };
@@ -341,6 +342,8 @@
 		47B14CEA0F7C08260017AB44 /* IIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIController.h; path = Classes/IIController.h; sourceTree = "<group>"; };
 		47B14CEB0F7C08260017AB44 /* IIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIController.m; path = Classes/IIController.m; sourceTree = "<group>"; };
 		47B14D570F7E09360017AB44 /* stage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = stage.json; path = Transends/stage.json; sourceTree = SOURCE_ROOT; };
+		47C7C5000FD27D860028DFCC /* Filter_pikchur_people.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_pikchur_people.h; path = Classes/Filter_pikchur_people.h; sourceTree = "<group>"; };
+		47C7C5010FD27D860028DFCC /* Filter_pikchur_people.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_pikchur_people.m; path = Classes/Filter_pikchur_people.m; sourceTree = "<group>"; };
 		47C7E2460F9CBB4100789864 /* Filter_kitschmaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_kitschmaster.h; path = Classes/Filter_kitschmaster.h; sourceTree = "<group>"; };
 		47C7E2470F9CBB4100789864 /* Filter_kitschmaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_kitschmaster.m; path = Classes/Filter_kitschmaster.m; sourceTree = "<group>"; };
 		47C7E2480F9CBB4100789864 /* Filter_pikchur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_pikchur.h; path = Classes/Filter_pikchur.h; sourceTree = "<group>"; };
@@ -539,6 +542,8 @@
 				479C4F240FA626AA003DF1B2 /* Filter_twitter.m */,
 				47C7E2460F9CBB4100789864 /* Filter_kitschmaster.h */,
 				47C7E2470F9CBB4100789864 /* Filter_kitschmaster.m */,
+				47C7C5000FD27D860028DFCC /* Filter_pikchur_people.h */,
+				47C7C5010FD27D860028DFCC /* Filter_pikchur_people.m */,
 				47C7E2480F9CBB4100789864 /* Filter_pikchur.h */,
 				47C7E2490F9CBB4100789864 /* Filter_pikchur.m */,
 				4704209A0FA132E800D7DE30 /* Filter_koornk.h */,
@@ -985,6 +990,7 @@
 				4705A8880FC5EA60005DA8FC /* iProgressView.m in Sources */,
 				4705B2E60FCF2121005DA8FC /* iIconView.m in Sources */,
 				4705B2E70FCF2121005DA8FC /* iWWWView.m in Sources */,
+				47C7C5020FD27D860028DFCC /* Filter_pikchur_people.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

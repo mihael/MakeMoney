@@ -24,4 +24,8 @@
 - (void)cacheFeched:(NSArray*)list;
 - (void)saveFecherList:(NSArray*)list;
 
+- (void)progressUp:(NSString*)page;
+- (void)progressDown;
+
+
 @end

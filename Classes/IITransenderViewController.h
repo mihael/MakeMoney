@@ -63,7 +63,7 @@
 @property (readwrite, assign) IINotControls *notControls;
 @property (readwrite, retain) UIViewController *transendController;
 @property (readwrite) BOOL feeling;
-@property (readwrite, retain) NSDictionary *notBehavior;
+@property (readwrite, assign) NSDictionary *notBehavior;
 
 - (id)initWithTransenderProgram:(NSString*)program andStage:(NSDictionary*)aStageName;
 

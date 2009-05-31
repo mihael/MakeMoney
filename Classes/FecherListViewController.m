@@ -18,7 +18,7 @@
 - (IBAction)refresh:(id)sender 
 {
 	[notControls setProgress:@"Refreshing ..." animated:YES];
-	[www loadOptions:[options copy]]; //start with initial options
+	[www loadOptions:options]; //start with initial options
 	[fecherList release];
 	fecherList = nil;
 	fecherList = [[NSArray alloc] init];
@@ -201,7 +201,8 @@
 		[littleArrowView setImage:[transender imageNamed:[options valueForKey:@"icon"]]];
 	
 	if (!www) {
-		www = [[IIWWW alloc] initWithOptions:[options copy]];//make a copy, man
+		www = [[IIWWW alloc] init];//make a copy, man
+		[www loadOptions:options];
 		[www setDelegate:self];
 	}
 	if (!fecherList) {

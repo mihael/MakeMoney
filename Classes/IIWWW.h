@@ -40,7 +40,7 @@
 @property (readwrite, retain) NSURL *url;
 @property (readwrite, retain) NSString *params;
 @property (readwrite, retain) NSString *filterName;
-@property (readwrite, retain) NSDictionary *options;
+@property (readwrite, assign) NSDictionary *options;
 
 - (id)initWithOptions:(NSDictionary*)o;
 - (void)loadOptions:(NSDictionary*)o;
