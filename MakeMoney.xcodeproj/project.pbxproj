@@ -78,6 +78,7 @@
 		477ABD500F45641100696306 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD4A0F45641100696306 /* CoreGraphics.framework */; };
 		477ABD560F45644F00696306 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD550F45644F00696306 /* CFNetwork.framework */; };
 		4783DCF80F6AD894007CBA02 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4783DCF70F6AD894007CBA02 /* QuartzCore.framework */; };
+		478DE4050FD295E70067BAE6 /* PusherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478DE4040FD295E70067BAE6 /* PusherViewController.m */; };
 		4796C73C0F41E53D002F2C2A /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796C73B0F41E53D002F2C2A /* Entitlements.plist */; };
 		479C332B0F4D7A6600EBD9F3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479C332A0F4D7A6600EBD9F3 /* AudioToolbox.framework */; };
 		479C4F100FA61B37003DF1B2 /* StreamingPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */; };
@@ -286,6 +287,8 @@
 		477ABD4A0F45641100696306 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		477ABD550F45644F00696306 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4783DCF70F6AD894007CBA02 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		478DE4030FD295E70067BAE6 /* PusherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PusherViewController.h; path = Classes/PusherViewController.h; sourceTree = "<group>"; };
+		478DE4040FD295E70067BAE6 /* PusherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PusherViewController.m; path = Classes/PusherViewController.m; sourceTree = "<group>"; };
 		4796C73B0F41E53D002F2C2A /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		479C332A0F4D7A6600EBD9F3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamingPlayerView.xib; sourceTree = "<group>"; };
@@ -453,6 +456,8 @@
 		289233A00DB2D0730083E9F9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				478DE4030FD295E70067BAE6 /* PusherViewController.h */,
+				478DE4040FD295E70067BAE6 /* PusherViewController.m */,
 				4704209D0FA132F500D7DE30 /* IIFilters */,
 				47041EB50FA0CF1100D7DE30 /* MessageViewController.h */,
 				47041EB60FA0CF1100D7DE30 /* MessageViewController.m */,
@@ -991,6 +996,7 @@
 				4705B2E60FCF2121005DA8FC /* iIconView.m in Sources */,
 				4705B2E70FCF2121005DA8FC /* iWWWView.m in Sources */,
 				47C7C5020FD27D860028DFCC /* Filter_pikchur_people.m in Sources */,
+				478DE4050FD295E70067BAE6 /* PusherViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
