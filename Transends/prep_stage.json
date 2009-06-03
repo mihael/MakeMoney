@@ -1,9 +1,25 @@
 {
+#require the web
+"wwwapp":"true", 
+
+#require wi-fi 
+"wifiapp":"true",
+
+#name of .json transends listing or so called program
 "program":"program",
+
+#transitions style can be horizontal or vertical if set to false
 "horizontal":"true",
+
+#animate or not
 "animated":"true",
+
+#time beetwen transends
 "vibe":"1.83",
+
+#should transender direction change
 "direction_changes":"false",
+
 "big_button":"false",
 "button_on_left":"true",
 "button_opens_not_controls":"true",

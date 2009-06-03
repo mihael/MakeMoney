@@ -46,11 +46,10 @@
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"+25", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":25, "params":"data[api][feeds][type]=people&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][auth_key]=c2cD5shuM6BRrlas1dkOQMyIKsxgGtHMCJ5FfZePeRffN1uLF3gYjMQGUX21F6fz&data[api][feeds][user_id]=5213&data[api][feeds][include][piks]=true", "filter":"pikchur_people"}, "ior":{"stop":"true", "space":"down"}}
 
 #pikchur pikchurdeveloper
-{"type":"Pikchur","auth_key":"vGGQIlldkFn807sI6fOkd8yIKsxgGtHMCJ5FfZePeRf4pvOhBo1LQcieB8zldJT0","user_id":"2270"}
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "message":" ", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":2, "params":"data[api][feeds][type]=people&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][auth_key]=vGGQIlldkFn807sI6fOkd8yIKsxgGtHMCJ5FfZePeRf4pvOhBo1LQcieB8zldJT0&data[api][feeds][user_id]=2270&data[api][feeds][include][piks]=true", "filter":"pikchur_people"}, "ior":{"stop":"true", "space":"down"}}
+
 ]
 	@beerchase #experimental
-	# beerchase pikchur auth: {"type":"Pikchur","auth_key":"cyfET7o9OzWOuQXp0QKxdsyIKsxgGtHMCJ5FfZePeRfJb2STF8t\/NjfaFMeRtimM","user_id":"6238"}
 	[
 
 	]

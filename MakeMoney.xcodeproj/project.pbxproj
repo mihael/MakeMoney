@@ -79,6 +79,7 @@
 		477ABD560F45644F00696306 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD550F45644F00696306 /* CFNetwork.framework */; };
 		4783DCF80F6AD894007CBA02 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4783DCF70F6AD894007CBA02 /* QuartzCore.framework */; };
 		478DE4050FD295E70067BAE6 /* PusherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478DE4040FD295E70067BAE6 /* PusherViewController.m */; };
+		478DE4710FD2AF590067BAE6 /* PusherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478DE4700FD2AF590067BAE6 /* PusherView.xib */; };
 		4796C73C0F41E53D002F2C2A /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796C73B0F41E53D002F2C2A /* Entitlements.plist */; };
 		479C332B0F4D7A6600EBD9F3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479C332A0F4D7A6600EBD9F3 /* AudioToolbox.framework */; };
 		479C4F100FA61B37003DF1B2 /* StreamingPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */; };
@@ -289,6 +290,7 @@
 		4783DCF70F6AD894007CBA02 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		478DE4030FD295E70067BAE6 /* PusherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PusherViewController.h; path = Classes/PusherViewController.h; sourceTree = "<group>"; };
 		478DE4040FD295E70067BAE6 /* PusherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PusherViewController.m; path = Classes/PusherViewController.m; sourceTree = "<group>"; };
+		478DE4700FD2AF590067BAE6 /* PusherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PusherView.xib; sourceTree = "<group>"; };
 		4796C73B0F41E53D002F2C2A /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		479C332A0F4D7A6600EBD9F3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamingPlayerView.xib; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 				47041EE00FA1047300D7DE30 /* MessageView.xib */,
 				47C7E25D0F9CC70900789864 /* FecherView.xib */,
 				47231FB60FBA381000D49E87 /* FecherListView.xib */,
+				478DE4700FD2AF590067BAE6 /* PusherView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -932,6 +935,7 @@
 				4705A98B0FC603D4005DA8FC /* kepo_icon.png in Resources */,
 				4705AAA90FC709E4005DA8FC /* Progress in Resources */,
 				4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */,
+				478DE4710FD2AF590067BAE6 /* PusherView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

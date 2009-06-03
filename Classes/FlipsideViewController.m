@@ -16,7 +16,7 @@
     //self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];     
 	networkQueue = [[ASINetworkQueue alloc] init];	
 	if ([[Reachability sharedReachability] internetConnectionStatus]==NotReachable) {
-		version.text = @"Please connect device to internet. Thanks.";
+		version.text = @"Please move device within network reach. Thanks.";
 	} else {
 		[self fetchStartupCount];	
 	}

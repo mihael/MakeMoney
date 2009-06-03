@@ -8,6 +8,7 @@
 #import "iAlert.h"
 #import "MakeMoneyAppDelegate.h"
 #import "Reachability.h"
+#import "UIApplication-Network.h"
 
 @implementation RootViewController
 
@@ -38,41 +39,22 @@
 	
     self.view = primaryView;
     [primaryView release];      
+	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, 480.0, 320.0) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
+	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
+	[self.view addSubview:notControls];
+	[notControls setNotController:self];
+	transenderViewController = [[IITransenderViewController alloc] initWithTransenderProgram:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"program"] andStage:[[MakeMoneyAppDelegate app] stage]];
+	[notControls setDelegate:transenderViewController];
+	[transenderViewController setNotControls:notControls];
+	[transenderViewController setDelegate:self];	
+    [self.view insertSubview:transenderViewController.view belowSubview:notControls];
 	
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];	
-	BOOL wwwapp = [[[[MakeMoneyAppDelegate app] stage] valueForKey:@"wwwapp"] boolValue];
-	if (wwwapp) {
-		[[Reachability sharedReachability] setHostName:@"google.com"];
-		if ([[Reachability sharedReachability] remoteHostStatus]==NotReachable) {
-			[[iAlert instance] alert:@"Network" withMessage:@"Please connect device to internet. Thanks."];	
-		}
-	}
-	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, 480.0, 320.0) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
-	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
 	[notControls setCanOpen:[[[[MakeMoneyAppDelegate app] stage] valueForKey:@"button_opens_not_controls"] boolValue]];
-	NSString *noise_url = [[NSUserDefaults standardUserDefaults] valueForKey:@"noise"];
-	if ([noise_url hasPrefix:@"null"]) {
-		//no noise. thanks.
-	} else if ([noise_url hasPrefix:@"http://"]) {
-		[notControls playWithStreamUrl:noise_url];
-	} else if ([[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]) {
-		[notControls playWithStreamUrl:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]];
-	}
 	
-	[self.view addSubview:notControls];
-	[notControls setNotController:self];
-	
-	self.transenderViewController = [[IITransenderViewController alloc] initWithTransenderProgram:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"program"] andStage:[[MakeMoneyAppDelegate app] stage]];
-	[notControls setDelegate:transenderViewController];
-	[transenderViewController setNotControls:notControls];
-	[transenderViewController setDelegate:self];
-
-    [self.view insertSubview:transenderViewController.view belowSubview:notControls];
-
-
 	float vibe = [[[NSUserDefaults standardUserDefaults] valueForKey:@"vibe"] floatValue];
 	if (vibe>=kIITransenderVibeShort) {
 		[[transenderViewController transender] reVibe:vibe];	
@@ -86,7 +68,30 @@
 	} else {
 		[[transenderViewController transender] transend];
 	}
+	
+	BOOL wwwapp = [[[[MakeMoneyAppDelegate app] stage] valueForKey:@"wwwapp"] boolValue];
+	if (wwwapp) {
+		[[Reachability sharedReachability] setHostName:@"google.com"];
+		if ([[Reachability sharedReachability] remoteHostStatus]==NotReachable) {
+			[[iAlert instance] alert:@"Network" withMessage:@"Please move device within network reach. Thanks."];	
+		}
+	}
+
+	BOOL wifiapp = [[[[MakeMoneyAppDelegate app] stage] valueForKey:@"wifiapp"] boolValue];
+	if (wifiapp) { 
+		if (![UIApplication hasActiveWiFiConnection]) {
+			//only play radio if wi-fi, when program says wifi is a must
+			[self playBackgroundRadio];
+		} else {
+			//disable application, then
+			[self bringUpTheWifiAppUnabler];
+		}
+	} else {
+		//edge or wifi, always play radio if no restriction in program
+		[self playBackgroundRadio];
+	}
 }
+
 
 //makemoney always runs in widescreen
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -114,6 +119,34 @@
 - (void)meditating {
 	//[notControls lightUp];
 	[[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+}
+
+#pragma mark radio
+- (void)playBackgroundRadio {
+	//play radio
+	NSString *noise_url = [[NSUserDefaults standardUserDefaults] valueForKey:@"noise"];
+	if ([noise_url hasPrefix:@"null"]) {
+		//no noise. thanks.
+	} else if ([noise_url hasPrefix:@"http://"]) {
+		[notControls playWithStreamUrl:noise_url];
+	} else if ([[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]) {
+		[notControls playWithStreamUrl:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"noise_url"]];
+	}	
+}
+
+#pragma mark disabler
+- (void)bringUpTheWifiAppUnabler {
+	UIView *nowifi = [[[UIView alloc] initWithFrame:CGRectMake(0,0,480,320)] autorelease];
+	nowifi.backgroundColor = [UIColor redColor];
+	UILabel *l = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 320)] autorelease];
+	l.text = APP_TITLE;
+	l.font = [UIFont boldSystemFontOfSize:83.0];
+	l.textAlignment = UITextAlignmentCenter;
+	l.textColor = [UIColor whiteColor];
+	l.backgroundColor = [UIColor clearColor];
+	[nowifi addSubview:l];
+	[self.view addSubview:nowifi];
+	[[iAlert instance] alert:@"App Requires Wi-Fi" withMessage:@"Please move device within Wi-Fi network reach. Thanks."];				
 }
 
 #pragma mark experiments

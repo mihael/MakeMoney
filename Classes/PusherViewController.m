@@ -7,6 +7,7 @@
 #import "JSON.h"
 #import "URLUtils.h"
 #import <QuartzCore/QuartzCore.h>
+#import "iIconView.h" 
 
 @implementation PusherViewController
 
@@ -15,11 +16,11 @@
 	//if image, send to pikchur and get back url, then send position with url
 	if (location) {
 		if (imageSelected) {		
-			DebugLog(@"uploading image %@", selectedImagePath);
+			//DebugLog(@"uploading image %@ %@", selectedImagePath, locationText);
 			[self uploadSelectedImage];
 		} else {
+			[self pickButtonPushed:self];
 			//just send position
-			DebugLog(@"updating");
 			//TODO just text update koornk, twitter, kitschmaster...
 			//[self pushWith:locationText];			
 		}
@@ -33,7 +34,7 @@
 		[www authenticateWithPikchur];
 	} else {
 		[notControls setPickDelegate:self];
-		[notControls pickInView:self.view];
+		[notControls pickInView:background];
 	}
 }
 
@@ -45,6 +46,8 @@
 		selectedImagePath = [[Kriya imageWithInMemoryImage:[info valueForKey:UIImagePickerControllerOriginalImage]] retain];
 		[selectedImageView setImage:[Kriya imageWithUrl:selectedImagePath]];
 		[selectedImageView setHidden:NO];
+		[background setImage:[Kriya imageWithUrl:selectedImagePath]];
+		[background setHidden:NO];
 		imageSelected = YES;
 	}
 }
@@ -78,7 +81,6 @@
 - (void)pushWith:(NSString*)text
 {
 	[notControls setProgress:@"Updating ..." animated:YES];
-	//send raddarkopter position
 	NSArray *keys = [NSArray arrayWithObjects:@"status", nil];
 	NSArray *objects = [NSArray arrayWithObjects:text, nil];
 	NSDictionary *params = [NSDictionary dictionaryWithObjects:objects forKeys:keys];	
@@ -109,7 +111,14 @@
 		[location release];
 	}
 	location = [newLocation retain];
-	locationText = [NSString stringWithFormat:@"lat:F% lon:%F %@", location.coordinate.latitude, location.coordinate.longitude, [self googleMapsUrlFor:location.coordinate]];
+	//locationText = [NSString stringWithFormat:@"lat:F% lon:%F %@", location.coordinate.latitude, location.coordinate.longitude, [self googleMapsUrlFor:location.coordinate]];
+	[locationText release];
+	NSString *shortUrl = [self googleMapsUrlFor:location.coordinate];
+	if (shortUrl!=nil) {
+		locationText = [[NSString stringWithFormat:@"lat:%F lon:%F %@", location.coordinate.latitude, location.coordinate.longitude, shortUrl] retain];	
+	} else {
+		locationText = [[NSString stringWithFormat:@"lat:%F lon:%F", location.coordinate.latitude, location.coordinate.longitude] retain];	
+	}
 	DebugLog(@"Location changed to Lat:%F Lon:%F", location.coordinate.latitude, location.coordinate.longitude);
 }
 
@@ -134,10 +143,16 @@
 		{
 			//this comes from authenticating with pikchur for the first and last time
 			[notControls setProgress:nil animated:YES];
+			[self pickButtonPushed:self]; //repeat picking
 		} 
 		else if ([information valueForKey:@"post"]) 
 		{
 			//this comes from pikchur after uploading
+			[notControls setProgress:nil animated:YES];
+			[background setImage:[self.transender imageNamed:@"main.jpg"]];
+			[selectedImageView setHidden:YES];
+			imageSelected = NO;
+			[transender transend];
 			//push
 			//[self pushWith:[NSString stringWithFormat:@"%@ %@", locationText, [[information valueForKey:@"post"] valueForKey:@"url"]]];
 			//TODO notify about image upload koornk, twitter, kitschmaster...
@@ -160,7 +175,6 @@
 				//unknown things
 				DebugLog(@"UNKNOWN REKORDED %@", information);
 				[notControls setProgress:nil animated:YES];
-
 		}
 	} else {
 		//this shuld nut hupen
@@ -183,11 +197,12 @@
 
 #pragma mark IIController overrides
 - (void)functionalize {
-	if (www)
-		[www release];
-	www = [[IIWWW alloc] initWithOptions:options];
-	[www setDelegate:self];
-	if ([options valueForKey:@"background"])
+	if (!www){
+		www = [[IIWWW alloc] init];
+		[www loadOptions:options];
+		[www setDelegate:self];
+	}
+	if (![background image]&&[options valueForKey:@"background"])
 		[background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];	
 	if (!locationManager) { //create only if not here
 		locationManager = [[CLLocationManager alloc] init];
@@ -195,7 +210,6 @@
 		[locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
 		[locationManager setDistanceFilter:100.0]; //every hundred meters check if there are kopters near :D
 	}
-
 	if (!pusherbar) {
 		pusherbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 480, 44)] autorelease];
 		[pusherbar setBarStyle:UIBarStyleBlackTranslucent];
@@ -221,19 +235,17 @@
 }
 - (void)startFunctioning {
 	DebugLog(@"#startFunctioning");
-	//this is ljubljana, default loc
 	if (!location) {
-		location = [[CLLocation alloc] initWithLatitude:46.055 longitude:14.514];
+		location = [[CLLocation alloc] initWithLatitude:46.055 longitude:14.514];//ljubljana
 	}		
-//	CLLocation *location2 = [[CLLocation alloc] initWithLatitude:46.056 longitude:14.514];
-//	DebugLog(@"distance between ljubljanas %F", [location getDistanceFrom:location2]);
 	[self locatus];
 }
 
 - (void)dealloc {
-	[locationText release];
+	[selectedImagePath release];
 	[selectedImageView release];
 	[location release];
+	[locationText release];
 	[locationManager release];
 	[www release];
     [super dealloc];

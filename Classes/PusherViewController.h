@@ -13,8 +13,6 @@
 @interface PusherViewController : IIController <IIWWWDelegate, CLLocationManagerDelegate>
 {
 	IBOutlet UIImageView* background;
-	IBOutlet UILabel* message;
-
 	UIToolbar* pusherbar;
 	UIBarButtonItem *pusherButton;
 	UIBarButtonItem *pickButton;
@@ -26,7 +24,6 @@
 
 	IIWWW *www;
 	CLLocation *location;
-	CLLocation *transendedLocation;
 	CLLocationManager *locationManager;
 }
 

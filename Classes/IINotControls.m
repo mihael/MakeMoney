@@ -552,7 +552,7 @@
 		UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
 		[picker setDelegate:self];
 		[picker setAllowsImageEditing:NO];
-		[[picker navigationBar] setHidden:YES];	
+		//[[picker navigationBar] setHidden:NO];	
 		//[picker setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 		
 		switch (buttonIndex) {

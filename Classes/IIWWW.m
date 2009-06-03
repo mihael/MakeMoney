@@ -24,13 +24,18 @@
 
 - (void)loadOptions:(NSDictionary*)o
 {	
-	[self setOptions:o];
-	DebugLog(@"LOADOPTIONS page:%i", [[self.options valueForKey:@"page"]intValue]);
-	
-	//ensure EDGE network comes on
-	[[Reachability sharedReachability] setHostName:[[NSURL URLWithString:[options valueForKey:@"url"]] host]];
+	[self setOptions:[o copy]];
+		
+	NSString * wwwurl = [options valueForKey:@"url"];
+	if (!wwwurl) {
+		wwwurl = @"http://www.apple.com";
+	} else {
+		[self setUrl:[NSURL URLWithString:wwwurl]];		
+	}
+
+	[[Reachability sharedReachability] setHostName:[[NSURL URLWithString:wwwurl] host]];
 	if (![self hasWWWAccess]) {
-		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];	
+		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please move device within network reach. Thanks."];	
 	}
 	
 	[filter release];
@@ -43,8 +48,7 @@
 			filter = [[[filterClass alloc] init] retain];
 		}
 	}
-	
-	[self setUrl:[NSURL URLWithString:[options valueForKey:@"url"]]];
+
 	page = 1;
 	if ([options valueForKey:@"page"])
 		page = [[options valueForKey:@"page"] intValue];
@@ -52,21 +56,14 @@
 	if ([options valueForKey:@"limit"])
 		limit = [[options valueForKey:@"limit"] intValue];
 	if ([options valueForKey:@"params"])
-		params = [options valueForKey:@"params"];
-	
-	if ([options valueForKey:@"pikchur"]) {
-	}
-	
-	
+		params = [options valueForKey:@"params"];	
+
 	[server release];
 	server = nil;
 	server = [[[ASINetworkQueue alloc] init] retain];	
 	[server setRequestDidFinishSelector:@selector(fechFinished:)];
 	[server setRequestDidFailSelector:@selector(fechFailed:)];	
 	[server setDelegate:self];	
-
-	
-	
 }
 
 - (void)dealloc {
@@ -111,23 +108,25 @@
 - (void)fech 
 {
 	if ([self hasWWWAccess]) {
-		if ([options valueForKey:@"method"]) {
-			if ([[options valueForKey:@"method"] isEqualToString:@"custom"]) {
-				if ([filter respondsToSelector:@selector(prepareRequestFor:)])  //filter holds custom implementation for feching urls
-					[self envokeRequest:[filter prepareRequestFor:options]];
-				//TODO envokeRequests... prepareRequests
-			} else if ([[options valueForKey:@"method"] isEqualToString:@"form"]) {
-				[self formFech];
-			} else if ([[options valueForKey:@"method"] isEqualToString:@"post"]) {
-				[self postFech];
-			} else { //all else gets
+		if (self.url) {
+			if ([options valueForKey:@"method"]) {
+				if ([[options valueForKey:@"method"] isEqualToString:@"custom"]) {
+					if ([filter respondsToSelector:@selector(prepareRequestFor:)])  //filter holds custom implementation for feching urls
+						[self envokeRequest:[filter prepareRequestFor:options]];
+					//TODO envokeRequests... prepareRequests
+				} else if ([[options valueForKey:@"method"] isEqualToString:@"form"]) {
+					[self formFech];
+				} else if ([[options valueForKey:@"method"] isEqualToString:@"post"]) {
+					[self postFech];
+				} else { //all else gets
+					[self getFech];
+				}
+			} else {
 				[self getFech];
 			}
-		} else {
-			[self getFech];
-		}
+		} 
 	} else {
-		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];
+		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please move device within network reach. Thanks."];
 		[self fechFailed:nil];
 	}
 }
@@ -249,9 +248,9 @@
 					[self.delegate notFeched:@"Pikchur failed"];		
 				}
 			} else if ([messages valueForKey:@"auth_key"]!=NULL){
-				DebugLog(@"Pikchur auth_key: %@ user_id", [messages valueForKey:@"auth_key"], [messages valueForKey:@"auth_key"]);		
-				[[NSUserDefaults standardUserDefaults] setValue:[messages valueForKey:@"auth_key"] forKey:@"pikchur_auth_key"];
-				[[NSUserDefaults standardUserDefaults] setValue:[messages valueForKey:@"auth_key"] forKey:@"pikchur_user_id"];
+				DebugLog(@"Pikchur auth_key: %@ user_id: %@", [messages valueForKey:@"auth_key"], [messages valueForKey:@"user_id"]);		
+				[[NSUserDefaults standardUserDefaults] setValue:[messages valueForKey:@"auth_key"] forKey:[NSString stringWithFormat:@"%@_pikchur_auth_key", [options valueForKey:@"pikchur"]]];
+				[[NSUserDefaults standardUserDefaults] setValue:[messages valueForKey:@"user_id"] forKey:[NSString stringWithFormat:@"%@_pikchur_user_id", [options valueForKey:@"pikchur"]]];
 				[[NSUserDefaults standardUserDefaults] synchronize];
 				[self.delegate feched:messages];
 			} else if ([messages valueForKey:@"post"]!=NULL) {
@@ -326,10 +325,13 @@
 	//[request setPostValue:@"" forKey:@"data[api][origin]"];
 	[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
 	[request setPostValue:kPikchurAPIKey forKey:@"data[api][key]"];
-	[request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"] forKey:@"data[api][auth_key]"];
-	[request setPostValue:description forKey:@"data[api][status]"];
-	[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].latitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lat]"];
-	[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].longitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lon]"];	
+	[request setPostValue:[[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@_pikchur_auth_key", [options valueForKey:@"pikchur"]]] forKey:@"data[api][auth_key]"];
+	if (description)
+		[request setPostValue:description forKey:@"data[api][status]"];
+	if (location) {
+		[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].latitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lat]"];
+		[request setPostValue:[[NSString stringWithFormat:@"%F",[location coordinate].longitude] dataUsingEncoding:NSUTF8StringEncoding] forKey:@"data[api][geo][lon]"];	
+	}
 	
 	//doit
 	[request setDelegate:self];
@@ -340,27 +342,28 @@
 }
 
 - (void)authenticateWithPikchur {
-	if (![[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"]) {
-		DebugLog(@"#authenticateWithPikchur");
-		NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
-		NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
-		
-		ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kPikchurAuthURL]] autorelease];
-		[request setPostValue:username forKey:@"data[api][username]"];
-		[request setPostValue:password forKey:@"data[api][password]"];
-		[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
-		[request setPostValue:kPikchurAPIKey forKey:@"data[api][key]"];
+	DebugLog(@"#authenticateWithPikchur");
+	NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
+	NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
+	
+	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kPikchurAuthURL]] autorelease];
+	[request setPostValue:username forKey:@"data[api][username]"];
+	[request setPostValue:password forKey:@"data[api][password]"];
+	[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
+	[request setPostValue:kPikchurAPIKey forKey:@"data[api][key]"];
 
-		[request setDelegate:self];
-		[request setDidFailSelector:@selector(imageUploadFailed:)];
-		[request setDidFinishSelector:@selector(imageUploadFinished:)];
-		[request start];
-	}
+	[request setDelegate:self];
+	[request setDidFailSelector:@selector(imageUploadFailed:)];
+	[request setDidFinishSelector:@selector(imageUploadFinished:)];
+	[self envokeRequest:request];
 } 
 
 - (BOOL)isAuthenticatedWithPikchur 
 {
-	if ([[NSUserDefaults standardUserDefaults] valueForKey:@"pikchur_auth_key"])
+	DebugLog(@"isAuthenticatedWithPikchur %@", options);
+
+	DebugLog(@"isAuthenticatedWithPikchur %@", [options valueForKey:@"pikchur"]);
+	if ([[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@_pikchur_auth_key", [options valueForKey:@"pikchur"]]])
 		return YES;
 	return NO;
 }

@@ -17,4 +17,7 @@
 }
 @property (nonatomic, retain) IINotControls *notControls;
 @property (nonatomic, retain) IITransenderViewController *transenderViewController;
+
+- (void)playBackgroundRadio;
+- (void)bringUpTheWifiAppUnabler;
 @end
