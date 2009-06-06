@@ -41,23 +41,25 @@
 - (void)feched:(id)information
 {
 	if (information) {	
-
-		[self.transender trimMemories]; //trim all that follows
+		
+		if (!trimmedSelf)
+			[self.transender trimMemories]; //trim all that follows
 
 		if ([options valueForKey:@"message"]&&!trimmedSelf) { //delete self from program, if this is an automatic fech
 			[self.transender vipeCurrentMemorie]; //vipe self
 			trimmedSelf = YES;
 		}
 		
-		if ([options valueForKey:@"page"]) { 
-			NSUInteger page = [[options valueForKey:@"page"] intValue];
+		if ([www.options valueForKey:@"page"]) { //www.options hold repages
+			NSUInteger page = [[www.options valueForKey:@"page"] intValue];
+			DebugLog(@"OPTIONS PAGE %i", page);
 			//repage
-			int page_plus = [[options valueForKey:@"page_plus"] intValue];
+			int page_plus = [[www.options valueForKey:@"page_plus"] intValue];
 			if (page_plus<=0) {
 				page_plus = 1;
 			}
 			NSUInteger nextPage = page + page_plus;	
-			NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:options];
+			NSMutableDictionary *repaged_options = [NSMutableDictionary dictionaryWithDictionary:www.options];
 			[repaged_options setValue:[NSString stringWithFormat:@"%i",nextPage] forKey:@"page"];				
 			
 			NSMutableArray *addedFecherList = [NSMutableArray arrayWithArray:[self persistedObject]];
@@ -105,7 +107,8 @@
 - (void)cacheFeched:(NSArray*)list
 {
 	if (list) {	
-		[self.transender trimMemories]; //trim all that follows
+		if (!trimmedSelf)
+			[self.transender trimMemories]; //trim all that follows
 		if ([options valueForKey:@"message"]&&!trimmedSelf) { //delete self from program, if this is an automatic fech
 			[self.transender vipeCurrentMemorie]; //vipe self
 			trimmedSelf = YES;
@@ -125,8 +128,19 @@
 		[www setDelegate:self];
 	}
 	
-	trimmedSelf = NO;
+}
 
+- (void)stopFunctioning {
+	[www cancelFech];
+	[self progressDown];
+	DebugLog(@"#stopFunctioning");
+}
+
+- (void)startFunctioning {
+	[button setHidden:NO];
+	[www loadOptions:options]; //change options
+	trimmedSelf = NO; //not yet trimmed self
+	
 	if ([options valueForKey:@"background_url"]) {
 		[self.background setImage:[Kriya imageWithUrl:[options valueForKey:@"background_url"]]];
 	} else if ([options valueForKey:@"background"]) {
@@ -144,22 +158,12 @@
 		[self.button setTitle:[options valueForKey:@"message"] forState:UIControlStateNormal];	
 		[self.button setEnabled:NO];
 	} else {
-		[self.button setTitle:@"+fech" forState:UIControlStateNormal];
+		[self.button setTitle:@"+" forState:UIControlStateNormal];
 		[self.button setEnabled:YES];
 	}
 	//button.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
 	//button.titleLabel.textAlignment = UITextAlignmentCenter;
-}
-
-- (void)stopFunctioning {
-	[www cancelFech];
-	[self progressDown];
-	DebugLog(@"#stopFunctioning");
-}
-
-- (void)startFunctioning {
-	[button setHidden:NO];
-	[www loadOptions:options]; //change options
+	
 	if ([options valueForKey:@"message"]) {
 		[self progressUp:[options valueForKey:@"page"]];
 		if ([options valueForKey:@"restore_key"]) {

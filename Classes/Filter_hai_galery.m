@@ -21,7 +21,7 @@
 - (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
 	//NSLog(@"FILTERING HAI %@", information);
-	NSMutableArray* urls = [self extractFrom:information withPrefix:@"<img src=\"gallery2/main.php?g2_view=core.DownloadItem" andSuffix:@"\""];
+	NSMutableArray* urls = [IIFilter extractFrom:information withPrefix:@"<img src=\"gallery2/main.php?g2_view=core.DownloadItem" andSuffix:@"\""];
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	NSUInteger i, count = [urls count];
 	for (i = 0; i < count; i++) {

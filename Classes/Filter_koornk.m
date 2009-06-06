@@ -30,7 +30,7 @@
 		NSMutableString * status = [[[koo valueForKey:@"status"] mutableCopy] autorelease];
 
 		//extract pairs
-		NSMutableArray* urls = [self extractURLPairsFrom:status];
+		NSMutableArray* urls = [IIFilter extractURLPairsFrom:status];
 		//find images - download them in background
 		NSUInteger i, count = [urls count];
 		for (i = 0; i < count; i++) {

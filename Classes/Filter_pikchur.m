@@ -34,7 +34,7 @@
 }
 
 - (NSString*)pikchurUrlFromID:(NSString*)pikID withSize:(NSString*)sizeStr {
-	return [NSString stringWithFormat:@"https://s3.amazonaws.com/pikchurimages/pic_%@_%@.jpg", pikID, sizeStr];
+	return [NSString stringWithFormat:@"%@pic_%@_%@.jpg", kPikchurFormatFinal,pikID, sizeStr];
 }
 
 @end

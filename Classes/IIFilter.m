@@ -8,9 +8,6 @@
 #import "URLUtils.h"
 #import "ASIHTTPRequest.h"
 
-#define kPikchurFormat @"http://pikchur.com/"
-#define kTwitPicFormat @"http://twitpic.com/"
-
 @implementation IIFilter
 
 - (id)prepareRequestFor:(NSDictionary*)options 
@@ -44,7 +41,7 @@
 }
 
 //find all urls within a string, package into URLPairs array
-- (NSMutableArray*)extractURLPairsFrom:(NSString*)information 
++ (NSMutableArray*)extractURLPairsFrom:(NSString*)information 
 {
 	URLUtils *utils = [URLUtils utils];
 	NSMutableArray *urlpairs = [NSMutableArray arrayWithCapacity:1];
@@ -72,8 +69,11 @@
 
 //this scans for something like image urls... very basic and simple, no xml parsing shit
 //whatever you need and can be put beetwen prefix and suffix 
-// example <img src="$$$"> -> pre => <img src=" suf => "
-- (NSMutableArray*)extractFrom:(NSString*)information withPrefix:(NSString*)pre andSuffix:(NSString*)suf
+// example 
+// <img src="$$$"> 
+// pre => <img src=" 
+// suf => "
++ (NSMutableArray*)extractFrom:(NSString*)information withPrefix:(NSString*)pre andSuffix:(NSString*)suf
 {
 	NSUInteger info_length = [information length];
 	NSUInteger pre_length = [pre length];
@@ -131,42 +131,55 @@
 	return nil;
 }
 
+//is it pikchur or twitpic
++ (BOOL)isImageUrl:(NSString*)url {
+	return ([IIFilter isPikchurUrl:url]||[IIFilter isTwitPicUrl:url]);
+}
+
 //pikchur
 + (BOOL)isPikchurUrl:(NSString*)url {
-	return [url hasPrefix:kPikchurFormat];
+	return [url hasPrefix:kPikchurFormat]||[url hasPrefix:kPikchurFormatFinal];
 }
 
 + (NSString*)pikchurAssetUrlFrom:(NSString*)pikchurUrl withSize:(NSString*)sizeStr {
-	return [NSString stringWithFormat:@"https://s3.amazonaws.com/pikchurimages/pic_%@_%@.jpg", [pikchurUrl substringFromIndex:19], sizeStr];
+	return [NSString stringWithFormat:@"%@pic_%@_%@.jpg", kPikchurFormatFinal, [pikchurUrl substringFromIndex:19], sizeStr];
 }
 
 //twitpic
 + (BOOL)isTwitPicUrl:(NSString*)url {
-	return [url hasPrefix:kTwitPicFormat];
+	return [url hasPrefix:kTwitPicFormat]||[url hasPrefix:kTwitPicFormatFinal];
 }
 
 + (NSString*)twitPicAssetUrlFrom:(NSString*)twitPicUrl withSize:(NSString*)sizeStr {
-	//fech full image webpage - this is the place to find the real asset url
-	ASIHTTPRequest* request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/full", twitPicUrl]]]autorelease];
-	[request start];
-	NSError *error = [request error];
-	if (!error) {
-		//extract urls from page
-		URLUtils *utils = [URLUtils utils];
-		NSArray *tokens = [utils tokenizeByAll:[request responseString]];
-		int i;
-		for (i = 0; i < [tokens count]; i++) {
-			NSString *token = [tokens objectAtIndex:i];
-			if ([utils isURLToken:token]) {
-				//is token the image if it ends with "-#{size}.jpg"
-				if ([token hasSuffix:[NSString stringWithFormat:@"-full.jpg"]]) {
-					return [NSString stringWithFormat:@"%@%@.jpg", [token substringToIndex:[token length]-8], sizeStr];
-				} else if ([token hasPrefix:@"http://s3.amazonaws.com/twitpic/"] ) {
-					return token;
-				}
-			} 
-		}
-	} 
+	if ([twitPicUrl hasPrefix:kTwitPicFormat]) {
+		//fech full image webpage - this is the place to find the real asset url
+		ASIHTTPRequest* request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/full", twitPicUrl]]]autorelease];
+		[request start];
+		NSError *error = [request error];
+		if (!error) {
+			NSMutableArray *urls = [IIFilter extractFrom:[request responseString] withPrefix:@"<img class=\"photo-large\" src=\"" andSuffix:@"\""];
+			if ([urls count]==1) {
+				return [urls objectAtIndex:0];
+			}
+			/*
+			//extract urls from page
+			URLUtils *utils = [URLUtils utils];
+			NSArray *tokens = [utils tokenizeByAll:[request responseString]];
+			int i;
+			for (i = 0; i < [tokens count]; i++) {
+				NSString *token = [tokens objectAtIndex:i];
+				if ([utils isURLToken:token]) {
+					//is token the image if it ends with "-#{size}.jpg"
+					if ([token hasSuffix:[NSString stringWithFormat:@"-full.jpg"]]) {
+						return [NSString stringWithFormat:@"%@%@.jpg", [token substringToIndex:[token length]-8], sizeStr];
+					} else if ([token hasPrefix:@"http://s3.amazonaws.com/twitpic/"] ) {
+						return token;
+					}
+				} 
+			}
+			 */
+		} 
+	}
 	return twitPicUrl; //return original, if code failed
 }
 

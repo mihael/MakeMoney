@@ -31,7 +31,7 @@
 		}
 	}
 	
-	NSMutableArray* urls = [self extractFrom:information withPrefix:@"<img id=\"webcam" andSuffix:@"/>"];
+	NSMutableArray* urls = [IIFilter extractFrom:information withPrefix:@"<img id=\"webcam" andSuffix:@"/>"];
 	//DebugLog(@"EXTR %i", [urls count]);
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	NSUInteger i, count = [urls count];

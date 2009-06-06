@@ -30,7 +30,7 @@
 		}
 	}
 	
-	NSMutableArray* urls = [self extractFrom:information withPrefix:@"<img src=\"" andSuffix:@"\""];
+	NSMutableArray* urls = [IIFilter extractFrom:information withPrefix:@"<img src=\"" andSuffix:@"\""];
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	NSUInteger i, count = [urls count];
 	for (i = 0; i < count; i++) {

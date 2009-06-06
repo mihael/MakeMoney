@@ -135,6 +135,8 @@
 		47D796150F725A9C00C52774 /* IITransenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D7960E0F725A9C00C52774 /* IITransenderView.m */; };
 		47D796160F725A9C00C52774 /* IITransenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D796100F725A9C00C52774 /* IITransenderViewController.m */; };
 		47D796210F725B6900C52774 /* MoneyTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D796200F725B6900C52774 /* MoneyTimerViewController.m */; };
+		47E2676C0FD97A4D0040F565 /* ImageArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E2676B0FD97A4D0040F565 /* ImageArtView.xib */; };
+		47E267710FD97A6D0040F565 /* ImageArtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E267700FD97A6D0040F565 /* ImageArtViewController.m */; };
 		47E427D10F53396C009D7EFF /* 0000000004.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47E427B40F53396C009D7EFF /* 0000000004.jpg */; };
 		47E427D20F53396C009D7EFF /* 000000005.caf in Resources */ = {isa = PBXBuildFile; fileRef = 47E427B50F53396C009D7EFF /* 000000005.caf */; };
 		47E427D30F53396C009D7EFF /* 0000000006.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47E427B60F53396C009D7EFF /* 0000000006.jpg */; };
@@ -368,6 +370,9 @@
 		47D796100F725A9C00C52774 /* IITransenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IITransenderViewController.m; path = Classes/IITransenderViewController.m; sourceTree = "<group>"; };
 		47D7961F0F725B6900C52774 /* MoneyTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoneyTimerViewController.h; path = Classes/MoneyTimerViewController.h; sourceTree = "<group>"; };
 		47D796200F725B6900C52774 /* MoneyTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoneyTimerViewController.m; path = Classes/MoneyTimerViewController.m; sourceTree = "<group>"; };
+		47E2676B0FD97A4D0040F565 /* ImageArtView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageArtView.xib; sourceTree = "<group>"; };
+		47E2676F0FD97A6D0040F565 /* ImageArtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageArtViewController.h; path = Classes/ImageArtViewController.h; sourceTree = "<group>"; };
+		47E267700FD97A6D0040F565 /* ImageArtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageArtViewController.m; path = Classes/ImageArtViewController.m; sourceTree = "<group>"; };
 		47E427B40F53396C009D7EFF /* 0000000004.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0000000004.jpg; sourceTree = "<group>"; };
 		47E427B50F53396C009D7EFF /* 000000005.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 000000005.caf; sourceTree = "<group>"; };
 		47E427B60F53396C009D7EFF /* 0000000006.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0000000006.jpg; sourceTree = "<group>"; };
@@ -458,6 +463,8 @@
 		289233A00DB2D0730083E9F9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				47E2676F0FD97A6D0040F565 /* ImageArtViewController.h */,
+				47E267700FD97A6D0040F565 /* ImageArtViewController.m */,
 				478DE4030FD295E70067BAE6 /* PusherViewController.h */,
 				478DE4040FD295E70067BAE6 /* PusherViewController.m */,
 				4704209D0FA132F500D7DE30 /* IIFilters */,
@@ -638,6 +645,7 @@
 				47C7E25D0F9CC70900789864 /* FecherView.xib */,
 				47231FB60FBA381000D49E87 /* FecherListView.xib */,
 				478DE4700FD2AF590067BAE6 /* PusherView.xib */,
+				47E2676B0FD97A4D0040F565 /* ImageArtView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -936,6 +944,7 @@
 				4705AAA90FC709E4005DA8FC /* Progress in Resources */,
 				4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */,
 				478DE4710FD2AF590067BAE6 /* PusherView.xib in Resources */,
+				47E2676C0FD97A4D0040F565 /* ImageArtView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1010,7 @@
 				4705B2E70FCF2121005DA8FC /* iWWWView.m in Sources */,
 				47C7C5020FD27D860028DFCC /* Filter_pikchur_people.m in Sources */,
 				478DE4050FD295E70067BAE6 /* PusherViewController.m in Sources */,
+				47E267710FD97A6D0040F565 /* ImageArtViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

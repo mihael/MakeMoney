@@ -13,8 +13,9 @@
 	return @"{\"ii\":\"MessageView\", \"ions\":{\"message\":\"%@\", \"data\":%@, \"icon_url\":\"%@\", \"background_url\":\"%@\", \"noise_url\":\"%@\", \"yutub_url\":\"%@\"}, %@},";
 }
 
-- (void)functionalize {	
-	[icon setHidden:YES];
+- (void)functionalize {
+	if (icon)
+		[icon setHidden:YES];
 }
 
 - (void)stopFunctioning {
@@ -45,8 +46,6 @@
 	if ([options valueForKey:@"background_url"]) {
 		UIImage *img = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
 		if (img) {
-			if ([img size].width > background.frame.size.width && [img size].height > background.frame.size.height)
-				[background setContentMode:UIViewContentModeCenter];
 			[background setImage:img];
 		}
 	} else if ([options valueForKey:@"background"]) {
@@ -63,7 +62,10 @@
 	}
 		
 	NSString *msg = [options valueForKey:@"message"];
-	if (msg) {
+	if ([msg hasPrefix:@"hide"]) {
+		//do not display message then
+		[message setText:@""];
+	} else {
 		NSDictionary *data = [options valueForKey:@"data"];
 		if (data) {
 			[message setText:[data valueForKey:msg]];		

@@ -3,6 +3,13 @@
 //  MakeMoney
 //
 
+//supported image url formats
+#define kPikchurFormat @"http://pikchur.com/"
+#define kPikchurFormatFinal @"https://s3.amazonaws.com/pikchurimages/"
+#define kTwitPicFormat @"http://twitpic.com/"
+#define kTwitPicFormatFinal @"http://s3.amazonaws.com/twitpic/"
+
+
 //usable Behaviors, for when writing IIFilter subclasses
 #define k_ior_stop @"\"ior\":{\"stop\":\"true\"}"
 #define k_ior_notstop @"\"ior\":{\"stop\":\"false\"}"
@@ -19,17 +26,25 @@
 - (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options;
 - (NSString*)pageParamName;
 - (NSString*)limitParamName;
-- (NSMutableArray*)extractURLPairsFrom:(NSString*)information;
-- (NSMutableArray*)extractFrom:(NSString*)information withPrefix:(NSString*)pre andSuffix:(NSString*)suf;
+
+//simple URL extraction
++ (NSMutableArray*)extractURLPairsFrom:(NSString*)information;
+
+//simple information extraction beetween prefix and suffix
++ (NSMutableArray*)extractFrom:(NSString*)information withPrefix:(NSString*)pre andSuffix:(NSString*)suf;
 
 //supported assets and userid links
 + (NSString*)assetUrl:(NSString*)url;
+
 //pikchur
 + (BOOL)isPikchurUrl:(NSString*)url;
 + (NSString*)pikchurAssetUrlFrom:(NSString*)pikchurUrl withSize:(NSString*)sizeStr;
 //twitpic
 + (BOOL)isTwitPicUrl:(NSString*)url;
 + (NSString*)twitPicAssetUrlFrom:(NSString*)twitPicUrl withSize:(NSString*)sizeStr;
+//checks for all supported 
++ (BOOL)isImageUrl:(NSString*)url;
+
 //audio stream
 + (BOOL)isStreamUrl:(NSString*)url;
 + (NSString*)streamAssetUrlFrom:(NSString*)url;

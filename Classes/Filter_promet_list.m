@@ -19,7 +19,7 @@
 			base_url = [options valueForKey:@"filter_base_url"];
 		}
 	}
-	NSMutableArray* urls = [self extractFrom:information withPrefix:@"<a href=\"" andSuffix:@"</a>"];
+	NSMutableArray* urls = [IIFilter extractFrom:information withPrefix:@"<a href=\"" andSuffix:@"</a>"];
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	NSUInteger i, count = [urls count];
 	for (i = 0; i < count; i++) {

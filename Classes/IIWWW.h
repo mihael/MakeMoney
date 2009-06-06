@@ -11,6 +11,8 @@
 #define kPikchurAuthURL @"https://api.pikchur.com/auth/json"
 #define kPikchurAPIKey @"plusOOts6YVcBSFGgT0jaA"
 
+#define kTwitPicUploadURL @"http://twitpic.com/api/uploadAndPost"
+
 @class ASINetworkQueue;
 @class IIFilter;
 
@@ -40,7 +42,7 @@
 @property (readwrite, retain) NSURL *url;
 @property (readwrite, retain) NSString *params;
 @property (readwrite, retain) NSString *filterName;
-@property (readwrite, assign) NSDictionary *options;
+@property (readwrite, retain) NSDictionary *options;
 
 - (id)initWithOptions:(NSDictionary*)o;
 - (void)loadOptions:(NSDictionary*)o;
@@ -72,13 +74,20 @@
 - (void)fechUpdateWithParams:(NSDictionary*)p;
 //TODO- (void)fechUpdateWithImage:(UIImage*)i andParams:(NSDictionary*)p;
 
-//supported pikchur upload supply it in ions like this: "pikchur":"username@password"
+//supported pikchur upload, supply it in ions like this: "pikchur":"username@password"
 - (void)fechUploadWithPikchur:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location andProgress:(id)progressDelegate;
+
+//supported twitpic upload, supply it in ions like this: "twitter":"username@password"
+- (void)fechUploadWithTwitPic:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location andProgress:(id)progressDelegate;
+
+
+//preparing image for upload
 - (UIImage*)scaleAndRotateImage:(UIImage*)image;
 
 //this is sync
 //authenticate with pikchur and save auth_key for later use
 - (void)authenticateWithPikchur;
 - (BOOL)isAuthenticatedWithPikchur;
+
 
 @end

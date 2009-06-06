@@ -63,6 +63,8 @@
 				<real>1.83</real>
 				<real>2.38</real>
 				<real>2.83</real>
+				<real>3.38</real>
+				<real>3.83</real>
 			</array>
 			<key>Titles</key>
 			<array>
@@ -72,6 +74,8 @@
 				<string>0.55Hz</string>
 				<string>0.42Hz</string>
 				<string>0.35Hz</string>
+				<string>0.3Hz</string>
+				<string>0.26Hz</string>
 			</array>
 		</dict>
 		<dict>

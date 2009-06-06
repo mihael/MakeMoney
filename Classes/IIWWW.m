@@ -37,15 +37,15 @@
 	if (![self hasWWWAccess]) {
 		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please move device within network reach. Thanks."];	
 	}
-	
-	[filter release];
+	if (filter)
+		[filter release];
 	filter = nil;
 	[self setFilterName:[options valueForKey:@"filter"]];
 	if (filterName) { //program says we want to filter information after receive
 		NSString *filterClassName = [NSString stringWithFormat:@"Filter_%@", filterName];
 		Class filterClass = NSClassFromString(filterClassName);
 		if (filterClass) {
-			filter = [[[filterClass alloc] init] retain];
+			filter = [[filterClass alloc] init];
 		}
 	}
 
@@ -58,9 +58,10 @@
 	if ([options valueForKey:@"params"])
 		params = [options valueForKey:@"params"];	
 
-	[server release];
+	if (server)
+		[server release];
 	server = nil;
-	server = [[[ASINetworkQueue alloc] init] retain];	
+	server = [[ASINetworkQueue alloc] init];	
 	[server setRequestDidFinishSelector:@selector(fechFinished:)];
 	[server setRequestDidFailSelector:@selector(fechFailed:)];	
 	[server setDelegate:self];	
@@ -225,7 +226,7 @@
 	}
 }
 
-#pragma mark ASIHTTPRequest delegate
+#pragma mark pikchur upload delegates
 - (void)imageUploadFailed:(ASIHTTPRequest *)request 
 {
 	if ([(id)self.delegate respondsToSelector:@selector(notFeched:)])
@@ -338,7 +339,7 @@
 	[request setDidFailSelector:@selector(imageUploadFailed:)];
 	[request setDidFinishSelector:@selector(imageUploadFinished:)];
 	[self envokeRequest:request];
-	DebugLog(@"REQUESTING UPLOAD");
+	DebugLog(@"REQUESTING PIKCHUR UPLOAD");
 }
 
 - (void)authenticateWithPikchur {
@@ -366,6 +367,54 @@
 	if ([[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@_pikchur_auth_key", [options valueForKey:@"pikchur"]]])
 		return YES;
 	return NO;
+}
+
+#pragma mark twitpic
+- (void)fechUploadWithTwitPic:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location andProgress:(id)progressDelegate 
+{
+	NSString *username = [[[options valueForKey:@"twitter"] componentsSeparatedByString:@"@"] objectAtIndex:0];
+	NSString *password = [[[options valueForKey:@"twitter"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
+	
+	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kTwitPicUploadURL]] autorelease];
+	if (progressDelegate)
+		[request setDownloadProgressDelegate:progressDelegate];
+	
+	NSString *stringBoundary = [NSString stringWithString:@"0xKhTmLbOuNdArY"];
+	NSMutableData *postBody = [NSMutableData data];
+	[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"media\"; filename=\"upload.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];		
+	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithUrl:imagePath]], 0.9)];
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[request setPostBody:postBody];
+	[request setPostValue:username forKey:@"username"];
+	[request setPostValue:password forKey:@"password"];
+	if (description)
+		[request setPostValue:description forKey:@"message"];
+	
+	//doit
+	[request setDelegate:self];
+	[request setDidFailSelector:@selector(fechUploadWithTwitPicFailed:)];
+	[request setDidFinishSelector:@selector(fechUploadWithTwitPicFinished:)];
+	[self envokeRequest:request];
+	DebugLog(@"REQUESTING TWITPIC UPLOAD");
+	
+
+}
+
+- (void)fechUploadWithTwitPicFailed:(ASIHTTPRequest *)request 
+{
+	if ([(id)self.delegate respondsToSelector:@selector(notFeched:)])
+		[self.delegate notFeched:@"Upload failed."];		
+}
+
+- (void)fechUploadWithTwitPicFinished:(ASIHTTPRequest *)request 
+{
+	NSError *error = [request error];
+	if (!error) {
+		[self.delegate feched:[request responseString]];
+	} 
 }
 
 #pragma mark image scaling and rotating

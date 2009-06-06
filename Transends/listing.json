@@ -23,7 +23,7 @@
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"Fech recent twitter", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=mr_foto", "filter":"twitter"}, "ior":{"stop":"true"}}
 ]
 
-@mr_foto 1 #review
+@mr_foto 1 #debug
 [
 {"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}}
 ]
@@ -32,6 +32,11 @@
 [
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"djgoatboy twitter mix", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":10, "params":"screen_name=djgoatboy", "filter":"twitter"}, "ior":{"stop":"true"}}
 {"m":{"t":"", "d":"", "p":"", "i":""}, "ii":"FecherView", "ions":{"reuse":"true", "button_title":"kitschmaster twitter mix", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":10, "params":"screen_name=kitschmaster", "filter":"twitter"}, "ior":{"stop":"true"}}
+]
+
+@SamiraKentric #pursuit mode
+[
+{"ii":"FecherView", "ions":{"reuse":"true", "button_title":"+25", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":25, "params":"data[api][feeds][type]=people&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][auth_key]=cyfET7o9OzWOuQXp0QKxdsyIKsxgGtHMCJ5FfZePeRfJb2STF8t&data[api][feeds][user_id]=6238&data[api][feeds][include][piks]=true", "filter":"pikchur_people"}, "ior":{"stop":"true", "space":"down"}}
 ]
 
 @pikchur #experimental 
@@ -51,6 +56,13 @@
 ]
 	@beerchase #experimental
 	[
+		#twitter stream
+		{"ii":"PusherView", "ions":{"reuse":"true", "title":"Cool", "background":"main.jpg", "twitter":"beerchase@beerchase999"}, "ior":{"stop":"true", "space":"down"}},
+		{"ii":"FecherView", "ions":{"button_title":"beerchase", "background":"main.jpg","url":"http://beerchase:beerchase999@twitter.com/statuses/friends_timeline.json", "method":"get", "page":1, "limit":25, "params":"", "filter":"twitter", "hide_messages":"true", "fech_ids":"true"}, "ior":{"stop":"true", "space":"down"}}
+
+		#pikchur stream
+		{"ii":"PusherView", "ions":{"reuse":"true", "title":"Cool", "background":"main.jpg", "pikchur":"beerchase@beerchase999"}, "ior":{"stop":"true", "space":"down"}},
+		{"ii":"FecherView", "ions":{"reuse":"true", "button_title":"+3", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":3, "params":"data[api][feeds][type]=people&data[api][key]=plusOOts6YVcBSFGgT0jaA&data[api][auth_key]=cyfET7o9OzWOuQXp0QKxdsyIKsxgGtHMCJ5FfZePeRfJb2STF8t&data[api][feeds][user_id]=6238&data[api][feeds][include][piks]=true", "filter":"pikchur_people"}, "ior":{"stop":"true", "space":"down"}}
 
 	]
 

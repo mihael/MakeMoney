@@ -61,7 +61,7 @@
 @property (nonatomic, assign) id <IITransenderViewControllerDelegate> delegate;
 @property (readonly, retain) IITransender *transender;
 @property (readwrite, assign) IINotControls *notControls;
-@property (readwrite, retain) UIViewController *transendController;
+@property (readwrite, retain) IIController *transendController;
 @property (readwrite) BOOL feeling;
 @property (readwrite, assign) NSDictionary *notBehavior;
 
@@ -82,16 +82,21 @@
 - (void)transendedWithMusic:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
 //transender delegate
 
-
+//transition delegates - not used for now
 - (void)transitionViewDidStart:(IITransenderView *)view;
 - (void)transitionViewDidFinish:(IITransenderView *)view;
 - (void)transitionViewDidCancel:(IITransenderView *)view;
 
+//move view into screen
 - (void)transit:(UIView*)wiev;
 
+//move image into screen
 - (void)transitImage:(UIImage*)img;
 
+//listen a shorter than 30sec music
 -(void)hearMusicFile:(NSString*)thePath;
+
+//view a movie
 -(void)seeMovie:(NSURL*)url;
 
 @end

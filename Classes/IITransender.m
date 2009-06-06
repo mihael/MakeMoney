@@ -232,8 +232,10 @@
 		NSString *memoryII = [memory valueForKey:@"ii"];		
 		NSString *diskII = nil;
 		
-		//see what kind of transend this is and act		
+		//see what kind of transend this is and act	
+		
 		if ([memoryII isEqualToString:@"message"]) {
+		//message
 			
 			if ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable) {
 
@@ -280,7 +282,9 @@
 			}
 
 		} else if ([memoryII hasSuffix:@"View"]) {
+		//*View
 
+			BOOL functionalize = NO;
 			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryII];
 			Class viewControllerClass = NSClassFromString(className);
 			id viewController = [wies objectForKey:className];
@@ -291,11 +295,13 @@
 					viewController = [[[viewControllerClass alloc] initWithNibName:memoryII bundle:nil] autorelease];
 				} else { //just init, view controller should load it self programmatically
 					viewController = [[[viewControllerClass alloc] init]autorelease]; 
-				}		
+				}	
+				//each loaded View should functionalize once
+				functionalize = YES;
 			}
 				
 			//transend
-			if (viewController && [viewController respondsToSelector:@selector(startFunctioning)] && delegate) {
+			if (viewController && delegate) {
 
 				if ([viewController respondsToSelector:@selector(setTransender:)])
 					[viewController setTransender:self];
@@ -318,10 +324,11 @@
 						[viewController setBehavior:behavior];
 				}
 
-				//functionalize
-				if ([viewController respondsToSelector:@selector(functionalize)])
+				//functionalize only if first view load
+				if (functionalize && [viewController respondsToSelector:@selector(functionalize)])
 					[viewController functionalize];
 				
+				//finnaly transend
 				if ([delegate respondsToSelector:@selector(transendedWithView:withIons:withIor:)])
 					[delegate transendedWithView:viewController withIons:options withIor:behavior];
 			
@@ -331,6 +338,8 @@
 			}	
 			
 		} else {
+		//0*
+			
 			if ([memoryII hasPrefix:@"0"]) { //a simple 0-prefixed transend
 				diskII = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryII];
 			} else if ([memoryII hasPrefix:@"/"]) { //a direct path
@@ -345,7 +354,7 @@
 				}					
 			}
 
-			//can not play sounds and movies in simulator, so do not transend
+			//can not play sounds and movies in simulator, so do not transend while in simulator
 			#if !(TARGET_IPHONE_SIMULATOR)
 			if ([[memoryII pathExtension] isEqualToString:@"mov"]) {
 				if ([delegate respondsToSelector:@selector(transendedWithMovie:withIons:withIor:)])

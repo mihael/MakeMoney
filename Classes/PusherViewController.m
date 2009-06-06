@@ -11,6 +11,7 @@
 
 @implementation PusherViewController
 
+#pragma mark actions
 - (IBAction)pusherButtonPushed:(id)sender 
 { 
 	//if image, send to pikchur and get back url, then send position with url
@@ -28,11 +29,17 @@
 	
 }
 
-- (IBAction)pickButtonPushed:(id)sender {
-	if (![www isAuthenticatedWithPikchur]) {
-		[notControls setProgress:@"Preparing uploads..." animated:YES];
-		[www authenticateWithPikchur];
-	} else {
+- (IBAction)pickButtonPushed:(id)sender 
+{
+	if ([options valueForKey:@"pikchur"]) {	
+		if (![www isAuthenticatedWithPikchur]) {
+			[notControls setProgress:@"Preparing uploads..." animated:YES];
+			[www authenticateWithPikchur];
+		} else {
+			[notControls setPickDelegate:self];
+			[notControls pickInView:background];
+		}
+	} else if ([options valueForKey:@"twitter"]) {
 		[notControls setPickDelegate:self];
 		[notControls pickInView:background];
 	}
@@ -52,10 +59,19 @@
 	}
 }
 
+#pragma mark uploading
 - (void)uploadSelectedImage
 {
-	[notControls setProgress:@"Uploading ..." animated:YES];
-	[www fechUploadWithPikchur:selectedImagePath withDescription:locationText andLocation:location andProgress:nil];
+	if ([options valueForKey:@"pikchur"]) {
+		[notControls setProgress:@"Uploading ..." animated:YES];
+		[www fechUploadWithPikchur:selectedImagePath withDescription:locationText andLocation:location andProgress:nil];
+	} else if ([options valueForKey:@"twitter"]) {
+		[notControls setProgress:@"Uploading ..." animated:YES];
+		[www fechUploadWithTwitPic:selectedImagePath withDescription:locationText andLocation:location andProgress:nil];		
+	} else {
+		[notControls setProgress:@"Uploading to nowhere..." animated:YES];
+	}
+
 }
 
 //get short link for google maps 
@@ -87,6 +103,14 @@
 	[www fechUpdateWithParams:params];
 }
 
+- (void)pushFinished 
+{
+	[notControls setProgress:@"Thanks" animated:YES];
+	[background setImage:[self.transender imageNamed:@"main.jpg"]];
+	[selectedImageView setHidden:YES];
+	imageSelected = NO;
+	[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(hidePushFinished) userInfo:nil repeats:NO];
+}
 
 #pragma mark CLLocationManagerDelegate methods
 - (void)locatus {
@@ -148,11 +172,9 @@
 		else if ([information valueForKey:@"post"]) 
 		{
 			//this comes from pikchur after uploading
-			[notControls setProgress:nil animated:YES];
-			[background setImage:[self.transender imageNamed:@"main.jpg"]];
-			[selectedImageView setHidden:YES];
-			imageSelected = NO;
-			[transender transend];
+
+			[self pushFinished];
+
 			//push
 			//[self pushWith:[NSString stringWithFormat:@"%@ %@", locationText, [[information valueForKey:@"post"] valueForKey:@"url"]]];
 			//TODO notify about image upload koornk, twitter, kitschmaster...
@@ -177,22 +199,25 @@
 				[notControls setProgress:nil animated:YES];
 		}
 	} else {
-		//this shuld nut hupen
-		DebugLog(@"THIS SHOULD NOT HAPPEN %@", information);
-		[notControls setProgress:nil animated:YES];
+
+		NSMutableArray *urls = [IIFilter extractFrom:information withPrefix:@"<mediaurl>" andSuffix:@"</mediaurl>"];
+		if ([urls count]==1)
+			DebugLog(@"REKORDED %@", urls);
+		[self pushFinished];
 	}
 }
 
 #pragma mark Effects
-- (void)animateKopter 
+- (void)hidePushFinished 
 {
 	CATransition *animation = [CATransition animation];
 	[animation setType:kCATransitionFade];
-	[animation setDuration:0.83];
+	[animation setDuration:0.5];
 	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-	//[animation setSubtype:kCATransitionFromBottom];
-	//[[overKopter layer] addAnimation:animation forKey:@"kopterAnimation"];
+	[[notControls progressor].layer addAnimation:animation forKey:@"pushFinishedAnimation"];
+	[notControls setProgress:nil animated:NO];
 }
+
 
 
 #pragma mark IIController overrides

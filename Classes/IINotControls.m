@@ -577,8 +577,7 @@
 {
 	[picker dismissModalViewControllerAnimated:YES];
 	UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
-	DebugLog(@"Picked image for sending to pikchur: w=%f, h=%f", image.size.width, image.size.height);
-	//NSLog(@"what else do we have %@", editingInfo);
+	DebugLog(@"Picked image: w=%f, h=%f", image.size.width, image.size.height);
 	if (image) {
 		if (pickDelegate)
 			[pickDelegate picked:info];

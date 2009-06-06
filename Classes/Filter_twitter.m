@@ -21,6 +21,7 @@
 
 - (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
+
 	NSArray* twits = [information JSONValue];
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	NSUInteger i, twits_count = [twits count];
@@ -28,9 +29,15 @@
 	for (i = 0; i < twits_count; i++) {
 		NSMutableDictionary* twit = [(NSDictionary*)[twits objectAtIndex:i] mutableCopy];		
 		NSMutableString * text = [[[twit valueForKey:@"text"] mutableCopy] autorelease];
+		NSString *textKey = nil;
+		if ([[options valueForKey:@"hide_messages"] boolValue]) {
+			textKey = @"hide";
+		} else {
+			textKey = @"text";
+		}
 		
 		//extract pairs
-		NSMutableArray* urls = [self extractURLPairsFrom:text];
+		NSMutableArray* urls = [IIFilter extractURLPairsFrom:text];
 		NSMutableArray* user_ids = [NSMutableArray arrayWithCapacity:1];
 		NSMutableArray* asset_urls = [NSMutableArray arrayWithCapacity:1];
 
@@ -48,10 +55,13 @@
 					[asset_urls addObject:assetUrl];					
 				}				
 			}//for urls
-
+			
 			if ([asset_urls count]<=0) { //no usable urls
 //				[transends appendFormat:@"{\"ii\":\"MessageView\", \"ions\":{\"message\":\"text\", \"data\":%@, \"icon_url\":\"%@\", \"background_url\":\"%@\"}, %@},", [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], k_ior_notstop];
-				[transends appendFormat:[MessageViewController transendFormat], @"text", [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], @"", @"", k_ior_notstop];
+				if ([textKey hasPrefix:@"text"]) {
+					[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], @"", @"", k_ior_notstop];
+				} 
+
 			} else { //add this message with all images/mp3s/assets found in this message
 				NSUInteger k, c = [asset_urls count];
 				for (k = 0; k < c; k++) {
@@ -60,17 +70,19 @@
 					NSString *yutub_url = @"";
 					if ([IIFilter isStreamUrl:asset_url]) {
 						noise_url = asset_url;
-						[transends appendFormat:[MessageViewController transendFormat], @"text", [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_space];
+						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_space];
 					} else if ([IIFilter isYutubUrl:asset_url]) {
 						yutub_url = asset_url;
-						[transends appendFormat:[MessageViewController transendFormat], @"text", [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_space];
+						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_space];
+					} else if ([IIFilter isImageUrl:asset_url]){
+						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], asset_url, noise_url, yutub_url, k_ior_notstop_space];						
 					} else {
-						[transends appendFormat:[MessageViewController transendFormat], @"text", [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_notstop];						
+						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_notstop_space];						
 					}
 				}
 			}
 			
-			if ([user_ids count]>0) {
+			if ([[options valueForKey:@"fech_ids"] boolValue] && [user_ids count]>0) {
 				NSUInteger x, uc = [user_ids count];
 				for (x = 0; x < uc; x++) {
 					NSString* user_id = [user_ids objectAtIndex:x];
@@ -79,7 +91,7 @@
 			}
 
 		} else { //no urls in status
-			[transends appendFormat:[MessageViewController transendFormat], @"text", [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], @"", @"", k_ior_notstop];
+			[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], @"", @"", k_ior_notstop];
 		}
 		
 	}

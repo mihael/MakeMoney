@@ -25,7 +25,7 @@
 			base_url = [options valueForKey:@"filter_base_url"];
 		}
 	}
-	NSMutableArray* urls = [self extractFrom:information withPrefix:@"<a href=\"" andSuffix:@"</a>"];
+	NSMutableArray* urls = [IIFilter extractFrom:information withPrefix:@"<a href=\"" andSuffix:@"</a>"];
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	NSUInteger i, count = [urls count];
 	for (i = 0; i < count; i++) {
@@ -53,7 +53,7 @@
 		}
 		
 		if (v_url)
-			[transends appendFormat:@"{\"ii\":\"FecherView\", \"ions\":{\"restore_key\":\"wp_fecher_%i\", \"message\":\"%@\", \"url\":\"%@/%@\", \"page\":1, \"fech_all\":\"true\", \"filter\":\"wp_gallery\", \"filter_base_url\":\"%@\", \"background_url\":\"%@/%@\"}, %@},", i, [URLUtils decodeHTTP:url_title], base_url, v_url, base_url, base_url, d_url, k_ior_stop_space];
+			[transends appendFormat:@"{\"ii\":\"FecherView\", \"ions\":{\"reuse\":\"true\", \"restore_key\":\"restore_key_%@\", \"message\":\"%@\", \"url\":\"%@/%@\", \"page\":1, \"fech_all\":\"true\", \"filter\":\"wp_gallery\", \"filter_base_url\":\"%@\", \"background_url\":\"%@/%@\"}, %@},", v_url, [URLUtils decodeHTTP:url_title], base_url, v_url, base_url, base_url, d_url, k_ior_stop_space];
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];
 }
