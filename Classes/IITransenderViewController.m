@@ -38,19 +38,32 @@
 }
 
 - (void)loadView {
-	skrin = [[IITransenderView alloc] initWithFrame:CGRectMake(0, 0, 480, 320)];
+	skrin = [[IITransenderView alloc] initWithFrame:[Kriya orientedFrame]];
+	DebugLog(@"TRANSENDER VIEW FRAME %f %f", skrin.frame.size.width, skrin.frame.size.height);
 	skrin.delegate = self;
 	self.view = skrin;
+//	[skrin setAutoresizesSubviews:NO];
+//	[skrin setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 	
-	transendEmitter1 = [[UIImageView alloc] initWithImage:[transender imageNamed:@"main.jpg"]];
+	transendEmitter1 = [[UIImageView alloc] initWithFrame:skrin.frame];
+	[transendEmitter1 setImage:[transender imageNamed:@"main.jpg"]];
 	[transendEmitter1 setContentMode:UIViewContentModeScaleAspectFit];
-	transendEmitter2 = [[UIImageView alloc] initWithImage:[transender imageNamed:@"main.jpg"]];
+	transendEmitter2 = [[UIImageView alloc] initWithFrame:skrin.frame];
+	[transendEmitter2 setImage:[transender imageNamed:@"main.jpg"]];
 	[transendEmitter2 setContentMode:UIViewContentModeScaleAspectFit];
-
 	useEmitter1 = YES;
 	[self.view addSubview:transendEmitter1];
 	avoidBehavior = NO;
 	[self showInfoView];
+}
+
+- (void)layout:(CGRect)rect
+{
+	[skrin setFrame:rect];
+	[transendEmitter1 setFrame:rect];
+	[transendEmitter2 setFrame:rect];
+	if (transendController)
+		[transendController layout:(CGRect)rect];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,13 +89,15 @@
 	[directions release];
     [super dealloc];
 }
+
 #pragma mark Startup info view
 - (void)showInfoView 
 {
-	infoView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 320)] autorelease];
+	CGRect r = [Kriya orientedFrame];
+	infoView = [[[UIView alloc] initWithFrame:r] autorelease];
 	[infoView setBackgroundColor:[UIColor clearColor]];
-	UILabel *version = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 160)] autorelease];		
-	UILabel *startups = [[[UILabel alloc] initWithFrame:CGRectMake(0, 160, 480, 160)] autorelease];
+	UILabel *version = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, r.size.width, r.size.height/2)] autorelease];		
+	UILabel *startups = [[[UILabel alloc] initWithFrame:CGRectMake(0, r.size.height/2, r.size.width, r.size.height/2)] autorelease];
 	version.text = [NSString stringWithFormat:@"Version %@", [MakeMoneyAppDelegate version]];
 	startups.text = [[NSUserDefaults standardUserDefaults] valueForKey:STARTUPS];
 	version.backgroundColor = [UIColor clearColor];
@@ -93,6 +108,8 @@
 	startups.font = [UIFont systemFontOfSize:23];
 	version.textAlignment = UITextAlignmentCenter;
 	startups.textAlignment = UITextAlignmentCenter;
+	startups.lineBreakMode = UILineBreakModeWordWrap;
+	startups.numberOfLines = 2;
 	[infoView addSubview:version];
 	[infoView addSubview:startups];
 	[self.view addSubview:infoView];
@@ -146,8 +163,11 @@
 		DebugLog(@"#transendedWithView again");
 	}
 
-	if ([transendController respondsToSelector:@selector(startFunctioning)]) {
-		[transendController startFunctioning]; //start the current view if can
+	if (transendController) {
+		[transendController layout:[Kriya orientedFrame]];
+		if ([transendController respondsToSelector:@selector(startFunctioning)]) {
+			[transendController startFunctioning]; //start the current view if can
+		}
 	}
 
 	[self continueWithBehavior];
@@ -354,6 +374,8 @@
 - (void)transit:(UIView*)wiev {
 	if ([skrin subviews].count > 0) {
 		UIView *replaceMe = [[skrin subviews] objectAtIndex:0];
+		//wiev.frame = KriyaFrame();
+		DebugLog(@"transit WIEV %f %f", wiev.frame.size.width, wiev.frame.size.height);
 		
 		if (animated) {
 			//chose transition type and direction at random from the arrays of supported transitions and directions
@@ -390,7 +412,7 @@
 		} else { //transit without animating
 			[skrin replaceSubview:replaceMe withSubview:wiev];
 		}
-		
+
 	} else {
 		DebugLog(@"#transit skrin has no views.");
 	}

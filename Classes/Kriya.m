@@ -3,7 +3,36 @@
 #import "MakeMoneyAppDelegate.h"
 #import <CommonCrypto/CommonDigest.h>
 
+CGRect KriyaFrame() {
+	CGRect frame = [UIScreen mainScreen].applicationFrame;
+	return CGRectMake(0, 0, frame.size.width, frame.size.height);
+}
+
 @implementation Kriya
+
++ (CGRect)orientedFrame {
+	UIInterfaceOrientation interfaceOrientation = [[UIDevice currentDevice] orientation];
+	CGRect r = CGRectZero;
+	switch (interfaceOrientation) {
+		case UIInterfaceOrientationPortrait:
+			r = CGRectMake(0, 0, 320, 480);
+			break;
+		case UIInterfaceOrientationPortraitUpsideDown:
+			r = CGRectMake(0, 0, 320, 480);
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+			r = CGRectMake(0, 0, 480, 320);
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			r = CGRectMake(0, 0, 480, 320);
+			break;
+		default:
+			r = CGRectMake(0, 0, 320, 480);
+			break;
+	}
+	return r;
+}
+
 + (NSInteger)appRunCount 
 {
 	if (![[NSUserDefaults standardUserDefaults] objectForKey:RUNS]){

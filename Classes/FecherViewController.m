@@ -185,8 +185,17 @@
 			[www fech];					
 		}
 	}
+	
+	[self layout:[Kriya orientedFrame]];
 	DebugLog(@"#startFunctioning");
 	
+}
+
+- (void)layout:(CGRect)rect
+{
+	[self.view setFrame:rect];
+	[background setFrame:rect];
+	[button setFrame:CGRectMake(20, 20, rect.size.width - 20, rect.size.height - 20)];
 }
 
 - (void)progressUp:(NSString*)page

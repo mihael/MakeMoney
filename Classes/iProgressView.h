@@ -13,6 +13,7 @@
 }
 - (id)initWithFrame:(CGRect)frame;
 - (id)initWithFrame:(CGRect)frame text:(NSString*)t;
+- (void)layout:(CGRect)rect;
 - (void)setProgress:(float)p;
 - (void)setText:(NSString*)t;
 - (void)setFill:(UIColor*)c;

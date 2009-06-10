@@ -174,6 +174,7 @@
 	}
 }
 
+#pragma mark invokes
 //transend invoke
 - (void)invokeTransend 
 {
@@ -221,10 +222,10 @@
 	if (delegate) {
 		//find out what is next
 		[self computeSpot];
-
+		
 		//transend with memoriesSpot
 		DebugLog(@"#invokeTransend timer:%@ spot:%i vibe: %f", timer, memoriesSpot, vibe);
-
+		
 		//read ii
 		NSDictionary *memory = [memories objectAtIndex:memoriesSpot];
 		NSDictionary *behavior = [memory objectForKey:@"ior"];
@@ -235,13 +236,13 @@
 		//see what kind of transend this is and act	
 		
 		if ([memoryII isEqualToString:@"message"]) {
-		//message
+			//message
 			
 			if ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable) {
-
+				
 				UIImage* background = nil;
 				//fech background_url icon_url if not yet
-
+				
 				//feching could last longer than the vibe - lets meditate on this
 				[self meditate]; 
 				//NSDate *fechTime = [NSDate date];  //record point in time
@@ -268,27 +269,27 @@
 				
 				//NSTimeInterval elapsedTime = [fechTime timeIntervalSinceNow];  
 				//DebugLog(@"Fech time: %f", -elapsedTime);              
-							
+				
 				//transend
 				if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) 
 				{
 					[delegate transendedWithImage:background withIons:options withIor:behavior];
-				
+					
 					//[self transend]; //resume with transending
 				}
 			} else {
 				[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];
-				[self invokeTransendFailed:IITransenderFailedWithMessage];
+				[self invokeTransendFailed:IITransenderInvokeFailedWithMessage];
 			}
-
+			
 		} else if ([memoryII hasSuffix:@"View"]) {
-		//*View
-
+			//*View
+			
 			BOOL functionalize = NO;
 			NSString *className = [NSString stringWithFormat:@"%@Controller", memoryII];
 			Class viewControllerClass = NSClassFromString(className);
 			id viewController = [wies objectForKey:className];
-
+			
 			//if not in wies then laod with or without nib
 			if (!viewController) {			
 				if ([Kriya xibExists:memoryII] ) { //load from nib if there is one
@@ -299,13 +300,13 @@
 				//each loaded View should functionalize once
 				functionalize = YES;
 			}
-				
+			
 			//transend
 			if (viewController && delegate) {
-
+				
 				if ([viewController respondsToSelector:@selector(setTransender:)])
 					[viewController setTransender:self];
-
+				
 				//send options to wiev, reusability
 				if (options) {
 					//set fresh options
@@ -323,7 +324,7 @@
 					if ([viewController respondsToSelector:@selector(setBehavior:)])
 						[viewController setBehavior:behavior];
 				}
-
+				
 				//functionalize only if first view load
 				if (functionalize && [viewController respondsToSelector:@selector(functionalize)])
 					[viewController functionalize];
@@ -331,21 +332,21 @@
 				//finnaly transend
 				if ([delegate respondsToSelector:@selector(transendedWithView:withIons:withIor:)])
 					[delegate transendedWithView:viewController withIons:options withIor:behavior];
-			
+				
 			} else {
 				DebugLog(@"#invokeTransend not transended %i: %@", memoriesSpot, memoryII);
-				[self invokeTransendFailed:IITransenderFailedWithView];
+				[self invokeTransendFailed:IITransenderInvokeFailedWithView];
 			}	
 			
 		} else {
-		//0*
+			//0*
 			
 			if ([memoryII hasPrefix:@"0"]) { //a simple 0-prefixed transend
 				diskII = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryII];
 			} else if ([memoryII hasPrefix:@"/"]) { //a direct path
 				diskII = memoryII;
 			}
-		
+			
 			if ([[memoryII pathExtension] isEqualToString:@"jpg"]) {
 				if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) {
 					UIImage* img = [[UIImage alloc] initWithContentsOfFile:diskII];
@@ -353,9 +354,9 @@
 					[img release];
 				}					
 			}
-
+			
 			//can not play sounds and movies in simulator, so do not transend while in simulator
-			#if !(TARGET_IPHONE_SIMULATOR)
+#if !(TARGET_IPHONE_SIMULATOR)
 			if ([[memoryII pathExtension] isEqualToString:@"mov"]) {
 				if ([delegate respondsToSelector:@selector(transendedWithMovie:withIons:withIor:)])
 					[delegate transendedWithMovie:diskII withIons:options withIor:behavior];
@@ -364,16 +365,16 @@
 				if ([delegate respondsToSelector:@selector(transendedWithMusic:withIons:withIor:)])
 					[delegate transendedWithMusic:diskII withIons:options withIor:behavior];
 			}		
-			#endif
+#endif
 		}
-
+		
 		//always call delegate when last transend in listing transended
 		if (memoriesSpot == memoriesCount) {
 			if ([delegate respondsToSelector:@selector(transendedAll:)])
 				[delegate transendedAll:self];		
 		}
 	}	
-
+	
 }
 
 //failed with some? happens... although it is not shit. it is manuever, so you can grow.
@@ -382,20 +383,20 @@
 	NSDictionary* b = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"true", @"3", nil] forKeys:[NSArray arrayWithObjects:@"stop", @"effect", nil]];
 	switch (failed) {
 		case IITransenderFailedWithProgram:			
-//			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
+			//			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			DebugLog(@"Failed with program.");
 			[self meditate];
 			break;
-		case IITransenderFailedWithImage:			
+		case IITransenderInvokeFailedWithImage:			
 			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
-		case IITransenderFailedWithMovie:			
+		case IITransenderInvokeFailedWithMovie:			
 			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
-		case IITransenderFailedWithMusic:			
+		case IITransenderInvokeFailedWithMusic:			
 			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
-		case IITransenderFailedWithView:			
+		case IITransenderInvokeFailedWithView:			
 			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
 		default:
@@ -404,6 +405,7 @@
 	}
 }
 
+#pragma mark transends
 //if transending, meditate, if meditating, transend
 - (void)transendOrMeditate 
 {
@@ -534,6 +536,17 @@
 		memoriesGoldcut = -1; //disable cuttinggold
 	}
 }
+
+- (id)fechGoldcut 
+{
+	if (memoriesGoldcut>-1) {
+	//	memoriesGoldcut = goldcut; //goldcutting enabled
+	} else {
+		
+	}
+	return nil;
+}
+
 
 //return path for image relative to this transender
 - (NSString*)pathForImageNamed:(NSString*)imageName 

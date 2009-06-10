@@ -15,9 +15,9 @@
 @synthesize notControls, transenderViewController;
 
 - (void)loadView {
-	UIView *primaryView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+	UIView *primaryView = [[UIView alloc] initWithFrame:KriyaFrame()];
     primaryView.backgroundColor = [UIColor clearColor];
-
+/*
     // Start in landscape orientation, and stay that way
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (orientation == UIInterfaceOrientationLandscapeRight) 
@@ -35,10 +35,10 @@
         // Rotate the view 90 degrees around its new center point.
         transform = CGAffineTransformRotate(transform, (M_PI / 2.0));
         primaryView.transform = transform;
-    }   	
+    }   	*/
     self.view = primaryView;
     [primaryView release];      
-	notControls = [[[IINotControls alloc] initWithFrame:CGRectMake(0, 0, 480.0, 320.0) withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
+	notControls = [[[IINotControls alloc] initWithFrame:[Kriya orientedFrame] withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
 	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
 	[self.view addSubview:notControls];
 	[notControls setNotController:self];
@@ -92,9 +92,16 @@
 }
 
 
-//makemoney always runs in widescreen
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation 
+{
+	CGRect r = [Kriya orientedFrame];
+	[notControls layout:r];
+	[transenderViewController layout:r];
+}
+
+//since rootviewcontroller sits under or atop all else, this is the only place to controll autorotation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return ( (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));//(interfaceOrientation == UIInterfaceOrientationPortrait);
+	return YES; //( (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,9 +142,9 @@
 
 #pragma mark disabler
 - (void)bringUpTheWifiAppUnabler {
-	UIView *nowifi = [[[UIView alloc] initWithFrame:CGRectMake(0,0,480,320)] autorelease];
+	UIView *nowifi = [[[UIView alloc] initWithFrame:KriyaFrame()] autorelease];
 	nowifi.backgroundColor = [UIColor redColor];
-	UILabel *l = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 480, 320)] autorelease];
+	UILabel *l = [[[UILabel alloc] initWithFrame:KriyaFrame()] autorelease];
 	l.text = APP_TITLE;
 	l.font = [UIFont boldSystemFontOfSize:83.0];
 	l.textAlignment = UITextAlignmentCenter;

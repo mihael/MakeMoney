@@ -6,6 +6,8 @@
 #import "IIWWW.h"
 #import "JSON.h"
 #define kSelectedFech @"selectedFech"
+#define kMinCellHeight 44.0
+
 @implementation FecherListViewController
 @synthesize fecherList, background;
 
@@ -96,7 +98,7 @@
 #pragma mark UITableViewDelegate methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	CGFloat height = 57.0;
+	CGFloat height = kMinCellHeight;
 	@synchronized(fecherList) {
 //		height = [self cellHeightForIndex:[indexPath row]];
 	}
@@ -167,7 +169,7 @@
 //this method is repeated on each transend, so must be careful how you implement things
 - (void)functionalize {
 	if (!listbar) {
-		listbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 480, 44)] autorelease];
+		listbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [Kriya orientedFrame].size.width, 44)] autorelease];
 		[listbar setBarStyle:UIBarStyleBlackTranslucent];
 		
 		UIBarButtonItem *flexi = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];		
@@ -177,7 +179,7 @@
 		button = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"photo_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refresh:)] autorelease];		
 		[listbar setItems:[NSArray arrayWithObjects:fixi, flexi, title, flexi, button, nil]];
 		
-		littleArrowView = [[LittleArrowView alloc] initWithFrame:CGRectMake(436, 0, 44, 44) image:nil round:10 alpha:1.0];
+		littleArrowView = [[LittleArrowView alloc] initWithFrame:CGRectMake([Kriya orientedFrame].size.width - 44, 0, 44, 44) image:nil round:10 alpha:1.0];
 		[littleArrowView addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:littleArrowView];
 		[self.view insertSubview:listbar belowSubview:littleArrowView];
@@ -241,9 +243,17 @@
 		[www fech];
 	}
 	
-	[self becomeFirstResponder];
+	if (listbar) {
+		[self layout:[Kriya orientedFrame]];
+	}
 	DebugLog(@"#startFunctioning");
 }
 
+- (void)layout:(CGRect)rect
+{
+	[self.view setFrame:rect];
+	[listbar setFrame:CGRectMake(0, 0, rect.size.width, 44)];
+	[littleArrowView setFrame:CGRectMake(rect.size.width - 44, 0, 44, 44)];
+}
 
 @end

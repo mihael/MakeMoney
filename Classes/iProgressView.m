@@ -4,6 +4,7 @@
 //
 #import "iProgressView.h"
 #define kPad 3
+#define kSize 183
 
 @implementation iProgressView
 
@@ -12,7 +13,8 @@
 }
 
 - (id)initWithFrame:(CGRect)frame text:(NSString*)t{
-	CGRect r = CGRectInset(frame, 144, 88);
+	CGRect r = CGRectMake(frame.size.width/2-kSize/2, frame.size.height/2-kSize/2, kSize, kSize);
+	
     if (self = [super initWithFrame:r]) {
 		strokeColor = [UIColor clearColor];
 		fillColor = [UIColor blackColor];
@@ -40,6 +42,14 @@
     return self;
 }
 
+- (void)layout:(CGRect)rect
+{
+	CGRect r = CGRectMake(rect.size.width/2-kSize/2, rect.size.height/2-kSize/2, kSize, kSize);
+	self.frame = r;
+	[text setFrame:CGRectMake(kPad, kPad, r.size.width-kPad, 44)];
+	[progress setFrame:CGRectMake(22.0, 44.0, r.size.width - 44.0, 22.0)];
+	indica.center = CGPointMake(r.size.width/2,r.size.height/2+5); 	
+}
 
 - (void)drawRect:(CGRect)rect {
 	CGContextRef context = UIGraphicsGetCurrentContext(); 

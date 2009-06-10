@@ -4,7 +4,7 @@
 {"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}
 ]
 
-@moonpreview 1 #review
+@moonpreview 1 
 [
 {"ii":"message", "ions":{"background_url":"http://tycho.usno.navy.mil/cgi-bin/phase.gif", "refech":"true"}, "ior":{"stop":"true", "space":"up", "content_mode":"center"}},
 {"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}

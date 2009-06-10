@@ -12,31 +12,34 @@
 
 @implementation IINotControls
 @synthesize notController, delegate, pickDelegate, notOpen, canOpen, bigButton, progressor, canSpaceTouch;
-
 - (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options
 {
     if (self = [super initWithFrame:frame]) {
 		[self setBackgroundColor:[UIColor clearColor]];
-		backLight = [[[UIImageView alloc] initWithFrame:frame] retain];
+		backLight = [[UIImageView alloc] initWithFrame:frame];
 		[self addSubview:backLight];
 		[self hideBackLight];
 		notOpen = YES;
-		canOpen = [[options valueForKey:@"button_opens_not_controls"]boolValue];
-		bigButton = [[options valueForKey:@"big_button"]boolValue];
+		canOpen = [[options valueForKey:@"button_opens_not_controls"] boolValue];
+		bigButton = [[options valueForKey:@"big_button"] boolValue];
+		buttonOnLeft = [[options valueForKey:@"button_on_left"] boolValue];		
 		notControlsFrame = frame;
 		
 		NSUInteger buttonSize = kButtonSize;
 		if (bigButton)
 			buttonSize = kBigButtonSize;
-		
-		notControlsOneButtonFrame = CGRectMake(0, 0, kPadding + buttonSize + kPadding, kPadding + buttonSize + kPadding);
-		
+
 		button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		NSUInteger x = frame.size.width - (2*kPadding+buttonSize);
-		if ([[options valueForKey:@"button_on_left"] boolValue]) 
+		if (buttonOnLeft) {
 			x = kPadding;
+			notControlsOneButtonFrame = CGRectMake(0, 0, 2*kPadding+buttonSize, 2*kPadding+buttonSize);
+		} else {
+			//TODO this does not work anymore... button shows up only when self.frame is full screen
+			notControlsOneButtonFrame = CGRectMake(x, 0, 2*kPadding+buttonSize, 2*kPadding+buttonSize);			
+		}
 		
-		[button setFrame:CGRectMake(x, kPadding, buttonSize, kButtonSize)];
+		[button setFrame:CGRectMake(x, kPadding, buttonSize, buttonSize)];
 		if (bigButton) {
 			[button setImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
 			[button setImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateHighlighted];
@@ -87,6 +90,33 @@
 		canSpaceTouch = YES; //always send touches to delegate
     }
     return self;
+}
+
+- (void)layout:(CGRect)rect
+{
+	[backLight setFrame:rect];
+	notControlsFrame = rect;
+	NSUInteger buttonSize = kButtonSize;
+	if (bigButton)
+		buttonSize = kBigButtonSize;
+	
+	NSUInteger x = rect.size.width - (2*kPadding+buttonSize);
+	if (buttonOnLeft) {
+		x = kPadding;
+	}
+	
+	[button setFrame:CGRectMake(x, kPadding, buttonSize, buttonSize)];
+
+	[leftButton setFrame:CGRectMake(kPadding, rect.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
+	
+	[rightButton setFrame:CGRectMake(rect.size.width - kLeftRightButtonSize - kPadding, rect.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
+	
+	[messageView setFrame:CGRectMake(kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding), (kLeftRightButtonSize+2*kPadding))];
+	
+	[progressor layout:rect];
+	
+	[wwwView setFrame:CGRectInset(rect, 57, 57)];
+	
 }
 
 - (void)drawRect:(CGRect)rect 
@@ -614,7 +644,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
 {
     UITouch *touch = [touches anyObject];
-	
+	//DebugLog(@"TOUCH");
 	if([touch tapCount] >= 2) {
         // Process a double-tap gesture
 		if (delegate) {

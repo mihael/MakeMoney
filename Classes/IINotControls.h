@@ -65,6 +65,7 @@
 	CGPoint startTouchPosition;
 	BOOL buttonInTouching;
 	BOOL buttonNotLightUp;
+	BOOL buttonOnLeft;
 	BOOL notOpen;
 	BOOL canOpen;
 	BOOL bigButton;
@@ -81,6 +82,7 @@
 @property (readonly) iProgressView *progressor;
 
 - (id)initWithFrame:(CGRect)frame withOptions:(NSDictionary*)options;
+- (void)layout:(CGRect)rect;
 
 - (void)pickInView:(UIView*)inView; //open image picker and let select
 

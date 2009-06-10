@@ -11,9 +11,14 @@
 #define RUNS @"kriya_runs"
 #define STARTUPS @"kriya_worldwide_application_startups"
 
+//get app frame
+CGRect KriyaFrame();
+
 @interface Kriya : NSObject {
 
 }
+
++ (CGRect)orientedFrame;
 
 + (NSInteger)appRunCount;
 + (void)incrementAppRunCount;

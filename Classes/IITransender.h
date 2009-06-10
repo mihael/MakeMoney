@@ -41,11 +41,11 @@
 @end
 
 typedef enum {
-	IITransenderFailedWithView = 0,	
-	IITransenderFailedWithImage = 1,
-	IITransenderFailedWithMovie = 2,
-	IITransenderFailedWithMusic = 3,
-	IITransenderFailedWithMessage = 4,
+	IITransenderInvokeFailedWithView = 0,	
+	IITransenderInvokeFailedWithImage = 1,
+	IITransenderInvokeFailedWithMovie = 2,
+	IITransenderInvokeFailedWithMusic = 3,
+	IITransenderInvokeFailedWithMessage = 4,
 	IITransenderFailedWithProgram = 5
 } IITransenderFailedWith;
 
@@ -96,13 +96,16 @@ typedef enum {
 - (void)reVibe:(float)v;
 - (void)meditateWith:(int)memoryspot;
 - (void)rememberSpot;
-- (void)invokeTransend:(NSTimer*)timer;
-- (void)invokeTransend;
-- (void)invokeTransendFailed:(IITransenderFailedWith)failed;
 - (BOOL)isTransending;
+- (void)invokeTransend;
+- (void)invokeTransend:(NSTimer*)timer;
+- (void)invokeTransendFailed:(IITransenderFailedWith)failed;
 - (void)changeDirection;
 - (void)changeDirectionTo:(BOOL)d;
 - (void)goldcutAt:(int)goldcut;
+
+
+- (id)fechGoldcut;
 
 - (NSString*)pathForImageNamed:(NSString*)imageName;
 - (UIImage*)imageNamed:(NSString*)imageName;

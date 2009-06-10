@@ -43,14 +43,14 @@ static MakeMoneyAppDelegate* app = nil;
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	DebugLog(@"Terminated with spot: %i", [[[rootViewController transenderViewController] transender] currentSpot]);
 }
-
+/*
 - (void)application:(UIApplication *)application willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation duration:(NSTimeInterval)duration;
 {
     // This prevents the view from autorotating to portrait in the simulator
     if ((newStatusBarOrientation == UIInterfaceOrientationPortrait) || (newStatusBarOrientation == UIInterfaceOrientationPortraitUpsideDown))
         [application setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
 }
-
+*/
 - (void)dealloc {
     [rootViewController release];
     [window release];
@@ -77,7 +77,7 @@ static MakeMoneyAppDelegate* app = nil;
 - (void)brickboxStartupFinished:(ASIHTTPRequest *)request
 {
 	NSInteger startupz = [[request responseString] intValue];
-	[[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%@ was purchased %@.", APP_TITLE, [Kriya howManyTimes:startupz]] forKey:STARTUPS];
+	[[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%@ downloaded %@.", APP_TITLE, [Kriya howManyTimes:startupz]] forKey:STARTUPS];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

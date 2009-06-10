@@ -7,8 +7,13 @@
 @implementation IIController
 @synthesize transender, options, notControls, behavior;
 
-//THIS IS CALLED ON EVERY VIEW TRANSEND - 
-//something like re-init, since transender can reuse views, they need to be re-initialized.
+- (void)layout:(CGRect)rect
+{
+	//write this if you want nice rotation, it will be called upon if the view is showing
+}
+
+//THIS IS CALLED ONCE FOR EVERY LOADED VIEW TRANSEND 
+//something like init, since transender can reuse views, they need to be initialized.
 - (void)functionalize 
 {
 	//write this in subclass
