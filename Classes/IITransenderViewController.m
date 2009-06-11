@@ -46,7 +46,7 @@
 //	[skrin setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 	
 	transendEmitter1 = [[UIImageView alloc] initWithFrame:skrin.frame];
-	[transendEmitter1 setImage:[transender imageNamed:@"main.jpg"]];
+	[transendEmitter1 setImage:[transender imageNamed:@"vmain.jpg"]];
 	[transendEmitter1 setContentMode:UIViewContentModeScaleAspectFit];
 	transendEmitter2 = [[UIImageView alloc] initWithFrame:skrin.frame];
 	[transendEmitter2 setImage:[transender imageNamed:@"main.jpg"]];
@@ -63,7 +63,7 @@
 	[transendEmitter1 setFrame:rect];
 	[transendEmitter2 setFrame:rect];
 	if (transendController)
-		[transendController layout:(CGRect)rect];
+		[transendController layout:rect];
 }
 
 - (void)didReceiveMemoryWarning {

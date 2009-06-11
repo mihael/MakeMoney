@@ -33,8 +33,15 @@
 {
 	if ([options valueForKey:@"pikchur"]) {	
 		if (![www isAuthenticatedWithPikchur]) {
-			[notControls setProgress:@"Preparing uploads..." animated:YES];
-			[www authenticateWithPikchur];
+			
+			NSString *username = [[NSUserDefaults standardUserDefaults] valueForKey:@"account_username"];
+			NSString *password = [[NSUserDefaults standardUserDefaults] valueForKey:@"account_password"];
+			if (username&&password&&![username isEqualToString:@""]) {
+				[notControls setProgress:@"Preparing uploads..." animated:YES];
+				[www authenticateWithPikchur];
+			} else {
+				[[iAlert instance] alert:@"Account Information Missing" withMessage:@"Please add your account credentials in application settings."];
+			}
 		} else {
 			[notControls setPickDelegate:self];
 			[notControls pickInView:background];
@@ -106,7 +113,10 @@
 - (void)pushFinished 
 {
 	[notControls setProgress:@"Thanks" animated:YES];
-	[background setImage:[self.transender imageNamed:@"main.jpg"]];
+	if ([Kriya orientedFrame].size.width == 320.0)
+		[background setImage:[self.transender imageNamed:@"vmain.jpg"]];
+	else 
+		[background setImage:[self.transender imageNamed:@"main.jpg"]];
 	[selectedImageView setHidden:YES];
 	imageSelected = NO;
 	[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(hidePushFinished) userInfo:nil repeats:NO];
@@ -155,7 +165,7 @@
 - (void)notFeched:(NSString*)err
 {
 	[notControls setProgress:nil animated:NO];
-	//[[iAlert instance] alert: withMessage:@"Please retry? Thanks."];
+	[[iAlert instance] alert:@"Upload fail" withMessage:@"Please retry? Thanks."];
 	DebugLog(@"#notFeched %@ : %@", [self.options valueForKey:@"url"], err);	
 }
 
@@ -188,15 +198,13 @@
 		{
 			//this must be the returned status koornk
 			DebugLog(@"REKORDED %@", information);		
-			[notControls setProgress:nil animated:YES];
-			imageSelected = NO;
-			[selectedImageView setHidden:YES];
+			[self pushFinished];
 		} 
 		else 
 		{
 				//unknown things
 				DebugLog(@"UNKNOWN REKORDED %@", information);
-				[notControls setProgress:nil animated:YES];
+				[self pushFinished];
 		}
 	} else {
 
@@ -227,8 +235,6 @@
 		[www loadOptions:options];
 		[www setDelegate:self];
 	}
-	if (![background image]&&[options valueForKey:@"background"])
-		[background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];	
 	if (!locationManager) { //create only if not here
 		locationManager = [[CLLocationManager alloc] init];
 		[locationManager setDelegate:self];
@@ -236,7 +242,7 @@
 		[locationManager setDistanceFilter:100.0]; //every hundred meters check if there are kopters near :D
 	}
 	if (!pusherbar) {
-		pusherbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 480, 44)] autorelease];
+		pusherbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [Kriya orientedFrame].size.width, 44)] autorelease];
 		[pusherbar setBarStyle:UIBarStyleBlackTranslucent];
 		
 		UIBarButtonItem *flexi = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];		
@@ -246,7 +252,7 @@
 		pickButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"photo_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(pickButtonPushed:)] autorelease];		
 		[pusherbar setItems:[NSArray arrayWithObjects:fixi, flexi, pusherButton, flexi, pickButton, nil]];
 		
-		selectedImageView = [[iIconView alloc] initWithFrame:CGRectMake(436, 0, 44, 44) image:nil round:10 alpha:1.0];
+		selectedImageView = [[iIconView alloc] initWithFrame:CGRectMake([Kriya orientedFrame].size.width-44, 0, 44, 44) image:nil round:10 alpha:1.0];
 		[selectedImageView addTarget:self action:@selector(pickButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
 		[self.view addSubview:selectedImageView];
 		[self.view insertSubview:pusherbar belowSubview:selectedImageView];
@@ -264,6 +270,24 @@
 		location = [[CLLocation alloc] initWithLatitude:46.055 longitude:14.514];//ljubljana
 	}		
 	[self locatus];
+	[self layout:[Kriya orientedFrame]];
+}
+
+- (void)layout:(CGRect)rect
+{
+	[self.view setFrame:rect];
+	[background setFrame:rect];
+	[pusherbar setFrame:CGRectMake(0, 0, rect.size.width, 44)];
+	[selectedImageView setFrame:CGRectMake(rect.size.width-44, 0, 44, 44)];
+	
+	if (rect.size.width == 320.0) {
+		[background setImage:[self.transender imageNamed:@"vmain.jpg"]];
+	} else {
+		[background setImage:[self.transender imageNamed:@"main.jpg"]];
+	}
+
+	
+			
 }
 
 - (void)dealloc {

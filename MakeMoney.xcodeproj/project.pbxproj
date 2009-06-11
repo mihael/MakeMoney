@@ -65,6 +65,7 @@
 		47348E490F9B8D5300A1D78A /* radionula_screen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47348E470F9B8D5300A1D78A /* radionula_screen.jpg */; };
 		475912E30FB9756F0079FA20 /* Filter_promet_list.m in Sources */ = {isa = PBXBuildFile; fileRef = 475912E20FB9756F0079FA20 /* Filter_promet_list.m */; };
 		4759131B0FBA076F0079FA20 /* Filter_promet_webcam.m in Sources */ = {isa = PBXBuildFile; fileRef = 4759131A0FBA076F0079FA20 /* Filter_promet_webcam.m */; };
+		475B46BE0FE16DAA00D7194D /* vmain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 475B46BD0FE16DAA00D7194D /* vmain.jpg */; };
 		4773867B0F4ACCB20044085E /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 477386670F4ACCB20044085E /* ASIFormDataRequest.m */; };
 		4773867C0F4ACCB20044085E /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 477386690F4ACCB20044085E /* ASIHTTPRequest.m */; };
 		4773867D0F4ACCB20044085E /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4773866B0F4ACCB20044085E /* ASINetworkQueue.m */; };
@@ -270,6 +271,7 @@
 		475912E20FB9756F0079FA20 /* Filter_promet_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_promet_list.m; path = Classes/Filter_promet_list.m; sourceTree = "<group>"; };
 		475913190FBA076F0079FA20 /* Filter_promet_webcam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_promet_webcam.h; path = Classes/Filter_promet_webcam.h; sourceTree = "<group>"; };
 		4759131A0FBA076F0079FA20 /* Filter_promet_webcam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_promet_webcam.m; path = Classes/Filter_promet_webcam.m; sourceTree = "<group>"; };
+		475B46BD0FE16DAA00D7194D /* vmain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = vmain.jpg; path = Artwork/vmain.jpg; sourceTree = "<group>"; };
 		477386660F4ACCB20044085E /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIFormDataRequest.h; path = Classes/ASIFormDataRequest.h; sourceTree = "<group>"; };
 		477386670F4ACCB20044085E /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIFormDataRequest.m; path = Classes/ASIFormDataRequest.m; sourceTree = "<group>"; };
 		477386680F4ACCB20044085E /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIHTTPRequest.h; path = Classes/ASIHTTPRequest.h; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 		472965380F4834F50053F946 /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				475B46BD0FE16DAA00D7194D /* vmain.jpg */,
 				4705A98A0FC603D4005DA8FC /* kepo_icon.png */,
 				4705A9760FC60058005DA8FC /* mr_foto_icon.png */,
 				4705A9770FC60058005DA8FC /* mr_foto_image.png */,
@@ -941,6 +944,7 @@
 				4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */,
 				478DE4710FD2AF590067BAE6 /* PusherView.xib in Resources */,
 				47E2676C0FD97A4D0040F565 /* ImageArtView.xib in Resources */,
+				475B46BE0FE16DAA00D7194D /* vmain.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

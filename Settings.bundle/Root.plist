@@ -8,6 +8,28 @@
 	<array>
 		<dict>
 			<key>Title</key>
+			<string>Account Username</string>
+			<key>Key</key>
+			<string>account_username</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>DefaultValue</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Account Password</string>
+			<key>Key</key>
+			<string>account_password</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>DefaultValue</key>
+			<string></string>
+			<key>IsSecure</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Title</key>
 			<string>Background radio</string>
 			<key>Key</key>
 			<string>noise</string>
@@ -84,7 +106,7 @@
 		</dict>
 		<dict>
 			<key>Title</key>
-			<string>Pikchur download size</string>
+			<string>Image Downloads</string>
 			<key>Key</key>
 			<string>pikchur_download_size</string>
 			<key>Type</key>

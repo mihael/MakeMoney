@@ -1,8 +1,4 @@
 [
-{"ii":"FecherView", "ions":{"button_title":"beerchase", "background":"main.jpg","url":"http://mihael:bitbitbit888@twitter.com/statuses/friends_timeline.json", "method":"get", "page":1, "limit":25, "params":"", "filter":"twitter", "hide_messages":"false", "fech_ids":"false"}, "ior":{"stop":"true", "space":"down"}},
-
-{"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"mr_foto_gallery", "icon":"mr_foto_icon.png", "background":"main.jpg", "url":"http://galerija.mr-foto.net/main.php", "method":"get", "page":1, "fech_all":"true", "filter":"wp_gallery_list", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true", "space":"down"}},
-{"ii":"0_18.jpg",  "ior":{"stop":"false", "space":"up"}},
-{"ii":"0_19.jpg",  "ior":{"stop":"false", "space":"up"}},
-{"ii":"0_20.jpg",  "ior":{"stop":"false", "space":"up"}}
+{"ii":"PusherView", "ions":{"reuse":"true", "title":"", "pikchur":"pikchur@pikchur"}, "ior":{"stop":"true", "space":"down"}},
+{"ii":"FecherView", "ions":{"reuse":"true", "button_title":"+25", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":3, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "ior":{"stop":"true", "space":"down"}}
 ]

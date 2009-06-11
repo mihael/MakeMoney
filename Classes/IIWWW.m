@@ -344,8 +344,15 @@
 
 - (void)authenticateWithPikchur {
 	DebugLog(@"#authenticateWithPikchur");
-	NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
-	NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
+	NSString *username = [[NSUserDefaults standardUserDefaults] valueForKey:@"account_username"];
+	NSString *password = [[NSUserDefaults standardUserDefaults] valueForKey:@"account_password"];
+
+	if (username&&password&&![username isEqualToString:@"username"]) {
+		//take what was given
+	} else if ([options valueForKey:@"pikchur"]) {	
+		username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
+		password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
+	}
 	
 	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kPikchurAuthURL]] autorelease];
 	[request setPostValue:username forKey:@"data[api][username]"];
@@ -361,8 +368,6 @@
 
 - (BOOL)isAuthenticatedWithPikchur 
 {
-	DebugLog(@"isAuthenticatedWithPikchur %@", options);
-
 	DebugLog(@"isAuthenticatedWithPikchur %@", [options valueForKey:@"pikchur"]);
 	if ([[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@_pikchur_auth_key", [options valueForKey:@"pikchur"]]])
 		return YES;
