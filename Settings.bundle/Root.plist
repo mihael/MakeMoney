@@ -18,11 +18,15 @@
 			<key>Titles</key>
 			<array>
 				<string>RadioNULA</string>
+				<string>Groove Salad</string>
+				<string>Space Music</string>
 				<string>Off</string>
 			</array>
 			<key>Values</key>
 			<array>
 				<string>http://91.185.196.3:8020/</string>
+				<string>http://scfire-dtc-aa03.stream.aol.com:80/stream/1018</string>
+				<string>http://194.140.112.114:8000</string>
 				<string>null</string>
 			</array>
 		</dict>

@@ -76,7 +76,6 @@
 		477ABD4F0F45641100696306 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD490F45641100696306 /* Foundation.framework */; };
 		477ABD500F45641100696306 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD4A0F45641100696306 /* CoreGraphics.framework */; };
 		477ABD560F45644F00696306 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD550F45644F00696306 /* CFNetwork.framework */; };
-		4782DE6E0FDE9E5500AD53D2 /* IITransender-Invoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 4782DE6D0FDE9E5500AD53D2 /* IITransender-Invoke.m */; };
 		4783DCF80F6AD894007CBA02 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4783DCF70F6AD894007CBA02 /* QuartzCore.framework */; };
 		478DE4050FD295E70067BAE6 /* PusherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 478DE4040FD295E70067BAE6 /* PusherViewController.m */; };
 		478DE4710FD2AF590067BAE6 /* PusherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478DE4700FD2AF590067BAE6 /* PusherView.xib */; };
@@ -288,8 +287,6 @@
 		477ABD490F45641100696306 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		477ABD4A0F45641100696306 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		477ABD550F45644F00696306 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		4782DE6C0FDE9E5500AD53D2 /* IITransender-Invoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IITransender-Invoke.h"; sourceTree = "<group>"; };
-		4782DE6D0FDE9E5500AD53D2 /* IITransender-Invoke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IITransender-Invoke.m"; sourceTree = "<group>"; };
 		4783DCF70F6AD894007CBA02 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		478DE4030FD295E70067BAE6 /* PusherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PusherViewController.h; path = Classes/PusherViewController.h; sourceTree = "<group>"; };
 		478DE4040FD295E70067BAE6 /* PusherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PusherViewController.m; path = Classes/PusherViewController.m; sourceTree = "<group>"; };
@@ -718,8 +715,6 @@
 				47D796080F725A9C00C52774 /* IIMusic.m */,
 				47D796090F725A9C00C52774 /* IINotControls.h */,
 				47D7960A0F725A9C00C52774 /* IINotControls.m */,
-				4782DE6C0FDE9E5500AD53D2 /* IITransender-Invoke.h */,
-				4782DE6D0FDE9E5500AD53D2 /* IITransender-Invoke.m */,
 				47D7960B0F725A9C00C52774 /* IITransender.h */,
 				47D7960C0F725A9C00C52774 /* IITransender.m */,
 				47D7960D0F725A9C00C52774 /* IITransenderView.h */,
@@ -1012,7 +1007,6 @@
 				47C7C5020FD27D860028DFCC /* Filter_pikchur_people.m in Sources */,
 				478DE4050FD295E70067BAE6 /* PusherViewController.m in Sources */,
 				47E267710FD97A6D0040F565 /* ImageArtViewController.m in Sources */,
-				4782DE6E0FDE9E5500AD53D2 /* IITransender-Invoke.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

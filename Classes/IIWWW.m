@@ -284,7 +284,7 @@
 			//SEL filterMethod = NSSelectorFromString([NSString stringWithFormat:@"%@:", filterMethod]);
 			DebugLog(@"#filtering with %@", filterName);
 			NSString *filtered_information = [filter performSelector:@selector(filter:withOptions:) withObject:[request responseString] withObject:options];
-			DebugLog(@"#filtered with %@", filterName);
+			DebugLog(@"#filtered with %@ %@", filterName, filtered_information);
 			if (filtered_information) {
 				[self.delegate feched:[filtered_information JSONValue]];		
 			} else {

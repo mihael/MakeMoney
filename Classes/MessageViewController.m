@@ -19,7 +19,6 @@
 }
 
 - (void)stopFunctioning {
-	DebugLog(@"MessageViewController#stopFunctioning");
 	if ([[options valueForKey:@"yutub_url"] hasPrefix:@"http://"]) {
 		DebugLog(@"REMOVING YUTUB %@", [options valueForKey:@"yutub_url"]);
 		[notControls wwwClear];
@@ -27,6 +26,7 @@
 	if ([options valueForKey:@"icon_url"]) {
 		[icon setHidden:YES];
 	}
+	DebugLog(@"#stopFunctioning");
 }
 
 - (void)startFunctioning {
@@ -36,7 +36,7 @@
 			if (icon) {
 				[icon setImage:img];
 			} else {
-				icon = [[[LittleArrowView alloc] initWithFrame:CGRectMake(423, 10, 57, 57) image:img round:10.0 alpha:0.83] autorelease];
+				icon = [[[LittleArrowView alloc] initWithFrame:CGRectMake([Kriya orientedFrame].size.width - 57, 10, 57, 57) image:img round:10.0 alpha:0.83] autorelease];
 				[self.view addSubview:icon];				
 			}
 			[icon setHidden:NO];
@@ -73,9 +73,16 @@
 			[message setText:msg];
 		}
 	}
-	
-	DebugLog(@"MessageViewController#startFunctioning");
+	[self layout:[Kriya orientedFrame]];
+	DebugLog(@"#startFunctioning");
 }
 
+- (void)layout:(CGRect)rect
+{
+	[self.view setFrame:rect];
+	[background setFrame:rect];
+	[icon setFrame:CGRectMake(rect.size.width - 57, 10, 57, 57)];
+	[message setFrame:CGRectMake(kPadding, kPadding, rect.size.width-2*kPadding, rect.size.height-2*kPadding)];
+}
 
 @end
