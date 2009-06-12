@@ -29,13 +29,17 @@
 			base_url = [options valueForKey:@"filter_base_url"];
 		}
 	}
-	
-	NSMutableArray* urls = [IIFilter extractFrom:information withPrefix:@"<img src=\"" andSuffix:@"\""];
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
-	NSUInteger i, count = [urls count];
-	for (i = 0; i < count; i++) {
-		NSString* link = [urls objectAtIndex:i];
-		[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@/%@\"}, %@},", base_url, [link stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"], k_ior_notstop_space];
+	
+	NSMutableArray* thumbMatrix = [IIFilter extractFrom:information withPrefix:@"<div class=\"gbBlock\"" andSuffix:@"\"</div><div class=\"gbBlock "];
+	//should be only one thumbMatrix object
+	if ([thumbMatrix count]==1) {
+		NSMutableArray* urls = [IIFilter extractFrom:[thumbMatrix objectAtIndex:0] withPrefix:@"rev=\"/d/" andSuffix:@".jpg\""];
+		NSUInteger i, count = [urls count];
+		for (i = 0; i < count; i++) {
+			NSString* link = [urls objectAtIndex:i];
+			[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@/d/%@.jpg\"}, %@},", base_url, [link stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"], k_ior_notstop_space];
+		}
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];
 }

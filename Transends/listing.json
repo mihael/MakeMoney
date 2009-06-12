@@ -10,6 +10,12 @@
 {"ii":"MessageView", "ions":{"reuse":"true", "message":"Many Thanks!", "background":"main.jpg"}, "ior":{"stop":"true", "effect":3, "content_mode":"fit"}}
 ]
 
+@pikchur 1.0
+[
+{"ii":"PusherView", "ions":{"reuse":"true", "title":"", "pikchur":"pikchur@pikchur"}, "ior":{"stop":"true", "space":"down"}},
+{"ii":"FecherView", "ions":{"reuse":"true", "button_title":"+25", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":3, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "ior":{"stop":"true", "space":"down"}}
+]
+
 @raddarkopter 1 #waiting for 3.0
 # {"type":"Pikchur","auth_key":"c2cD5shuM6BRrlas1dkOQMyIKsxgGtHMCJ5FfZePeRffN1uLF3gYjMQGUX21F6fz","user_id":"5213"}
 [
