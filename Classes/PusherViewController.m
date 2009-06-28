@@ -58,9 +58,9 @@
 	if (info) {
 		[selectedImagePath release];
 		selectedImagePath = [[Kriya imageWithInMemoryImage:[info valueForKey:UIImagePickerControllerOriginalImage]] retain];
-		[selectedImageView setImage:[Kriya imageWithUrl:selectedImagePath]];
+		[selectedImageView setImage:[Kriya imageWithUrl:selectedImagePath feches:NO]];
 		[selectedImageView setHidden:NO];
-		[background setImage:[Kriya imageWithUrl:selectedImagePath]];
+		[background setImage:[Kriya imageWithUrl:selectedImagePath feches:NO]];
 		[background setHidden:NO];
 		imageSelected = YES;
 	}

@@ -375,7 +375,7 @@
 	if ([skrin subviews].count > 0) {
 		UIView *replaceMe = [[skrin subviews] objectAtIndex:0];
 		//wiev.frame = KriyaFrame();
-		DebugLog(@"transit WIEV %f %f", wiev.frame.size.width, wiev.frame.size.height);
+		//DebugLog(@"transit WIEV %f %f", wiev.frame.size.width, wiev.frame.size.height);
 		
 		if (animated) {
 			//chose transition type and direction at random from the arrays of supported transitions and directions
@@ -466,11 +466,15 @@
 }
 
 - (void)spaceTouch:(id)notControl touchPoint:(CGPoint)point { //space was just tapped
+	DebugLog(@"spaceTouch");
 	if ([notControl notOpen]) { //use only when not open notControls
 		if ([transender isTransending]) {
+			DebugLog(@"lightingUp meditate");
+			[transender cancelFech];
 			[notControl lightUp];
 			[transender meditate];
 		} else {
+			DebugLog(@"lightingDown transend");
 			[notControl lightDown];
 			[transender transend];
 		}		

@@ -142,7 +142,7 @@
 	trimmedSelf = NO; //not yet trimmed self
 	
 	if ([options valueForKey:@"background_url"]) {
-		[self.background setImage:[Kriya imageWithUrl:[options valueForKey:@"background_url"]]];
+		[self.background setImage:[Kriya imageWithUrl:[options valueForKey:@"background_url"] feches:YES]];
 	} else if ([options valueForKey:@"background"]) {
 		[self.background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];
 	}

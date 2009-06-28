@@ -26,6 +26,7 @@
 	transendsPath = [[[[NSBundle mainBundle] pathForResource:@"program" ofType:@"json"] stringByDeletingLastPathComponent]retain];
 	DebugLog(@"OM OM OM PATH %@", transendsPath);
 	wies = [[NSMutableDictionary alloc] initWithCapacity:1];
+	cancelFech = NO;
 }
 
 //for simple fast usage with 0_prefixed.jpg images, sounds and movies
@@ -227,7 +228,7 @@
 		DebugLog(@"#invokeTransend timer:%@ spot:%i vibe: %f", timer, memoriesSpot, vibe);
 		
 		//read ii
-		NSDictionary *memory = [memories objectAtIndex:memoriesSpot];
+		memory = [memories objectAtIndex:memoriesSpot];
 		NSDictionary *behavior = [memory objectForKey:@"ior"];
 		NSDictionary *options = [memory objectForKey:@"ions"];
 		NSString *memoryII = [memory valueForKey:@"ii"];		
@@ -238,6 +239,10 @@
 		if ([memoryII isEqualToString:@"message"]) {
 			//message
 			
+			//TODO asynchronize this and you will exist!
+			[self invokeMessageTransend];
+			
+			/*
 			if ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable) {
 				
 				UIImage* background = nil;
@@ -281,7 +286,7 @@
 				[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];
 				[self invokeTransendFailed:IITransenderInvokeFailedWithMessage];
 			}
-			
+			*/
 		} else if ([memoryII hasSuffix:@"View"]) {
 			//*View
 			
@@ -374,7 +379,102 @@
 				[delegate transendedAll:self];		
 		}
 	}	
+}
+
+- (void)invokeMessageTransend
+{
+	NSDictionary *options = [memory objectForKey:@"ions"];
 	
+	if ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable) {
+		
+		//feching could last longer than the vibe - lets meditate on this
+		[self meditate]; 
+		//NSDate *fechTime = [NSDate date];  //record point in time
+		//notify we are feching
+		if ([delegate respondsToSelector:@selector(fechingTransend)])
+			[delegate fechingTransend];
+
+		//is there an icon? fech it.
+		if ([options valueForKey:@"icon_url"]) {
+			if ([options valueForKey:@"refech_icon"]) { //remove feched then, and refech
+				[Kriya clearImageWithUrl:[options valueForKey:@"icon_url"]];
+			}
+			UIImage *icon = [Kriya imageWithUrl:[options valueForKey:@"icon_url"] feches:NO];
+			if (icon) { //image is cached
+				[self iconWithUrlFinished:icon];
+			} else { //fech anew
+				[Kriya imageWithUrl:[options valueForKey:@"icon_url"] delegate:self finished:@selector(iconWithUrlFinished:) failed:@selector(iconWithUrlFailed:)];				
+			}
+		}
+		
+		//is there a background? fech it.
+		if ([options valueForKey:@"background_url"]) {
+			if ([options valueForKey:@"refech"]) { //remove feched then, and refech
+				[Kriya clearImageWithUrl:[options valueForKey:@"background_url"]];
+			}
+			UIImage *background = [Kriya imageWithUrl:[options valueForKey:@"background_url"] feches:NO];
+			if (background) { //image is cached
+				[self imageWithUrlFinished:background];
+			} else { //fech anew
+				[Kriya imageWithUrl:[options valueForKey:@"background_url"] delegate:self finished:@selector(imageWithUrlFinished:) failed:@selector(imageWithUrlFailed:)];				
+			}
+		}		
+	} else {
+		[[iAlert instance] alert:@"Network unreachable" withMessage:@"Please connect device to internet. Thanks."];
+		[self invokeTransendFailed:IITransenderInvokeFailedWithMessage];
+	}	
+}
+
+- (void)iconWithUrlFinished:(id)response 
+{
+	if ([response isKindOfClass:[ASIHTTPRequest class]]){
+		//just cache it
+		[Kriya imageWithInMemoryImage:[UIImage imageWithData:[response responseData]] forUrl:[[response url] absoluteString]];
+	}
+	DebugLog(@"iconWithUrlFinished");
+}
+
+- (void)iconWithUrlFailed:(id)response 
+{
+	DebugLog(@"iconWithUrlFailed");
+}
+
+- (void)imageWithUrlFinished:(id)response 
+{
+	if (!cancelFech) {
+		NSDictionary *behavior = [memory objectForKey:@"ior"];
+		NSDictionary *options = [memory objectForKey:@"ions"];
+		UIImage *background = nil;
+		
+		if ([response isKindOfClass:[UIImage class]]) {
+			background = response;
+		} else if ([response isKindOfClass:[ASIHTTPRequest class]]){
+			background = [Kriya imageWithPath:[Kriya imageWithInMemoryImage:[UIImage imageWithData:[response responseData]] forUrl:[[response url] absoluteString]]];
+		}
+
+		if (!background && [options valueForKey:@"background"])
+			background = [self imageNamed:[options valueForKey:@"background"]];
+		if (!background)
+			background = [self imageNamed:@"main.jpg"];
+		
+		//notify we feched
+		if ([delegate respondsToSelector:@selector(fechedTransend)])
+			[delegate fechedTransend];
+		
+		//transend
+		if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) 
+		{
+			[delegate transendedWithImage:background withIons:options withIor:behavior];
+		}
+	}
+	cancelFech = NO; //reset canceling indicator
+	DebugLog(@"imageWithUrlFinished");
+}
+
+- (void)imageWithUrlFailed:(id)response 
+{
+	DebugLog(@"imageWithUrlFailed");
+	[self invokeTransendFailed:IITransenderInvokeFailedWithMessage];
 }
 
 //failed with some? happens... although it is not shit. it is manuever, so you can grow.
@@ -474,6 +574,11 @@
     }
 }
 
+- (void)cancelFech 
+{
+	cancelFech = YES;
+}
+
 //push memory spot at start, do nothing about it
 - (void)spot 
 {
@@ -554,7 +659,7 @@
 	return [NSString stringWithFormat:@"%@/%@", transendsPath, imageName];
 }
 
-//return image for imageName 
+//return image for imageName - only for images within Resources/Transends dir
 - (UIImage*)imageNamed:(NSString*)imageName 
 {
 	return [UIImage imageWithContentsOfFile:[self pathForImageNamed:imageName]];

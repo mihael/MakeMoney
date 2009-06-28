@@ -14,7 +14,7 @@
 
 - (void)startFunctioning {
 	if ([options valueForKey:@"background_url"]) {
-		UIImage *img = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
+		UIImage *img = [Kriya imageWithUrl:[options valueForKey:@"background_url"] feches:NO];
 		if (img) {
 			[background setImage:img];
 		}

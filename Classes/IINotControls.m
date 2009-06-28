@@ -82,12 +82,15 @@
 		[self addSubview:rightButton];
 		[self addSubview:wwwView];
 		[self addSubview:progressor];
-		[self closeNotControls];
-		buttonInTouching = NO;
-		buttonNotLightUp = YES;
-		[iAccelerometerSensor instance].delegate=self;
+		[self closeNotControls]; //start closed
 		
 		canSpaceTouch = YES; //always send touches to delegate
+		buttonInTouching = NO;
+		buttonNotLightUp = YES;
+		buttonInSpinning = NO;
+		buttonSpinDirection = YES;
+
+		[iAccelerometerSensor instance].delegate=self;
     }
     return self;
 }
@@ -138,6 +141,14 @@
 //spining button
 - (void)spinButtonWith:(BOOL)direction
 {
+	buttonSpinDirection = direction;
+	buttonInSpinning = YES;
+	[self spinButton];
+}
+
+- (void)spinButton
+{
+	
 	[CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 	CGRect frame = [button frame];
@@ -151,25 +162,43 @@
 	
 	CABasicAnimation *animation;
 	animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-	if (direction) {
+	if (buttonSpinDirection) {
 		animation.fromValue = [NSNumber numberWithFloat:2 * M_PI];
 		animation.toValue = [NSNumber numberWithFloat:0.0];
 	} else {
 		animation.fromValue = [NSNumber numberWithFloat:0.0];
 		animation.toValue = [NSNumber numberWithFloat:2 * M_PI];		
 	}
-
-	animation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear];
-	//animation.delegate = self;
+	
+	animation.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseInEaseOut];
+	animation.delegate = self;
 	[button.layer addAnimation:animation forKey:@"rotationAnimation"];
 	
 	[CATransaction commit];
+	
+}
+
+- (void)animationDidStart:(CAAnimation *)theAnimation
+{
+	DebugLog(@"button START");
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)finished
+{
+	DebugLog(@"button STOP");
+	if (finished&&buttonInSpinning)
+	{
+		DebugLog(@"button RESPIN");
+		[self spinButton];
+	}
 }
 
 - (void)stillButton
 {
+	buttonInSpinning = NO;
 	[button.layer removeAllAnimations];
 }
+
 
 #pragma mark from superview remover
 - (void)unable
@@ -188,15 +217,6 @@
 	if (underView)
 		[underView addSubview:self];
 		
-}
-
-#pragma mark animation callback 
-- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)finished
-{
-	if (finished)
-	{
-		[self spinButtonWith:YES];
-	}
 }
 
 #pragma mark BackLight animations
@@ -644,7 +664,6 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
 {
     UITouch *touch = [touches anyObject];
-	//DebugLog(@"TOUCH");
 	if([touch tapCount] >= 2) {
         // Process a double-tap gesture
 		if (delegate) {
@@ -655,7 +674,7 @@
     } else {
 		if (delegate) {
 			if (canSpaceTouch&&[delegate respondsToSelector:@selector(spaceTouch:touchPoint:)]) {
-				
+				DebugLog(@"TOUCH");				
 				[delegate spaceTouch:self touchPoint:[touch locationInView:self]];
 			}
 		}

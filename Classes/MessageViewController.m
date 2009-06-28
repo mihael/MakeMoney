@@ -31,7 +31,7 @@
 
 - (void)startFunctioning {
 	if ([options valueForKey:@"icon_url"]) {
-		UIImage *img = [Kriya imageWithUrl:[options valueForKey:@"icon_url"]];
+		UIImage *img = [Kriya imageWithUrl:[options valueForKey:@"icon_url"] feches:YES];
 		if (img) {
 			if (icon) {
 				[icon setImage:img];
@@ -44,7 +44,7 @@
 	} 
 	
 	if ([options valueForKey:@"background_url"]) {
-		UIImage *img = [Kriya imageWithUrl:[options valueForKey:@"background_url"]];
+		UIImage *img = [Kriya imageWithUrl:[options valueForKey:@"background_url"] feches:YES];
 		if (img) {
 			[background setImage:img];
 		}

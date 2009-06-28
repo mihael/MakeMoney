@@ -41,14 +41,12 @@
 		473488C40F991F2B00A1D78A /* IIWWW.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488C30F991F2B00A1D78A /* IIWWW.m */; };
 		473488E10F99DF8E00A1D78A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488DD0F99DF8E00A1D78A /* main.m */; };
 		473488E20F99DF8E00A1D78A /* UIApplication-Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 473488DF0F99DF8E00A1D78A /* UIApplication-Network.m */; };
-		473488FB0F99E31C00A1D78A /* highbutton1.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F50F99E31C00A1D78A /* highbutton1.png */; };
 		473488FC0F99E31C00A1D78A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F60F99E31C00A1D78A /* icon.png */; };
 		473488FD0F99E31C00A1D78A /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F70F99E31C00A1D78A /* main.png */; };
 		473488FE0F99E31C00A1D78A /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F80F99E31C00A1D78A /* movie.png */; };
 		473488FF0F99E31C00A1D78A /* music.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F90F99E31C00A1D78A /* music.png */; };
 		473489070F99E34900A1D78A /* backlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 473489010F99E34900A1D78A /* backlight.png */; };
 		473489080F99E34900A1D78A /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 473489020F99E34900A1D78A /* button.png */; };
-		473489090F99E34900A1D78A /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 473489030F99E34900A1D78A /* button2.png */; };
 		4734890A0F99E34900A1D78A /* highbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 473489040F99E34900A1D78A /* highbutton.png */; };
 		4734890B0F99E34900A1D78A /* littlebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 473489050F99E34900A1D78A /* littlebutton.png */; };
 		4734890C0F99E34900A1D78A /* littlehighbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 473489060F99E34900A1D78A /* littlehighbutton.png */; };
@@ -240,14 +238,12 @@
 		473488DD0F99DF8E00A1D78A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		473488DE0F99DF8E00A1D78A /* UIApplication-Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIApplication-Network.h"; path = "Classes/UIApplication-Network.h"; sourceTree = "<group>"; };
 		473488DF0F99DF8E00A1D78A /* UIApplication-Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIApplication-Network.m"; path = "Classes/UIApplication-Network.m"; sourceTree = "<group>"; };
-		473488F50F99E31C00A1D78A /* highbutton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = highbutton1.png; path = Artwork/highbutton1.png; sourceTree = "<group>"; };
 		473488F60F99E31C00A1D78A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Artwork/icon.png; sourceTree = "<group>"; };
 		473488F70F99E31C00A1D78A /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main.png; path = Artwork/main.png; sourceTree = "<group>"; };
 		473488F80F99E31C00A1D78A /* movie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = movie.png; path = Artwork/movie.png; sourceTree = "<group>"; };
 		473488F90F99E31C00A1D78A /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = music.png; path = Artwork/music.png; sourceTree = "<group>"; };
 		473489010F99E34900A1D78A /* backlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backlight.png; path = Artwork/G/backlight.png; sourceTree = "<group>"; };
 		473489020F99E34900A1D78A /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = Artwork/G/button.png; sourceTree = "<group>"; };
-		473489030F99E34900A1D78A /* button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button2.png; path = Artwork/G/button2.png; sourceTree = "<group>"; };
 		473489040F99E34900A1D78A /* highbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = highbutton.png; path = Artwork/G/highbutton.png; sourceTree = "<group>"; };
 		473489050F99E34900A1D78A /* littlebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = littlebutton.png; path = Artwork/G/littlebutton.png; sourceTree = "<group>"; };
 		473489060F99E34900A1D78A /* littlehighbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = littlehighbutton.png; path = Artwork/G/littlehighbutton.png; sourceTree = "<group>"; };
@@ -596,10 +592,8 @@
 			children = (
 				473489010F99E34900A1D78A /* backlight.png */,
 				473489020F99E34900A1D78A /* button.png */,
-				473489030F99E34900A1D78A /* button2.png */,
 				473489040F99E34900A1D78A /* highbutton.png */,
 				473489050F99E34900A1D78A /* littlebutton.png */,
-				473488F50F99E31C00A1D78A /* highbutton1.png */,
 				473489060F99E34900A1D78A /* littlehighbutton.png */,
 			);
 			name = G;
@@ -906,14 +900,12 @@
 				47AD915A0F800830001687AA /* 0_Movie_140.mov in Resources */,
 				47AD915B0F800830001687AA /* 0_Movie_141.mov in Resources */,
 				479CBF510F8E574400718563 /* 0_mm_test1.jpg in Resources */,
-				473488FB0F99E31C00A1D78A /* highbutton1.png in Resources */,
 				473488FC0F99E31C00A1D78A /* icon.png in Resources */,
 				473488FD0F99E31C00A1D78A /* main.png in Resources */,
 				473488FE0F99E31C00A1D78A /* movie.png in Resources */,
 				473488FF0F99E31C00A1D78A /* music.png in Resources */,
 				473489070F99E34900A1D78A /* backlight.png in Resources */,
 				473489080F99E34900A1D78A /* button.png in Resources */,
-				473489090F99E34900A1D78A /* button2.png in Resources */,
 				4734890A0F99E34900A1D78A /* highbutton.png in Resources */,
 				4734890B0F99E34900A1D78A /* littlebutton.png in Resources */,
 				4734890C0F99E34900A1D78A /* littlehighbutton.png in Resources */,

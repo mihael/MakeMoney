@@ -71,6 +71,9 @@
 	BOOL bigButton;
 	BOOL canSpaceTouch;
 	
+	BOOL buttonSpinDirection;
+	BOOL buttonInSpinning;
+	
 }
 @property (nonatomic, assign) id <IINotControlsDelegate> delegate;
 @property (nonatomic, assign) id notController;
@@ -118,6 +121,7 @@
 - (void)openNotControls; //open controls - show underbuttons
 - (void)closeNotControls;
 
+- (void)spinButton;
 - (void)spinButtonWith:(BOOL)direction;
 - (void)stillButton;
 

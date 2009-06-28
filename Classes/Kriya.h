@@ -14,6 +14,13 @@
 //get app frame
 CGRect KriyaFrame();
 
+@protocol KriyaDelegate <NSObject>
+- (void)imageWithUrlFinished:(id)response;
+- (void)imageWithUrlFailed:(id)response;
+- (void)iconWithUrlFinished:(id)response;
+- (void)iconWithUrlFailed:(id)response; 
+@end
+
 @interface Kriya : NSObject {
 
 }
@@ -42,8 +49,14 @@ CGRect KriyaFrame();
 + (NSData*)loadWithPath:(NSString*)filepath;
 
 + (NSString*)imageWithInMemoryImage:(UIImage*)image;
-+ (UIImage*)imageWithUrl:(NSString*)url; //feches image from web, caches to disk
++ (NSString*)imageWithInMemoryImage:(UIImage*)image forUrl:(NSString*)url;
++ (UIImage*)imageWithUrl:(NSString*)url feches:(BOOL)fechFromWeb;  //feches image from web, caches to disk
++ (void)imageWithUrl:(NSString*)url delegate:(id)delegate finished:(SEL)finishSelector failed:(SEL)failSelector;
++ (UIImage*)imageWithPath:(NSString*)path; //feches image from tmp/
 + (void)clearImageWithUrl:(NSString*)url; //clears feched image
+
+//async envoke something
++ (void)envoke:(id)request;
 
 //create some hash
 + (NSString*)md5:(NSString*)str;

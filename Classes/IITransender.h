@@ -19,6 +19,7 @@
  * The only limitation are notControls which stay above Your application view. 
  *
 */
+#import "ASIHTTPRequest.h"
 #import "IIController.h"
 #import "IIFilter.h"
 #define kIITransenderVibeShort 0.05
@@ -49,10 +50,11 @@ typedef enum {
 	IITransenderFailedWithProgram = 5
 } IITransenderFailedWith;
 
-@interface IITransender : NSObject 
+@interface IITransender : NSObject <KriyaDelegate>
 {
     id <IITransenderDelegate> delegate; //the delegate to be notified of transends
 	NSMutableArray *memories; //holding our memories of transends
+	NSDictionary *memory; //holding the invoked memory
 	int memoriesSpot; //exact position of last transended memorie
 	int memoriesCount; //cached memories count - [memories count] should be recalled only once when program changes
 	int memoriesGoldcut; //goldcut - splits memories into two virtual memories - one could be used for menus
@@ -64,6 +66,10 @@ typedef enum {
 	
 	BOOL direction; //indicator of moving left or right (up/down) in memories array
 	NSMutableDictionary *wies; //holding all transended controllers
+
+	BOOL cancelFech;
+	
+	
 }
 
 @property (nonatomic, assign) id <IITransenderDelegate> delegate;
@@ -89,6 +95,7 @@ typedef enum {
 
 - (void)spot;
 - (void)meditate;
+- (void)cancelFech;
 - (void)transend;
 - (void)transendNow;
 - (void)transendOrMeditate;
@@ -99,11 +106,17 @@ typedef enum {
 - (BOOL)isTransending;
 - (void)invokeTransend;
 - (void)invokeTransend:(NSTimer*)timer;
+- (void)invokeMessageTransend;
 - (void)invokeTransendFailed:(IITransenderFailedWith)failed;
 - (void)changeDirection;
 - (void)changeDirectionTo:(BOOL)d;
 - (void)goldcutAt:(int)goldcut;
 
+//KriyaDelegate
+- (void)imageWithUrlFinished:(id)response;
+- (void)imageWithUrlFailed:(id)response; 
+- (void)iconWithUrlFinished:(id)response;
+- (void)iconWithUrlFailed:(id)response; 
 
 - (id)fechGoldcut;
 
