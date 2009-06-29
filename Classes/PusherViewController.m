@@ -58,12 +58,18 @@
 	if (info) {
 		[selectedImagePath release];
 		selectedImagePath = [[Kriya imageWithInMemoryImage:[info valueForKey:UIImagePickerControllerOriginalImage]] retain];
-		[selectedImageView setImage:[Kriya imageWithUrl:selectedImagePath feches:NO]];
+		DebugLog(@"selected image path %@", selectedImagePath);
+		UIImage *img =[Kriya imageWithPath:selectedImagePath];
+		DebugLog(@"IMAGE %@", img);
+		[selectedImageView setImage:img];
 		[selectedImageView setHidden:NO];
-		[background setImage:[Kriya imageWithUrl:selectedImagePath feches:NO]];
+		[background setImage:[Kriya imageWithPath:selectedImagePath]];
 		[background setHidden:NO];
 		imageSelected = YES;
+	} else {
+		DebugLog(@"Empty pick");
 	}
+
 }
 
 #pragma mark uploading

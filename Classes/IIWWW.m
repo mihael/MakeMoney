@@ -318,7 +318,7 @@
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"dataAPIimage\"; filename=\"upload.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];		
-	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithUrl:imagePath feches:NO]], 0.9)];
+	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithPath:imagePath]], 0.9)];
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[request setPostBody:postBody];
 	[request setPostValue:username forKey:@"data[api][username]"];
@@ -390,7 +390,7 @@
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"media\"; filename=\"upload.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];		
-	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithUrl:imagePath feches:NO]], 0.9)];
+	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithPath:imagePath]], 0.9)];
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[request setPostBody:postBody];
 	[request setPostValue:username forKey:@"username"];

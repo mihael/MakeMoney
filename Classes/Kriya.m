@@ -37,7 +37,6 @@ CGRect KriyaFrame() {
 + (NSInteger)appRunCount 
 {
 	if (![[NSUserDefaults standardUserDefaults] objectForKey:RUNS]){
-		NSLog(@"Om Om Om Kriya Babaji Namah Om Om Om");
 		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:RUNS];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
@@ -52,7 +51,7 @@ CGRect KriyaFrame() {
 
 + (void)prayInCode 
 {
-	NSLog(@"OM NAMAH SHIVAYA %@ OM KRIYA BABAJI NAMAH OM", PRAYER);
+	NSLog(@"%@", PRAYER);
 }
 
 + (NSString*)deviceId 
