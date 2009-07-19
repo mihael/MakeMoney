@@ -1,5 +1,5 @@
 //
-//  IITranscender.m
+//  IITransender.m
 //  MakeMoney
 //
 #import "Reachability.h"
@@ -239,10 +239,11 @@
 		if ([memoryII isEqualToString:@"message"]) {
 			//message
 			
-			//TODO asynchronize this and you will exist!
 			[self invokeMessageTransend];
 			
 			/*
+			 First incarnation of download was quick and dirty, completely in sync and blocking.
+			 :)
 			if ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable) {
 				
 				UIImage* background = nil;
@@ -488,7 +489,7 @@
 			[self meditate];
 			break;
 		case IITransenderInvokeFailedWithImage:			
-			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
+			//[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
 			break;
 		case IITransenderInvokeFailedWithMovie:			
 			[delegate transendedWithImage:[self imageNamed:@"not_image.jpg"] withIons:nil withIor:b];
