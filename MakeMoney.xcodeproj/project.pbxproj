@@ -61,6 +61,7 @@
 		47348DB70F9B837600A1D78A /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 47348DB60F9B837600A1D78A /* AudioStreamer.m */; };
 		47348E160F9B85E700A1D78A /* StreamingPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47348E150F9B85E700A1D78A /* StreamingPlayerViewController.m */; };
 		47348E490F9B8D5300A1D78A /* radionula_screen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47348E470F9B8D5300A1D78A /* radionula_screen.jpg */; };
+		474266971017156A00F7E0FE /* IIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 474266961017156A00F7E0FE /* IIApplication.m */; };
 		475912E30FB9756F0079FA20 /* Filter_promet_list.m in Sources */ = {isa = PBXBuildFile; fileRef = 475912E20FB9756F0079FA20 /* Filter_promet_list.m */; };
 		4759131B0FBA076F0079FA20 /* Filter_promet_webcam.m in Sources */ = {isa = PBXBuildFile; fileRef = 4759131A0FBA076F0079FA20 /* Filter_promet_webcam.m */; };
 		475B46BE0FE16DAA00D7194D /* vmain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 475B46BD0FE16DAA00D7194D /* vmain.jpg */; };
@@ -263,6 +264,8 @@
 		47348E140F9B85E700A1D78A /* StreamingPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamingPlayerViewController.h; path = Classes/StreamingPlayerViewController.h; sourceTree = "<group>"; };
 		47348E150F9B85E700A1D78A /* StreamingPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamingPlayerViewController.m; path = Classes/StreamingPlayerViewController.m; sourceTree = "<group>"; };
 		47348E470F9B8D5300A1D78A /* radionula_screen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = radionula_screen.jpg; path = Artwork/radionula_screen.jpg; sourceTree = SOURCE_ROOT; };
+		474266951017156A00F7E0FE /* IIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIApplication.h; path = Classes/IIApplication.h; sourceTree = "<group>"; };
+		474266961017156A00F7E0FE /* IIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIApplication.m; path = Classes/IIApplication.m; sourceTree = "<group>"; };
 		475912E10FB9756F0079FA20 /* Filter_promet_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_promet_list.h; path = Classes/Filter_promet_list.h; sourceTree = "<group>"; };
 		475912E20FB9756F0079FA20 /* Filter_promet_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter_promet_list.m; path = Classes/Filter_promet_list.m; sourceTree = "<group>"; };
 		475913190FBA076F0079FA20 /* Filter_promet_webcam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter_promet_webcam.h; path = Classes/Filter_promet_webcam.h; sourceTree = "<group>"; };
@@ -427,7 +430,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* AppRoot */ = {
+		080E96DDFE201D6D7F000001 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				289233AA0DB2D0DB0083E9F9 /* RootViewController.h */,
@@ -437,7 +440,7 @@
 				32CA4F630368D1EE00C91783 /* MakeMoney_Prefix.pch */,
 				473488DD0F99DF8E00A1D78A /* main.m */,
 			);
-			name = AppRoot;
+			name = App;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -449,21 +452,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		281C6CD70DB2D82200F60ACC /* AppViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = AppViews;
-			sourceTree = "<group>";
-		};
-		289233A00DB2D0730083E9F9 /* Tools */ = {
+		289233A00DB2D0730083E9F9 /* IIControllers */ = {
 			isa = PBXGroup;
 			children = (
 				47E2676F0FD97A6D0040F565 /* ImageArtViewController.h */,
 				47E267700FD97A6D0040F565 /* ImageArtViewController.m */,
 				478DE4030FD295E70067BAE6 /* PusherViewController.h */,
 				478DE4040FD295E70067BAE6 /* PusherViewController.m */,
-				4704209D0FA132F500D7DE30 /* IIFilters */,
 				47041EB50FA0CF1100D7DE30 /* MessageViewController.h */,
 				47041EB60FA0CF1100D7DE30 /* MessageViewController.m */,
 				47348B2A0F9A48DD00A1D78A /* AssetRepository.h */,
@@ -485,7 +480,7 @@
 				289233AC0DB2D0DB0083E9F9 /* FlipsideViewController.h */,
 				289233AD0DB2D0DB0083E9F9 /* FlipsideViewController.m */,
 			);
-			name = Tools;
+			name = IIControllers;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
@@ -495,8 +490,11 @@
 				4705AAA80FC709E4005DA8FC /* Progress */,
 				4705ABAF0FC964FB005DA8FC /* Settings.bundle */,
 				477386850F4ACCCD0044085E /* Kriya */,
-				281C6CD70DB2D82200F60ACC /* AppViews */,
-				080E96DDFE201D6D7F000001 /* AppRoot */,
+				474266941017151800F7E0FE /* IIApplication */,
+				47D796040F725A8800C52774 /* IITransender */,
+				289233A00DB2D0730083E9F9 /* IIControllers */,
+				4704209D0FA132F500D7DE30 /* IIFilters */,
+				080E96DDFE201D6D7F000001 /* App */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -508,10 +506,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				47348B060F9A3B6100A1D78A /* Views */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				47EBEAC10F4C688A009F377E /* Transends */,
+				47348B060F9A3B6100A1D78A /* Views */,
 				472965380F4834F50053F946 /* Artwork */,
+				47EBEAC10F4C688A009F377E /* Transends */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -565,6 +563,7 @@
 		472965380F4834F50053F946 /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				473489000F99E33300A1D78A /* G */,
 				475B46BD0FE16DAA00D7194D /* vmain.jpg */,
 				4705A98A0FC603D4005DA8FC /* kepo_icon.png */,
 				4705A9760FC60058005DA8FC /* mr_foto_icon.png */,
@@ -578,7 +577,6 @@
 				479C52A20FAAC244003DF1B2 /* music.jpg */,
 				47041ED30FA0D7C800D7DE30 /* not_image.jpg */,
 				47041EB30FA0B42B00D7DE30 /* remote_image_fail.png */,
-				473489000F99E33300A1D78A /* G */,
 				473488F60F99E31C00A1D78A /* icon.png */,
 				473488F70F99E31C00A1D78A /* main.png */,
 				473488F80F99E31C00A1D78A /* movie.png */,
@@ -653,17 +651,32 @@
 			name = AudioStreamer;
 			sourceTree = "<group>";
 		};
+		4742667910170E3E00F7E0FE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				477386860F4ACCDE0044085E /* AllSeeingEye */,
+				477386870F4ACD010044085E /* JSON */,
+				47348DB40F9B833C00A1D78A /* AudioStreamer */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		474266941017151800F7E0FE /* IIApplication */ = {
+			isa = PBXGroup;
+			children = (
+				474266951017156A00F7E0FE /* IIApplication.h */,
+				474266961017156A00F7E0FE /* IIApplication.m */,
+			);
+			name = IIApplication;
+			sourceTree = "<group>";
+		};
 		477386850F4ACCCD0044085E /* Kriya */ = {
 			isa = PBXGroup;
 			children = (
-				47348DB40F9B833C00A1D78A /* AudioStreamer */,
-				477386870F4ACD010044085E /* JSON */,
-				477386860F4ACCDE0044085E /* AllSeeingEye */,
+				4742667910170E3E00F7E0FE /* Helpers */,
 				4734896D0F99E69D00A1D78A /* i */,
 				477386710F4ACCB20044085E /* Kriya.h */,
 				477386720F4ACCB20044085E /* Kriya.m */,
-				289233A00DB2D0730083E9F9 /* Tools */,
-				47D796040F725A8800C52774 /* Transender */,
 			);
 			name = Kriya;
 			sourceTree = "<group>";
@@ -703,7 +716,7 @@
 			name = JSON;
 			sourceTree = "<group>";
 		};
-		47D796040F725A8800C52774 /* Transender */ = {
+		47D796040F725A8800C52774 /* IITransender */ = {
 			isa = PBXGroup;
 			children = (
 				47B14CEA0F7C08260017AB44 /* IIController.h */,
@@ -723,7 +736,7 @@
 				473488C20F991F2B00A1D78A /* IIWWW.h */,
 				473488C30F991F2B00A1D78A /* IIWWW.m */,
 			);
-			name = Transender;
+			name = IITransender;
 			sourceTree = "<group>";
 		};
 		47EBEAC10F4C688A009F377E /* Transends */ = {
@@ -1003,6 +1016,7 @@
 				47C7C5020FD27D860028DFCC /* Filter_pikchur_people.m in Sources */,
 				478DE4050FD295E70067BAE6 /* PusherViewController.m in Sources */,
 				47E267710FD97A6D0040F565 /* ImageArtViewController.m in Sources */,
+				474266971017156A00F7E0FE /* IIApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

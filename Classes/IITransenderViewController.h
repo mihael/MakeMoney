@@ -67,6 +67,9 @@
 
 - (id)initWithTransenderProgram:(NSString*)program andStage:(NSDictionary*)aStageName;
 
+//layout to this rect
+- (void)layout:(CGRect)rect;
+
 //infoView
 - (void)showInfoView;
 - (void)hideInfoView:(NSTimer*)timer;

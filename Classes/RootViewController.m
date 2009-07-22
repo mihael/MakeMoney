@@ -12,7 +12,7 @@
 
 @implementation RootViewController
 
-@synthesize notControls, transenderViewController;
+@synthesize transenderViewController;
 
 - (void)loadView {
 	UIView *primaryView = [[UIView alloc] initWithFrame:KriyaFrame()];
@@ -155,6 +155,14 @@
 	[[iAlert instance] alert:@"App Requires Wi-Fi" withMessage:@"Please move device within Wi-Fi network reach. Thanks."];				
 }
 
+#pragma mark IIController saveState
+- (void)saveState 
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:[[transenderViewController transender] currentSpot] forKey:SPOT];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	DebugLog(@"Terminated with spot: %i", [[transenderViewController transender] currentSpot]);
+}
+
 #pragma mark experiments
 - (void)rotateView270:(UIView*)w
 {
@@ -189,4 +197,5 @@
 - (void)moviesEnd {
 //	[self.view addSubview:notControls];	
 }
+
 @end

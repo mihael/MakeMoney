@@ -26,5 +26,7 @@
 - (void)persistObject:(id)o;
 - (id)persistedObject;
 
+- (void)saveState;
+
 + (NSString*)transendFormat;
 @end

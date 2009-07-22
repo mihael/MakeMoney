@@ -34,9 +34,9 @@ CGRect KriyaFrame();
 
 + (NSString*)deviceId;
 
-+ (NSString*)brickbox_url;
++ (NSString*)server_url;
++ (NSString*)startup_url;
 + (NSString*)support_url;
-+ (NSString*)kitsch_url;
 
 + (NSString*)howManyTimes:(int)i;
 

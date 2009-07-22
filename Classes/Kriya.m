@@ -59,19 +59,19 @@ CGRect KriyaFrame() {
 	return [[UIDevice currentDevice] uniqueIdentifier];
 }
 
-+ (NSString*)brickbox_url 
++ (NSString*)server_url
 {
-	return [NSString stringWithFormat:@"http://kitschmaster.com/brickboxes/%@/%@", APP_TITLE, [Kriya deviceId]];
+	return APP_SERVER_URL;
+} 
+
++ (NSString*)startup_url 
+{
+	return [NSString stringWithFormat:@"%@/brickboxes/%@/%@", APP_SERVER_URL, APP_TITLE, [Kriya deviceId]];
 }
 
 + (NSString*)support_url 
 {
-	return [NSString stringWithFormat:@"http://kitschmaster.com/brickboxes/%@", APP_SUPPORT_URL];
-}
-
-+ (NSString*)kitsch_url 
-{
-	return [NSString stringWithFormat:@"http://kitschmaster.com/kiches/%@", APP_URL];
+	return [NSString stringWithFormat:@"%@/brickboxes/%@", APP_SERVER_URL, APP_TITLE];
 }
 
 + (NSString*)howManyTimes:(int)i 

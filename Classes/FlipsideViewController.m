@@ -42,13 +42,13 @@
 	//testing like this
 	//NSString * url = [NSString stringWithFormat:@"http://localhost:3000/brickboxes/%@/%@", MANTRA, [Kriya deviceId]];	
 	//NSString * url = [NSString stringWithFormat:@"http://kitschmaster.com/brickboxes/%@/%@", MANTRA, [Kriya deviceId]];
-	
+	/* This is going ...
 	ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[Kriya brickbox_url]]] autorelease];
 	[request setRequestMethod:@"POST"];
 	[networkQueue addOperation:request];
 	[networkQueue go];
-	
-	[web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://kitschmaster.com/kiches/%@", APP_URL]]]];
+	*/
+	[web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[Kriya support_url]]]];
 	
 }
 

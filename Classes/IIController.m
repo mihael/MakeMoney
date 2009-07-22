@@ -49,6 +49,12 @@
 	return nil;
 }
 
+//save state of this controller
+- (void)saveState
+{
+	//override this in your controller, if you need to save state on applicationWillTerminate
+}
+
 //return transend format - or how to call this IIControler subclass from program.json 
 //this is useful for inserts in filtering
 + (NSString*)transendFormat
@@ -68,8 +74,10 @@
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	[self.transender meditate];
-	[self.notControls lightUp];
+	if (self.transender) {
+		[self.transender meditate];
+	    [self.notControls lightUp];
+	}
 	[[iAlert instance] alert:[NSString stringWithFormat:@"Received Memory Warning in %@", [self class]] withMessage:@"Good luck!"];
 }
 
