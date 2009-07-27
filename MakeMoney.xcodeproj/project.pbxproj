@@ -439,8 +439,9 @@
 		080E96DDFE201D6D7F000001 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				47C39438101DB24F005F45B6 /* Filters */,
 				47C39437101DB247005F45B6 /* Controllers */,
+				47C39438101DB24F005F45B6 /* Filters */,
+				47348B060F9A3B6100A1D78A /* Views */,
 				47C393EA101DB0D1005F45B6 /* MakeMoneyAppDelegate.h */,
 				47C393EB101DB0D1005F45B6 /* MakeMoneyAppDelegate.m */,
 				47C393EC101DB0D1005F45B6 /* RootViewController.h */,
@@ -480,7 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				8D1107310486CEB800E47090 /* Info.plist */,
-				47348B060F9A3B6100A1D78A /* Views */,
 				472965380F4834F50053F946 /* Artwork */,
 				47EBEAC10F4C688A009F377E /* Transends */,
 			);
@@ -586,7 +586,8 @@
 				478DE4700FD2AF590067BAE6 /* PusherView.xib */,
 				47E2676B0FD97A4D0040F565 /* ImageArtView.xib */,
 			);
-			path = Views;
+			name = Views;
+			path = ../Views;
 			sourceTree = "<group>";
 		};
 		47348DB40F9B833C00A1D78A /* AudioStreamer */ = {
