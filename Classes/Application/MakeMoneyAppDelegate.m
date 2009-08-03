@@ -7,6 +7,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASINetworkQueue.h"
 #import "Reachability.h"
+#import "cocos2d.h"
 
 @implementation MakeMoneyAppDelegate
 
@@ -38,10 +39,43 @@ static MakeMoneyAppDelegate* app = nil;
 	//load the stage - a simple settings file
 	[self setStage:[Kriya stage]];
 
-	window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] retain];
-	rootViewController = [[[RootViewController alloc] init] retain];	
-	[window addSubview:[rootViewController view]];
-    [window makeKeyAndVisible];
+	//prepare the window into the brain of human beings
+	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+	if ([[[self stage] valueForKey:@"2D"] boolValue]) {
+		//run in cocos2d style
+
+		// director attaches to the window
+		[[Director sharedDirector] attachInWindow:window];
+		
+		// before creating any layer, set the landscape mode
+		[[Director sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
+		
+		//show the window
+		[window makeKeyAndVisible];
+
+		// Create and initialize parent and empty Scene
+		Scene *scene = [Scene node];
+		
+		// Create and initialize our HelloWorld Layer
+//		Layer *layer = [HelloWorld node];
+		// add our HelloWorld Layer as a child of the main scene
+//		[scene addChild:layer];
+		
+		// Run!
+		[[Director sharedDirector] runWithScene: scene];
+
+	} else {
+		//run in UIKit style
+		
+		//prepare the rootview
+		rootViewController = [[RootViewController alloc] init];	
+		[window addSubview:[rootViewController view]];
+		
+		//show the window
+		[window makeKeyAndVisible];
+	}
+		
 
 	//rekord this apps startup
 	[self startup];
