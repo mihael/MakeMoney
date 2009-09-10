@@ -7,20 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47041EE10FA1047300D7DE30 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47041EE00FA1047300D7DE30 /* MessageView.xib */; };
 		4705AAA90FC709E4005DA8FC /* Progress in Resources */ = {isa = PBXBuildFile; fileRef = 4705AAA80FC709E4005DA8FC /* Progress */; };
 		4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4705ABAF0FC964FB005DA8FC /* Settings.bundle */; };
-		4707D7870FB093DB00094125 /* KopterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4707D7860FB093DB00094125 /* KopterView.xib */; };
 		4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707D8500FB2D86400094125 /* CoreLocation.framework */; };
 		472111EB105945F8003348D4 /* program.json in Resources */ = {isa = PBXBuildFile; fileRef = 479C54990FAAEE73003DF1B2 /* program.json */; };
-		47231FB70FBA381000D49E87 /* FecherListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47231FB60FBA381000D49E87 /* FecherListView.xib */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
 		473488FC0F99E31C00A1D78A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F60F99E31C00A1D78A /* icon.png */; };
 		473489360F99E53100A1D78A /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 473489350F99E53100A1D78A /* libz.1.2.3.dylib */; };
-		47348B0C0F9A3B6100A1D78A /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B080F9A3B6100A1D78A /* FlipsideView.xib */; };
-		47348B0D0F9A3B6100A1D78A /* MoneyTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B090F9A3B6100A1D78A /* MoneyTimerView.xib */; };
-		47348B0E0F9A3B6100A1D78A /* RemoteImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */; };
-		47348B160F9A3CD500A1D78A /* MoonTimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B150F9A3CD500A1D78A /* MoonTimeView.xib */; };
 		4745C7F4105589B900BAED5A /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4745C79B105588A400BAED5A /* libcocos2d.a */; };
 		4745C89810593B2F00BAED5A /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4745C89510593B2F00BAED5A /* GameScene.m */; };
 		4745C89910593B2F00BAED5A /* SplashScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4745C89710593B2F00BAED5A /* SplashScene.m */; };
@@ -29,10 +22,8 @@
 		477ABD500F45641100696306 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD4A0F45641100696306 /* CoreGraphics.framework */; };
 		477ABD560F45644F00696306 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD550F45644F00696306 /* CFNetwork.framework */; };
 		4783DCF80F6AD894007CBA02 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4783DCF70F6AD894007CBA02 /* QuartzCore.framework */; };
-		478DE4710FD2AF590067BAE6 /* PusherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478DE4700FD2AF590067BAE6 /* PusherView.xib */; };
 		4796C73C0F41E53D002F2C2A /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4796C73B0F41E53D002F2C2A /* Entitlements.plist */; };
 		479C332B0F4D7A6600EBD9F3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479C332A0F4D7A6600EBD9F3 /* AudioToolbox.framework */; };
-		479C4F100FA61B37003DF1B2 /* StreamingPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */; };
 		47B14D580F7E09360017AB44 /* stage.json in Resources */ = {isa = PBXBuildFile; fileRef = 47B14D570F7E09360017AB44 /* stage.json */; };
 		47C393D6101725EC005F45B6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C393D5101725EC005F45B6 /* MapKit.framework */; };
 		47C393F3101DB100005F45B6 /* Kriya.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C393F2101DB100005F45B6 /* Kriya.m */; };
@@ -58,29 +49,6 @@
 		47C39432101DB1F7005F45B6 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3942B101DB1F7005F45B6 /* SBJsonParser.m */; };
 		47C39433101DB1F7005F45B6 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3942D101DB1F7005F45B6 /* SBJsonWriter.m */; };
 		47C39436101DB214005F45B6 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39435101DB214005F45B6 /* AudioStreamer.m */; };
-		47C3944F101DB2B2005F45B6 /* Filter_hai_galery.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3943A101DB2B2005F45B6 /* Filter_hai_galery.m */; };
-		47C39450101DB2B2005F45B6 /* Filter_kitschmaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3943C101DB2B2005F45B6 /* Filter_kitschmaster.m */; };
-		47C39451101DB2B2005F45B6 /* Filter_kitschmaster_brickbox.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3943E101DB2B2005F45B6 /* Filter_kitschmaster_brickbox.m */; };
-		47C39452101DB2B2005F45B6 /* Filter_koornk.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39440101DB2B2005F45B6 /* Filter_koornk.m */; };
-		47C39453101DB2B2005F45B6 /* Filter_pikchur.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39442101DB2B2005F45B6 /* Filter_pikchur.m */; };
-		47C39454101DB2B2005F45B6 /* Filter_pikchur_people.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39444101DB2B2005F45B6 /* Filter_pikchur_people.m */; };
-		47C39455101DB2B2005F45B6 /* Filter_promet_list.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39446101DB2B2005F45B6 /* Filter_promet_list.m */; };
-		47C39456101DB2B2005F45B6 /* Filter_promet_webcam.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39448101DB2B2005F45B6 /* Filter_promet_webcam.m */; };
-		47C39457101DB2B2005F45B6 /* Filter_twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3944A101DB2B2005F45B6 /* Filter_twitter.m */; };
-		47C39458101DB2B2005F45B6 /* Filter_wp_gallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3944C101DB2B2005F45B6 /* Filter_wp_gallery.m */; };
-		47C39459101DB2B2005F45B6 /* Filter_wp_gallery_list.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3944E101DB2B2005F45B6 /* Filter_wp_gallery_list.m */; };
-		47C39472101DB2C6005F45B6 /* FecherListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3945B101DB2C6005F45B6 /* FecherListViewController.m */; };
-		47C39473101DB2C6005F45B6 /* FecherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3945D101DB2C6005F45B6 /* FecherViewController.m */; };
-		47C39474101DB2C6005F45B6 /* FlipsideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3945F101DB2C6005F45B6 /* FlipsideView.m */; };
-		47C39475101DB2C6005F45B6 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39461101DB2C6005F45B6 /* FlipsideViewController.m */; };
-		47C39476101DB2C6005F45B6 /* ImageArtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39463101DB2C6005F45B6 /* ImageArtViewController.m */; };
-		47C39477101DB2C6005F45B6 /* KopterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39465101DB2C6005F45B6 /* KopterViewController.m */; };
-		47C39478101DB2C6005F45B6 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39467101DB2C6005F45B6 /* MessageViewController.m */; };
-		47C39479101DB2C6005F45B6 /* MoneyTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39469101DB2C6005F45B6 /* MoneyTimerViewController.m */; };
-		47C3947A101DB2C6005F45B6 /* MoonTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3946B101DB2C6005F45B6 /* MoonTimeViewController.m */; };
-		47C3947B101DB2C6005F45B6 /* PusherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3946D101DB2C6005F45B6 /* PusherViewController.m */; };
-		47C3947C101DB2C6005F45B6 /* RemoteImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3946F101DB2C6005F45B6 /* RemoteImageViewController.m */; };
-		47C3947D101DB2C6005F45B6 /* StreamingPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39471101DB2C6005F45B6 /* StreamingPlayerViewController.m */; };
 		47C39491101DB373005F45B6 /* IIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39480101DB373005F45B6 /* IIApplication.m */; };
 		47C39492101DB373005F45B6 /* IIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39482101DB373005F45B6 /* IIController.m */; };
 		47C39493101DB373005F45B6 /* IIFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39484101DB373005F45B6 /* IIFilter.m */; };
@@ -100,8 +68,6 @@
 		47C3966C1026F4C5005F45B6 /* littlebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C396671026F4C5005F45B6 /* littlebutton.png */; };
 		47C3966D1026F4C5005F45B6 /* littlehighbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C396681026F4C5005F45B6 /* littlehighbutton.png */; };
 		47C3966F1026F508005F45B6 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C3966E1026F508005F45B6 /* fps_images.png */; };
-		47C7E25E0F9CC70900789864 /* FecherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C7E25D0F9CC70900789864 /* FecherView.xib */; };
-		47E2676C0FD97A4D0040F565 /* ImageArtView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47E2676B0FD97A4D0040F565 /* ImageArtView.xib */; };
 		47EBE8620F4C056A009F377E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EBE8610F4C056A009F377E /* SystemConfiguration.framework */; };
 		47EBE93B0F4C5BD9009F377E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EBE93A0F4C5BD9009F377E /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
@@ -1529,19 +1495,8 @@
 				472965430F4859C10053F946 /* Hajlov in Resources */,
 				47B14D580F7E09360017AB44 /* stage.json in Resources */,
 				473488FC0F99E31C00A1D78A /* icon.png in Resources */,
-				47348B0C0F9A3B6100A1D78A /* FlipsideView.xib in Resources */,
-				47348B0D0F9A3B6100A1D78A /* MoneyTimerView.xib in Resources */,
-				47348B0E0F9A3B6100A1D78A /* RemoteImageViewController.xib in Resources */,
-				47348B160F9A3CD500A1D78A /* MoonTimeView.xib in Resources */,
-				47C7E25E0F9CC70900789864 /* FecherView.xib in Resources */,
-				47041EE10FA1047300D7DE30 /* MessageView.xib in Resources */,
-				479C4F100FA61B37003DF1B2 /* StreamingPlayerView.xib in Resources */,
-				4707D7870FB093DB00094125 /* KopterView.xib in Resources */,
-				47231FB70FBA381000D49E87 /* FecherListView.xib in Resources */,
 				4705AAA90FC709E4005DA8FC /* Progress in Resources */,
 				4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */,
-				478DE4710FD2AF590067BAE6 /* PusherView.xib in Resources */,
-				47E2676C0FD97A4D0040F565 /* ImageArtView.xib in Resources */,
 				47C396691026F4C5005F45B6 /* backlight.png in Resources */,
 				47C3966A1026F4C5005F45B6 /* button.png in Resources */,
 				47C3966B1026F4C5005F45B6 /* highbutton.png in Resources */,
@@ -1582,29 +1537,6 @@
 				47C39432101DB1F7005F45B6 /* SBJsonParser.m in Sources */,
 				47C39433101DB1F7005F45B6 /* SBJsonWriter.m in Sources */,
 				47C39436101DB214005F45B6 /* AudioStreamer.m in Sources */,
-				47C3944F101DB2B2005F45B6 /* Filter_hai_galery.m in Sources */,
-				47C39450101DB2B2005F45B6 /* Filter_kitschmaster.m in Sources */,
-				47C39451101DB2B2005F45B6 /* Filter_kitschmaster_brickbox.m in Sources */,
-				47C39452101DB2B2005F45B6 /* Filter_koornk.m in Sources */,
-				47C39453101DB2B2005F45B6 /* Filter_pikchur.m in Sources */,
-				47C39454101DB2B2005F45B6 /* Filter_pikchur_people.m in Sources */,
-				47C39455101DB2B2005F45B6 /* Filter_promet_list.m in Sources */,
-				47C39456101DB2B2005F45B6 /* Filter_promet_webcam.m in Sources */,
-				47C39457101DB2B2005F45B6 /* Filter_twitter.m in Sources */,
-				47C39458101DB2B2005F45B6 /* Filter_wp_gallery.m in Sources */,
-				47C39459101DB2B2005F45B6 /* Filter_wp_gallery_list.m in Sources */,
-				47C39472101DB2C6005F45B6 /* FecherListViewController.m in Sources */,
-				47C39473101DB2C6005F45B6 /* FecherViewController.m in Sources */,
-				47C39474101DB2C6005F45B6 /* FlipsideView.m in Sources */,
-				47C39475101DB2C6005F45B6 /* FlipsideViewController.m in Sources */,
-				47C39476101DB2C6005F45B6 /* ImageArtViewController.m in Sources */,
-				47C39477101DB2C6005F45B6 /* KopterViewController.m in Sources */,
-				47C39478101DB2C6005F45B6 /* MessageViewController.m in Sources */,
-				47C39479101DB2C6005F45B6 /* MoneyTimerViewController.m in Sources */,
-				47C3947A101DB2C6005F45B6 /* MoonTimeViewController.m in Sources */,
-				47C3947B101DB2C6005F45B6 /* PusherViewController.m in Sources */,
-				47C3947C101DB2C6005F45B6 /* RemoteImageViewController.m in Sources */,
-				47C3947D101DB2C6005F45B6 /* StreamingPlayerViewController.m in Sources */,
 				47C39491101DB373005F45B6 /* IIApplication.m in Sources */,
 				47C39492101DB373005F45B6 /* IIController.m in Sources */,
 				47C39493101DB373005F45B6 /* IIFilter.m in Sources */,
