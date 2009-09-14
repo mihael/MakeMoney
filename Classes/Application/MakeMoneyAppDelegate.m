@@ -45,25 +45,18 @@ static MakeMoneyAppDelegate* app = nil;
 
 	if ([[[self stage] valueForKey:@"2D"] boolValue]) {
 		//run in cocos2d style
-
-		// director attaches to the window
+		
 		[[Director sharedDirector] attachInWindow:window];
-		
-		// before creating any layer, set the landscape mode
 		[[Director sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
-		
-		//show the window
 		[window makeKeyAndVisible];
 
-		// Create and initialize parent and empty Scene
-		Scene *scene = [SplashScene node];
+		//load splash scene, the initial scene
+		NSString *className = [[self stage] valueForKey:@"2D_scene"];
+		if (!className)
+			className = @"SplashScene";
+		Class SceneClass = NSClassFromString(className);
+		Scene *scene = [SceneClass node];
 		
-		// Create and initialize our HelloWorld Layer
-//		Layer *layer = [HelloWorld node];
-		// add our HelloWorld Layer as a child of the main scene
-//		[scene addChild:layer];
-		
-		// Run!
 		[[Director sharedDirector] runWithScene: scene];
 
 	} else {

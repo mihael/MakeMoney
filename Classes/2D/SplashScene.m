@@ -2,9 +2,6 @@
 //  SplashScene.m
 //  MakeMoney
 //
-//  Created by mihael on 9/10/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
 #import "cocos2d.h"
 #import "SplashScene.h"
 
@@ -16,14 +13,9 @@
 		Sprite * bg = [Sprite spriteWithFile:@"main.png"];
 		[bg setPosition:ccp(240, 160)];
 		[self addChild:bg z:0];
-		[self splashWith:1];
 		[self addChild:[Layer1 node] z:1];
 	}
 	return self;
-}
-
-- (void)splashWith:(int)timespan {
-	
 }
 
 @end
@@ -98,7 +90,7 @@
 {
 	//	time1 +=delta;
 	time1 +=1;	
-	[label1 setString: [NSString stringWithFormat:@"%2.1f", time1 ]];
+	[label1 setString: [NSString stringWithFormat:@"%2.1f", time1] ];
 }
 
 -(void) step2: (ccTime) delta
