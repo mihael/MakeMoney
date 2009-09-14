@@ -15,7 +15,6 @@
 		473488FC0F99E31C00A1D78A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F60F99E31C00A1D78A /* icon.png */; };
 		473489360F99E53100A1D78A /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 473489350F99E53100A1D78A /* libz.1.2.3.dylib */; };
 		4745C7F4105589B900BAED5A /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4745C79B105588A400BAED5A /* libcocos2d.a */; };
-		4745C89810593B2F00BAED5A /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4745C89510593B2F00BAED5A /* GameScene.m */; };
 		4745C89910593B2F00BAED5A /* SplashScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4745C89710593B2F00BAED5A /* SplashScene.m */; };
 		477ABD4E0F45641100696306 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD480F45641100696306 /* UIKit.framework */; };
 		477ABD4F0F45641100696306 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD490F45641100696306 /* Foundation.framework */; };
@@ -439,8 +438,6 @@
 		47348B150F9A3CD500A1D78A /* MoonTimeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoonTimeView.xib; sourceTree = "<group>"; };
 		47348E470F9B8D5300A1D78A /* radionula_screen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = radionula_screen.jpg; path = Artwork/radionula_screen.jpg; sourceTree = SOURCE_ROOT; };
 		4745C6CA105587CB00BAED5A /* cocos2d-iphone.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "cocos2d-iphone.xcodeproj"; sourceTree = cocos2d; };
-		4745C89410593B2F00BAED5A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		4745C89510593B2F00BAED5A /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		4745C89610593B2F00BAED5A /* SplashScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScene.h; sourceTree = "<group>"; };
 		4745C89710593B2F00BAED5A /* SplashScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScene.m; sourceTree = "<group>"; };
 		475B46BD0FE16DAA00D7194D /* vmain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = vmain.jpg; path = Artwork/vmain.jpg; sourceTree = "<group>"; };
@@ -889,8 +886,6 @@
 		4745C89310593B2F00BAED5A /* 2D */ = {
 			isa = PBXGroup;
 			children = (
-				4745C89410593B2F00BAED5A /* GameScene.h */,
-				4745C89510593B2F00BAED5A /* GameScene.m */,
 				4745C89610593B2F00BAED5A /* SplashScene.h */,
 				4745C89710593B2F00BAED5A /* SplashScene.m */,
 			);
@@ -1549,7 +1544,6 @@
 				47C396501026D1BB005F45B6 /* main.m in Sources */,
 				47C396511026D1BB005F45B6 /* MakeMoneyAppDelegate.m in Sources */,
 				47C396521026D1BB005F45B6 /* RootViewController.m in Sources */,
-				4745C89810593B2F00BAED5A /* GameScene.m in Sources */,
 				4745C89910593B2F00BAED5A /* SplashScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

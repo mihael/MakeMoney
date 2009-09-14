@@ -8,6 +8,7 @@
 #import "ASINetworkQueue.h"
 #import "Reachability.h"
 #import "cocos2d.h"
+#import "SplashScene.h"
 
 @implementation MakeMoneyAppDelegate
 
@@ -55,7 +56,7 @@ static MakeMoneyAppDelegate* app = nil;
 		[window makeKeyAndVisible];
 
 		// Create and initialize parent and empty Scene
-		Scene *scene = [Scene node];
+		Scene *scene = [SplashScene node];
 		
 		// Create and initialize our HelloWorld Layer
 //		Layer *layer = [HelloWorld node];
