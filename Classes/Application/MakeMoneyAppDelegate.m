@@ -8,7 +8,6 @@
 #import "ASINetworkQueue.h"
 #import "Reachability.h"
 #import "cocos2d.h"
-#import "SplashScene.h"
 
 @implementation MakeMoneyAppDelegate
 

@@ -4,6 +4,7 @@ require 'rake'
 #require 'rake/rdoctask'
 
 desc "pushup to git.rubynarails.com"
-task :pushup => :environment do
-  exec "git push original master:refs/heads/master"
+task :pushup do
+  #exec "git push original master:refs/heads/master"
+  exec "git push original master"
 end
