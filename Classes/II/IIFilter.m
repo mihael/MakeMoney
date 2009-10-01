@@ -250,10 +250,9 @@
 	[request start];
 	NSError *error = [request error];
 	if (!error) {
-		NSArray *tokens = [[request responseString] componentsSeparatedByString:@"'"];
-		NSString *decodedUrl = [tokens objectAtIndex:1];
-		DebugLog(@"decode_bit_ly decoded %@", decodedUrl);
-		return decodedUrl;
+		NSMutableArray *urls = [IIFilter extractURLPairsFrom:[request responseString]];
+		if ([urls count]>0)
+			return [[urls objectAtIndex:0] url];
 	} 	
 	return encodedUrl;
 }
