@@ -59,7 +59,7 @@
 			if ([asset_urls count]<=0) { //no usable urls
 //				[transends appendFormat:@"{\"ii\":\"MessageView\", \"ions\":{\"message\":\"text\", \"data\":%@, \"icon_url\":\"%@\", \"background_url\":\"%@\"}, %@},", [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], k_ior_notstop];
 				if ([textKey hasPrefix:@"text"]) {
-					[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], @"", @"", k_ior_notstop];
+					[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], @"", @"", k_ior_stop_notspace];
 				} 
 
 			} else { //add this message with all images/mp3s/assets found in this message
@@ -70,14 +70,14 @@
 					NSString *yutub_url = @"";
 					if ([IIFilter isStreamUrl:asset_url]) {
 						noise_url = asset_url;
-						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_space];
+						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_notspace];
 					} else if ([IIFilter isYutubUrl:asset_url]) {
 						yutub_url = asset_url;
-						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_space];
+						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_notspace];
 					} else if ([IIFilter isImageUrl:asset_url]){
-						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], asset_url, noise_url, yutub_url, k_ior_notstop_space];						
+						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], asset_url, noise_url, yutub_url, k_ior_stop_notspace];						
 					} else {
-						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_notstop_space];						
+						[transends appendFormat:[MessageViewController transendFormat], textKey, [twit JSONRepresentation], [[twit valueForKey:@"user"] valueForKey:@"profile_image_url"], [[twit valueForKey:@"user"] valueForKey:@"profile_background_image_url"], noise_url, yutub_url, k_ior_stop_notspace];						
 					}
 				}
 			}

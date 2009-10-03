@@ -256,10 +256,21 @@
 					}				
 				}
 			}
+
+			//Change background noise if requested
+			NSString *noise_url = [notBehavior valueForKey:@"noise_url"];
+			if (noise_url) {
+				[notControls playStop];
+				[notControls playWithStreamUrl:noise_url];
+			}
+			
+			//Change speed of transending if requested
 			NSNumber *revibe = [notBehavior valueForKey:@"revibe"];
 			if (revibe) {
 				[transender reVibe:[revibe floatValue]];
 			}
+
+			//Does the whole available space act like a button?
 			NSString *space= [notBehavior valueForKey:@"space"];
 			if ([space isEqualToString:@"up"]||[space isEqualToString:@"true"])
 				[notControls spaceUp];
@@ -503,7 +514,7 @@
 	}
 }
 
-- (void)picked:(id)notControl {
+- (void)picked:(NSDictionary*)info {
 }
 
 @end

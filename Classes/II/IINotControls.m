@@ -73,8 +73,7 @@
 		progressor = [[iProgressView alloc] initWithFrame:self.frame text:nil];
 		[progressor setHidden:YES];
 		
-		wwwView = [[iWWWView alloc] initWithFrame:CGRectInset(self.frame, 57, 57)];
-		
+		wwwView = [[iWWWView alloc] initWithFrame:CGRectMake(0, buttonSize, self.frame.size.width, self.frame.size.height - buttonSize)];
 		[wwwView setHidden:YES];
 		
 		[self addSubview:button];
@@ -391,6 +390,10 @@
 	//this is called when touches up
 	if (notOpen) { //the controls do not show their underbuttons
 		if (buttonInTouching) { //if touched up inside before 1.0sec, means we just tapped once
+			//hide www if open
+			if (![wwwView isHidden])
+				[self wwwClear];
+			
 			//call delegate and tell him about this simple tap
 			if (delegate) {
 				if ([delegate respondsToSelector:@selector(oneTap:)]) {

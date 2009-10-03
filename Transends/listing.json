@@ -74,6 +74,12 @@
 
 @MakeMoneyFrameworkDemo 1 #TODO
 [
+
+{"ii":"KopterView", "ions":{"reuse":"true", "title":"thanks to www.promet.si", "background":"main.png", "url":"http://raddarkopter:raddarkopter999@koornk.com/api/recent/", "method":"get", "page":1, "limit":50, "update_url":"http://raddarkopter:raddarkopter999@koornk.com/api/update", "pikchur":"raddarkopter@raddarkopter999"}, "ior":{"stop":"true", "space":"down"}},
+{"ii":"FecherListView", "ions":{"reuse":"true", "restore_key":"promet_si", "icon":"kepo_icon.png", "background":"main.jpg", "url":"http://www.promet.si", "params":"id=25", "method":"get", "filter":"promet_list", "filter_base_url":"http://www.promet.si"}, "ior":{"stop":"true", "space":"down"}},
+{"ii":"PusherView", "ions":{"reuse":"true", "title":"", "pikchur":"pikchur@pikchur"}, "ior":{"stop":"true", "space":"down"}},
+{"ii":"FecherView", "ions":{"reuse":"true", "button_title":"+25", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "ior":{"stop":"true", "space":"down"}}
+
 {"ii":"0_1.jpg",  "ior":{"stop":"false"}},
 {"ii":"0_2.jpg",  "ior":{"stop":"false"}},
 {"ii":"0_3.jpg",  "ior":{"stop":"false", "revibe":1.38}},

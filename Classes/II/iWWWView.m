@@ -46,14 +46,50 @@ Cool!\
 	return self;
 }
 
+- (id)initWithFrame:(CGRect)frame {
+	
+	if (self = [super initWithFrame:frame]) {
+		//self.backgroundColor = [UIColor clearColor];
+		webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, kButtonSize, frame.size.width, frame.size.height-kButtonSize)];
+//		[webView loadHTMLString:kClearHTML baseURL:nil];
+		[webView setDelegate:self];
+//		[webView setScalesPageToFit:YES];
+
+		[self addSubview:webView];
+		//[self clear];
+
+		indica = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+		[indica setCenter:webView.center];
+		[indica setHidesWhenStopped:YES];
+		[self addSubview:indica];
+	}
+	return self;
+}
+
 - (void)dealloc {
+	[webView release];
+	[indica release];
 	[_url release];
 	[super dealloc];
 }
 
-- (void)layoutSubviews {
-	[self stringByEvaluatingJavaScriptFromString:
-	 [NSString stringWithFormat:@"yt.width = %0.0f; yt.height = %0.0f", self.frame.size.width, self.frame.size.height]];
+- (void) startLoading {
+	[indica startAnimating];
+}
+
+- (void) stopLoading {
+	[indica stopAnimating];
+}
+
+- (NSMutableURLRequest*)makeRequest:(NSString*)url {
+	NSString *encodedUrl = (NSString*)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)url, NULL, NULL, kCFStringEncodingUTF8);
+	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
+	[request setURL:[NSURL URLWithString:encodedUrl]];
+	//[request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
+	//[request setTimeoutInterval:TIMEOUT_SEC];
+	[request setHTTPShouldHandleCookies:FALSE];
+	[encodedUrl release];
+	return request;
 }
 
 - (void)setUrl:(NSString*)url {
@@ -61,11 +97,9 @@ Cool!\
 	_url = [url copy];
 	
 	if (_url) {
-		NSString* html = [NSString stringWithFormat:kEmbedHTML, self.frame.size.width, self.frame.size.width,
-						  self.frame.size.height, _url, _url, self.frame.size.width, self.frame.size.height];
-		[self loadHTMLString:html baseURL:nil];
+		[webView loadRequest:[self makeRequest:_url]];
 	} else {
-		[self loadHTMLString:@"&nbsp;" baseURL:nil];
+		[self setHidden:YES];
 	}
 }
 
@@ -76,15 +110,43 @@ Cool!\
 	if (_url) {
 		NSString* html = [NSString stringWithFormat:kEmbedHTML, self.frame.size.width, self.frame.size.width,
 						  self.frame.size.height, _url, _url, self.frame.size.width, self.frame.size.height];
-		[self loadHTMLString:html baseURL:nil];
+		[webView loadHTMLString:html baseURL:nil];
 	} else {
-		[self loadHTMLString:@"&nbsp;" baseURL:nil];
+		[self setHidden:YES];
 	}
 }
 
 - (void)clear 
 {
-	[self loadHTMLString:kClearHTML baseURL:nil];
+	[webView loadHTMLString:kClearHTML baseURL:nil];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+	DebugLog(@"iWWWView#webViewDidFinishLoad");
+	[self stopLoading];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+	DebugLog(@"iWWWView#webViewDidStartLoad");	
+	[self startLoading];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+	DebugLog(@"iWWWView#didFailLoadWithError");	
+
+	[self stopLoading];
+	[self setHidden:YES];
+	switch (error.code) {
+		case NSURLErrorCannotFindHost:
+			//[[ikooAlert instance] alert:@"Web" withMessage:@"Host not found."];
+			break;
+		case NSURLErrorTimedOut:
+			//[[ikooAlert instance] alert:@"Web" withMessage:@"Timed out."];
+			break;
+		default:
+			//NSLog(@"WebViewController#didFailWithError %@ code %i ", [error localizedDescription], error.code);			
+			break;
+	}//hide all other errors for now :) and be happy	
 }
 
 @end

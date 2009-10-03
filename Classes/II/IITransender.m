@@ -234,6 +234,7 @@
 		NSString *memoryII = [memory valueForKey:@"ii"];		
 		NSString *diskII = nil;
 		
+		DebugLog(@"#invokeTransend options: %@ behavior: %@", options, behavior);
 		//see what kind of transend this is and act	
 		
 		if ([memoryII isEqualToString:@"message"]) {
@@ -300,13 +301,18 @@
 			if (!viewController) {			
 				if ([Kriya xibExists:memoryII] ) { //load from nib if there is one
 					viewController = [[[viewControllerClass alloc] initWithNibName:memoryII bundle:nil] autorelease];
+					DebugLog(@"#invokeTransend XIB viewController=%@ delegate=%@", viewController, delegate);
+
 				} else { //just init, view controller should load it self programmatically
-					viewController = [[[viewControllerClass alloc] init]autorelease]; 
+					
+					DebugLog(@"#invokeTransend programmaticaly viewController=%@ delegate=%@", viewController, delegate);
+
+					viewController = [[[viewControllerClass alloc] init] autorelease]; 
 				}	
 				//each loaded View should functionalize once
 				functionalize = YES;
 			}
-			
+
 			//transend
 			if (viewController && delegate) {
 				
