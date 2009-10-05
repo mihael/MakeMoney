@@ -5,7 +5,8 @@
 
 //supported image url formats
 #define kPikchurFormat @"http://pikchur.com/"
-#define kPikchurFormatFinal @"https://s3.amazonaws.com/pikchurimages/"
+#define kPikchurFormatShort @"http://pk.gd/"
+#define kPikchurFormatFinal @"http://img.pikchur.com/"
 #define kTwitPicFormat @"http://twitpic.com/"
 #define kTwitPicFormatFinal @"http://s3.amazonaws.com/twitpic/"
 

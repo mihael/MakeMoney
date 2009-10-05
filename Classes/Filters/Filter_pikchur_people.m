@@ -8,12 +8,12 @@
 
 - (NSString*)pageParamName
 {
-	return @"data[api][feeds][piks][page]";
+	return @"data[api][feeds][page]";
 }
 
 - (NSString*)limitParamName
 {
-	return @"data[api][feeds][piks][limit]";
+	return @"data[api][feeds][limit]";
 }
 
 @end

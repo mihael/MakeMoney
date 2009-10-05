@@ -3,23 +3,30 @@
 //  MakeMoney
 //
 #import "Filter_pikchur.h"
-#import "JSON.h"
+#import "CJSONDeserializer.h"
 
 @implementation Filter_pikchur
 
 - (NSString*)pageParamName
 {
-	return @"data[api][feeds][timeline][page]";
+	return @"data[api][feeds][page]";
 }
 
 - (NSString*)limitParamName
 {
-	return @"data[api][feeds][timeline][limit]";
+	return @"data[api][feeds][limit]";
 }
 
 - (NSString*)filter:(NSString*)information withOptions:(NSDictionary*)options
 {
-	NSArray* piks = [[information JSONValue] objectForKey:@"Piks"];
+
+	NSError *error = nil;
+	NSDictionary *informationDictionary = [[CJSONDeserializer deserializer] deserializeAsDictionary:[information dataUsingEncoding:NSUTF8StringEncoding] error:&error];
+
+	if (error!=nil)
+		DebugLog(@"ERROR: %@", [error localizedDescription]);
+	
+	NSArray* piks = [informationDictionary objectForKey:@"feed"];
 	
 	NSString* behavior = k_ior_notstop_space;
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
@@ -28,7 +35,7 @@
 	for (i = 0; i < count; i++) {
 		NSDictionary * pik= [piks objectAtIndex:i];
 		
-		[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@\"}, %@},", [self pikchurUrlFromID:[[pik valueForKey:@"Pik"] valueForKey:@"id"]  withSize:@"m"], behavior];
+		[transends appendFormat:@"{\"ii\":\"message\", \"ions\":{\"background_url\":\"%@\"}, %@},", [self pikchurUrlFromID:[[pik valueForKey:@"media"] valueForKey:@"short_code"]  withSize:@"m"], behavior];
 	}
 	return [NSString stringWithFormat:@"%@]", [transends substringToIndex:transends.length-1]];
 }

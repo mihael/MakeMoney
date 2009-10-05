@@ -11,6 +11,12 @@
 		4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4705ABAF0FC964FB005DA8FC /* Settings.bundle */; };
 		4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707D8500FB2D86400094125 /* CoreLocation.framework */; };
 		472111EB105945F8003348D4 /* program.json in Resources */ = {isa = PBXBuildFile; fileRef = 479C54990FAAEE73003DF1B2 /* program.json */; };
+		47287025107A2E730053F2CE /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4728701A107A2E730053F2CE /* ASIAuthenticationDialog.m */; };
+		47287026107A2E730053F2CE /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4728701C107A2E730053F2CE /* ASIInputStream.m */; };
+		47287027107A2E730053F2CE /* ASINSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4728701E107A2E730053F2CE /* ASINSStringAdditions.m */; };
+		47287028107A2E730053F2CE /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 47287020107A2E730053F2CE /* ASIS3BucketObject.m */; };
+		47287029107A2E730053F2CE /* ASIS3ListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 47287022107A2E730053F2CE /* ASIS3ListRequest.m */; };
+		4728702A107A2E730053F2CE /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 47287024107A2E730053F2CE /* ASIS3Request.m */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
 		473488FC0F99E31C00A1D78A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F60F99E31C00A1D78A /* icon.png */; };
 		473489360F99E53100A1D78A /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 473489350F99E53100A1D78A /* libz.1.2.3.dylib */; };
@@ -85,6 +91,9 @@
 		47C3966F1026F508005F45B6 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C3966E1026F508005F45B6 /* fps_images.png */; };
 		47EBE8620F4C056A009F377E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EBE8610F4C056A009F377E /* SystemConfiguration.framework */; };
 		47EBE93B0F4C5BD9009F377E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EBE93A0F4C5BD9009F377E /* MediaPlayer.framework */; };
+		47FC5D44107A8EDB0000AB03 /* Filter_pikchur.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39442101DB2B2005F45B6 /* Filter_pikchur.m */; };
+		47FC5D45107A8EE10000AB03 /* Filter_pikchur_people.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39444101DB2B2005F45B6 /* Filter_pikchur_people.m */; };
+		47FC5D4F107A8FF60000AB03 /* libTouchJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4745C7A5105588A400BAED5A /* libTouchJSON.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -410,6 +419,13 @@
 			remoteGlobalIDString = 5018F24C0DFDEAC400C013A5;
 			remoteInfo = cocos2d;
 		};
+		47FC5D4C107A8FB80000AB03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4745C6CA105587CB00BAED5A /* cocos2d-iphone.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 509B39DE0F31020900F2FB95 /* TouchJSON */;
+			remoteInfo = TouchJSON;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -442,6 +458,18 @@
 		4723232B0FBDCCC300D49E87 /* finger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finger.png; path = Artwork/finger.png; sourceTree = "<group>"; };
 		4723232C0FBDCCC300D49E87 /* overfinger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = overfinger.png; path = Artwork/overfinger.png; sourceTree = "<group>"; };
 		472643200F56A9530097D30A /* listing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = listing.json; path = Transends/listing.json; sourceTree = SOURCE_ROOT; };
+		47287019107A2E730053F2CE /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = Classes/II/ASIAuthenticationDialog.h; sourceTree = "<group>"; };
+		4728701A107A2E730053F2CE /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = Classes/II/ASIAuthenticationDialog.m; sourceTree = "<group>"; };
+		4728701B107A2E730053F2CE /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIInputStream.h; path = Classes/II/ASIInputStream.h; sourceTree = "<group>"; };
+		4728701C107A2E730053F2CE /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = Classes/II/ASIInputStream.m; sourceTree = "<group>"; };
+		4728701D107A2E730053F2CE /* ASINSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASINSStringAdditions.h; path = Classes/II/ASINSStringAdditions.h; sourceTree = "<group>"; };
+		4728701E107A2E730053F2CE /* ASINSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASINSStringAdditions.m; path = Classes/II/ASINSStringAdditions.m; sourceTree = "<group>"; };
+		4728701F107A2E730053F2CE /* ASIS3BucketObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3BucketObject.h; path = Classes/II/ASIS3BucketObject.h; sourceTree = "<group>"; };
+		47287020107A2E730053F2CE /* ASIS3BucketObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3BucketObject.m; path = Classes/II/ASIS3BucketObject.m; sourceTree = "<group>"; };
+		47287021107A2E730053F2CE /* ASIS3ListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3ListRequest.h; path = Classes/II/ASIS3ListRequest.h; sourceTree = "<group>"; };
+		47287022107A2E730053F2CE /* ASIS3ListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3ListRequest.m; path = Classes/II/ASIS3ListRequest.m; sourceTree = "<group>"; };
+		47287023107A2E730053F2CE /* ASIS3Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIS3Request.h; path = Classes/II/ASIS3Request.h; sourceTree = "<group>"; };
+		47287024107A2E730053F2CE /* ASIS3Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIS3Request.m; path = Classes/II/ASIS3Request.m; sourceTree = "<group>"; };
 		472965420F4859C10053F946 /* Hajlov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hajlov; sourceTree = "<group>"; };
 		473488F60F99E31C00A1D78A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Artwork/icon.png; sourceTree = "<group>"; };
 		473488F70F99E31C00A1D78A /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main.png; path = Artwork/main.png; sourceTree = "<group>"; };
@@ -670,6 +698,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47FC5D4F107A8FF60000AB03 /* libTouchJSON.a in Frameworks */,
 				4745C7F4105589B900BAED5A /* libcocos2d.a in Frameworks */,
 				477ABD4E0F45641100696306 /* UIKit.framework in Frameworks */,
 				477ABD4F0F45641100696306 /* Foundation.framework in Frameworks */,
@@ -935,6 +964,18 @@
 		477386860F4ACCDE0044085E /* AllSeeingEye */ = {
 			isa = PBXGroup;
 			children = (
+				47287019107A2E730053F2CE /* ASIAuthenticationDialog.h */,
+				4728701A107A2E730053F2CE /* ASIAuthenticationDialog.m */,
+				4728701B107A2E730053F2CE /* ASIInputStream.h */,
+				4728701C107A2E730053F2CE /* ASIInputStream.m */,
+				4728701D107A2E730053F2CE /* ASINSStringAdditions.h */,
+				4728701E107A2E730053F2CE /* ASINSStringAdditions.m */,
+				4728701F107A2E730053F2CE /* ASIS3BucketObject.h */,
+				47287020107A2E730053F2CE /* ASIS3BucketObject.m */,
+				47287021107A2E730053F2CE /* ASIS3ListRequest.h */,
+				47287022107A2E730053F2CE /* ASIS3ListRequest.m */,
+				47287023107A2E730053F2CE /* ASIS3Request.h */,
+				47287024107A2E730053F2CE /* ASIS3Request.m */,
 				47C39415101DB1C1005F45B6 /* ASIFormDataRequest.h */,
 				47C39416101DB1C1005F45B6 /* ASIFormDataRequest.m */,
 				47C39417101DB1C1005F45B6 /* ASIHTTPRequest.h */,
@@ -1166,6 +1207,7 @@
 			);
 			dependencies = (
 				4745C7F2105588DB00BAED5A /* PBXTargetDependency */,
+				47FC5D4D107A8FB80000AB03 /* PBXTargetDependency */,
 			);
 			name = MakeMoney;
 			productName = MakeMoney;
@@ -1599,6 +1641,14 @@
 				47B16316107667BA00267E83 /* FecherViewController.m in Sources */,
 				47547EBA1076688E00DA7658 /* Filter_twitter.m in Sources */,
 				47547EFF10767C0000DA7658 /* FlipsideViewController.m in Sources */,
+				47287025107A2E730053F2CE /* ASIAuthenticationDialog.m in Sources */,
+				47287026107A2E730053F2CE /* ASIInputStream.m in Sources */,
+				47287027107A2E730053F2CE /* ASINSStringAdditions.m in Sources */,
+				47287028107A2E730053F2CE /* ASIS3BucketObject.m in Sources */,
+				47287029107A2E730053F2CE /* ASIS3ListRequest.m in Sources */,
+				4728702A107A2E730053F2CE /* ASIS3Request.m in Sources */,
+				47FC5D44107A8EDB0000AB03 /* Filter_pikchur.m in Sources */,
+				47FC5D45107A8EE10000AB03 /* Filter_pikchur_people.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1609,6 +1659,11 @@
 			isa = PBXTargetDependency;
 			name = cocos2d;
 			targetProxy = 4745C7F1105588DB00BAED5A /* PBXContainerItemProxy */;
+		};
+		47FC5D4D107A8FB80000AB03 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TouchJSON;
+			targetProxy = 47FC5D4C107A8FB80000AB03 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
