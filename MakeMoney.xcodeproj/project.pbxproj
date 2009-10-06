@@ -94,6 +94,10 @@
 		47FC5D44107A8EDB0000AB03 /* Filter_pikchur.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39442101DB2B2005F45B6 /* Filter_pikchur.m */; };
 		47FC5D45107A8EE10000AB03 /* Filter_pikchur_people.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39444101DB2B2005F45B6 /* Filter_pikchur_people.m */; };
 		47FC5D4F107A8FF60000AB03 /* libTouchJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4745C7A5105588A400BAED5A /* libTouchJSON.a */; };
+		47FC5E60107BA4AC0000AB03 /* PusherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3946D101DB2C6005F45B6 /* PusherViewController.m */; };
+		47FC5E61107BA4B50000AB03 /* PusherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 478DE4700FD2AF590067BAE6 /* PusherView.xib */; };
+		47FC5E94107BA5080000AB03 /* finger.png in Resources */ = {isa = PBXBuildFile; fileRef = 4723232B0FBDCCC300D49E87 /* finger.png */; };
+		47FC5E95107BA50F0000AB03 /* photo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 47EB30920FBE29C90013C02F /* photo_icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1587,6 +1591,9 @@
 				47B1630B1076657500267E83 /* MessageView.xib in Resources */,
 				47B1630C1076657F00267E83 /* FecherView.xib in Resources */,
 				47B1630D1076658100267E83 /* FlipsideView.xib in Resources */,
+				47FC5E61107BA4B50000AB03 /* PusherView.xib in Resources */,
+				47FC5E94107BA5080000AB03 /* finger.png in Resources */,
+				47FC5E95107BA50F0000AB03 /* photo_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1649,6 +1656,7 @@
 				4728702A107A2E730053F2CE /* ASIS3Request.m in Sources */,
 				47FC5D44107A8EDB0000AB03 /* Filter_pikchur.m in Sources */,
 				47FC5D45107A8EE10000AB03 /* Filter_pikchur_people.m in Sources */,
+				47FC5E60107BA4AC0000AB03 /* PusherViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

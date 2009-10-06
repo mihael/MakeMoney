@@ -285,13 +285,14 @@
 	[background setFrame:rect];
 	[pusherbar setFrame:CGRectMake(0, 0, rect.size.width, 44)];
 	[selectedImageView setFrame:CGRectMake(rect.size.width-44, 0, 44, 44)];
-	
-	if (rect.size.width == 320.0) {
-		[background setImage:[self.transender imageNamed:@"vmain.jpg"]];
-	} else {
-		[background setImage:[self.transender imageNamed:@"main.jpg"]];
-	}
 
+	if (!imageSelected){
+		if (rect.size.width == 320.0) {
+			[background setImage:[self.transender imageNamed:@"vmain.jpg"]];
+		} else {
+			[background setImage:[self.transender imageNamed:@"main.jpg"]];
+		}
+	}
 	
 			
 }

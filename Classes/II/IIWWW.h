@@ -6,12 +6,14 @@
 #import "ASINetworkQueue.h"
 #import "IIFilter.h"
 #import <CoreLocation/CoreLocation.h>
-
+                            
 #define kPikchurUploadURL @"http://api.pikchur.com/api/post/json"
 #define kPikchurAuthURL @"https://api.pikchur.com/auth/json"
 #define kPikchurAPIKey @"plusOOts6YVcBSFGgT0jaA"
 
 #define kTwitPicUploadURL @"http://twitpic.com/api/uploadAndPost"
+
+#define TIMEOUT_SEC 120
 
 @class ASINetworkQueue;
 @class IIFilter;
@@ -25,6 +27,11 @@
     id <IIWWWDelegate> delegate; //the delegate to be notified of feches
 	ASINetworkQueue* server;
 
+	//classics
+	NSURLConnection *connection;
+	NSMutableData *recievedData;
+	int statusCode;
+	
 	NSDictionary *options;
 	int page;
 	int limit;
@@ -70,7 +77,7 @@
 - (void)fechFailed:(ASIHTTPRequest *)request;
 - (void)fechFinished:(ASIHTTPRequest *)request;
 
- //feching is also posting information to web
+//feching is also posting information to web
 - (void)fechUpdateWithParams:(NSDictionary*)p;
 //TODO- (void)fechUpdateWithImage:(UIImage*)i andParams:(NSDictionary*)p;
 
@@ -88,6 +95,9 @@
 //authenticate with pikchur and save auth_key for later use
 - (void)authenticateWithPikchur;
 - (BOOL)isAuthenticatedWithPikchur;
+
+//classic request
+- (NSMutableURLRequest*)makeRequest:(NSString*)_url;
 
 
 @end

@@ -194,8 +194,13 @@
 - (void)layout:(CGRect)rect
 {
 	[self.view setFrame:rect];
-	[background setFrame:rect];
 	[button setFrame:CGRectMake(20, 20, rect.size.width - 20, rect.size.height - 20)];
+	if (rect.size.width == 320.0) {
+		[background setImage:[self.transender imageNamed:@"vmain.jpg"]];
+	} else {
+		[background setImage:[self.transender imageNamed:@"main.jpg"]];
+	}
+	[background setFrame:rect];
 }
 
 - (void)progressUp:(NSString*)page

@@ -65,9 +65,12 @@
 	[server setRequestDidFinishSelector:@selector(fechFinished:)];
 	[server setRequestDidFailSelector:@selector(fechFailed:)];	
 	[server setDelegate:self];	
+
+	recievedData = [[NSMutableData alloc] init];
 }
 
 - (void)dealloc {
+	[recievedData release];
 	[options release];
 	options = nil;	
 	[filter release];
@@ -305,8 +308,68 @@
 #pragma mark Pikchur API 
 - (void)fechUploadWithPikchur:(NSString*)imagePath withDescription:(NSString*)description andLocation:(CLLocation*)location andProgress:(id)progressDelegate
 {
-	NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
-	NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
+	
+	NSMutableURLRequest *postRequest = [self makeRequest:kPikchurUploadURL];
+	[postRequest setHTTPMethod:@"POST"];
+	
+	NSString *stringBoundary = [NSString stringWithString:@"0xKhTmLbOuNdArY"];
+	NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",stringBoundary];
+	[postRequest addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	
+	NSMutableData *postBody = [NSMutableData data];
+	[postBody appendData:[[NSString stringWithFormat:@"--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][auth_key]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	NSString *authkey = [[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@_pikchur_auth_key", [options valueForKey:@"pikchur"]]]; 
+	[postBody appendData:[authkey dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][key]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[kPikchurAPIKey dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+
+	if (description) {
+		[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][status]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+		[postBody appendData:[description dataUsingEncoding:NSUTF8StringEncoding]];
+		[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	}
+
+	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][origin]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[@"MTE" dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	//[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][update][koornk]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	//[postBody appendData:[@"OFF" dataUsingEncoding:NSUTF8StringEncoding]];
+	//[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	if (location) {
+		[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][geo][lat]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+		[postBody appendData:[[NSString stringWithFormat:@"%F",[location coordinate].latitude] dataUsingEncoding:NSUTF8StringEncoding]];
+		//[postBody appendData:[@"46.055" dataUsingEncoding:NSUTF8StringEncoding]];//LJUBLJANA
+		[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+		[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"data[api][geo][lon]\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+		[postBody appendData:[[NSString stringWithFormat:@"%F",[location coordinate].longitude] dataUsingEncoding:NSUTF8StringEncoding]];
+		//[postBody appendData:[@"14.514" dataUsingEncoding:NSUTF8StringEncoding]];//LJUBLJANA		
+		[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	}
+	
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"dataAPIimage\"; filename=\"upload.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postBody appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	
+	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithPath:imagePath]], 0.9)];
+	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	[postRequest setHTTPBody:postBody];
+
+	connection = [[NSURLConnection alloc] initWithRequest:postRequest delegate:self];
+	
+	DebugLog(@"REQUESTING PIKCHUR UPLOAD");
+
+	/*
+	this code stopped working after I upgraded the ALLSEEINGEYE code...
+	maybe I should just stick to a simple HttpClient, like that one in ikoo
+	ASI is out.
+	//NSString *username = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:0];
+	//NSString *password = [[[options valueForKey:@"pikchur"] componentsSeparatedByString:@"@"] objectAtIndex:1];;
 	
 	ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:kPikchurUploadURL]] autorelease];
 	if (progressDelegate)
@@ -318,11 +381,13 @@
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"dataAPIimage\"; filename=\"upload.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];		
-	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithPath:imagePath]], 0.9)];
+	UIImage *img_data = [self scaleAndRotateImage:[Kriya imageWithPath:imagePath]];
+	DebugLog(@"SENDING IMAGE DATA: %@", img_data);
+	[postBody appendData:UIImageJPEGRepresentation(img_data, 0.9)];
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[request setPostBody:postBody];
-	[request setPostValue:username forKey:@"data[api][username]"];
-	[request setPostValue:password forKey:@"data[api][password]"];
+	//[request setPostValue:username forKey:@"data[api][username]"];
+//	[request setPostValue:password forKey:@"data[api][password]"];
 	//[request setPostValue:@"" forKey:@"data[api][origin]"];
 	[request setPostValue:@"pikchur" forKey:@"data[api][service]"];
 	[request setPostValue:kPikchurAPIKey forKey:@"data[api][key]"];
@@ -338,8 +403,10 @@
 	[request setDelegate:self];
 	[request setDidFailSelector:@selector(imageUploadFailed:)];
 	[request setDidFinishSelector:@selector(imageUploadFinished:)];
+	DebugLog(@"ABOUT TO REQUEST: %@", request);
 	[self envokeRequest:request];
 	DebugLog(@"REQUESTING PIKCHUR UPLOAD");
+	*/ 
 }
 
 - (void)authenticateWithPikchur {
@@ -368,7 +435,7 @@
 
 - (BOOL)isAuthenticatedWithPikchur 
 {
-	DebugLog(@"isAuthenticatedWithPikchur %@", [options valueForKey:@"pikchur"]);
+	DebugLog(@"isAuthenticatedWithPikchur %@ KEY:%@", [options valueForKey:@"pikchur"], [[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@_pikchur_auth_key", [options valueForKey:@"pikchur"]]]);
 	if ([[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"%@_pikchur_auth_key", [options valueForKey:@"pikchur"]]])
 		return YES;
 	return NO;
@@ -390,7 +457,9 @@
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"media\"; filename=\"upload.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
 	[postBody appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];		
-	[postBody appendData:UIImageJPEGRepresentation([self scaleAndRotateImage:[Kriya imageWithPath:imagePath]], 0.9)];
+	UIImage *img_data = [self scaleAndRotateImage:[Kriya imageWithPath:imagePath]];
+	DebugLog(@"SENDING IMAGE DATA: %@", img_data);
+	[postBody appendData:UIImageJPEGRepresentation(img_data, 0.9)];
 	[postBody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[request setPostBody:postBody];
 	[request setPostValue:username forKey:@"username"];
@@ -529,5 +598,48 @@
 	
 	return imageCopy;  
 }  
+
+#pragma mark NSURLConnection 
+- (void)requestSucceeded {
+	DebugLog(@"#requestSucceeded");
+	[self.delegate feched:@""];
+}
+
+- (void)requestFailed:(NSError*)error {
+	DebugLog(@"#requestFailed");
+	if (error)
+	  [self.delegate notFeched:[error localizedDescription]];
+	else
+		[self.delegate notFeched:nil];
+		
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    statusCode = [(NSHTTPURLResponse*)response statusCode];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [recievedData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	[self requestSucceeded];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError*) error {
+	[self requestFailed:error];
+}
+
+- (NSMutableURLRequest*)makeRequest:(NSString*)_url {
+	NSString *encodedUrl = (NSString*)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)_url, NULL, NULL, kCFStringEncodingUTF8);
+	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
+	[request setURL:[NSURL URLWithString:encodedUrl]];
+	[request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
+	[request setTimeoutInterval:TIMEOUT_SEC];
+	[request setHTTPShouldHandleCookies:FALSE];
+	[encodedUrl release];
+	return request;
+}
+
 
 @end
