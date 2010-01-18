@@ -24,7 +24,8 @@
 
 - (void)loadOptions:(NSDictionary*)o
 {	
-	[self setOptions:[o copy]];
+	//[self setOptions:[o copy]];
+	[self setOptions:o];
 		
 	NSString * wwwurl = [options valueForKey:@"url"];
 	if (!wwwurl) {

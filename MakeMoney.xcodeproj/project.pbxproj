@@ -427,7 +427,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 4745C6CA105587CB00BAED5A /* cocos2d-iphone.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 509B39DE0F31020900F2FB95 /* TouchJSON */;
+			remoteGlobalIDString = 509B39DE0F31020900F2FB95;
 			remoteInfo = TouchJSON;
 		};
 /* End PBXContainerItemProxy section */

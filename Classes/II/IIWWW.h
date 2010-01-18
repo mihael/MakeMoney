@@ -47,9 +47,9 @@
 @property (nonatomic, assign) id <IIWWWDelegate> delegate;
 @property (readonly, retain) ASINetworkQueue *server;
 @property (readwrite, retain) NSURL *url;
-@property (readwrite, retain) NSString *params;
-@property (readwrite, retain) NSString *filterName;
-@property (readwrite, retain) NSDictionary *options;
+@property (readwrite, copy) NSString *params;
+@property (readwrite, copy) NSString *filterName;
+@property (readwrite, copy) NSDictionary *options;
 
 - (id)initWithOptions:(NSDictionary*)o;
 - (void)loadOptions:(NSDictionary*)o;
