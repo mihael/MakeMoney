@@ -50,11 +50,10 @@ Cool!\
 	
 	if (self = [super initWithFrame:frame]) {
 		//self.backgroundColor = [UIColor clearColor];
-		webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, kButtonSize, frame.size.width, frame.size.height-kButtonSize)];
+		webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 //		[webView loadHTMLString:kClearHTML baseURL:nil];
 		[webView setDelegate:self];
 //		[webView setScalesPageToFit:YES];
-
 		[self addSubview:webView];
 		//[self clear];
 
@@ -103,6 +102,17 @@ Cool!\
 	}
 }
 
+- (void)setNSURL:(NSURL*)nsurl {
+	[_url release];
+	_url = [[nsurl absoluteString] copy];
+	
+	if (_url) {
+		[webView loadRequest:[NSURLRequest requestWithURL:nsurl]];
+	} else {
+		[self setHidden:YES];
+	}
+}
+
 - (void)setYutubUrl:(NSString*)yutub_url {
 	[_url release];
 	_url = [yutub_url copy];
@@ -121,9 +131,17 @@ Cool!\
 	[webView loadHTMLString:kClearHTML baseURL:nil];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (NSString *)eval:(NSString *)javascript 
+{
+	return [webView stringByEvaluatingJavaScriptFromString:(NSString *)javascript];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)_webView {
 	DebugLog(@"iWWWView#webViewDidFinishLoad");
 	[self stopLoading];
+	int scrollY = [[NSUserDefaults standardUserDefaults] integerForKey:@"scrollY"];
+	if (scrollY>0)
+		[webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.scrollTo(0, %d);",scrollY]];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
@@ -132,7 +150,7 @@ Cool!\
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-	DebugLog(@"iWWWView#didFailLoadWithError");	
+	DebugLog(@"iWWWView#didFailLoadWithError %@", [error localizedDescription]);	
 
 	[self stopLoading];
 	[self setHidden:YES];

@@ -73,7 +73,7 @@
 		progressor = [[iProgressView alloc] initWithFrame:self.frame text:nil];
 		[progressor setHidden:YES];
 		
-		wwwView = [[iWWWView alloc] initWithFrame:CGRectMake(0, buttonSize, self.frame.size.width, self.frame.size.height - buttonSize)];
+		wwwView = [[iWWWView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 		[wwwView setHidden:YES];
 		
 		[self addSubview:button];
@@ -773,6 +773,12 @@
 }
 
 #pragma mark WWW
+- (void)wwwWithNSURL:(NSURL*)nsurl
+{
+	[wwwView setHidden:NO];
+	[wwwView setNSURL:nsurl];
+}
+
 - (void)wwwWithUrl:(NSString*)url 
 {
 	[wwwView setHidden:NO];
@@ -783,6 +789,11 @@
 {
 	[wwwView setHidden:NO];
 	[wwwView setYutubUrl:yutub_url];
+}
+
+- (NSString*)wwwEval:(NSString *)javascript
+{
+	return [wwwView eval:javascript];
 }
 
 - (void)wwwClear 

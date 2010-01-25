@@ -96,6 +96,8 @@
 //www display
 - (void)wwwWithYutubUrl:(NSString*)yutub_url;
 - (void)wwwWithUrl:(NSString*)url;
+- (void)wwwWithNSURL:(NSURL*)nsurl;
+- (NSString*)wwwEval:(NSString *)javascript;
 - (void)wwwClear;
 
 //the space without is the topmost view, the view where the button lies

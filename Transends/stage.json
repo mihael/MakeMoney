@@ -1,7 +1,7 @@
 {
 "2D":"false",
 "2D_scene":"SplashScene",
-"wwwapp":"true",
+"wwwapp":"false",
 "wifiapp":"false",
 "program":"program",
 "horizontal":"true",

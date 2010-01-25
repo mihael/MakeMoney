@@ -94,7 +94,7 @@ CGRect KriyaFrame() {
 {
 	NSString * xib_path = [[NSBundle mainBundle] pathForResource:xibName ofType:@"xib"];
 	NSString * nib_path = [[NSBundle mainBundle] pathForResource:xibName ofType:@"nib"];
-	DebugLog(@"#xibExists %@ %@", xibName, nib_path);
+	DebugLog(@"#xibExists %@ %@", xibName, xib_path);
 	return (  xib_path == nil && nib_path == nil) ? NO : YES;
 }
 

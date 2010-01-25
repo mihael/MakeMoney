@@ -16,6 +16,11 @@
 - (id)initWithFrame:(CGRect)frame;
 
 - (void)setUrl:(NSString*)url;
+- (void)setNSURL:(NSURL*)nsurl;
 - (void)setYutubUrl:(NSString*)yutub_url;
 - (void)clear;
+
+//run/evaluate javascript
+- (NSString *)eval:(NSString *)javascript;
+
 @end
