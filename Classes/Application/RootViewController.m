@@ -101,7 +101,8 @@
 
 //since rootviewcontroller sits under or atop all else, this is the only place to controll autorotation
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES; //( (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));//(interfaceOrientation == UIInterfaceOrientationPortrait);
+	//return NO; //( (interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));//(interfaceOrientation == UIInterfaceOrientationPortrait);
+	return [[[[MakeMoneyAppDelegate app] stage] valueForKey:@"can_rotate"] boolValue];
 }
 
 - (void)didReceiveMemoryWarning {

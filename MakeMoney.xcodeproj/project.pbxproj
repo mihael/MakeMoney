@@ -36,8 +36,11 @@
 		479E044C1076628200B52AA3 /* main.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 479C52A00FAAC244003DF1B2 /* main.jpg */; };
 		479E044D1076628E00B52AA3 /* vmain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 475B46BD0FE16DAA00D7194D /* vmain.jpg */; };
 		47A20A75110D8C99003195A0 /* LocalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A20A74110D8C99003195A0 /* LocalWebViewController.m */; };
-		47A20A77110D9064003195A0 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 47A20A76110D9064003195A0 /* index.html */; };
-		47A20B39110DADFB003195A0 /* tm-icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47A20B38110DADFB003195A0 /* tm-icon.jpg */; };
+		47A20F02110EE093003195A0 /* backlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 47A20D3D110EE093003195A0 /* backlight.png */; };
+		47A20F03110EE093003195A0 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 47A20D3E110EE093003195A0 /* button.png */; };
+		47A20F04110EE093003195A0 /* highbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47A20D3F110EE093003195A0 /* highbutton.png */; };
+		47A20F05110EE093003195A0 /* littlebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47A20D40110EE093003195A0 /* littlebutton.png */; };
+		47A20F06110EE093003195A0 /* littlehighbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47A20D41110EE093003195A0 /* littlehighbutton.png */; };
 		47B14D580F7E09360017AB44 /* stage.json in Resources */ = {isa = PBXBuildFile; fileRef = 47B14D570F7E09360017AB44 /* stage.json */; };
 		47B162F9107664B200267E83 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B162F8107664B200267E83 /* libicucore.dylib */; };
 		47B1630B1076657500267E83 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47041EE00FA1047300D7DE30 /* MessageView.xib */; };
@@ -86,11 +89,6 @@
 		47C396501026D1BB005F45B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3964B1026D1BB005F45B6 /* main.m */; };
 		47C396511026D1BB005F45B6 /* MakeMoneyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3964D1026D1BB005F45B6 /* MakeMoneyAppDelegate.m */; };
 		47C396521026D1BB005F45B6 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3964F1026D1BB005F45B6 /* RootViewController.m */; };
-		47C396691026F4C5005F45B6 /* backlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C396641026F4C5005F45B6 /* backlight.png */; };
-		47C3966A1026F4C5005F45B6 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C396651026F4C5005F45B6 /* button.png */; };
-		47C3966B1026F4C5005F45B6 /* highbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C396661026F4C5005F45B6 /* highbutton.png */; };
-		47C3966C1026F4C5005F45B6 /* littlebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C396671026F4C5005F45B6 /* littlebutton.png */; };
-		47C3966D1026F4C5005F45B6 /* littlehighbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C396681026F4C5005F45B6 /* littlehighbutton.png */; };
 		47C3966F1026F508005F45B6 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C3966E1026F508005F45B6 /* fps_images.png */; };
 		47EBE8620F4C056A009F377E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EBE8610F4C056A009F377E /* SystemConfiguration.framework */; };
 		47EBE93B0F4C5BD9009F377E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EBE93A0F4C5BD9009F377E /* MediaPlayer.framework */; };
@@ -509,8 +507,11 @@
 		479CBF500F8E574400718563 /* 0_mm_test1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0_mm_test1.jpg; sourceTree = "<group>"; };
 		47A20A73110D8C99003195A0 /* LocalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalWebViewController.h; path = Controllers/LocalWebViewController.h; sourceTree = "<group>"; };
 		47A20A74110D8C99003195A0 /* LocalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalWebViewController.m; path = Controllers/LocalWebViewController.m; sourceTree = "<group>"; };
-		47A20A76110D9064003195A0 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = Resources/index.html; sourceTree = "<group>"; };
-		47A20B38110DADFB003195A0 /* tm-icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "tm-icon.jpg"; path = "Resources/tm-icon.jpg"; sourceTree = "<group>"; };
+		47A20D3D110EE093003195A0 /* backlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backlight.png; sourceTree = "<group>"; };
+		47A20D3E110EE093003195A0 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		47A20D3F110EE093003195A0 /* highbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = highbutton.png; sourceTree = "<group>"; };
+		47A20D40110EE093003195A0 /* littlebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlebutton.png; sourceTree = "<group>"; };
+		47A20D41110EE093003195A0 /* littlehighbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlehighbutton.png; sourceTree = "<group>"; };
 		47AD8E5D0F7EC0EE001687AA /* 0_Movie716.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 0_Movie716.mov; sourceTree = "<group>"; };
 		47AD90080F7FBCAA001687AA /* 0_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0_1.jpg; sourceTree = "<group>"; };
 		47AD90090F7FBCAA001687AA /* 0_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0_2.jpg; sourceTree = "<group>"; };
@@ -661,11 +662,6 @@
 		47C3964D1026D1BB005F45B6 /* MakeMoneyAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MakeMoneyAppDelegate.m; path = Application/MakeMoneyAppDelegate.m; sourceTree = "<group>"; };
 		47C3964E1026D1BB005F45B6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = Application/RootViewController.h; sourceTree = "<group>"; };
 		47C3964F1026D1BB005F45B6 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = Application/RootViewController.m; sourceTree = "<group>"; };
-		47C396641026F4C5005F45B6 /* backlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backlight.png; sourceTree = "<group>"; };
-		47C396651026F4C5005F45B6 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
-		47C396661026F4C5005F45B6 /* highbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = highbutton.png; sourceTree = "<group>"; };
-		47C396671026F4C5005F45B6 /* littlebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlebutton.png; sourceTree = "<group>"; };
-		47C396681026F4C5005F45B6 /* littlehighbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlehighbutton.png; sourceTree = "<group>"; };
 		47C3966E1026F508005F45B6 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/2D/fps_images.png; sourceTree = "<group>"; };
 		47C7E25D0F9CC70900789864 /* FecherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FecherView.xib; sourceTree = "<group>"; };
 		47E2676B0FD97A4D0040F565 /* ImageArtView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageArtView.xib; sourceTree = "<group>"; };
@@ -779,11 +775,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				47A20B38110DADFB003195A0 /* tm-icon.jpg */,
-				47A20A76110D9064003195A0 /* index.html */,
+				47A20D3C110EE093003195A0 /* G */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				47C396701026F50F005F45B6 /* 2D */,
-				47C396631026F4C5005F45B6 /* G */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1021,6 +1015,19 @@
 			name = JSON;
 			sourceTree = "<group>";
 		};
+		47A20D3C110EE093003195A0 /* G */ = {
+			isa = PBXGroup;
+			children = (
+				47A20D3D110EE093003195A0 /* backlight.png */,
+				47A20D3E110EE093003195A0 /* button.png */,
+				47A20D3F110EE093003195A0 /* highbutton.png */,
+				47A20D40110EE093003195A0 /* littlebutton.png */,
+				47A20D41110EE093003195A0 /* littlehighbutton.png */,
+			);
+			name = G;
+			path = Resources/G;
+			sourceTree = "<group>";
+		};
 		47B7A61C107652D3005F9DC7 /* RegExKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1117,19 +1124,6 @@
 				47C39490101DB373005F45B6 /* IIWWW.m */,
 			);
 			name = IITransender;
-			sourceTree = "<group>";
-		};
-		47C396631026F4C5005F45B6 /* G */ = {
-			isa = PBXGroup;
-			children = (
-				47C396641026F4C5005F45B6 /* backlight.png */,
-				47C396651026F4C5005F45B6 /* button.png */,
-				47C396661026F4C5005F45B6 /* highbutton.png */,
-				47C396671026F4C5005F45B6 /* littlebutton.png */,
-				47C396681026F4C5005F45B6 /* littlehighbutton.png */,
-			);
-			name = G;
-			path = Resources/G;
 			sourceTree = "<group>";
 		};
 		47C396701026F50F005F45B6 /* 2D */ = {
@@ -1588,11 +1582,6 @@
 				473488FC0F99E31C00A1D78A /* icon.png in Resources */,
 				4705AAA90FC709E4005DA8FC /* Progress in Resources */,
 				4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */,
-				47C396691026F4C5005F45B6 /* backlight.png in Resources */,
-				47C3966A1026F4C5005F45B6 /* button.png in Resources */,
-				47C3966B1026F4C5005F45B6 /* highbutton.png in Resources */,
-				47C3966C1026F4C5005F45B6 /* littlebutton.png in Resources */,
-				47C3966D1026F4C5005F45B6 /* littlehighbutton.png in Resources */,
 				47C3966F1026F508005F45B6 /* fps_images.png in Resources */,
 				472111EB105945F8003348D4 /* program.json in Resources */,
 				479E04491076622000B52AA3 /* radionula_screen.jpg in Resources */,
@@ -1605,8 +1594,11 @@
 				47FC5E61107BA4B50000AB03 /* PusherView.xib in Resources */,
 				47FC5E94107BA5080000AB03 /* finger.png in Resources */,
 				47FC5E95107BA50F0000AB03 /* photo_icon.png in Resources */,
-				47A20A77110D9064003195A0 /* index.html in Resources */,
-				47A20B39110DADFB003195A0 /* tm-icon.jpg in Resources */,
+				47A20F02110EE093003195A0 /* backlight.png in Resources */,
+				47A20F03110EE093003195A0 /* button.png in Resources */,
+				47A20F04110EE093003195A0 /* highbutton.png in Resources */,
+				47A20F05110EE093003195A0 /* littlebutton.png in Resources */,
+				47A20F06110EE093003195A0 /* littlehighbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1709,7 +1701,7 @@
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = MakeMoney;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5B9B5D11-9BF0-415C-A855-5DE2730762FB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25DB7F39-D9A0-4FBC-B60A-83AA83019BEC";
 				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "$(cocos2d)/**";
 			};
@@ -1720,7 +1712,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Miha Plohl";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1732,7 +1724,7 @@
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = MakeMoney;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "01113C3D-4492-4A2A-810B-DD19A223F418";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "$(cocos2d)/**";
 			};

@@ -7,6 +7,7 @@
 "horizontal":"true",
 "animated":"true",
 "vibe":"1.83",
+"can_rotate":"true",
 "direction_changes":"false",
 "big_button":"false",
 "button_on_left":"true",

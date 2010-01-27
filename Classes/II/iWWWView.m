@@ -53,7 +53,7 @@ Cool!\
 		webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 //		[webView loadHTMLString:kClearHTML baseURL:nil];
 		[webView setDelegate:self];
-//		[webView setScalesPageToFit:YES];
+		//[webView setScalesPageToFit:YES];
 		[self addSubview:webView];
 		//[self clear];
 
@@ -139,9 +139,13 @@ Cool!\
 - (void)webViewDidFinishLoad:(UIWebView *)_webView {
 	DebugLog(@"iWWWView#webViewDidFinishLoad");
 	[self stopLoading];
+//	int scrollY = [[NSUserDefaults standardUserDefaults] integerForKey:[[NSUserDefaults standardUserDefaults] valueForKey:[webView stringByEvaluatingJavaScriptFromString:@"window.location.pathname"]]];
 	int scrollY = [[NSUserDefaults standardUserDefaults] integerForKey:@"scrollY"];
-	if (scrollY>0)
+	if (scrollY>0) {
 		[webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.scrollTo(0, %d);",scrollY]];
+		//reset saved value
+		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"scrollY"];
+	}
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
