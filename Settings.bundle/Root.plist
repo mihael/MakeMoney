@@ -36,17 +36,21 @@
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>DefaultValue</key>
-			<string>http://91.185.196.3:8020/</string>
+			<string>http://radio.nulab.si:8800/classics</string>
 			<key>Titles</key>
 			<array>
-				<string>RadioNULA</string>
+				<string>RadioNULA Classic</string>
+				<string>RadioNULA One Love</string>
+				<string>RadioNULA Office Dips</string>
 				<string>Groove Salad</string>
 				<string>Space Music</string>
 				<string>Off</string>
 			</array>
 			<key>Values</key>
 			<array>
-				<string>http://91.185.196.3:8020/</string>
+				<string>http://radio.nulab.si:8800/classics</string>
+				<string>http://radio.nulab.si:8800/onelove</string>
+				<string>http://radio.nulab.si:8800/lounge</string>
 				<string>http://scfire-dtc-aa03.stream.aol.com:80/stream/1018</string>
 				<string>http://194.140.112.114:8000</string>
 				<string>null</string>
