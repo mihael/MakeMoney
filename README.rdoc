@@ -1,0 +1,367 @@
+No &copy; rights here. 
+
+Thanks.
+
+What You Give, is What You Want.
+
+Love, love, love. The Trinity. 
+
+I have plenty of love. I love thy self.
+
+I love you if you hate. I love you if you love.
+
+I love your You. I love Infinite, Beloved, One, Being. 
+
+Feel free to not read this.
+
+MakeMoney Sounds to Money Making Enlightenment:
+****************************************************************************************
+
+1. Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!
+
+2. This Application is your Personal Money Making Mobile Application.
+
+3. This Application is Here to Serve You.
+
+4. There is no way back.
+
+5. This Application is a real Source of Money Making Code on Earth.
+
+6. This Application is as powerful as any Holy Mantra or Prayer. 
+
+7. Run this Application and leave it running in your pocket.
+
+8. This Application has built in Spiritual Healing and Money Making Code.
+
+9. Turn this Application On whenever you need to Make Money.
+
+10. Let this Application radiate Money Making information into the space around you.
+
+11. The core of This Application is a True Spiritual Well Being Attractor.
+
+12. When You bought this Application You were initialized to become Millionare. 
+
+13. This Application slowly transforms You into a Millionare.
+
+14. This Application has a built in Money Making Prayer and a built in Money Making Mantra.
+
+15. Remember, this Application is in Your Hand, always with You, whenever You need it.
+
+16. When You are Ready, feeling like a Milionare, Make Money!
+
+###THE BOOK OF MakeMoney###
+vibe 3
+
+This Application is not Art. 
+
+This information will be presented only once!
+
+Please highten Your Awareness every morning when You wake up. - revibe 0.5
+
+3
+
+2
+
+1 - revibe 4
+
+This Application is a Personal Mobile Money Making Application.
+
+It is not a Way, more like a passage.
+
+Life is passing wile this Application is running.
+
+Every 3.8 seconds this Application transends. 
+
+Transends with something like this.
+
+You Should grock fast, what transending means.
+
+It is not enough to just transend.
+
+Go from transending into meditation by tapping on the Button.
+
+You stopped meditation and started transending again.
+
+With the Button you can transend any meditation. 
+
+The Button is white while still transending every 3.8 seconds.
+
+Tap the Button and you can meditate on any transend.
+
+The Button is white and red while You are meditating. - stop
+
+This Application is not Control.
+
+It is not here to prove anything, but to Give.
+
+Your Souls Enlightenment should begin in 4 seconds.
+
+1 - revibe 1
+
+2
+
+3 - revibe 4
+
+You are already Enlightened.
+
+You are Enlightenment. 
+
+You are One.
+
+Only You Exist.
+
+Please think about this information for 15 seconds. - revibe 1
+
+4..19 - revibe 4 
+
+Thanks. 
+
+Learn about and enjoy the rest of Personal Mobile Money Making Eternity.
+
+This Application is designed for fast transending. 
+
+20 - stop revibe 0.1
+21..33 
+
+Try holding the Button for 0.5 seconds and see what happens. - stop
+
+Underbuttons are used to move in meditation between transends. 
+
+34..121
+
+That was a Vibe of one transend each 0.1 seconds. - revibe 4
+
+This Application is designed for time stopping meditations, so you can relax. - stop
+
+Listen to this Applications Music and Dance at the same time for 30 seconds.
+
+#caf (TODO music player)
+
+See a Movie for 10 seconds.
+
+#mov
+
+Behavior after transending can be manipulated.
+
+The Vibe can be revibed to be faster or slower. - revibe 0.38
+
+1
+
+2
+
+3 - revibe 4
+
+Deep meditation can be initialized just like this. - stop
+
+Transends can be Images, Sounds, Movies or any custom Views.
+
+You can recieve full source code and tools for making personalized clones of This Application.
+
+But only if You enter a valid email in the next screen. ;) - revibe 1
+
+#input (TODO)
+
+Thanks for buying MakeMoney and enjoy creating Your MakeMoney based Application.
+
+#web - (TODO pikchurs) - stop - open - freeze (TODO - freeze memory spot, never change again)
+
+
+
+
+#########################################################
+stage.json
+
+	available transitions
+	0 - MoveIn, 
+	1 - Push, 
+	2 - Reveal, 
+	3 - Fade
+
+
+
+	This is the data for ...
+
+listing.json
+
+	this file is your poem. what you put in here will become your fortune.
+
+	it has to be a regular JSON file.
+
+	you can write your Application Views just by filling up this file with references to images, mov-s, caf-s or subclasess of IIController.
+
+	this file can be generated with the transender.gem
+	
+	if you do not have it, no problem, you can get it like this:
+	
+		gem sources -a http://gems.github.com 
+		sudo gem install mihael-transender
+		
+	create a folder and just fill it up with images, movies and sounds, then:
+	
+		transender -assemble_app (TODO)
+	
+
+### HASH
+[{"name":"0000000004.jpg", "next":""}, { "name":"MoneyTimerView" }, {"name":"000000005.caf", "next":""}, {"name":"0000000006.jpg", "next":""}, {"name":"0000000007.caf", "next":""}, {"name":"0000000010.jpg", "next":""}, {"name":"0000000011.caf", "next":""} ]
+
+
+{"name":"0000000004.jpg", "behavior":{"stop":false}}, 
+{"name":"000000005.caf", "behavior":{"stop":false, "background":true}},
+{"name":"0000000006.jpg", "behavior":{"stop":true}}, 
+{"name":"0000000007.caf", "behavior":{"stop":false}}, 
+
+muvis
+
+{"name":"0_Movie716.mov", "behavior":{"id":"21", "stop":"false", "background":"true"}},
+{"name":"0_Movie_139.mov", "behavior":{"id":"22", "stop":"false", "background":"true"}},
+{"name":"0_Movie_140.mov", "behavior":{"id":"23", "stop":"false", "background":"true"}},
+{"name":"0_Movie_141.mov", "behavior":{"id":"24", "stop":"false", "background":"true"}},
+
+radios
+
+{"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"screen.jpg"}, "behavior":{"stop":"true"}},
+
+
+flipside - currently unusable, since kitschmaster does not like dreamhost anymore
+
+{"name":"FlipsideView", "behavior":{"id":"26", "stop":"true"}}
+
+content - startups
+{"name":"MoonTimeView", "behavior":{"id":"3.1", "stop":"true"}},
+{"name":"0_mm_test1.jpg",  "behavior":{"id":"7.1", "stop":"true"}},
+
+views
+{"name":"MoonTimeView", "behavior":{"id":"3.2", "stop":"true"}},
+
+twitter
+{"name":"FecherView", "options":{"button_title":"kitschmaster's twitter", "background":"main.png","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":20, "params":"screen_name=kitschmaster", "filter":"twitter"}, "behavior":{"stop":"true"}},
+
+###################LISTING EXAMPLES########################
+{"name":"MessageView", "options":{"message":"No &copy; rights here.", "image":"main.png"}, "behavior":{"stop":"false", "effect":0}},
+{"name":"MessageView", "options":{"message":"Thanks.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
+{"name":"MessageView", "options":{"message":"What You Give, is What You Want.", "image":"main.png"}, "behavior":{"stop":"false", "effect":2}},
+{"name":"MessageView", "options":{"message":"Greetings Beloved Eternal Friend! Many Thanks for Buying this Application!", "image":"main.png"}, "behavior":{"stop":"false", "effect":3}},
+{"name":"000000005.caf",  "behavior":{"id":"3.4", "stop":"true"}},
+{"name":"MessageView", "options":{"message":"This Application is your Personal Money Making Mobile Application.", "image":"main.png"}, "behavior":{"stop":"false", "effect":4}},
+{"name":"MessageView", "options":{"message":"This Application is Here to Serve You.", "image":"main.png"}, "behavior":{"stop":"false", "effect":1}},
+
+
+{"name":"FlipyView", "behavior":{"id":"-0", "stop":"true"}},
+{"name":"0_1.jpg",  "behavior":{"id":"1", "stop":"false"}},
+{"name":"0_2.jpg",  "behavior":{"id":"2", "stop":"false"}},
+{"name":"0_3.jpg",  "behavior":{"id":"3", "stop":"false"}},
+{"name":"RemoteImageView", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_mage", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+{"name":"remote_image", "options":{"url":"http://kitschmaster.com/assets/0000/0001/IMG_2630_thumb.JPG"}, "behavior":{"stop":"true"}},
+
+
+{"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"radionula_screen.jpg"}, "behavior":{"stop":"true"}},
+
+{"name":"0_4.jpg",  "behavior":{"id":"4", "stop":"false"}},
+{"name":"0_5.jpg",  "behavior":{"id":"5", "stop":"false"}},
+{"name":"0_6.jpg",  "behavior":{"id":"6", "stop":"false"}},
+{"name":"0_7.jpg",  "behavior":{"id":"7", "stop":"false"}},
+{"name":"0_mm_test1.jpg",  "behavior":{"id":"7.1", "stop":"true"}},
+{"name":"0_8.jpg",  "behavior":{"id":"8", "stop":"false"}},
+{"name":"0_9.jpg",  "behavior":{"id":"9", "stop":"false"}},
+{"name":"0_10.jpg", "behavior":{"id":"10", "stop":"false"}},
+{"name":"0_11.jpg", "behavior":{"id":"11", "stop":"false"}},
+{"name":"0_12.jpg", "behavior":{"id":"12", "stop":"false"}},
+{"name":"0_13.jpg", "behavior":{"id":"13", "stop":"false"}},
+{"name":"0_14.jpg", "behavior":{"id":"14", "stop":"false"}},
+{"name":"0_15.jpg", "behavior":{"id":"15", "stop":"false"}},
+{"name":"0_16.jpg", "behavior":{"id":"16", "stop":"false"}},
+{"name":"0_17.jpg", "behavior":{"id":"17", "stop":"false", "revibe":"1.0"}},
+{"name":"0_18.jpg", "behavior":{"id":"18", "stop":"false"}},
+{"name":"0_19.jpg", "behavior":{"id":"19", "stop":"false"}},
+{"name":"0_20.jpg", "behavior":{"id":"20", "stop":"true"}},
+{"name":"0_Movie716.mov", "behavior":{"id":"21", "stop":"false", "background":"true"}},
+{"name":"0_Movie_139.mov", "behavior":{"id":"22", "stop":"false", "background":"true"}},
+{"name":"0_Movie_140.mov", "behavior":{"id":"23", "stop":"false", "background":"true"}},
+{"name":"0_Movie_141.mov", "behavior":{"id":"24", "stop":"false", "background":"true"}},
+{"name":"FlipsideView", "behavior":{"id":"26", "stop":"true"}}
+
+In me I shall see, the works done by me, shine enlightenment to the.
+
+##########################################################################################
+The first program I tried to implement was a password program written in BASIC.
+I wrote it well, it worked in the programming environment. Then I tried to apply it to my operating system.
+I think I forgot to compile it, anyway, this was my first traumatic emotional experience with the non-thinking device, called computer.
+I cried, thinking I broke the thing, since it refused to run the password program uncompiled and just stopped doing anything while booting.
+In panic I entered the SYSTEM and did a low-level disk format. Ha! :) That looked way too scarry as the percentage was rising so I canceled it before it was finished. Ha! 
+That took away the disk partition tables.
+
+Yes. I did have an advanced operating system called MS-DOS 6.0 installed when I first got that 386 thing. But after this first programming/low-level-formating experience I had only MS-DOS 3.0. 
+Why? 
+The guy that repaired the mess, put it there. My father drove the 386 to the servis, he had no luck with me.
+
+But since then I learned. Breaking stuff means pain, suffering, but if you can forget about that shit and focus on learning, then you can understand your self in clear ways.
+
+Sometimes I go ahead and brake many code-parts, just to suffer the next days in debugging my little fractalic nature.
+
+I to me, seem to be, the creator of the. But behold stranger, do not take a breath without thinking your way is the best way.
+Since when is coding humans been allowed? I know when I am, what I am. 
+
+/*
+ * IITransender programming.
+ * You do all programming for IITransender through a json formatted string with conventioned structure and naming.
+ * The program.json is a simple array, yet very cool, since each entry represents one transend = one screen = one inline Application(view),
+ *
+ * Structure looks like this:
+ * [ "ii":"(string_transend_fractal)", "ions":{(hash_transend_informations)}, "ior":{(hash_transend_behavior)} ]
+ *
+ * transend_fractal can be:
+ * "ii":"#{ACustom}View" - if you want to transend a whole view controller named #{ACustom}ViewController, subclassed from IIController
+ * "ii":"message" - if you want to display a message with or without local/remote background and/or icon, useful for almost any information to meditate upon
+ * "ii":"filename.mov" - if you just want to play a movie
+ * "ii":"filename.caf" - if you want to play a <30 second sound
+ * "ii":"filename.jpg" - if you want to transend an image
+ * 
+ * transend_informations can hold any value, but these are reserved, since they get feched magicaly:
+ * "url":"(valid_url)" - used in many transend_fractals as base url to act upon
+ * "background":"(cached_path_or_name)" - a cached image or resource image
+ * "background_url":"(url_path)" - url to be downloaded from to get the background - this always stops transending
+ * "icon":"(cached_path_or_name)" - a cached small image or resource small image
+ * 
+ * transend_behavior is used only for defining behavior of transend
+ * "effect":(integer) - can have values: 0 - MoveIn, 1 - Push, 2 - Reveal, 3 - Fade (using numbers to decrease size of req typing drastically)
+ * "stop":(true|false) - if true, calls [transender meditate], the one white button lightens up, time stops, meditate upon the transend
+ * "..." - all other values you can implement if you need
+ *
+ */
+
+Deep, deep, deep down in my soul I know.
+
+SteveRack.app
+[
+{"ii":"MessageView", "ions":{"reuse":"true", "message":"Steve Rack", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"0_1.jpg",  "ior":{"stop":"false"}},
+{"ii":"0_2.jpg",  "ior":{"stop":"false"}},
+{"ii":"0_3.jpg",  "ior":{"stop":"false"}},
+{"ii":"MessageView", "ions":{"message":"Welcome to your personal money making mobile iphone and ipod application!", "background":"main.png"}, "ior":{"stop":"false", "effect":2, "revibe":3.83}},
+
+{"ii":"FecherView", "ions":{"button_title":"Fech Recent Artwork", "background":"main.png", "url":"http://hireanillustrator.com/v2/gallery", "method":"get", "page":1, "params":"g2_itemId=13876", "filter":"hai_galery"}, "ior":{"stop":"true"}},
+{"ii":"FecherView", "ions":{"button_title":"Fech Recent Twitts", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=steverack", "filter":"twitter"}, "ior":{"stop":"true"}}
+]
+
+raddarkopter is about to be born. should I really do it. should I give them the power to avoid. nope. it will be completely transparent. I do not want to break the laws people have accepted as theirs. I can only show them, there is another way.
+
+[
+{"ii":"MessageView", "ions":{"reuse":"true", "message":"@mr_foto", "background":"main.png"}, "ior":{"stop":"false", "effect":3}},
+{"ii":"0_1.jpg",  "ior":{"stop":"false"}},
+{"ii":"0_2.jpg",  "ior":{"stop":"false"}},
+{"ii":"0_3.jpg",  "ior":{"stop":"false"}},
+{"ii":"MessageView", "ions":{"message":"Welcome to your personal money making mobile iphone and ipod application!", "background":"main.png"}, "ior":{"stop":"false", "effect":2, "revibe":3.83}},
+
+{"ii":"FecherView", "ions":{"button_title":"Fech recent photos", "background":"main.png", "url":"http://galerija.mr-foto.net/v/skisova_trznica_2009/nocni_program/", "method":"get", "page":1, "filter":"wp_gallery", "filter_base_url":"http://galerija.mr-foto.net"}, "ior":{"stop":"true"}},
+{"ii":"FecherView", "ions":{"button_title":"Fech recent twitter", "background":"main.jpg","url":"http://twitter.com/statuses/user_timeline.json", "method":"get", "page":1, "limit":3, "params":"screen_name=mr_foto", "filter":"twitter"}, "ior":{"stop":"true"}}
+]
+
+The length you walk is not important. Only the smile you carry.
+
+In your smile lies a blissful Awareness, Conciousness, Spirit.
+
+Here it is. Your rebirth.
