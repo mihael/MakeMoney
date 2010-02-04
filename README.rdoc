@@ -1,10 +1,10 @@
 = iPhone and iPod touch Apps created with MakeMoney
-* {FingerTapping}[itms://itunes.apple.com/us/app/fingertapping/id341326070?mt=8]
-* {moonpreview}[itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=317863157&amp;mt=8&amp;s=143441]
-* {mrfoto}[itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=317728262&amp;mt=8&amp;s=143441]
-* {radionula}[itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=313126620&amp;mt=8&amp;s=143441]
-* {pikchur}[itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306950638&amp;mt=8&amp;s=143441]
-* {ikoo}[itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306942717&amp;mt=8&amp;s=143441]
+* {FingerTapping}[http://kitschmaster.com/FingerTapping] itms://itunes.apple.com/us/app/fingertapping/id341326070?mt=8
+* {moonpreview}[http://kitschmaster.com/] itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=317863157&amp;mt=8&amp;s=143441
+* {mrfoto}[http://kitschmaster.com/] itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=317728262&amp;mt=8&amp;s=143441
+* {radionula}[http://kitschmaster.com/] itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=313126620&amp;mt=8&amp;s=143441
+* {pikchur}[http://kitschmaster.com/] itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306950638&amp;mt=8&amp;s=143441
+* {ikoo}[http://kitschmaster.com/] itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306942717&amp;mt=8&amp;s=143441
 
 = The Little Book Of MakeMoney
 
