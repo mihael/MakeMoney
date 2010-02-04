@@ -1,3 +1,26 @@
+<h3>iPhone and iPod touch Apps created with MakeMoney</h3>
+              <div>
+                <table>
+                  <tr>
+                    <td><a href="itms://itunes.apple.com/us/app/fingertapping/id341326070?mt=8"><img alt="Rounded_icon" src="http://kitschmaster.com/assets/0000/0623/rounded_icon.png" style="vertical-align:middle;" /></a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=317863157&amp;mt=8&amp;s=143441"><img alt="Icon_rounded" src="http://kitschmaster.com/assets/0000/0615/icon_rounded.png" style="vertical-align:middle;" /></a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=317728262&amp;mt=8&amp;s=143441"><img alt="Logo_mali" src="http://kitschmaster.com/assets/0000/0545/logo_mali.png" style="vertical-align:middle;" /></a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=313126620&amp;mt=8&amp;s=143441"><img alt="Radionula" src="http://kitschmaster.com/assets/0000/0591/radionula.png" style="vertical-align:middle;" /></a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306950638&amp;mt=8&amp;s=143441"><img alt="K_icon" src="http://kitschmaster.com/assets/0000/0594/k_icon.png" style="vertical-align:middle;" /></a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306942717&amp;mt=8&amp;s=143441"><img alt="Icon" src="http://kitschmaster.com/assets/0000/0539/icon.png" style="vertical-align:middle;" /></a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="itms://itunes.apple.com/us/app/fingertapping/id341326070?mt=8">FingerTapping</a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=317863157&amp;mt=8&amp;s=143441">moonpreview</a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=317728262&amp;mt=8&amp;s=143441">mrfoto</a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=313126620&amp;mt=8&amp;s=143441">radionula</a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306950638&amp;mt=8&amp;s=143441">pikchur</a></td>
+                    <td><a href="itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306942717&amp;mt=8&amp;s=143441">ikoo</a></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
 No &copy; rights here. 
 
 Thanks.
