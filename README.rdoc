@@ -135,8 +135,6 @@ This Application is designed for time stopping meditations, so you can relax. - 
 
 Listen to this Applications Music and Dance at the same time for 30 seconds.
 
-#caf (TODO music player)
-
 See a Movie for 10 seconds.
 
 #mov
@@ -157,15 +155,7 @@ Transends can be Images, Sounds, Movies or any custom Views.
 
 You can recieve full source code and tools for making personalized clones of This Application.
 
-But only if You enter a valid email in the next screen. ;) - revibe 1
-
-#input (TODO)
-
-Thanks for buying MakeMoney and enjoy creating Your MakeMoney based Application.
-
-#web - (TODO pikchurs) - stop - open - freeze (TODO - freeze memory spot, never change again)
-
-
+Thanks for taking MakeMoney and enjoy creating Your MakeMoney based Application.
 
 
 #########################################################
@@ -220,11 +210,6 @@ muvis
 radios
 
 {"name":"StreamingPlayerView", "options":{"url":"http://91.185.196.3:8020/", "image":"screen.jpg"}, "behavior":{"stop":"true"}},
-
-
-flipside - currently unusable, since kitschmaster does not like dreamhost anymore
-
-{"name":"FlipsideView", "behavior":{"id":"26", "stop":"true"}}
 
 content - startups
 {"name":"MoonTimeView", "behavior":{"id":"3.1", "stop":"true"}},
