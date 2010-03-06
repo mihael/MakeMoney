@@ -10,7 +10,7 @@
 - (id)init {
 	self = [super init];
 	if (self != nil) {
-		Sprite * bg = [Sprite spriteWithFile:@"main.png"];
+		CCSprite * bg = [CCSprite spriteWithFile:@"main.png"];
 		[bg setPosition:ccp(240, 160)];
 		[self addChild:bg z:0];
 		[self addChild:[Layer1 node] z:1];
@@ -26,9 +26,9 @@
 	[super init];
 	
 	// timers
-	label1 = [Label labelWithString:@"0" fontName:@"Courier" fontSize:32];
-	label2 = [Label labelWithString:@"0" fontName:@"Courier" fontSize:32];
-	label3 = [Label labelWithString:@"0" fontName:@"Courier" fontSize:32];
+	label1 = [CCLabel labelWithString:@"0" fontName:@"Courier" fontSize:32];
+	label2 = [CCLabel labelWithString:@"0" fontName:@"Courier" fontSize:32];
+	label3 = [CCLabel labelWithString:@"0" fontName:@"Courier" fontSize:32];
 
 	[self schedule: @selector(step1:) interval: 0.5f];
 	[self schedule: @selector(step2:) interval:1.0f];
@@ -44,17 +44,17 @@
 	
 	// Sprite
 
-	Sprite *rPad = [Sprite spriteWithFile:@"icon.png"];
+	CCSprite *rPad = [CCSprite spriteWithFile:@"icon.png"];
 	rPad.position = ccp(240,100);
 	[self addChild:rPad];
 
-	Sprite *lPad = [Sprite spriteWithFile:@"finger.png"];
+	CCSprite *lPad = [CCSprite spriteWithFile:@"finger.png"];
 	lPad.position = ccp(50,10);
 	[self addChild:lPad];
 	
 	// pause button
-	MenuItem *item1 = [MenuItemFont itemFromString: @"Pause" target:self selector:@selector(pause:)];
-	Menu *menu = [Menu menuWithItems: item1, nil];
+	CCMenuItem *item1 = [CCMenuItemFont itemFromString: @"Pause" target:self selector:@selector(pause:)];
+	CCMenu *menu = [CCMenu menuWithItems: item1, nil];
 	menu.position = ccp(480/2, 270);
 	
 	[self addChild: menu];
@@ -69,7 +69,7 @@
 
 -(void) pause: (id) sender
 {
-	[[Director sharedDirector] pause];
+	[[CCDirector sharedDirector] pause];
 	
 	// Dialog
 	UIAlertView* dialog = [[UIAlertView alloc] init];
@@ -83,7 +83,7 @@
 
 - (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex
 {	
-	[[Director sharedDirector] resume];
+	[[CCDirector sharedDirector] resume];
 }
 
 -(void) step1: (ccTime) delta

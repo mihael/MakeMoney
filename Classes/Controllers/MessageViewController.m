@@ -26,7 +26,7 @@
 	CGRect rect = KriyaFrame();
 	if (!content) {
 		content = [[iContentView alloc] initWithFrame:CGRectMake(kPadding, kPadding, rect.size.width-2*kPadding, rect.size.height-2*kPadding)] ;
-		[content setFont:[UIFont systemFontOfSize:25]];
+		//[content setFont:[UIFont systemFontOfSize:25]];
 		[content setBackgroundColor:[UIColor clearColor]];
 		[content setTextColor:[UIColor whiteColor]];
 		[content setNumberOfLines:0];

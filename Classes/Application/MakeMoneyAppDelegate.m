@@ -45,8 +45,8 @@ static MakeMoneyAppDelegate* app = nil;
 	if ([[[self stage] valueForKey:@"2D"] boolValue]) {
 		//run in cocos2d style
 		
-		[[Director sharedDirector] attachInWindow:window];
-		[[Director sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
+		[[CCDirector sharedDirector] attachInWindow:window];
+		[[CCDirector sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
 		[window makeKeyAndVisible];
 
 		//load splash scene, the initial scene
@@ -54,9 +54,9 @@ static MakeMoneyAppDelegate* app = nil;
 		if (!className)
 			className = @"SplashScene";
 		Class SceneClass = NSClassFromString(className);
-		Scene *scene = [SceneClass node];
+		CCScene *scene = [SceneClass node];
 		
-		[[Director sharedDirector] runWithScene: scene];
+		[[CCDirector sharedDirector] runWithScene: scene];
 
 	} else {
 		//run in UIKit style

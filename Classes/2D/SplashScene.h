@@ -4,17 +4,17 @@
 //
 #import "cocos2d.h"
 
-@interface SplashScene : Scene {
+@interface SplashScene : CCScene {
 
 }
 
 @end
 
-@interface Layer1 : Layer
+@interface Layer1 : CCLayer
 {
-	Label *label1;
-	Label *label2;
-	Label *label3;
+	CCLabel *label1;
+	CCLabel *label2;
+	CCLabel *label3;
 	
 	ccTime time1, time2, time3;
 }

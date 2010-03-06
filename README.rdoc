@@ -6,6 +6,28 @@
 * {pikchur}[http://kitschmaster.com/pikchur] itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306950638&amp;mt=8&amp;s=143441
 * {ikoo}[http://kitschmaster.com/ikoo] itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=306942717&amp;mt=8&amp;s=143441
 
+= What I am not doing?
+
+I am not trying to do something great. I am trying to do the impossible.
+
+This is the basic idea behind MakeMoney. 
+
+In other terms: I am seeking out new ways to not make too much money while enjoying this life.
+
+Imagine an Array. Now put the start and the end of this Array together and You get a closed circle. 
+Now imagine each cell of this circle to hold one IIController subclass (which can hold and should show some UIViews naturally).
+
+In code You can see this in the IITransender class. Currently this "transender" takes a "program" and plays it.
+
+On start the IITransender loads the first program (IIController) and passes it to IITransenderViewController which slides the UIView in.
+
+The playing of the program can be in both directions.
+
+You can set up this program in the Transends/program.json file.
+
+Every program runs in some settings, so there is also a Transends/stage.json file.
+
+
 = The Little Book Of MakeMoney
 
 No &copy; rights here. 
