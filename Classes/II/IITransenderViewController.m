@@ -54,7 +54,8 @@
 	useEmitter1 = YES;
 	[self.view addSubview:transendEmitter1];
 	avoidBehavior = NO;
-	[self showInfoView];
+	if ([[[[MakeMoneyAppDelegate app] stage] valueForKey:@"info"] boolValue])
+		[self showInfoView];
 }
 
 - (void)layout:(CGRect)rect
