@@ -120,6 +120,6 @@ typedef enum {
 
 - (id)fechGoldcut;
 
-- (NSString*)pathForImageNamed:(NSString*)imageName;
+- (NSString*)pathForTransendNamed:(NSString*)transendName;
 - (UIImage*)imageNamed:(NSString*)imageName;
 @end

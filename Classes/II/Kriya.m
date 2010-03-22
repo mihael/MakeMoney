@@ -64,6 +64,11 @@ CGRect KriyaFrame() {
 	return APP_SERVER_URL;
 } 
 
++ (NSString*)apn_register_url_for:(NSString*)token
+{
+	return [NSString stringWithFormat:@"%@/apn_register/%@/%@", APP_SERVER_URL, APP_TITLE, token];
+}
+
 + (NSString*)startup_url 
 {
 	return [NSString stringWithFormat:@"%@/brickboxes/%@/%@", APP_SERVER_URL, APP_TITLE, [Kriya deviceId]];

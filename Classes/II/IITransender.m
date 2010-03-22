@@ -234,7 +234,7 @@
 		NSString *memoryII = [memory valueForKey:@"ii"];		
 		NSString *diskII = nil;
 		
-		DebugLog(@"#invokeTransend options: %@ behavior: %@", options, behavior);
+		DebugLog(@"#invokeTransend ii: %@ options: %@ behavior: %@", memoryII, options, behavior);
 		//see what kind of transend this is and act	
 		
 		if ([memoryII isEqualToString:@"message"]) {
@@ -351,14 +351,11 @@
 			}	
 			
 		} else {
-			//0*
-			
-			if ([memoryII hasPrefix:@"0"]) { //a simple 0-prefixed transend
-				diskII = [NSString stringWithFormat:@"%@/%@", transendsPath, memoryII];
-			} else if ([memoryII hasPrefix:@"/"]) { //a direct path
-				diskII = memoryII;
-			}
-			
+			//simple transends like images, videos and sounds
+			diskII = [self pathForTransendNamed:memoryII];
+
+			//DebugLog(@"diskII %@ pathExtension %@", diskII, [memoryII pathExtension]);
+
 			if ([[memoryII pathExtension] isEqualToString:@"jpg"]) {
 				if ([delegate respondsToSelector:@selector(transendedWithImage:withIons:withIor:)]) {
 					UIImage* img = [[UIImage alloc] initWithContentsOfFile:diskII];
@@ -661,14 +658,14 @@
 
 
 //return path for image relative to this transender
-- (NSString*)pathForImageNamed:(NSString*)imageName 
+- (NSString*)pathForTransendNamed:(NSString*)transendName 
 {
-	return [NSString stringWithFormat:@"%@/%@", transendsPath, imageName];
+	return [NSString stringWithFormat:@"%@/%@", transendsPath, transendName];
 }
 
 //return image for imageName - only for images within Resources/Transends dir
 - (UIImage*)imageNamed:(NSString*)imageName 
 {
-	return [UIImage imageWithContentsOfFile:[self pathForImageNamed:imageName]];
+	return [UIImage imageWithContentsOfFile:[self pathForTransendNamed:imageName]];
 }
 @end

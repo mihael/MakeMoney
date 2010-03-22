@@ -35,6 +35,7 @@ CGRect KriyaFrame();
 + (NSString*)deviceId;
 
 + (NSString*)server_url;
++ (NSString*)apn_register_url_for:(NSString*)token;
 + (NSString*)startup_url;
 + (NSString*)support_url;
 
