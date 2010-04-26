@@ -34,10 +34,13 @@ CGRect KriyaFrame();
 
 + (NSString*)deviceId;
 
++ (NSString*)app_title;
++ (NSString*)app_id;
 + (NSString*)server_url;
-+ (NSString*)apn_register_url_for:(NSString*)token;
++ (NSString*)apn_register_url;
 + (NSString*)startup_url;
 + (NSString*)support_url;
++ (NSString*)welcome_url;
 
 + (NSString*)howManyTimes:(int)i;
 
@@ -63,4 +66,14 @@ CGRect KriyaFrame();
 + (NSString*)md5:(NSString*)str;
 
 //+ (*)textWithPath:(NSString*)filepath
+
+//compare date to two other dates
++ (BOOL) date:(NSDate*)date isBetweenDate:(NSDate*)beginDate andDate:(NSDate*)endDate;
+
++ (void)saveState:(NSString*)value forField:(NSString*)key;
++ (NSString*)stateForField:(NSString*)key;
+
+//scales and rotates an image
++ (UIImage*)scaleAndRotateImage:(UIImage*)image;
+
 @end

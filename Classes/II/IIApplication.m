@@ -5,6 +5,7 @@
 #import "IIApplication.h"
 #import "Reachability.h"
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 @implementation IIApplication
 #pragma mark launch
@@ -20,20 +21,21 @@
 	//todo
 	//call server
 	//ensure EDGE network comes on
-	NSURL *regUrl = [NSURL URLWithString:[Kriya apn_register_url_for:[NSString stringWithFormat:@"%@", deviceToken]]];
+	NSString *token = [[[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding] autorelease];
+	NSURL *regUrl = [NSURL URLWithString:[Kriya apn_register_url]];
 	[[Reachability sharedReachability] setHostName:[regUrl host]];
+	//DebugLog(@"REG %@ %@ %@ %@", token, [Kriya apn_register_url], [regUrl host], regUrl);
 	[[Reachability sharedReachability] remoteHostStatus];
 	//register this startup(device) if internet present
 	if ([[Reachability sharedReachability] internetConnectionStatus]!=NotReachable) {
-		ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:regUrl] autorelease];
-		[request setRequestMethod:@"POST"];
+		ASIFormDataRequest *request = [[[ASIFormDataRequest alloc] initWithURL:regUrl] autorelease];
 		[request setDelegate:self];
 		[request setDidFinishSelector:@selector(apnProviderRegisterFinished:)];
 		[request setDidFailSelector:@selector(apnProviderRegisterFailed:)];
+		[request setPostValue:token forKey:@"token"];
 		NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
 		[queue addOperation:request];	
 	}
-	
 }
 
 //override this to ger your behavior after registering with provider

@@ -10,6 +10,9 @@
 		4705AAA90FC709E4005DA8FC /* Progress in Resources */ = {isa = PBXBuildFile; fileRef = 4705AAA80FC709E4005DA8FC /* Progress */; };
 		4705ABB00FC964FB005DA8FC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4705ABAF0FC964FB005DA8FC /* Settings.bundle */; };
 		4707D8510FB2D86400094125 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4707D8500FB2D86400094125 /* CoreLocation.framework */; };
+		471B26511185DB4400B980AE /* IIWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 471B26501185DB4400B980AE /* IIWindow.m */; };
+		471B266E1185E12D00B980AE /* RootViewController+InAppStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 471B266D1185E12D00B980AE /* RootViewController+InAppStore.m */; };
+		471B26731185E1DA00B980AE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 471B26721185E1DA00B980AE /* StoreKit.framework */; };
 		472111EB105945F8003348D4 /* program.json in Resources */ = {isa = PBXBuildFile; fileRef = 479C54990FAAEE73003DF1B2 /* program.json */; };
 		47287025107A2E730053F2CE /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4728701A107A2E730053F2CE /* ASIAuthenticationDialog.m */; };
 		47287026107A2E730053F2CE /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 4728701C107A2E730053F2CE /* ASIInputStream.m */; };
@@ -23,6 +26,7 @@
 		4745C89910593B2F00BAED5A /* SplashScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4745C89710593B2F00BAED5A /* SplashScene.m */; };
 		47547EBA1076688E00DA7658 /* Filter_twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3944A101DB2B2005F45B6 /* Filter_twitter.m */; };
 		47547EFF10767C0000DA7658 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39461101DB2C6005F45B6 /* FlipsideViewController.m */; };
+		4765DA801157C1ED004F21E3 /* 0_Movie_141.mov in Resources */ = {isa = PBXBuildFile; fileRef = 47AD91570F80082F001687AA /* 0_Movie_141.mov */; };
 		477ABD4E0F45641100696306 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD480F45641100696306 /* UIKit.framework */; };
 		477ABD4F0F45641100696306 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD490F45641100696306 /* Foundation.framework */; };
 		477ABD500F45641100696306 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD4A0F45641100696306 /* CoreGraphics.framework */; };
@@ -502,6 +506,11 @@
 		4705AFA50FCC2DA8005DA8FC /* prep_stage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prep_stage.json; sourceTree = "<group>"; };
 		4707D7860FB093DB00094125 /* KopterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KopterView.xib; sourceTree = "<group>"; };
 		4707D8500FB2D86400094125 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		471B264F1185DB4400B980AE /* IIWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IIWindow.h; path = Classes/II/IIWindow.h; sourceTree = "<group>"; };
+		471B26501185DB4400B980AE /* IIWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IIWindow.m; path = Classes/II/IIWindow.m; sourceTree = "<group>"; };
+		471B266C1185E12D00B980AE /* RootViewController+InAppStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RootViewController+InAppStore.h"; path = "Application/RootViewController+InAppStore.h"; sourceTree = "<group>"; };
+		471B266D1185E12D00B980AE /* RootViewController+InAppStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RootViewController+InAppStore.m"; path = "Application/RootViewController+InAppStore.m"; sourceTree = "<group>"; };
+		471B26721185E1DA00B980AE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		47231FB60FBA381000D49E87 /* FecherListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FecherListView.xib; sourceTree = "<group>"; };
 		4723232B0FBDCCC300D49E87 /* finger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finger.png; path = Artwork/finger.png; sourceTree = "<group>"; };
 		4723232C0FBDCCC300D49E87 /* overfinger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = overfinger.png; path = Artwork/overfinger.png; sourceTree = "<group>"; };
@@ -763,6 +772,7 @@
 				47C393D6101725EC005F45B6 /* MapKit.framework in Frameworks */,
 				47C3963410202824005F45B6 /* OpenGLES.framework in Frameworks */,
 				47B162F9107664B200267E83 /* libicucore.dylib in Frameworks */,
+				471B26731185E1DA00B980AE /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +792,8 @@
 				47C3964E1026D1BB005F45B6 /* RootViewController.h */,
 				47C3964F1026D1BB005F45B6 /* RootViewController.m */,
 				47C3964B1026D1BB005F45B6 /* main.m */,
+				471B266C1185E12D00B980AE /* RootViewController+InAppStore.h */,
+				471B266D1185E12D00B980AE /* RootViewController+InAppStore.m */,
 			);
 			name = Application;
 			path = Classes;
@@ -810,7 +822,6 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				4796C73B0F41E53D002F2C2A /* Entitlements.plist */,
-				47C3963310202824005F45B6 /* OpenGLES.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -828,6 +839,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				471B26721185E1DA00B980AE /* StoreKit.framework */,
+				47C3963310202824005F45B6 /* OpenGLES.framework */,
 				47B162F8107664B200267E83 /* libicucore.dylib */,
 				473489350F99E53100A1D78A /* libz.1.2.3.dylib */,
 				4707D8500FB2D86400094125 /* CoreLocation.framework */,
@@ -1010,7 +1023,7 @@
 			children = (
 				47C393F1101DB100005F45B6 /* Kriya.h */,
 				47C393F2101DB100005F45B6 /* Kriya.m */,
-				47C3947E101DB345005F45B6 /* IITransender */,
+				47C3947E101DB345005F45B6 /* II */,
 				4742667910170E3E00F7E0FE /* Helpers */,
 				4734896D0F99E69D00A1D78A /* i */,
 			);
@@ -1150,9 +1163,11 @@
 			name = Filters;
 			sourceTree = "<group>";
 		};
-		47C3947E101DB345005F45B6 /* IITransender */ = {
+		47C3947E101DB345005F45B6 /* II */ = {
 			isa = PBXGroup;
 			children = (
+				471B264F1185DB4400B980AE /* IIWindow.h */,
+				471B26501185DB4400B980AE /* IIWindow.m */,
 				47C3947F101DB373005F45B6 /* IIApplication.h */,
 				47C39480101DB373005F45B6 /* IIApplication.m */,
 				47C39481101DB373005F45B6 /* IIController.h */,
@@ -1172,7 +1187,7 @@
 				47C3948F101DB373005F45B6 /* IIWWW.h */,
 				47C39490101DB373005F45B6 /* IIWWW.m */,
 			);
-			name = IITransender;
+			name = II;
 			sourceTree = "<group>";
 		};
 		47C396701026F50F005F45B6 /* 2D */ = {
@@ -1690,6 +1705,7 @@
 				47A20F04110EE093003195A0 /* highbutton.png in Resources */,
 				47A20F05110EE093003195A0 /* littlebutton.png in Resources */,
 				47A20F06110EE093003195A0 /* littlehighbutton.png in Resources */,
+				4765DA801157C1ED004F21E3 /* 0_Movie_141.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1755,6 +1771,8 @@
 				47FC5E60107BA4AC0000AB03 /* PusherViewController.m in Sources */,
 				47A20A75110D8C99003195A0 /* LocalWebViewController.m in Sources */,
 				47A205DD112305F4004485FC /* Filter_kitschmaster.m in Sources */,
+				471B26511185DB4400B980AE /* IIWindow.m in Sources */,
+				471B266E1185E12D00B980AE /* RootViewController+InAppStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1793,7 +1811,7 @@
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = MakeMoney;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25DB7F39-D9A0-4FBC-B60A-83AA83019BEC";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "330D634E-2491-4FB6-AB17-3EC9247D8B25";
 				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "$(cocos2d)/**";
 			};
@@ -1804,7 +1822,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Miha Plohl";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1816,7 +1834,7 @@
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = MakeMoney;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5EC952FF-A46E-4F96-86B1-52FFF5710045";
 				SDKROOT = iphoneos3.0;
 				USER_HEADER_SEARCH_PATHS = "$(cocos2d)/**";
 			};

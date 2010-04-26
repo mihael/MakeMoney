@@ -1,13 +1,23 @@
 #import "Kriya.h"
-#import "JSON.h"
 #import "MakeMoneyAppDelegate.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "ASIHTTPRequest.h"
+#import "CJSONDeserializer.h"
 
 CGRect KriyaFrame() {
 	CGRect frame = [UIScreen mainScreen].applicationFrame;
 	return CGRectMake(0, 0, frame.size.width, frame.size.height);
 }
+
+#define pod_RectPortrait CGRectMake(0, 0, 320, 480)
+#define pod_RectPortraitUpsideDown CGRectMake(0, 0, 320, 480)
+#define pod_RectLandscapeLeft CGRectMake(0, 0, 480, 320)
+#define pod_RectLandscapeRight CGRectMake(0, 0, 480, 320)
+
+#define pad_RectPortrait CGRectMake(0, 0, 768, 1024)
+#define pad_RectPortraitUpsideDown CGRectMake(0, 0, 768, 1024)
+#define pad_RectLandscapeLeft CGRectMake(0, 0, 1024, 768)
+#define pad_RectLandscapeRight CGRectMake(0, 0, 1024, 768)
 
 @implementation Kriya
 
@@ -16,22 +26,39 @@ CGRect KriyaFrame() {
 	CGRect r = CGRectZero;
 	switch (interfaceOrientation) {
 		case UIInterfaceOrientationPortrait:
-			r = CGRectMake(0, 0, 320, 480);
+			//todo is this iPad?
+			r = pod_RectPortrait;
 			break;
 		case UIInterfaceOrientationPortraitUpsideDown:
-			r = CGRectMake(0, 0, 320, 480);
+			r = pod_RectPortraitUpsideDown;
 			break;
 		case UIInterfaceOrientationLandscapeLeft:
-			r = CGRectMake(0, 0, 480, 320);
+			r = pod_RectLandscapeLeft;
 			break;
 		case UIInterfaceOrientationLandscapeRight:
-			r = CGRectMake(0, 0, 480, 320);
+			r = pod_RectLandscapeRight;
 			break;
 		default:
-			r = CGRectMake(0, 0, 320, 480);
+			r = pod_RectPortrait;
 			break;
 	}
 	return r;
+}
+
++ (BOOL)portrait {
+	UIInterfaceOrientation interfaceOrientation = [[UIDevice currentDevice] orientation];
+	switch (interfaceOrientation) {
+		case UIInterfaceOrientationPortrait:
+			return YES;
+		case UIInterfaceOrientationPortraitUpsideDown:
+			return NO;
+		case UIInterfaceOrientationLandscapeLeft:
+			return NO;
+		case UIInterfaceOrientationLandscapeRight:
+			return NO;
+		default:
+			return YES;
+	}
 }
 
 + (NSInteger)appRunCount 
@@ -51,7 +78,7 @@ CGRect KriyaFrame() {
 
 + (void)prayInCode 
 {
-	NSLog(@"%@", PRAYER);
+	NSLog(@"%@ %@", MANTRA, PRAYER);
 }
 
 + (NSString*)deviceId 
@@ -59,14 +86,24 @@ CGRect KriyaFrame() {
 	return [[UIDevice currentDevice] uniqueIdentifier];
 }
 
++ (NSString*)app_title
+{
+	return APP_TITLE;
+}
+
++ (NSString*)app_id
+{
+	return APP_ID;
+}
+
 + (NSString*)server_url
 {
 	return APP_SERVER_URL;
 } 
 
-+ (NSString*)apn_register_url_for:(NSString*)token
++ (NSString*)apn_register_url
 {
-	return [NSString stringWithFormat:@"%@/apn_register/%@/%@", APP_SERVER_URL, APP_TITLE, token];
+	return [NSString stringWithFormat:@"%@/apn_register/%@", APP_SERVER_URL, APP_TITLE];
 }
 
 + (NSString*)startup_url 
@@ -77,6 +114,11 @@ CGRect KriyaFrame() {
 + (NSString*)support_url 
 {
 	return [NSString stringWithFormat:@"%@/brickboxes/%@", APP_SERVER_URL, APP_TITLE];
+}
+
++ (NSString*)welcome_url 
+{
+	return [NSString stringWithFormat:@"%@/kiches/%@", APP_SERVER_URL, APP_WELCOME_KICH];
 }
 
 + (NSString*)howManyTimes:(int)i 
@@ -92,14 +134,21 @@ CGRect KriyaFrame() {
 
 + (NSDictionary*)stage 
 {
-	return [[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"stage" ofType:@"json"]] JSONValue];
+	NSError *err = nil;
+	NSDictionary * data = [[CJSONDeserializer deserializer] deserialize:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"stage" ofType:@"json"]] error:&err];
+	//DLog(@"Deserialized: %@", data);
+	if (err) {
+		DLog(@"Error while deserializing stage.");
+		return nil;
+	}
+	return data;
 }
 
 + (BOOL)xibExists:(NSString*)xibName 
 {
 	NSString * xib_path = [[NSBundle mainBundle] pathForResource:xibName ofType:@"xib"];
 	NSString * nib_path = [[NSBundle mainBundle] pathForResource:xibName ofType:@"nib"];
-	DebugLog(@"#xibExists %@ %@", xibName, xib_path);
+	DLog(@"#xibExists %@ %@", xibName, xib_path);
 	return (  xib_path == nil && nib_path == nil) ? NO : YES;
 }
 
@@ -123,22 +172,22 @@ CGRect KriyaFrame() {
 
 + (NSString*)imageWithInMemoryImage:(UIImage*)image forUrl:(NSString*)url
 {
-	NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
-	path = [NSString stringWithFormat:@"%@/%@", path, [Kriya md5:url]];	
+	NSString *dir = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
+	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
+	NSString *path = [NSString stringWithFormat:@"%@/%@", dir, [Kriya md5:url]];	
 	[Kriya writeWithPath:path data:UIImageJPEGRepresentation(image, 1.0)];
-	return path;
+	return [path copy];
 } 
 
 
 + (NSString*)imageWithInMemoryImage:(UIImage*)image 
 {
 	NSString *generatedPath = [NSString stringWithFormat:@"%i", [[NSDate date] timeIntervalSince1970]*-1];
-	NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
-	path = [NSString stringWithFormat:@"%@/%@", path, [Kriya md5:generatedPath]];	
+	NSString *dir = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
+	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
+	NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", dir, [Kriya md5:generatedPath]];	
 	[Kriya writeWithPath:path data:UIImageJPEGRepresentation(image, 1.0)];
-	return path;
+	return [path copy];
 } 
 
 + (UIImage*)imageWithPath:(NSString*)path 
@@ -151,9 +200,9 @@ CGRect KriyaFrame() {
 //or for retrieving already downloaded images
 + (UIImage*)imageWithUrl:(NSString*)url feches:(BOOL)fechFromWeb
 {
-	NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
-	path = [NSString stringWithFormat:@"%@/%@", path, [Kriya md5:url]];	
+	NSString *dir = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
+	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
+	NSString *path = [NSString stringWithFormat:@"%@/%@", dir, [Kriya md5:url]];	
 	NSData* imgData = [Kriya loadWithPath:path];
 	if (!imgData&&fechFromWeb) {
 		NSURL *nsurl = [NSURL URLWithString:url];
@@ -181,15 +230,15 @@ CGRect KriyaFrame() {
 {
 	NSOperationQueue *queue = [[[NSOperationQueue alloc] init] autorelease];
 	[queue addOperation:request];
-	DebugLog(@"envoke %@", request);
+	//DLog(@"envoke %@", request);
 }
 
 
 + (void)clearImageWithUrl:(NSString*)url 
 {
-	NSString *path = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];			
-	path = [NSString stringWithFormat:@"%@/%@", path, [Kriya md5:url]];	
+	NSString *dir = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
+	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
+	NSString *path = [NSString stringWithFormat:@"%@/%@", dir, [Kriya md5:url]];	
 	[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 }
 
@@ -209,5 +258,135 @@ CGRect KriyaFrame() {
 			result[12], result[13],
 			result[14], result[15]];
 }
+
+#pragma mark Dates
++ (BOOL) date:(NSDate*)date isBetweenDate:(NSDate*)beginDate andDate:(NSDate*)endDate {
+    return (([date compare:beginDate] != NSOrderedAscending) && ([date compare:endDate] != NSOrderedDescending));
+}
+
+#pragma mark simple states
++ (void)saveState:(NSString*)value forField:(NSString*)key {
+	if (value&&key) {
+		DLog(@"OM KRIYA SAVING STATE %@ for %@", value, key);
+		[[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
+}
+
++ (NSString*)stateForField:(NSString*)key {
+	if (key) {
+		return [[NSUserDefaults standardUserDefaults] valueForKey:key];
+	} else {
+		return @"";
+	}
+}
+
+#pragma mark image scaling and rotating
++ (UIImage*)scaleAndRotateImage:(UIImage*)image {  
+	int kMaxResolution = 1024; // Or whatever  
+	
+	CGImageRef imgRef = image.CGImage;  
+	
+	CGFloat width = CGImageGetWidth(imgRef);  
+	CGFloat height = CGImageGetHeight(imgRef);  
+	
+    CGAffineTransform transform = CGAffineTransformIdentity;  
+    CGRect bounds = CGRectMake(0, 0, width, height);  
+    if (width > kMaxResolution || height > kMaxResolution) {  
+		CGFloat ratio = width/height;  
+		if (ratio > 1) {  
+			bounds.size.width = kMaxResolution;  
+            bounds.size.height = bounds.size.width / ratio;  
+        }  
+		else {  
+			bounds.size.height = kMaxResolution;  
+			bounds.size.width = bounds.size.height * ratio;  
+		}  
+	}  
+	
+	CGFloat scaleRatio = bounds.size.width / width;  
+	CGSize imageSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef));  
+	CGFloat boundHeight;  
+	UIImageOrientation orient = image.imageOrientation;  
+	switch(orient) {  
+			
+		case UIImageOrientationUp: //EXIF = 1  
+			transform = CGAffineTransformIdentity;  
+			break;  
+			
+		case UIImageOrientationUpMirrored: //EXIF = 2  
+			transform = CGAffineTransformMakeTranslation(imageSize.width, 0.0);  
+			transform = CGAffineTransformScale(transform, -1.0, 1.0);  
+			break;  
+			
+		case UIImageOrientationDown: //EXIF = 3  
+			transform = CGAffineTransformMakeTranslation(imageSize.width, imageSize.height);  
+			transform = CGAffineTransformRotate(transform, M_PI);  
+			break;  
+			
+		case UIImageOrientationDownMirrored: //EXIF = 4  
+			transform = CGAffineTransformMakeTranslation(0.0, imageSize.height);  
+			transform = CGAffineTransformScale(transform, 1.0, -1.0);  
+			break;  
+			
+		case UIImageOrientationLeftMirrored: //EXIF = 5  
+			boundHeight = bounds.size.height;  
+			bounds.size.height = bounds.size.width;  
+			bounds.size.width = boundHeight;  
+			transform = CGAffineTransformMakeTranslation(imageSize.height, imageSize.width);  
+			transform = CGAffineTransformScale(transform, -1.0, 1.0);  
+			transform = CGAffineTransformRotate(transform, 3.0 * M_PI / 2.0);  
+			break;  
+			
+		case UIImageOrientationLeft: //EXIF = 6  
+			boundHeight = bounds.size.height;  
+			bounds.size.height = bounds.size.width;  
+			bounds.size.width = boundHeight;  
+			transform = CGAffineTransformMakeTranslation(0.0, imageSize.width);  
+			transform = CGAffineTransformRotate(transform, 3.0 * M_PI / 2.0);  
+			break;  
+			
+		case UIImageOrientationRightMirrored: //EXIF = 7  
+			boundHeight = bounds.size.height;  
+			bounds.size.height = bounds.size.width;  
+			bounds.size.width = boundHeight;  
+			transform = CGAffineTransformMakeScale(-1.0, 1.0);  
+			transform = CGAffineTransformRotate(transform, M_PI / 2.0);  
+			break;  
+			
+		case UIImageOrientationRight: //EXIF = 8  
+			boundHeight = bounds.size.height;  
+			bounds.size.height = bounds.size.width;  
+			bounds.size.width = boundHeight;  
+			transform = CGAffineTransformMakeTranslation(imageSize.height, 0.0);  
+			transform = CGAffineTransformRotate(transform, M_PI / 2.0);  
+			break;  
+			
+		default:  
+			[NSException raise:NSInternalInconsistencyException format:@"Invalid image orientation"];  
+			
+	}  
+	
+	UIGraphicsBeginImageContext(bounds.size);  
+	
+	CGContextRef context = UIGraphicsGetCurrentContext();  
+	
+	if (orient == UIImageOrientationRight || orient == UIImageOrientationLeft) {  
+		CGContextScaleCTM(context, -scaleRatio, scaleRatio);  
+		CGContextTranslateCTM(context, -height, 0);  
+	}  
+	else {  
+		CGContextScaleCTM(context, scaleRatio, -scaleRatio);  
+		CGContextTranslateCTM(context, 0, -height);  
+	}  
+	
+	CGContextConcatCTM(context, transform);  
+	
+	CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);  
+	UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();  
+	UIGraphicsEndImageContext();  
+	
+	return imageCopy;  
+}  
 
 @end

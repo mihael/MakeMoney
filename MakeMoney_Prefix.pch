@@ -9,10 +9,22 @@
 	#import "iAlert.h"
 #endif
 
+//enable debug log
 #define DEBUG_MODE
+
+//enable test mode
+#define TEST_MODE
+
+//use Push Notifications
+#define APN_MODE
+
+//use InAppStore
+#define IAS_MODE
 
 #ifdef DEBUG_MODE
 #define DebugLog( s, ... ) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#define DLog( s, ... ) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 #else
 #define DebugLog( s, ... ) 
+#define DLog( s, ... ) 
 #endif
