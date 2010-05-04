@@ -24,24 +24,50 @@ CGRect KriyaFrame() {
 + (CGRect)orientedFrame {
 	UIInterfaceOrientation interfaceOrientation = [[UIDevice currentDevice] orientation];
 	CGRect r = CGRectZero;
-	switch (interfaceOrientation) {
-		case UIInterfaceOrientationPortrait:
-			//todo is this iPad?
-			r = pod_RectPortrait;
-			break;
-		case UIInterfaceOrientationPortraitUpsideDown:
-			r = pod_RectPortraitUpsideDown;
-			break;
-		case UIInterfaceOrientationLandscapeLeft:
-			r = pod_RectLandscapeLeft;
-			break;
-		case UIInterfaceOrientationLandscapeRight:
-			r = pod_RectLandscapeRight;
-			break;
-		default:
-			r = pod_RectPortrait;
-			break;
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		//this is an iPad
+		switch (interfaceOrientation) {
+			case UIInterfaceOrientationPortrait:
+				//todo is this iPad?
+				r = pad_RectPortrait;
+				break;
+			case UIInterfaceOrientationPortraitUpsideDown:
+				r = pad_RectPortraitUpsideDown;
+				break;
+			case UIInterfaceOrientationLandscapeLeft:
+				r = pad_RectLandscapeLeft;
+				break;
+			case UIInterfaceOrientationLandscapeRight:
+				r = pad_RectLandscapeRight;
+				break;
+			default:
+				r = pad_RectPortrait;
+				break;
+		}
+		
+	} else {
+		//this is iPhone or iPod touch
+		switch (interfaceOrientation) {
+			case UIInterfaceOrientationPortrait:
+				//todo is this iPad?
+				r = pod_RectPortrait;
+				break;
+			case UIInterfaceOrientationPortraitUpsideDown:
+				r = pod_RectPortraitUpsideDown;
+				break;
+			case UIInterfaceOrientationLandscapeLeft:
+				r = pod_RectLandscapeLeft;
+				break;
+			case UIInterfaceOrientationLandscapeRight:
+				r = pod_RectLandscapeRight;
+				break;
+			default:
+				r = pod_RectPortrait;
+				break;
+		}
 	}
+
+
 	return r;
 }
 

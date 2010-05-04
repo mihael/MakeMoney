@@ -56,6 +56,9 @@
 		47B7A64D107652F3005F9DC7 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B7A64A107652F3005F9DC7 /* RegexKitLite.m */; };
 		47B7A64E107652F3005F9DC7 /* RKLMatchEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B7A64C107652F3005F9DC7 /* RKLMatchEnumerator.m */; };
 		47B7A65110765306005F9DC7 /* iContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B7A65010765306005F9DC7 /* iContentView.m */; };
+		47C0E9901190C0C900B78660 /* 0_11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90120F7FBCAA001687AA /* 0_11.jpg */; };
+		47C0E9911190C0CD00B78660 /* 0_12.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90130F7FBCAA001687AA /* 0_12.jpg */; };
+		47C0E9921190C0D000B78660 /* 0_13.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90140F7FBCAA001687AA /* 0_13.jpg */; };
 		47C393D6101725EC005F45B6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C393D5101725EC005F45B6 /* MapKit.framework */; };
 		47C393F3101DB100005F45B6 /* Kriya.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C393F2101DB100005F45B6 /* Kriya.m */; };
 		47C3940A101DB18C005F45B6 /* AssetRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C393F5101DB18C005F45B6 /* AssetRepository.m */; };
@@ -819,6 +822,7 @@
 				47EBEAC10F4C688A009F377E /* Transends */,
 				472965380F4834F50053F946 /* Artwork */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				47C0E98B1190C02D00B78660 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				4796C73B0F41E53D002F2C2A /* Entitlements.plist */,
@@ -1099,6 +1103,13 @@
 				47B7A64C107652F3005F9DC7 /* RKLMatchEnumerator.m */,
 			);
 			name = RegExKit;
+			sourceTree = "<group>";
+		};
+		47C0E98B1190C02D00B78660 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
 		47C39437101DB247005F45B6 /* Controllers */ = {
@@ -1706,6 +1717,9 @@
 				47A20F05110EE093003195A0 /* littlebutton.png in Resources */,
 				47A20F06110EE093003195A0 /* littlehighbutton.png in Resources */,
 				4765DA801157C1ED004F21E3 /* 0_Movie_141.mov in Resources */,
+				47C0E9901190C0C900B78660 /* 0_11.jpg in Resources */,
+				47C0E9911190C0CD00B78660 /* 0_12.jpg in Resources */,
+				47C0E9921190C0D000B78660 /* 0_13.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1796,6 +1810,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Miha Plohl";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
@@ -1809,10 +1824,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MakeMoney_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = MakeMoney;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "330D634E-2491-4FB6-AB17-3EC9247D8B25";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(cocos2d)/**";
 			};
 			name = Debug;
@@ -1821,6 +1838,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Miha Plohl";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
@@ -1832,10 +1850,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MakeMoney_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = MakeMoney;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5EC952FF-A46E-4F96-86B1-52FFF5710045";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(cocos2d)/**";
 			};
 			name = Release;
