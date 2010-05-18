@@ -24,6 +24,8 @@ CGRect KriyaFrame() {
 + (CGRect)orientedFrame {
 	UIInterfaceOrientation interfaceOrientation = [[UIDevice currentDevice] orientation];
 	CGRect r = CGRectZero;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+	// iPad
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		//this is an iPad
 		switch (interfaceOrientation) {
@@ -66,7 +68,27 @@ CGRect KriyaFrame() {
 				break;
 		}
 	}
-
+#else
+	// iPhone
+	switch (interfaceOrientation) {
+		case UIInterfaceOrientationPortrait:
+			//todo is this iPad?
+			r = pod_RectPortrait;
+			break;
+		case UIInterfaceOrientationPortraitUpsideDown:
+			r = pod_RectPortraitUpsideDown;
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+			r = pod_RectLandscapeLeft;
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			r = pod_RectLandscapeRight;
+			break;
+		default:
+			r = pod_RectPortrait;
+			break;
+	}
+#endif
 
 	return r;
 }

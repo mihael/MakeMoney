@@ -20,6 +20,7 @@
 		[self addSubview:backLight];
 		[self hideBackLight];
 		notOpen = YES;
+		noButton = [[options valueForKey:@"no_button"] boolValue]; 
 		canOpen = [[options valueForKey:@"button_opens_not_controls"] boolValue];
 		bigButton = [[options valueForKey:@"big_button"] boolValue];
 		buttonOnLeft = [[options valueForKey:@"button_on_left"] boolValue];		
@@ -76,7 +77,8 @@
 		wwwView = [[iWWWView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 		[wwwView setHidden:YES];
 		
-		[self addSubview:button];
+		if (!noButton)
+			[self addSubview:button];
 		[self addSubview:leftButton];
 		[self addSubview:rightButton];
 		[self addSubview:wwwView];

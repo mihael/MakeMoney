@@ -70,6 +70,7 @@
 	BOOL canOpen;
 	BOOL bigButton;
 	BOOL canSpaceTouch;
+	BOOL noButton;
 	
 	BOOL buttonSpinDirection;
 	BOOL buttonInSpinning;
