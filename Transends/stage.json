@@ -10,11 +10,12 @@
 "animated":"true",
 "vibe":"1.83",
 "can_rotate":"true",
-"direction_changes":"false",
+"direction_changes":"true",
 "big_button":"false",
 "button_on_left":"true",
 "button_opens_not_controls":"true",
-"save_current_spot":"false",
+"can_save_images":"true",
+"save_current_spot":"true",
 "save_current_program":"false",
 "goldcut":-1
 }

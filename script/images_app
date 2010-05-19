@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+require 'benchmark'
+require File.expand_path(File.join(File.dirname(__FILE__), %w[lib makemoney.rb]))
+$:.unshift File.join(File.dirname(__FILE__))
+
+MakeMoney.log "#{'MakeMoney'.green} ~ the scripts."
+MakeMoney.log "images_app  creates an iphone/ipad image app from your image folder"
+time = Benchmark.realtime do 
+
+  @in_dir = ARGV[0]
+  @files = []
+  if (File.ftype(@in_dir) == 'directory')
+      Dir[File.join(@in_dir, "*.*")].each do |path|
+        if path =~ /\.jpg|\.png|\.JPG|\.PNG|\.JPEG|\.jpeg/
+          MakeMoney.log path
+          @files << path
+        end
+      end
+      MakeMoney.log "Files found: #{@files.size}. You need to add them to the XCode project."
+      if @files.size>0
+        #create MakeMoney json program
+stage = <<-RAW
+"info":"true",
+"2D":"false",
+"APN":"false",
+"wwwapp":"false",
+"wifiapp":"false",
+"program":"program",
+"horizontal":"true",
+"animated":"true",
+"vibe":"1.83",
+"can_rotate":"true",
+"direction_changes":"false",
+"big_button":"false",
+"button_on_left":"true",
+"button_opens_not_controls":"true",
+"save_current_spot":"false",
+"save_current_program":"false",
+"goldcut":-1
+RAW
+        program = ""
+        size = @files.size
+        out_path = File.join(File.dirname(__FILE__), %w[.. Transends])
+        @files.each_with_index do |f,i|
+          filename = f.split('/').last
+          ext = filename.split('.').last
+          out_file = "#{i.to_s}.#{ext}"
+program << <<-RAW
+  {"ii":"#{out_file}", "ions":{"reuse":"true"}, "ior":{"stop":"true"}}#{"," if i<size-1}
+RAW
+        `cp '#{f}' #{out_path}/#{out_file}`
+        end
+        out_program = File.join(out_path, %w[program.json])
+        out_stage = File.join(File.dirname(__FILE__), %w[.. Transends stage.json])
+        MakeMoney.write_program(program, out_program)
+        MakeMoney.write_stage(stage, out_stage)
+      end
+  end
+end
+MakeMoney.log "Realtime used : #{time}sec"

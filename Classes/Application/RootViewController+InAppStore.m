@@ -46,7 +46,7 @@
 - (void)requestProductData
 {
 	DLog(@"InAppStore#requestProductData");
-	SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: kFichrId]];
+	SKProductsRequest *request= [[[SKProductsRequest alloc] initWithProductIdentifiers: [NSSet setWithObject: kFichrId]] autorelease];
 	request.delegate = self;
 	[request start];
 }

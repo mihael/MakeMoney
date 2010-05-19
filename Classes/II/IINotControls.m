@@ -58,13 +58,20 @@
 		[leftButton setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];
 		[leftButton addTarget:self action:@selector(leftButtonTouch) forControlEvents:UIControlEventTouchUpInside];
 
+			
+		actionButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+		[actionButton setFrame:CGRectMake((kLeftRightButtonSize + kPadding), frame.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
+		[actionButton setImage:[UIImage imageNamed:@"littlebutton.png"] forState:UIControlStateNormal];
+		[actionButton setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];
+		[actionButton addTarget:self action:@selector(actionButtonTouch) forControlEvents:UIControlEventTouchUpInside];
+		
 		rightButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		[rightButton setFrame:CGRectMake(frame.size.width - kLeftRightButtonSize - kPadding, frame.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
 		[rightButton setImage:[UIImage imageNamed:@"littlebutton.png"] forState:UIControlStateNormal];
 		[rightButton setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];
 		[rightButton addTarget:self action:@selector(rightButtonTouch) forControlEvents:UIControlEventTouchUpInside];
 
-		messageView = [[[UILabel alloc] initWithFrame:CGRectMake(kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding), (kLeftRightButtonSize+2*kPadding))]retain];
+		messageView = [[[UILabel alloc] initWithFrame:CGRectMake(2*kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding) - (kLeftRightButtonSize+kPadding), (kLeftRightButtonSize+2*kPadding))]retain];
 		[messageView setBackgroundColor:[UIColor clearColor]];
 		[messageView setTextAlignment:UITextAlignmentCenter];
 		[messageView setTextColor:[UIColor whiteColor]];
@@ -80,6 +87,7 @@
 		if (!noButton)
 			[self addSubview:button];
 		[self addSubview:leftButton];
+		[self addSubview:actionButton];
 		[self addSubview:rightButton];
 		[self addSubview:wwwView];
 		[self addSubview:progressor];
@@ -98,6 +106,7 @@
 
 - (void)layout:(CGRect)rect
 {
+	self.frame = rect;
 	[backLight setFrame:rect];
 	notControlsFrame = rect;
 	NSUInteger buttonSize = kButtonSize;
@@ -112,10 +121,12 @@
 	[button setFrame:CGRectMake(x, kPadding, buttonSize, buttonSize)];
 
 	[leftButton setFrame:CGRectMake(kPadding, rect.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
-	
+
+	[actionButton setFrame:CGRectMake((kLeftRightButtonSize + kPadding), rect.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
+
 	[rightButton setFrame:CGRectMake(rect.size.width - kLeftRightButtonSize - kPadding, rect.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
 	
-	[messageView setFrame:CGRectMake(kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding), (kLeftRightButtonSize+2*kPadding))];
+	[messageView setFrame:CGRectMake(2*kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding) - (kLeftRightButtonSize+kPadding), (kLeftRightButtonSize+2*kPadding))];
 	
 	[progressor layout:rect];
 	
@@ -135,6 +146,7 @@
 	[button release];
 	[leftButton release];
 	[rightButton release];
+	[actionButton release];
     [super dealloc];
 }
 
@@ -269,6 +281,7 @@
 	[animation setDuration:0.5];
 	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
 	[[leftButton layer] addAnimation:animation forKey:kButtonAnimationKey];
+	[[actionButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 	[animation setSubtype:kCATransitionFromRight];
 	[[rightButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 }
@@ -281,6 +294,7 @@
 	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
 	[animation setSubtype:kCATransitionFromRight];
 	[[leftButton layer] addAnimation:animation forKey:kButtonAnimationKey];
+	[[actionButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 	[animation setSubtype:kCATransitionFromLeft];
 	[[rightButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 }
@@ -302,6 +316,7 @@
 	if (canOpen)
 	{
 		leftButton.hidden = NO;
+		actionButton.hidden = NO;
 		rightButton.hidden = NO;
 		notOpen = NO;
 		[self animateButtonsIn];
@@ -317,6 +332,7 @@
 - (void)closeNotControls
 {
 	leftButton.hidden = YES;
+	actionButton.hidden = YES;
 	rightButton.hidden = YES;
 	notOpen = YES;
 	[self animateButtonsOut];
@@ -429,6 +445,14 @@
 }
 
 #pragma mark underbuttons
+- (void)actionButtonTouch {
+	if (delegate) {
+		if ([delegate respondsToSelector:@selector(actionTouch:)]) {
+			[delegate actionTouch:self];
+		}
+	}
+}
+
 - (void)leftButtonTouch 
 {
 	if (delegate) {
@@ -606,7 +630,7 @@
 	if (notController) {
 		UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
 		[picker setDelegate:self];
-		[picker setAllowsImageEditing:NO];
+		[picker setAllowsEditing:NO];
 		//[[picker navigationBar] setHidden:NO];	
 		//[picker setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
 		
@@ -692,6 +716,7 @@
 {
     UITouch *touch = [touches anyObject];
     startTouchPosition = [touch locationInView:self];
+	moveCount = 0;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -703,13 +728,18 @@
 		if (fabsf(startTouchPosition.x - currentTouchPosition.x) >= kHorizontalSwipeDragMin &&
 			fabsf(startTouchPosition.y - currentTouchPosition.y) <= kVerticalSwipeDragMax)
 		{
+			moveCount++;
 			// It appears to be a swipe.
-			if (startTouchPosition.x < currentTouchPosition.x) {
-				if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)])
-					[delegate spaceSwipeLeft:self];
-			} else {
-				if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)])
-					[delegate spaceSwipeRight:self];
+			if (moveCount==1) { //only send swipe once
+				if (startTouchPosition.x < currentTouchPosition.x) {
+					if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)]) {
+						[delegate spaceSwipeLeft:self];
+					}
+				} else {
+					if ([delegate respondsToSelector:@selector(spaceTouch:touchPoint:)]) {
+						[delegate spaceSwipeRight:self];
+					}
+				}
 			}
 		} else {
 			// Process a non-swipe event.

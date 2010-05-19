@@ -13,7 +13,7 @@
 #define kButtonAnimationKey @"buttonViewAnimation"
 #define kBackLightAnimationKey @"backLightViewAnimation"
 #define kMessageFontName @"Helvetica-Bold"
-#define kMessageFontSize 18.0
+#define kMessageFontSize 14.0
 
 #define kHorizontalSwipeDragMin  12
 #define kVerticalSwipeDragMax 4
@@ -22,6 +22,7 @@
 - (void)shake:(id)notControl;//device was shaked
 
 - (void)leftTouch:(id)notControl; //left underbutton touch
+- (void)actionTouch:(id)notControl; //action underbutton touch
 - (void)rightTouch:(id)notControl; //right underbutton touch
 - (void)spaceTouch:(id)notControl touchPoint:(CGPoint)point; //empty space touch - can be while openNot && spaceUp
 - (void)spaceDoubleTouch:(id)notControl touchPoint:(CGPoint)point; //empty space double touch - can be while openNot && spaceUp
@@ -51,6 +52,7 @@
 	
     UIButton *button;
 	UIButton *leftButton;
+	UIButton *actionButton;
 	UIButton *rightButton;
 	UILabel *messageView;
 	CGRect notControlsFrame;
@@ -63,6 +65,7 @@
 	iWWWView *wwwView;
 	
 	CGPoint startTouchPosition;
+	int moveCount;
 	BOOL buttonInTouching;
 	BOOL buttonNotLightUp;
 	BOOL buttonOnLeft;

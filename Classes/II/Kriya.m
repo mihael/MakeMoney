@@ -14,10 +14,10 @@ CGRect KriyaFrame() {
 #define pod_RectLandscapeLeft CGRectMake(0, 0, 480, 320)
 #define pod_RectLandscapeRight CGRectMake(0, 0, 480, 320)
 
-#define pad_RectPortrait CGRectMake(0, 0, 768, 1024)
-#define pad_RectPortraitUpsideDown CGRectMake(0, 0, 768, 1024)
-#define pad_RectLandscapeLeft CGRectMake(0, 0, 1024, 768)
-#define pad_RectLandscapeRight CGRectMake(0, 0, 1024, 768)
+#define pad_RectPortrait CGRectMake(0, 0, 768, 1004)
+#define pad_RectPortraitUpsideDown CGRectMake(0, 0, 768, 1004)
+#define pad_RectLandscapeLeft CGRectMake(0, 0, 1024, 748)
+#define pad_RectLandscapeRight CGRectMake(0, 0, 1024, 748)
 
 @implementation Kriya
 
@@ -224,7 +224,7 @@ CGRect KriyaFrame() {
 	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
 	NSString *path = [NSString stringWithFormat:@"%@/%@", dir, [Kriya md5:url]];	
 	[Kriya writeWithPath:path data:UIImageJPEGRepresentation(image, 1.0)];
-	return [path copy];
+	return path;
 } 
 
 
@@ -235,7 +235,7 @@ CGRect KriyaFrame() {
 	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
 	NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", dir, [Kriya md5:generatedPath]];	
 	[Kriya writeWithPath:path data:UIImageJPEGRepresentation(image, 1.0)];
-	return [path copy];
+	return path;
 } 
 
 + (UIImage*)imageWithPath:(NSString*)path 

@@ -22,7 +22,7 @@
 			horizontal = ([[[NSUserDefaults standardUserDefaults] valueForKey:@"horizontal"] isEqualToString:@"true"]);
 		}
 		animated = [[stage valueForKey:@"animated"] boolValue];		
-		NSString* program_json = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:program ofType:@"json"]];
+		NSString* program_json = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:program ofType:@"json"] encoding:NSUTF8StringEncoding error:nil];
 		transender = [[IITransender alloc] initWith:program_json];
 		[transender setDelegate:self];
 		DebugLog(@"#initWithTransenderProgram: %@ andStage: %@", program, stage);
@@ -46,6 +46,7 @@
 //	[skrin setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 	
 	transendEmitter1 = [[UIImageView alloc] initWithFrame:skrin.frame];
+	//transendEmitter1.backgroundColor = [UIColor greenColor];
 	[transendEmitter1 setImage:[transender imageNamed:@"vmain.jpg"]];
 	[transendEmitter1 setContentMode:UIViewContentModeScaleAspectFit];
 	transendEmitter2 = [[UIImageView alloc] initWithFrame:skrin.frame];
@@ -89,6 +90,13 @@
 	[transitions release];
 	[directions release];
     [super dealloc];
+}
+
+- (void)setNotBehavior:(NSMutableDictionary*)newNotBehavior {
+	if (notBehavior != newNotBehavior) {
+			[notBehavior release];
+			notBehavior = [newNotBehavior mutableCopy];
+    }
 }
 
 #pragma mark Startup info view
@@ -308,7 +316,7 @@
 #pragma mark See Movie
 -(void)seeMovie:(NSURL*)url 
 {
-    MPMoviePlayerController* movie=[[MPMoviePlayerController alloc] initWithContentURL:url]; 
+    MPMoviePlayerController* movie= [[[MPMoviePlayerController alloc] initWithContentURL:url] autorelease]; 
     movie.scalingMode=MPMovieScalingModeAspectFill;
 	//movie.movieControlMode=MPMovieControlModeVolumeOnly;
 		
@@ -334,7 +342,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:MPMoviePlayerPlaybackDidFinishNotification 
                                                   object:movie]; 
-    [movie release]; 
+    //[movie release]; 
 	if (delegate) { //notify delegate about the end
 		if ([delegate respondsToSelector:@selector(moviesEnd)])
 			[delegate moviesEnd];
@@ -354,24 +362,24 @@
 #pragma mark View Transitioning
 - (void)transitImage:(UIImage*)img 
 {
-
-	if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"fill"]) {
-		transendEmitter1.contentMode = UIViewContentModeScaleAspectFill;
-		transendEmitter2.contentMode = UIViewContentModeScaleAspectFill;
+	if ([notBehavior valueForKey:@"content_mode"]) { //set content mode if requested
+		if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"fill"]) {
+			transendEmitter1.contentMode = UIViewContentModeScaleAspectFill;
+			transendEmitter2.contentMode = UIViewContentModeScaleAspectFill;
+		}
+		if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"fit"]) {
+			transendEmitter1.contentMode = UIViewContentModeScaleAspectFit;
+			transendEmitter2.contentMode = UIViewContentModeScaleAspectFit;
+		}
+		if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"scale"]) {
+			transendEmitter1.contentMode = UIViewContentModeScaleToFill;
+			transendEmitter2.contentMode = UIViewContentModeScaleToFill;
+		}
+		if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"center"]) {
+			transendEmitter1.contentMode = UIViewContentModeCenter;
+			transendEmitter2.contentMode = UIViewContentModeCenter;
+		}
 	}
-	if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"fit"]) {
-		transendEmitter1.contentMode = UIViewContentModeScaleAspectFit;
-		transendEmitter2.contentMode = UIViewContentModeScaleAspectFit;
-	}
-	if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"scale"]) {
-		transendEmitter1.contentMode = UIViewContentModeScaleToFill;
-		transendEmitter2.contentMode = UIViewContentModeScaleToFill;
-	}
-	if ([[notBehavior valueForKey:@"content_mode"] isEqualToString:@"center"]) {
-		transendEmitter1.contentMode = UIViewContentModeCenter;
-		transendEmitter2.contentMode = UIViewContentModeCenter;
-	}
-	
 	if (useEmitter1) { 
 		[transendEmitter2 setImage:img];
 		[self transit:transendEmitter2];
@@ -430,6 +438,10 @@
 	}
 }
 
+- (BOOL)isTransendedWithImage {
+	return ([[[skrin subviews] objectAtIndex:0] class]==[UIImageView class]);
+}
+
 #pragma mark IINotControlsDelegate
 - (void)shake:(id)notControl { //device is shaked
 	[transender meditate];
@@ -462,31 +474,44 @@
 }
 
 - (void)leftTouch:(id)notControl {
-	[transender changeDirectionTo:kIITransenderDirectionDown];
-	[transender invokeTransend];
-	if ([stage valueForKey:@"direction_changes"]) {
-		BOOL changes = [[stage valueForKey:@"direction_changes"] boolValue];
-		if (!changes)
-			[transender changeDirectionTo:kIITransenderDirectionUp];
+	if (![transender isTransending]) {
+		[transender changeDirectionTo:kIITransenderDirectionDown];
+		[transender invokeTransend];
+		if ([stage valueForKey:@"direction_changes"]) { //disable direction changes
+			BOOL changes = [[stage valueForKey:@"direction_changes"] boolValue];
+			if (!changes)
+				[transender changeDirectionTo:kIITransenderDirectionUp];
+		}
 	}
 	
 }
 
 - (void)rightTouch:(id)notControl {
-	[transender changeDirectionTo:kIITransenderDirectionUp];
-	[transender invokeTransend];
+	if (![transender isTransending]) {
+		[transender changeDirectionTo:kIITransenderDirectionUp];
+		[transender invokeTransend];
+	} //do not do anything if the transender is already transending
+}
+
+- (void)actionTouch:(id)notControl {
+	if ([self isTransendedWithImage]) { //this is an image transend
+		DLog(@"SHould SHOW POP UP IF IPAD ...");
+	} else {
+		//pass it on to the current transendController
+		DLog(@"actionTouch");
+	}
 }
 
 - (void)spaceTouch:(id)notControl touchPoint:(CGPoint)point { //space was just tapped
-	DebugLog(@"spaceTouch");
+	DLog(@"spaceTouch");
 	if ([notControl notOpen]) { //use only when not open notControls
 		if ([transender isTransending]) {
-			DebugLog(@"lightingUp meditate");
+			DLog(@"lightingUp meditate");
 			[transender cancelFech];
 			[notControl lightUp];
 			[transender meditate];
 		} else {
-			DebugLog(@"lightingDown transend");
+			DLog(@"lightingDown transend");
 			[notControl lightDown];
 			[transender transend];
 		}		
@@ -502,14 +527,16 @@
 }
 
 - (void)spaceSwipeRight:(id)notControl { //empty space swipe - can be while openNot
-	if (![notControl notOpen]) {
+	DLog(@"Space SWIPE RIGHT");
+	if (![notControl notOpen]&&![transender isTransending]) {
 		[transender changeDirectionTo:kIITransenderDirectionUp];
 		[transender invokeTransend];
 	}
 }
 
 - (void)spaceSwipeLeft:(id)notControl { //empty space swipe - can be while openNot
-	if (![notControl notOpen]) {
+	DLog(@"Space SWIPE LEFT");
+	if (![notControl notOpen]&&![transender isTransending]) {
 		[transender changeDirectionTo:kIITransenderDirectionDown];
 		[transender invokeTransend];
 	}

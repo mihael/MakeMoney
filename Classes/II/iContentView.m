@@ -74,9 +74,9 @@ static NSArray *expressions = nil;
 		button = [UIButton buttonWithType:UIButtonTypeRoundedRect]; // autoreleased
 	}
 	[button setFrame:frame];
-	[button setFont:self.label.font];
+	[[button titleLabel] setFont:self.label.font];
 	[button setTitle:text forState:UIControlStateNormal];
-	[button setLineBreakMode:[self.label lineBreakMode]];
+	[[button titleLabel] setLineBreakMode:[self.label lineBreakMode]];
 	[button setTitleColor:self.normalColor forState:UIControlStateNormal];
 	[button setTitleColor:self.highlightColor forState:UIControlStateHighlighted];
 	[button addTarget:self action:@selector(handleButton:) forControlEvents:UIControlEventTouchUpInside];

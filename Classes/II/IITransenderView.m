@@ -21,7 +21,7 @@
 	}
 	
 	NSArray *subViews = [self subviews];
-	NSUInteger index;
+	NSUInteger index = 0;
 	
 	if ([oldView superview] == self) {
 		// Find the index of oldView so that we can insert newView at the same place
@@ -62,7 +62,7 @@
 	}
 	
 	NSArray *subViews = [self subviews];
-	NSUInteger index;
+	NSUInteger index = 0;
 	
 	if ([oldView superview] == self) {
 		// Find the index of oldView so that we can insert newView at the same place

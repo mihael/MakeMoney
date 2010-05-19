@@ -21,6 +21,23 @@
 		47287029107A2E730053F2CE /* ASIS3ListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 47287022107A2E730053F2CE /* ASIS3ListRequest.m */; };
 		4728702A107A2E730053F2CE /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 47287024107A2E730053F2CE /* ASIS3Request.m */; };
 		472965430F4859C10053F946 /* Hajlov in Resources */ = {isa = PBXBuildFile; fileRef = 472965420F4859C10053F946 /* Hajlov */; };
+		472F645411A44E3E007DDABC /* 0_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90080F7FBCAA001687AA /* 0_1.jpg */; };
+		472F645511A44E3F007DDABC /* 0_10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90110F7FBCAA001687AA /* 0_10.jpg */; };
+		472F645611A44E41007DDABC /* 0_14.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90150F7FBCAA001687AA /* 0_14.jpg */; };
+		472F645711A44E43007DDABC /* 0_15.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90160F7FBCAA001687AA /* 0_15.jpg */; };
+		472F645811A44E44007DDABC /* 0_16.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90170F7FBCAA001687AA /* 0_16.jpg */; };
+		472F645911A44E45007DDABC /* 0_17.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90180F7FBCAA001687AA /* 0_17.jpg */; };
+		472F645A11A44E45007DDABC /* 0_18.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90190F7FBCAA001687AA /* 0_18.jpg */; };
+		472F645B11A44E46007DDABC /* 0_19.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD901A0F7FBCAA001687AA /* 0_19.jpg */; };
+		472F645C11A44E48007DDABC /* 0_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90090F7FBCAA001687AA /* 0_2.jpg */; };
+		472F645D11A44E49007DDABC /* 0_20.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD901B0F7FBCAA001687AA /* 0_20.jpg */; };
+		472F645E11A44E4B007DDABC /* 0_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD900A0F7FBCAA001687AA /* 0_3.jpg */; };
+		472F645F11A44E4C007DDABC /* 0_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD900B0F7FBCAA001687AA /* 0_4.jpg */; };
+		472F646011A44E4C007DDABC /* 0_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD900C0F7FBCAA001687AA /* 0_5.jpg */; };
+		472F646111A44E4F007DDABC /* 0_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD900D0F7FBCAA001687AA /* 0_6.jpg */; };
+		472F646211A44E50007DDABC /* 0_7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD900E0F7FBCAA001687AA /* 0_7.jpg */; };
+		472F646311A44E50007DDABC /* 0_8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD900F0F7FBCAA001687AA /* 0_8.jpg */; };
+		472F646411A44E51007DDABC /* 0_9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47AD90100F7FBCAA001687AA /* 0_9.jpg */; };
 		473488FC0F99E31C00A1D78A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 473488F60F99E31C00A1D78A /* icon.png */; };
 		473489360F99E53100A1D78A /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 473489350F99E53100A1D78A /* libz.1.2.3.dylib */; };
 		4745C89910593B2F00BAED5A /* SplashScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4745C89710593B2F00BAED5A /* SplashScene.m */; };
@@ -1720,6 +1737,23 @@
 				47C0E9901190C0C900B78660 /* 0_11.jpg in Resources */,
 				47C0E9911190C0CD00B78660 /* 0_12.jpg in Resources */,
 				47C0E9921190C0D000B78660 /* 0_13.jpg in Resources */,
+				472F645411A44E3E007DDABC /* 0_1.jpg in Resources */,
+				472F645511A44E3F007DDABC /* 0_10.jpg in Resources */,
+				472F645611A44E41007DDABC /* 0_14.jpg in Resources */,
+				472F645711A44E43007DDABC /* 0_15.jpg in Resources */,
+				472F645811A44E44007DDABC /* 0_16.jpg in Resources */,
+				472F645911A44E45007DDABC /* 0_17.jpg in Resources */,
+				472F645A11A44E45007DDABC /* 0_18.jpg in Resources */,
+				472F645B11A44E46007DDABC /* 0_19.jpg in Resources */,
+				472F645C11A44E48007DDABC /* 0_2.jpg in Resources */,
+				472F645D11A44E49007DDABC /* 0_20.jpg in Resources */,
+				472F645E11A44E4B007DDABC /* 0_3.jpg in Resources */,
+				472F645F11A44E4C007DDABC /* 0_4.jpg in Resources */,
+				472F646011A44E4C007DDABC /* 0_5.jpg in Resources */,
+				472F646111A44E4F007DDABC /* 0_6.jpg in Resources */,
+				472F646211A44E50007DDABC /* 0_7.jpg in Resources */,
+				472F646311A44E50007DDABC /* 0_8.jpg in Resources */,
+				472F646411A44E51007DDABC /* 0_9.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
