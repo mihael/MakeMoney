@@ -18,6 +18,7 @@
 		[self setBackgroundColor:[UIColor clearColor]];
 		backLight = [[UIImageView alloc] initWithFrame:frame];
 		[self addSubview:backLight];
+		[self makeBackLight];
 		[self hideBackLight];
 		notOpen = YES;
 		noButton = [[options valueForKey:@"no_button"] boolValue]; 
@@ -42,11 +43,11 @@
 		
 		[button setFrame:CGRectMake(x, kPadding, buttonSize, buttonSize)];
 		if (bigButton) {
-			[button setImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
-			[button setImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateHighlighted];
+			[button setImage:[UIImage imageNamed:@"bigbutton.png"] forState:UIControlStateNormal];
+			[button setImage:[UIImage imageNamed:@"highbigbutton.png"] forState:UIControlStateHighlighted];
 		} else {
-			[button setImage:[UIImage imageNamed:@"littlebutton.png"] forState:UIControlStateNormal];
-			[button setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];		
+			[button setImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+			[button setImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateHighlighted];		
 		}
 		[button addTarget:self action:@selector(buttonTouched) forControlEvents:UIControlEventTouchUpInside];
 		[button addTarget:self action:@selector(buttonTouching) forControlEvents:UIControlEventTouchDown];
@@ -104,10 +105,30 @@
     return self;
 }
 
+- (void)makeBackLight 
+{
+	NSString *currentLight = @"backlight.png";
+	if ([Kriya isPad]) {
+		if ([Kriya portrait]) {
+			currentLight = @"vbacklight-pad.png";
+		} else {
+			currentLight = @"backlight-pad.png";
+		}
+	} else {
+		if ([Kriya portrait]) {
+			currentLight = @"vbacklight.png";
+		} else {
+			currentLight = @"backlight.png";
+		}
+	}
+	[backLight setImage:[UIImage imageNamed:currentLight]];
+}
+
 - (void)layout:(CGRect)rect
 {
 	self.frame = rect;
 	[backLight setFrame:rect];
+	[self makeBackLight];
 	notControlsFrame = rect;
 	NSUInteger buttonSize = kButtonSize;
 	if (bigButton)
@@ -358,24 +379,42 @@
 
 - (void)lightDown 
 {
-	[button setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+	if (bigButton) {
+		[button setBackgroundImage:[UIImage imageNamed:@"bigbutton.png"] forState:UIControlStateNormal];
+	} else {
+		[button setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+	}
+
 	buttonNotLightUp = YES;
 }
 
 - (void)lightUp 
 {
-	[button setBackgroundImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateNormal];
+	if (bigButton) {
+		[button setBackgroundImage:[UIImage imageNamed:@"highbigbutton.png"] forState:UIControlStateNormal];
+	} else {
+		[button setBackgroundImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateNormal];
+	}
+//	[button setBackgroundImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateNormal];
 	buttonNotLightUp = NO;
 	[self animateLightUp];
 }
 
 - (void)lightUpOrDown 
 {
-	if (buttonNotLightUp) {
-		[button setBackgroundImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateNormal];
+	if (buttonNotLightUp) { //light it up then
+		if (bigButton) {
+			[button setBackgroundImage:[UIImage imageNamed:@"highbigbutton.png"] forState:UIControlStateNormal];
+		} else {
+			[button setBackgroundImage:[UIImage imageNamed:@"highbutton.png"] forState:UIControlStateNormal];
+		}
 		buttonNotLightUp = NO;
 	} else {
-		[button setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+		if (bigButton) {
+			[button setBackgroundImage:[UIImage imageNamed:@"bigbutton.png"] forState:UIControlStateNormal];
+		} else {
+			[button setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+		}
 		buttonNotLightUp = YES;
 	}
 }

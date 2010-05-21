@@ -39,7 +39,7 @@
     self.view = primaryView;
     [primaryView release];      
 	notControls = [[[IINotControls alloc] initWithFrame:[Kriya orientedFrame] withOptions:[[MakeMoneyAppDelegate app] stage]] retain];
-	[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
+	//[notControls setBackLight:[UIImage imageNamed:@"backlight.png"] withAlpha:1.0];
 	[self.view addSubview:notControls];
 	[notControls setNotController:self];
 	transenderViewController = [[IITransenderViewController alloc] initWithTransenderProgram:[[[MakeMoneyAppDelegate app] stage] valueForKey:@"program"] andStage:[[MakeMoneyAppDelegate app] stage]];

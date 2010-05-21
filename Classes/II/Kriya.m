@@ -14,12 +14,27 @@ CGRect KriyaFrame() {
 #define pod_RectLandscapeLeft CGRectMake(0, 0, 480, 320)
 #define pod_RectLandscapeRight CGRectMake(0, 0, 480, 320)
 
-#define pad_RectPortrait CGRectMake(0, 0, 768, 1004)
-#define pad_RectPortraitUpsideDown CGRectMake(0, 0, 768, 1004)
-#define pad_RectLandscapeLeft CGRectMake(0, 0, 1024, 748)
-#define pad_RectLandscapeRight CGRectMake(0, 0, 1024, 748)
+#define pad_RectPortrait CGRectMake(0, 0, 768, 1024)
+#define pad_RectPortraitUpsideDown CGRectMake(0, 0, 768, 1024)
+#define pad_RectLandscapeLeft CGRectMake(0, 0, 1024, 768)
+#define pad_RectLandscapeRight CGRectMake(0, 0, 1024, 768)
 
 @implementation Kriya
++ (BOOL)isPad {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+	// iPad capable OS
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		//this is an iPad
+		return YES;
+	}else {
+		//this is an iPod/iPhone
+		return NO;
+	}
+#else
+	//can not pissible be iPad
+	return NO;
+#endif
+}
 
 + (CGRect)orientedFrame {
 	UIInterfaceOrientation interfaceOrientation = [[UIDevice currentDevice] orientation];
@@ -99,7 +114,7 @@ CGRect KriyaFrame() {
 		case UIInterfaceOrientationPortrait:
 			return YES;
 		case UIInterfaceOrientationPortraitUpsideDown:
-			return NO;
+			return YES;
 		case UIInterfaceOrientationLandscapeLeft:
 			return NO;
 		case UIInterfaceOrientationLandscapeRight:

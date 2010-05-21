@@ -42,7 +42,6 @@
 		473489360F99E53100A1D78A /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 473489350F99E53100A1D78A /* libz.1.2.3.dylib */; };
 		4745C89910593B2F00BAED5A /* SplashScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4745C89710593B2F00BAED5A /* SplashScene.m */; };
 		47547EBA1076688E00DA7658 /* Filter_twitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3944A101DB2B2005F45B6 /* Filter_twitter.m */; };
-		47547EFF10767C0000DA7658 /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39461101DB2C6005F45B6 /* FlipsideViewController.m */; };
 		4765DA801157C1ED004F21E3 /* 0_Movie_141.mov in Resources */ = {isa = PBXBuildFile; fileRef = 47AD91570F80082F001687AA /* 0_Movie_141.mov */; };
 		477ABD4E0F45641100696306 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD480F45641100696306 /* UIKit.framework */; };
 		477ABD4F0F45641100696306 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477ABD490F45641100696306 /* Foundation.framework */; };
@@ -66,8 +65,6 @@
 		47B162F9107664B200267E83 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B162F8107664B200267E83 /* libicucore.dylib */; };
 		47B1630B1076657500267E83 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47041EE00FA1047300D7DE30 /* MessageView.xib */; };
 		47B1630C1076657F00267E83 /* FecherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C7E25D0F9CC70900789864 /* FecherView.xib */; };
-		47B1630D1076658100267E83 /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47348B080F9A3B6100A1D78A /* FlipsideView.xib */; };
-		47B163141076679D00267E83 /* FlipsideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3945F101DB2C6005F45B6 /* FlipsideView.m */; };
 		47B16315107667A300267E83 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39467101DB2C6005F45B6 /* MessageViewController.m */; };
 		47B16316107667BA00267E83 /* FecherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3945D101DB2C6005F45B6 /* FecherViewController.m */; };
 		47B7A64D107652F3005F9DC7 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B7A64A107652F3005F9DC7 /* RegexKitLite.m */; };
@@ -118,6 +115,12 @@
 		47C6C8C5112C2BD30085D6CD /* libTouchJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4745C7A5105588A400BAED5A /* libTouchJSON.a */; };
 		47EBE8620F4C056A009F377E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EBE8610F4C056A009F377E /* SystemConfiguration.framework */; };
 		47EBE93B0F4C5BD9009F377E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47EBE93A0F4C5BD9009F377E /* MediaPlayer.framework */; };
+		47FAD2E911A586F800B22D74 /* 0000000004.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47E427B40F53396C009D7EFF /* 0000000004.jpg */; };
+		47FAD30211A58B6A00B22D74 /* vbacklight.png in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD30111A58B6A00B22D74 /* vbacklight.png */; };
+		47FAD30711A58CD600B22D74 /* backlight-pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD30511A58CD600B22D74 /* backlight-pad.png */; };
+		47FAD30811A58CD600B22D74 /* vbacklight-pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD30611A58CD600B22D74 /* vbacklight-pad.png */; };
+		47FAD3E811A59B5D00B22D74 /* bigbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD3E611A59B5D00B22D74 /* bigbutton.png */; };
+		47FAD3E911A59B5D00B22D74 /* highbigbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 47FAD3E711A59B5D00B22D74 /* highbigbutton.png */; };
 		47FC5D44107A8EDB0000AB03 /* Filter_pikchur.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39442101DB2B2005F45B6 /* Filter_pikchur.m */; };
 		47FC5D45107A8EE10000AB03 /* Filter_pikchur_people.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C39444101DB2B2005F45B6 /* Filter_pikchur_people.m */; };
 		47FC5E60107BA4AC0000AB03 /* PusherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3946D101DB2C6005F45B6 /* PusherViewController.m */; };
@@ -553,7 +556,6 @@
 		473488F80F99E31C00A1D78A /* movie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = movie.png; path = Artwork/movie.png; sourceTree = "<group>"; };
 		473488F90F99E31C00A1D78A /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = music.png; path = Artwork/music.png; sourceTree = "<group>"; };
 		473489350F99E53100A1D78A /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
-		47348B080F9A3B6100A1D78A /* FlipsideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
 		47348B090F9A3B6100A1D78A /* MoneyTimerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoneyTimerView.xib; sourceTree = "<group>"; };
 		47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RemoteImageViewController.xib; sourceTree = "<group>"; };
 		47348B150F9A3CD500A1D78A /* MoonTimeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoonTimeView.xib; sourceTree = "<group>"; };
@@ -690,10 +692,6 @@
 		47C3945B101DB2C6005F45B6 /* FecherListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FecherListViewController.m; path = Controllers/FecherListViewController.m; sourceTree = "<group>"; };
 		47C3945C101DB2C6005F45B6 /* FecherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FecherViewController.h; path = Controllers/FecherViewController.h; sourceTree = "<group>"; };
 		47C3945D101DB2C6005F45B6 /* FecherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FecherViewController.m; path = Controllers/FecherViewController.m; sourceTree = "<group>"; };
-		47C3945E101DB2C6005F45B6 /* FlipsideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlipsideView.h; path = Controllers/FlipsideView.h; sourceTree = "<group>"; };
-		47C3945F101DB2C6005F45B6 /* FlipsideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlipsideView.m; path = Controllers/FlipsideView.m; sourceTree = "<group>"; };
-		47C39460101DB2C6005F45B6 /* FlipsideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlipsideViewController.h; path = Controllers/FlipsideViewController.h; sourceTree = "<group>"; };
-		47C39461101DB2C6005F45B6 /* FlipsideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlipsideViewController.m; path = Controllers/FlipsideViewController.m; sourceTree = "<group>"; };
 		47C39462101DB2C6005F45B6 /* ImageArtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageArtViewController.h; path = Controllers/ImageArtViewController.h; sourceTree = "<group>"; };
 		47C39463101DB2C6005F45B6 /* ImageArtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageArtViewController.m; path = Controllers/ImageArtViewController.m; sourceTree = "<group>"; };
 		47C39464101DB2C6005F45B6 /* KopterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KopterViewController.h; path = Controllers/KopterViewController.h; sourceTree = "<group>"; };
@@ -769,6 +767,11 @@
 		47EB30920FBE29C90013C02F /* photo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = photo_icon.png; path = Artwork/photo_icon.png; sourceTree = "<group>"; };
 		47EBE8610F4C056A009F377E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		47EBE93A0F4C5BD9009F377E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		47FAD30111A58B6A00B22D74 /* vbacklight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vbacklight.png; sourceTree = "<group>"; };
+		47FAD30511A58CD600B22D74 /* backlight-pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backlight-pad.png"; sourceTree = "<group>"; };
+		47FAD30611A58CD600B22D74 /* vbacklight-pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vbacklight-pad.png"; sourceTree = "<group>"; };
+		47FAD3E611A59B5D00B22D74 /* bigbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigbutton.png; sourceTree = "<group>"; };
+		47FAD3E711A59B5D00B22D74 /* highbigbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = highbigbutton.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -941,7 +944,6 @@
 				47348B0A0F9A3B6100A1D78A /* RemoteImageViewController.xib */,
 				479C4F0F0FA61B37003DF1B2 /* StreamingPlayerView.xib */,
 				4707D7860FB093DB00094125 /* KopterView.xib */,
-				47348B080F9A3B6100A1D78A /* FlipsideView.xib */,
 				47041EE00FA1047300D7DE30 /* MessageView.xib */,
 				47C7E25D0F9CC70900789864 /* FecherView.xib */,
 				47231FB60FBA381000D49E87 /* FecherListView.xib */,
@@ -1101,6 +1103,11 @@
 		47A20D3C110EE093003195A0 /* G */ = {
 			isa = PBXGroup;
 			children = (
+				47FAD3E611A59B5D00B22D74 /* bigbutton.png */,
+				47FAD3E711A59B5D00B22D74 /* highbigbutton.png */,
+				47FAD30511A58CD600B22D74 /* backlight-pad.png */,
+				47FAD30611A58CD600B22D74 /* vbacklight-pad.png */,
+				47FAD30111A58B6A00B22D74 /* vbacklight.png */,
 				47A20D3D110EE093003195A0 /* backlight.png */,
 				47A20D3E110EE093003195A0 /* button.png */,
 				47A20D3F110EE093003195A0 /* highbutton.png */,
@@ -1136,10 +1143,6 @@
 				47C3945B101DB2C6005F45B6 /* FecherListViewController.m */,
 				47C3945C101DB2C6005F45B6 /* FecherViewController.h */,
 				47C3945D101DB2C6005F45B6 /* FecherViewController.m */,
-				47C3945E101DB2C6005F45B6 /* FlipsideView.h */,
-				47C3945F101DB2C6005F45B6 /* FlipsideView.m */,
-				47C39460101DB2C6005F45B6 /* FlipsideViewController.h */,
-				47C39461101DB2C6005F45B6 /* FlipsideViewController.m */,
 				47C39462101DB2C6005F45B6 /* ImageArtViewController.h */,
 				47C39463101DB2C6005F45B6 /* ImageArtViewController.m */,
 				47C39464101DB2C6005F45B6 /* KopterViewController.h */,
@@ -1724,7 +1727,6 @@
 				479E044D1076628E00B52AA3 /* vmain.jpg in Resources */,
 				47B1630B1076657500267E83 /* MessageView.xib in Resources */,
 				47B1630C1076657F00267E83 /* FecherView.xib in Resources */,
-				47B1630D1076658100267E83 /* FlipsideView.xib in Resources */,
 				47FC5E61107BA4B50000AB03 /* PusherView.xib in Resources */,
 				47FC5E94107BA5080000AB03 /* finger.png in Resources */,
 				47FC5E95107BA50F0000AB03 /* photo_icon.png in Resources */,
@@ -1754,6 +1756,12 @@
 				472F646211A44E50007DDABC /* 0_7.jpg in Resources */,
 				472F646311A44E50007DDABC /* 0_8.jpg in Resources */,
 				472F646411A44E51007DDABC /* 0_9.jpg in Resources */,
+				47FAD2E911A586F800B22D74 /* 0000000004.jpg in Resources */,
+				47FAD30211A58B6A00B22D74 /* vbacklight.png in Resources */,
+				47FAD30711A58CD600B22D74 /* backlight-pad.png in Resources */,
+				47FAD30811A58CD600B22D74 /* vbacklight-pad.png in Resources */,
+				47FAD3E811A59B5D00B22D74 /* bigbutton.png in Resources */,
+				47FAD3E911A59B5D00B22D74 /* highbigbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1803,11 +1811,9 @@
 				47B7A64D107652F3005F9DC7 /* RegexKitLite.m in Sources */,
 				47B7A64E107652F3005F9DC7 /* RKLMatchEnumerator.m in Sources */,
 				47B7A65110765306005F9DC7 /* iContentView.m in Sources */,
-				47B163141076679D00267E83 /* FlipsideView.m in Sources */,
 				47B16315107667A300267E83 /* MessageViewController.m in Sources */,
 				47B16316107667BA00267E83 /* FecherViewController.m in Sources */,
 				47547EBA1076688E00DA7658 /* Filter_twitter.m in Sources */,
-				47547EFF10767C0000DA7658 /* FlipsideViewController.m in Sources */,
 				47287025107A2E730053F2CE /* ASIAuthenticationDialog.m in Sources */,
 				47287026107A2E730053F2CE /* ASIInputStream.m in Sources */,
 				47287027107A2E730053F2CE /* ASINSStringAdditions.m in Sources */,

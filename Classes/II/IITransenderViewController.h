@@ -27,7 +27,8 @@
 <IINotControlsDelegate, 
  IITransenderDelegate, 
  IIMusicDelegate, 
- IITransenderViewDelegate> 
+ IITransenderViewDelegate,
+ UIActionSheetDelegate> 
 {
     id <IITransenderViewControllerDelegate> delegate;
 		IITransenderView *skrin;
@@ -84,6 +85,7 @@
 - (void)transendedWithMovie:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
 - (void)transendedWithMusic:(NSString*)transend withIons:(NSDictionary*)ions withIor:(NSDictionary*)ior;
 - (BOOL)isTransendedWithImage;
+- (void)saveCurrentImageToLibrary;
 //transender delegate
 
 //transition delegates - not used for now
@@ -102,5 +104,8 @@
 
 //view a movie
 -(void)seeMovie:(NSURL*)url;
+
+//a small message can be displayed by notControls 
+- (void)setNotMessage;
 
 @end

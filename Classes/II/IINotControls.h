@@ -140,6 +140,7 @@
 - (void)setBackLight:(UIImage*)image withAlpha:(CGFloat)a;
 - (void)hideBackLight;
 - (void)showBackLight;
+- (void)makeBackLight; //automatic selection
 
 - (void)showMessage:(NSString*)message;
 - (void)hideMessage;

@@ -14,6 +14,7 @@
 "big_button":"false",
 "button_on_left":"true",
 "button_opens_not_controls":"true",
+"not_controls_use_backlight":"true",
 "can_save_images":"true",
 "save_current_spot":"true",
 "save_current_program":"false",

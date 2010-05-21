@@ -24,7 +24,8 @@ CGRect KriyaFrame();
 @interface Kriya : NSObject {
 
 }
-
++ (BOOL)isPad;
++ (BOOL)portrait;
 + (CGRect)orientedFrame;
 
 + (NSInteger)appRunCount;

@@ -14,8 +14,8 @@
 - (void)productsRequest:(SKProductsRequest*)request didReceiveResponse:(SKProductsResponse*)response;
 - (void)completeTransaction: (SKPaymentTransaction *)transaction;
 - (void)restoreTransaction: (SKPaymentTransaction *)transaction;
-- (void) failedTransaction: (SKPaymentTransaction *)transaction;
+- (void)failedTransaction: (SKPaymentTransaction *)transaction;
 - (void)recordTransaction: (SKPaymentTransaction *)transaction;
 - (void)provideContent: (NSString*)productIdentifier;
-
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions;
 @end

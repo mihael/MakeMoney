@@ -230,11 +230,29 @@
 }
 
 #pragma mark Behavior
+- (void)setNotMessage 
+{
+	[notControls showMessage:[NSString stringWithFormat:@"%i/%i %1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
+	//set message if any
+	NSString *m = [notBehavior valueForKey:@"m"];
+	if (m) {
+		NSUInteger max = [m length];
+		if (max > 0) {
+			if (max>20) {
+				max = 20;
+			}
+			//[notControls showMessage:[NSString stringWithFormat:@"%@ %i/%i %1.2fHz", [m substringToIndex:max], [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
+			[notControls showMessage:[NSString stringWithFormat:@"%@", [m substringToIndex:max]]];
+		}
+	}
+}
 - (void)continueWithBehavior 
 {
-	[notControls showMessage:[NSString stringWithFormat:@"Spot:%i of %i Vibe:%1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
-
-	if (avoidBehavior) { //just stop and do not much else
+	DLog(@"continueWithBehavior: %@", notBehavior);
+	[self setNotMessage];
+	
+	if (avoidBehavior) { //just stop and do not much else, since the notControls are open
+		DLog(@"continueWithBehavior: avoiding behavior");
 		[transender meditate];
 		[notControls lightUp];
 		if (delegate) {
@@ -265,7 +283,7 @@
 					}				
 				}
 			}
-
+			
 			//Change background noise if requested
 			NSString *noise_url = [notBehavior valueForKey:@"noise_url"];
 			if (noise_url) {
@@ -462,13 +480,18 @@
 	[transender meditate];
 	avoidBehavior = YES;
 	[notControl lightUp];
-	[notControl showBackLight];
-	[notControls showMessage:[NSString stringWithFormat:@"Spot:%i of %i Vibe:%1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
+	if ([@"true" isEqualToString:[stage valueForKey:@"not_controls_use_backlight"]]) { 
+		[notControl showBackLight];
+	}
+	//[notControls showMessage:[NSString stringWithFormat:@"[Spot:%i/%i Vibe:%1.2fHz]", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
+	[self setNotMessage];
 }
 
 - (void)notControlsClosed:(id)notControl {
 	avoidBehavior = NO;
-	[notControl hideBackLight];
+	if ([@"true" isEqualToString:[stage valueForKey:@"not_controls_use_backlight"]]) { 
+		[notControl hideBackLight];
+	}
 	[notControl hideMessage];
 	[self continueWithBehavior];
 }
@@ -496,6 +519,23 @@
 - (void)actionTouch:(id)notControl {
 	if ([self isTransendedWithImage]) { //this is an image transend
 		DLog(@"SHould SHOW POP UP IF IPAD ...");
+		if ([@"always" isEqualToString:[Kriya stateForField:@"saveImage"]]) {
+			//just save
+			[self saveCurrentImageToLibrary];
+		} else {
+			//ask before saving
+			UIActionSheet *as = [[[UIActionSheet alloc] initWithFrame:skrin.frame] autorelease];
+			[as setTitle:@"Image Export"];
+			[as setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+			[as addButtonWithTitle:@"Save to library?"];//0
+			[as addButtonWithTitle:@"Always save!"];//1
+			if (![Kriya isPad]) {
+				[as addButtonWithTitle:@"Cancel"];//2
+				[as setCancelButtonIndex:2];
+			}
+			[as setDelegate:self];
+			[as showInView:skrin];
+		}
 	} else {
 		//pass it on to the current transendController
 		DLog(@"actionTouch");
@@ -543,6 +583,39 @@
 }
 
 - (void)picked:(NSDictionary*)info {
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)saveCurrentImageToLibrary {
+	UIImageWriteToSavedPhotosAlbum([[[skrin subviews] objectAtIndex:0] image], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+- (void) image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {
+	if (error) {
+		[[iAlert instance] alert:@"Image Export" withMessage:[NSString stringWithFormat:@"Error saving image! %@",[error localizedDescription]]];
+	} else {
+		//if ([@"always" isEqualToString:[Kriya stateForField:@"saveImage"]])
+		[[iAlert instance] alert:@"Image Export" withMessage:@"Saved!"];
+	}
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	switch (buttonIndex) {
+		case 0:
+			DLog(@"action 0 saving image");//save image
+			[self saveCurrentImageToLibrary];
+			break;
+		case 1:
+			DLog(@"action 0 always saving image");//save image
+			[Kriya saveState:@"always" forField:@"saveImage"];
+			[self saveCurrentImageToLibrary];
+			break;
+		case 2:
+			DLog(@"action 2"); //cancel
+			break;
+		default:		//cancel
+			DLog(@"default action");
+			break;
+	}	
 }
 
 @end
