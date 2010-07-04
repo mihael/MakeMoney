@@ -159,6 +159,7 @@
 #pragma mark IIController saveState
 - (void)saveState 
 {
+	[transenderViewController saveState];
 	[[NSUserDefaults standardUserDefaults] setInteger:[[transenderViewController transender] currentSpot] forKey:SPOT];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	DebugLog(@"Terminated with spot: %i", [[transenderViewController transender] currentSpot]);

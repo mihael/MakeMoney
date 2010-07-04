@@ -29,6 +29,7 @@
 	NSArray* piks = [informationDictionary objectForKey:@"feed"];
 	
 	NSString* behavior = k_ior_notstop_space;
+//	NSString* behavior = @"\"ior\":{\"stop\":\"false\", \"space\":\"true\", \"content_mode\":\"fit\"}";
 	NSMutableString *transends = [NSMutableString stringWithString:@"["];
 	
 	NSUInteger i, count = [piks count];

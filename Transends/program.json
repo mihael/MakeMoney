@@ -1,24 +1,4 @@
 [
-{"ii":"0_1.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false", "space":"up", "m":"1234567890"}},
-{"ii":"0_2.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false", "space":"up", "m":"Welcome! 2"}},
-{"ii":"0_3.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false", "space":"up", "m":"Welcome! 3"}},
-{"ii":"0_4.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false", "space":"up", "m":"Welcome! 4"}},
-{"ii":"0_5.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false", "m":"Welcome! 5"}},
-{"ii":"0_6.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_7.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_8.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_9.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false", "m":"Welcome! 9"}},
-{"ii":"0_10.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_11.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_12.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_13.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_14.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_15.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_16.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false", "m":"Welcome! 16"}},
-{"ii":"0_17.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_18.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_19.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0_20.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"false"}},
-{"ii":"0000000004.jpg", "ions":{"reuse":"true"}, "ior":{"stop":"true", "space":"up", "m":"Evolucija!"}}
-
+{"ii":"PusherView", "ions":{"reuse":"true", "title":"", "pikchur":"pikchur@pikchur"}, "ior":{"stop":"true", "space":"down"}},
+{"ii":"FecherView", "ions":{"reuse":"true", "button_title":"+25", "background":"main.jpg", "url":"https://api.pikchur.com/api/feeds/json", "method":"form", "page":1, "limit":25, "params":"data[api][feeds][type]=timeline&data[api][key]=plusOOts6YVcBSFGgT0jaA", "filter":"pikchur"}, "ior":{"stop":"true", "space":"down"}}
 ]

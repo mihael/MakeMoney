@@ -445,6 +445,7 @@
 
 - (void)imageWithUrlFinished:(id)response 
 {
+	DLog(@"imageWithUrlFinished");
 	if (!cancelFech) {
 		NSDictionary *behavior = [memory objectForKey:@"ior"];
 		NSDictionary *options = [memory objectForKey:@"ions"];

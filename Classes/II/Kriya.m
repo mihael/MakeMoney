@@ -236,7 +236,7 @@ CGRect KriyaFrame() {
 + (NSString*)imageWithInMemoryImage:(UIImage*)image forUrl:(NSString*)url
 {
 	NSString *dir = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
+	[[NSFileManager defaultManager] createDirectoryAtPath:dir  withIntermediateDirectories:YES attributes:nil error:nil];			
 	NSString *path = [NSString stringWithFormat:@"%@/%@", dir, [Kriya md5:url]];	
 	[Kriya writeWithPath:path data:UIImageJPEGRepresentation(image, 1.0)];
 	return path;
@@ -247,7 +247,7 @@ CGRect KriyaFrame() {
 {
 	NSString *generatedPath = [NSString stringWithFormat:@"%i", [[NSDate date] timeIntervalSince1970]*-1];
 	NSString *dir = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
+	[[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:nil];			
 	NSString *path = [NSString stringWithFormat:@"%@/%@.jpg", dir, [Kriya md5:generatedPath]];	
 	[Kriya writeWithPath:path data:UIImageJPEGRepresentation(image, 1.0)];
 	return path;
@@ -264,7 +264,7 @@ CGRect KriyaFrame() {
 + (UIImage*)imageWithUrl:(NSString*)url feches:(BOOL)fechFromWeb
 {
 	NSString *dir = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
+	[[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:nil];			
 	NSString *path = [NSString stringWithFormat:@"%@/%@", dir, [Kriya md5:url]];	
 	NSData* imgData = [Kriya loadWithPath:path];
 	if (!imgData&&fechFromWeb) {
@@ -300,7 +300,7 @@ CGRect KriyaFrame() {
 + (void)clearImageWithUrl:(NSString*)url 
 {
 	NSString *dir = [NSHomeDirectory() stringByAppendingString:@"/tmp"];
-	[[NSFileManager defaultManager] createDirectoryAtPath:dir attributes:nil];			
+	[[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:nil];			
 	NSString *path = [NSString stringWithFormat:@"%@/%@", dir, [Kriya md5:url]];	
 	[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 }

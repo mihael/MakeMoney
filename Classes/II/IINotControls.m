@@ -9,6 +9,14 @@
 #import "iAccelerometerSensor.h"
 #import "AudioStreamer.h"
 #import "Reachability.h"
+#import "IITransender.h"
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30200
+#define kVibeSelectorWidth 200.0
+#else
+#define kVibeSelectorWidth 100.0
+#endif
+#define kVibeSelectorHeight 20.0
 
 @implementation IINotControls
 @synthesize notController, delegate, pickDelegate, notOpen, canOpen, bigButton, progressor, canSpaceTouch;
@@ -26,6 +34,7 @@
 		bigButton = [[options valueForKey:@"big_button"] boolValue];
 		buttonOnLeft = [[options valueForKey:@"button_on_left"] boolValue];		
 		notControlsFrame = frame;
+		canSelectVibe = [[options valueForKey:@"not_controls_use_vibe_selector"] boolValue];
 		
 		NSUInteger buttonSize = kButtonSize;
 		if (bigButton)
@@ -66,13 +75,31 @@
 		[actionButton setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];
 		[actionButton addTarget:self action:@selector(actionButtonTouch) forControlEvents:UIControlEventTouchUpInside];
 		
+		if (canSelectVibe) {
+			vibeSelection = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width - kLeftRightButtonSize - kPadding - kVibeSelectorWidth, frame.size.height - kLeftRightButtonSize - 4*kPadding, kVibeSelectorWidth, kLeftRightButtonSize)];
+			[vibeSelection setBackgroundColor:[UIColor clearColor]];
+			[vibeSelection setTextAlignment:UITextAlignmentCenter];
+			[vibeSelection setTextColor:[UIColor whiteColor]];
+			[vibeSelection setFont:[UIFont fontWithName:kMessageFontName size:10]];
+			[vibeSelection setText:@""];
+			vibeSelector = [[UISlider alloc] initWithFrame:CGRectMake(frame.size.width - kLeftRightButtonSize - kPadding - kVibeSelectorWidth, frame.size.height - kVibeSelectorHeight - 2*kPadding, kVibeSelectorWidth, kVibeSelectorHeight)];
+			[vibeSelector setMaximumValue:10];
+			[vibeSelector setMinimumValue:0.05];
+			[vibeSelector addTarget:self action:@selector(vibeSelectionChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		
 		rightButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		[rightButton setFrame:CGRectMake(frame.size.width - kLeftRightButtonSize - kPadding, frame.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
 		[rightButton setImage:[UIImage imageNamed:@"littlebutton.png"] forState:UIControlStateNormal];
 		[rightButton setImage:[UIImage imageNamed:@"littlehighbutton.png"] forState:UIControlStateHighlighted];
 		[rightButton addTarget:self action:@selector(rightButtonTouch) forControlEvents:UIControlEventTouchUpInside];
 
-		messageView = [[[UILabel alloc] initWithFrame:CGRectMake(2*kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding) - (kLeftRightButtonSize+kPadding), (kLeftRightButtonSize+2*kPadding))]retain];
+		
+		CGFloat messageWidth = notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding) - (kLeftRightButtonSize+kPadding);
+		if (canSelectVibe) {
+			messageWidth = messageWidth - kVibeSelectorWidth;
+		}
+		messageView = [[[UILabel alloc] initWithFrame:CGRectMake(2*kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), messageWidth, (kLeftRightButtonSize+2*kPadding))]retain];
 		[messageView setBackgroundColor:[UIColor clearColor]];
 		[messageView setTextAlignment:UITextAlignmentCenter];
 		[messageView setTextColor:[UIColor whiteColor]];
@@ -89,6 +116,10 @@
 			[self addSubview:button];
 		[self addSubview:leftButton];
 		[self addSubview:actionButton];
+		if (canSelectVibe) {
+			[self addSubview:vibeSelection];
+			[self addSubview:vibeSelector];
+		}
 		[self addSubview:rightButton];
 		[self addSubview:wwwView];
 		[self addSubview:progressor];
@@ -139,6 +170,13 @@
 		x = kPadding;
 	}
 	
+	CGFloat messageWidth = notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding) - (kLeftRightButtonSize+kPadding);
+	if (canSelectVibe) {
+		messageWidth = messageWidth - kVibeSelectorWidth;
+		[vibeSelection setFrame:CGRectMake(rect.size.width - kLeftRightButtonSize - kPadding - kVibeSelectorWidth, rect.size.height - kLeftRightButtonSize - 4*kPadding, kVibeSelectorWidth, kLeftRightButtonSize)];
+		[vibeSelector setFrame:CGRectMake(rect.size.width - kLeftRightButtonSize - kPadding - kVibeSelectorWidth, rect.size.height - kVibeSelectorHeight - 2*kPadding, kVibeSelectorWidth, kVibeSelectorHeight)];
+	}
+	
 	[button setFrame:CGRectMake(x, kPadding, buttonSize, buttonSize)];
 
 	[leftButton setFrame:CGRectMake(kPadding, rect.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
@@ -147,7 +185,7 @@
 
 	[rightButton setFrame:CGRectMake(rect.size.width - kLeftRightButtonSize - kPadding, rect.size.height - kLeftRightButtonSize - kPadding, kLeftRightButtonSize, kLeftRightButtonSize)];
 	
-	[messageView setFrame:CGRectMake(2*kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), notControlsFrame.size.width - 2*(kLeftRightButtonSize+2*kPadding) - (kLeftRightButtonSize+kPadding), (kLeftRightButtonSize+2*kPadding))];
+	[messageView setFrame:CGRectMake(2*kLeftRightButtonSize+2*kPadding, notControlsFrame.size.height - (kLeftRightButtonSize+2*kPadding), messageWidth, (kLeftRightButtonSize+2*kPadding))];
 	
 	[progressor layout:rect];
 	
@@ -168,6 +206,10 @@
 	[leftButton release];
 	[rightButton release];
 	[actionButton release];
+	if (canSelectVibe) {
+		[vibeSelector release];
+		[vibeSelection release];
+	}
     [super dealloc];
 }
 
@@ -303,6 +345,10 @@
 	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
 	[[leftButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 	[[actionButton layer] addAnimation:animation forKey:kButtonAnimationKey];
+	if (canSelectVibe) {
+		[[vibeSelection layer] addAnimation:animation forKey:kButtonAnimationKey];
+		[[vibeSelector layer] addAnimation:animation forKey:kButtonAnimationKey];
+	}
 	[animation setSubtype:kCATransitionFromRight];
 	[[rightButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 }
@@ -316,6 +362,10 @@
 	[animation setSubtype:kCATransitionFromRight];
 	[[leftButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 	[[actionButton layer] addAnimation:animation forKey:kButtonAnimationKey];
+	if (canSelectVibe) {
+		[[vibeSelection layer] addAnimation:animation forKey:kButtonAnimationKey];
+		[[vibeSelector layer] addAnimation:animation forKey:kButtonAnimationKey];
+	}
 	[animation setSubtype:kCATransitionFromLeft];
 	[[rightButton layer] addAnimation:animation forKey:kButtonAnimationKey];
 }
@@ -339,6 +389,10 @@
 		leftButton.hidden = NO;
 		actionButton.hidden = NO;
 		rightButton.hidden = NO;
+		if (canSelectVibe) {
+			vibeSelector.hidden = NO;
+			vibeSelection.hidden = NO;
+		}
 		notOpen = NO;
 		[self animateButtonsIn];
 		[self spaceUp];
@@ -355,6 +409,10 @@
 	leftButton.hidden = YES;
 	actionButton.hidden = YES;
 	rightButton.hidden = YES;
+	if (canSelectVibe) {
+		vibeSelector.hidden = YES;
+		vibeSelection.hidden = YES;
+	}
 	notOpen = YES;
 	[self animateButtonsOut];
 	[self spaceDown];
@@ -643,6 +701,25 @@
 	}
 }
 
+#pragma mark vibe selection
+- (void)showVibeSelection:(NSString*)vs 
+{
+	if (canSelectVibe) {
+		[vibeSelection setText:vs];
+	}
+}
+
+- (void)vibeSelectionChanged:(id)slider 
+{
+	DLog(@"vibe selection changed %@", slider);
+	if (delegate) {
+		if ([delegate respondsToSelector:@selector(vibeSelectionChange:)]) {
+			[delegate vibeSelectionChange:slider];
+		}
+	}
+	
+}
+
 #pragma mark picking images
 - (void)pickInView:(UIView*)inView 
 {
@@ -792,7 +869,11 @@
 		[streamer stop];
 }
 
-- (void)playWithStreamUrl:(NSString*)url
+- (void)playWithStreamUrl:(NSString*)url {
+	[self playWithStreamUrl:url andStreamerDelegate:nil];
+}
+
+- (void)playWithStreamUrl:(NSString*)url andStreamerDelegate:(id)streamerDelegate
 {
 	if (!streamer)
 	{
@@ -813,6 +894,14 @@
 			 forKeyPath:@"isPlaying"
 			 options:0
 			 context:nil];
+			
+			if (streamerDelegate) {
+				[streamer setDelegate:streamerDelegate];
+				[streamer setDidUpdateMetaDataSelector:@selector(metaDataUpdated:)];
+				[streamer setDidErrorSelector:@selector(streamError)];
+				[streamer setDidDetectBitrateSelector:@selector(bitrateUpdated:)];
+			}
+			
 			[streamer start];
 		}
 	} else	{

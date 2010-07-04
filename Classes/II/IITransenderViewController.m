@@ -232,7 +232,9 @@
 #pragma mark Behavior
 - (void)setNotMessage 
 {
-	[notControls showMessage:[NSString stringWithFormat:@"%i/%i %1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
+	[notControls showVibeSelection:[NSString stringWithFormat:@"%i/%i %1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
+	//[notControls showMessage:[NSString stringWithFormat:@"%i/%i %1.2fHz", [transender currentSpot]+1, [transender memoriesCount], 1/[transender currentVibe] ]];
+
 	//set message if any
 	NSString *m = [notBehavior valueForKey:@"m"];
 	if (m) {
@@ -516,6 +518,12 @@
 	} //do not do anything if the transender is already transending
 }
 
+- (void)vibeSelectionChange:(id)slider {
+	CGFloat value = [(UISlider*)slider value];
+	[transender reVibe:value];
+	[self setNotMessage];
+}
+
 - (void)actionTouch:(id)notControl {
 	if ([self isTransendedWithImage]) { //this is an image transend
 		DLog(@"SHould SHOW POP UP IF IPAD ...");
@@ -547,7 +555,7 @@
 	if ([notControl notOpen]) { //use only when not open notControls
 		if ([transender isTransending]) {
 			DLog(@"lightingUp meditate");
-			[transender cancelFech];
+			//[transender cancelFech];
 			[notControl lightUp];
 			[transender meditate];
 		} else {
@@ -618,4 +626,11 @@
 	}	
 }
 
+#pragma mark State
+- (void)saveState {
+	DLog(@"SAVING transendController state...");
+	if ([transendController respondsToSelector:@selector(saveState)]) {
+		[transendController saveState]; 
+	} 
+}
 @end

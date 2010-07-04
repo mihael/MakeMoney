@@ -23,6 +23,7 @@
 
 - (void)leftTouch:(id)notControl; //left underbutton touch
 - (void)actionTouch:(id)notControl; //action underbutton touch
+- (void)vibeSelectionChange:(id)slider; //slider underbutton moved
 - (void)rightTouch:(id)notControl; //right underbutton touch
 - (void)spaceTouch:(id)notControl touchPoint:(CGPoint)point; //empty space touch - can be while openNot && spaceUp
 - (void)spaceDoubleTouch:(id)notControl touchPoint:(CGPoint)point; //empty space double touch - can be while openNot && spaceUp
@@ -50,6 +51,8 @@
 	id notController;
     id pickDelegate;
 	
+	UISlider *vibeSelector;
+	UILabel *vibeSelection;
     UIButton *button;
 	UIButton *leftButton;
 	UIButton *actionButton;
@@ -74,6 +77,7 @@
 	BOOL bigButton;
 	BOOL canSpaceTouch;
 	BOOL noButton;
+	BOOL canSelectVibe;
 	
 	BOOL buttonSpinDirection;
 	BOOL buttonInSpinning;
@@ -95,6 +99,7 @@
 
 //noise streamer
 - (void)playWithStreamUrl:(NSString*)url; //play background noises
+- (void)playWithStreamUrl:(NSString*)url andStreamerDelegate:(id)streamerDelegate;
 - (void)playStop; //stop playing
 
 //www display
@@ -144,6 +149,9 @@
 
 - (void)showMessage:(NSString*)message;
 - (void)hideMessage;
+
+- (void)showVibeSelection:(NSString*)vs;
+- (void)vibeSelectionChanged:(id)slider;
 
 - (int)chooseOneFrom:(NSString*)jsonMemories; 
 

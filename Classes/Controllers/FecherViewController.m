@@ -141,11 +141,13 @@
 	[www loadOptions:options]; //change options
 	trimmedSelf = NO; //not yet trimmed self
 	
+	/*
 	if ([options valueForKey:@"background_url"]) {
 		[self.background setImage:[Kriya imageWithUrl:[options valueForKey:@"background_url"] feches:YES]];
 	} else if ([options valueForKey:@"background"]) {
 		[self.background setImage:[self.transender imageNamed:[options valueForKey:@"background"]]];
 	}
+	*/
 	
 	if (![self.background image]) {
 		[self.background setImage:[self.transender imageNamed:@"main.jpg"]];
@@ -195,7 +197,7 @@
 {
 	[self.view setFrame:rect];
 	[button setFrame:CGRectMake(20, 20, rect.size.width - 20, rect.size.height - 20)];
-	if (rect.size.width == 320.0) {
+	if ([Kriya portrait]) {
 		[background setImage:[self.transender imageNamed:@"vmain.jpg"]];
 	} else {
 		[background setImage:[self.transender imageNamed:@"main.jpg"]];
